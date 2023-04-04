@@ -50,7 +50,7 @@ include_once('../../../config/config.php');
 <div class="col-lg-4" >
 <div class="row" style="padding-top:10px">
 	<div class="col-lg-12">
-<!-- <div class="form-group row  py-0 my-0" >
+						<!-- <div class="form-group row  py-0 my-0" >
 						<label class="col-sm-3 col-form-label " style="color: black;" >Cancellation Date</label>
 							<div class="col-sm-9 input-group mb-1">
 								<input type="date" id="txtCancellationDate" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" value="<?php 
@@ -61,14 +61,14 @@ include_once('../../../config/config.php');
 																																					
 										?>" min="2018-01-01" max="2050-12-31">
 							</div>
-						</div> -->		  
-						
-						<!-- <div class="form-group row  py-0 my-0" >
+						</div>	  
+
+						<div class="form-group row  py-0 my-0" >
 						<label class="col-sm-3 col-form-label " style="color: black;" >Required Date</label>
 							<div class="col-sm-9 input-group mb-1">
 								<input type="date" id="txtRequiredDate" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1"  value="<?php echo date('Y-m-d'); ?>" min="2018-01-01" max="2050-12-31">
 							</div>
-						</div> -->	
+						</div> -->
 						
 						<div class="form-group row  py-0 my-0" >
 						<label class="col-sm-4 col-form-label " style="color: black;" >Federal Tax ID</label>

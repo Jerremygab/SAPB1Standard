@@ -7,7 +7,7 @@ if ($serviceType == 'I'){
 ?>
 
 <div class="">
-<table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width= 100%" cellspacing="0">
+<table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width: 100%;" cellspacing="0">
   <thead   style="border-bottom: 0 !important">
     <tr>
 		  <th class="text-right" style=" color: black">#</th>
@@ -84,8 +84,9 @@ if ($serviceType == 'I'){
 		</div>
 	  </td>
 	  <td >
+	  
 		<div class="input-group ">
-		<input type="text" class="form-control matrix-cell whsecode"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none" readonly/>
+		<input type="text" class="form-control matrix-cell whsecode" aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none;" readonly>
 		  <button class="btn " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#whseModal" data-backdrop="false">
 			<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 		  </button>
@@ -180,8 +181,8 @@ else{
 ?>
 <div class="">
 <table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white">
-  <thead style="z-index: 999;  background-color: lightgray;  !important" class="thead-fixed " style="">
-    <tr style="background-color: lightgray; z-index: 999; !important">
+  <thead style="z-index: 999;  background-color: lightgray !important;" class="thead-fixed ">
+    <tr style="background-color: lightgray; z-index: 999 !important;">
 			<th class="text-right" style="color: black">#</th>
 			<th style="color: black; min-width:400px;" >Description</th>
 			<th style="color: black; min-width:300px;">G/L Account</th>
@@ -283,7 +284,7 @@ else{
 	
   </tbody>
   <tfoot style="z-index: 999;  background-color: lightgray; " class="d-none">
-	<tr style="background-color: lightgray; z-index: 999; !important">
+	<tr style="background-color: lightgray; z-index: 999 !important;">
 	  <th class="text-right" style="width:50px; color: black">#</th>
       <th style="color: black; min-width:400px;" >Description</th>
       <th style="color: black; min-width:300px;">G/L Account</th>
@@ -318,3 +319,6 @@ else{
 			
         });
 </script>
+
+
+

@@ -36,7 +36,7 @@ include_once('../../../config/config.php');
 				<input type="text" class="form-control matrix-cell text-right rate"  style="outline: none; border:none" maxlength="12" readonly/>
 			  </td>
 			     <td >
-				<input type="text" class="form-control matrix-cell text-right baseamount"   style="outline: none; border:none" maxlength="12" />
+				 <input type="text" class="form-control matrix-cell text-right baseamount" style="outline: none; border: none;" maxlength="12" readonly >
 				
 			  </td>
 			   <td >

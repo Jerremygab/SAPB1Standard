@@ -7,8 +7,8 @@ if ($serviceType == 'I'){
 ?>
 
 <div class="">
-<table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width= 100%" cellspacing="0">
-  <thead   style="border-bottom: 0 !important">
+<table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width: 100%;" cellspacing="0">
+  <thead   style="border-bottom: 0 !important;">
     <tr>
 	  <th class="text-right" style=" color: black">#</th>
       <th style="color: black; min-width:300px; ">Item No.</th>
@@ -183,8 +183,8 @@ else{
 ?>
 <div class="">
 <table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white">
-  <thead style="z-index: 999;  background-color: lightgray;  !important" class="thead-fixed " style="">
-    <tr style="background-color: lightgray; z-index: 999; !important">
+  <thead style="z-index: 999;  background-color: lightgray !important" class="thead-fixed ">
+    <tr style="background-color: lightgray; z-index: 999 !important">
 	  <th class="text-right" style="color: black">#</th>
       <th style="color: black; min-width:400px;" >Description</th>
       <th style="color: black; min-width:300px;">G/L Account</th>
@@ -284,7 +284,7 @@ else{
 	
   </tbody>
   <tfoot style="z-index: 999;  background-color: lightgray; " class="d-none">
-	<tr style="background-color: lightgray; z-index: 999; !important">
+	<tr style="background-color: lightgray; z-index: 999 !important">
 	  <th class="text-right" style="width:50px; color: black">#</th>
       <th style="color: black; min-width:400px;" >Description</th>
       <th style="color: black; min-width:300px;">G/L Account</th>

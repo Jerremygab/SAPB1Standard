@@ -276,7 +276,7 @@
           
 	
 	<ul class="nav nav-tabs pt-2" id="myTab" role="tablist">
-  <li class="nav-item " style="">
+  <li class="nav-item ">
     <a class="nav-link active " id="" data-toggle="tab" href="#contents" role="tab" aria-controls="contents"
       aria-selected="true" style="color: black; font-weight:bold">Contents</a>
   </li>
@@ -296,7 +296,7 @@
 	<div class="form-group row  mb-0" >
 		<div class="col-sm-4 row">
 		<label for="inputEmail3" class="col-sm-4 col-form-label pr-0" style="color: black; font-size:15px" >Item/Service Type</label>
-			<select id="selTransactionType" class="col-sm-3 form-control-sm mdb-select md-form text-left" searchable="Search here.." style=" !important;outline:none; border-color: #D0D0D0;">
+			<select id="selTransactionType" class="col-sm-3 form-control-sm mdb-select md-form text-left" searchable="Search here.." style=" outline:none,!important; border-color: #D0D0D0,!important;">
 				<option class="text-center" value="I" >Item</option>
 				<option class="text-center" value="S" >Service</option>
 				<input type="hidden" id="rowLoader" name="rowLoader" class="form-control input-sm">
@@ -346,7 +346,7 @@
 									<input readonly type="text" id="txtSalesEmpCode" class="form-control d-none" placeholder="" aria-label="Username" aria-describedby="basic-addon1" value="1">
 									<input readonly type="text" id="txtSalesEmpName" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" style="border-bottom-left-radius:5px; border-top-left-radius:5px;" value="-No Sales Employee-">
 									<div class="input-group-append">
-										<button class="btn btnGroup"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; hover:"  data-toggle="modal" data-target="#salesEmpModal" data-backdrop="false">
+										<button class="btn btnGroup"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#salesEmpModal" data-backdrop="false">
 											<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue "></i>
 										</button>
 									</div>
@@ -358,14 +358,14 @@
 							<div class="col-sm-9 " >
 							<div class="input-group mb-1">
 								<div class="input-group-prepend " id="lnkEmployee">
-									<button class="btn"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; hover:"  data-toggle="modal" data-target="#" data-backdrop="false">
+									<button class="btn"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#" data-backdrop="false">
 										<i class="fas fa-arrow-right  " style="color: #FFD700; font-size:20px"></i>
 									</button>
 								</div>
 							  <input readonly type="text" class="form-control d-none" id="txtOwnerCode" value="<?php echo $UserId; ?>">
 							  <input readonly type="text" class="form-control " id="txtOwnerName" style="border-bottom-left-radius:5px; border-top-left-radius:5px;" value="<?php echo $UserName?>">
 							  <div class="input-group-append">
-										<button class="btn btnGroup"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; hover:"  data-toggle="modal" data-target="#empModal" data-backdrop="false">
+										<button class="btn btnGroup"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#empModal" data-backdrop="false">
 											<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue "></i>
 										</button>
 									</div>
@@ -431,8 +431,8 @@
 				<div  id="footerButtons" class="form-group row  mt-5 ">
 					<div class="col-lg-6 col-md-6 col-sm-6 text-left">
 						<button type="button" id="btnAdd" class="  btn btn-warning btn-rounded " style="color: black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Add</button>
-						<button type="button" id="btnUpdate" class="  btn btn-warning btn-rounded d-none" style="color:black; font-weight: bold; black;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Update</button>
-						<button type="button" id="btnOk" class="  btn btn-warning btn-rounded d-none" style="color:black; font-weight: bold; black;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Ok</button>
+						<button type="button" id="btnUpdate" class="  btn btn-warning btn-rounded d-none" style="color:black; font-weight: bold;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Update</button>
+						<button type="button" id="btnOk" class="  btn btn-warning btn-rounded d-none" style="color:black; font-weight: bold;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Ok</button>
 						
 						<button type="button" id="btnCancel" class=" btn btn-warning btn-rounded ml-5" style="color: black;width:250px; font-weight: bold; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Cancel</button>
 					</div>
@@ -1735,18 +1735,18 @@
 		  <div id="batchTableReport" class="table-responsive" style="width:100%; height:300px !important; padding-bottom:20px; padding-left:10px;  overflow:scroll;" >
 			
 	
-			<table id="tblBatchCreated" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width= 100%" cellspacing="0">
+			<table id="tblBatchCreated" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width: 100%;" cellspacing="0">
 						<thead>
 							<tr >
-								<th style="min-width:20px;position: sticky;top: 0; " >#</th>
-								<th  style="min-width:250px;position: sticky;top: 0; ">Batch</th>
-								<th  style="min-width:150px;position: sticky;top: 0; ">Qty</th>
-								<th  style="min-width:100px;position: sticky;top: 0; ">Expiration Date</th>
-								<th  style="min-width:100px;position: sticky;top: 0;  ">Mfr Date</th>
-								<th  style="min-width:100px;position: sticky;top: 0;  ;">Admission Date</th>
-								<th  style="min-width:300px;position: sticky;top: 0; ">Location</th>
-								<th  style="min-width:300px;position: sticky;top: 0; ">Details</th>
-								<th  style="min-width:300px;position: sticky;top: 0; ">Unit Cost</th>
+								<th style="min-width:20px;position: sticky;top: 0; ">#</th>
+								<th style="min-width:250px;position: sticky;top: 0; ">Batch</th>
+								<th style="min-width:150px;position: sticky;top: 0; ">Qty</th>
+								<th style="min-width:100px;position: sticky;top: 0; ">Expiration Date</th>
+								<th style="min-width:100px;position: sticky;top: 0; ">Mfr Date</th>
+								<th style="min-width:100px;position: sticky;top: 0;  ;">Admission Date</th>
+								<th style="min-width:300px;position: sticky;top: 0; ">Location</th>
+								<th style="min-width:300px;position: sticky;top: 0; ">Details</th>
+								<th style="min-width:300px;position: sticky;top: 0; ">Unit Cost</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -1808,10 +1808,10 @@
 		  <div  id="serialTableReport" class="table-responsive" style="width:100%; height:300px !important; padding-bottom:20px; padding-left:10px;  overflow:scroll;" >
 			
 	
-			<table id="tblSerialCreated" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width= 100%" cellspacing="0">
+			<table id="tblSerialCreated" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width: 100%;" cellspacing="0">
 						<thead>
 							<tr >
-								<th style="min-width:20px;position: sticky;top: 0; " >#</th>
+								<th  style="min-width:20px;position: sticky;top: 0; " >#</th>
 								<th  style="min-width:250px;position: sticky;top: 0; ">Mfr Serial No.</th>
 								<th  style="min-width:150px;position: sticky;top: 0; ">Serial Number</th>
 								<th  style="min-width:100px;position: sticky;top: 0; ">Expiration Date</th>
@@ -1856,7 +1856,7 @@
           <!--Body-->
           <div class="modal-body" style="padding-bottom: 0px;">
           	<ul class="nav nav-tabs pt-2" id="myTab" role="tablist">
-						  <li class="nav-item " style="">
+						  <li class="nav-item ">
 						    <a class="nav-link active " id="" data-toggle="tab" href="#docRefTo" role="tab" aria-controls="docRefTo"
 						      aria-selected="true" style="color: black; font-weight:bold">Document Referenced to</a>
 						  </li>
@@ -1876,7 +1876,7 @@
 									<hr/>
 									<div style="margin: 0px; padding-bottom: 0px;">
 										<input type="checkbox" id="chkFlagVar" name="flagVar" value="" style="width: 20px; height: 20px;">
-  									<label for="flagVar" style="font-size: ;">  Only Reference Business Partner on Main Document</label>
+  									<label for="flagVar">  Only Reference Business Partner on Main Document</label>
 									</div>
 								</div>
 							</div>

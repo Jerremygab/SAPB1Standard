@@ -7,7 +7,7 @@ include_once('../../../config/config.php');
 ?>
 
 <div class="">
-	<table id="tblWTaxTable" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width=100% !important;"  cellspacing="0">
+	<table id="tblWTaxTable" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
 											  <thead   style="border-bottom: 0 !important; ">
 											    <tr >
 													<th class="text-right" style=" color: black; min-width:20px; " >#</th>
