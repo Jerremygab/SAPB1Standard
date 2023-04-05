@@ -86,7 +86,7 @@ if ($serviceType == 'I'){
 	  <td >
 	  
 		<div class="input-group ">
-		<input type="text" class="form-control matrix-cell whsecode" aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none;" readonly>
+		<input type="text" class="form-control matrix-cell whsecode" aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none;" readonly/>
 		  <button class="btn " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#whseModal" data-backdrop="false">
 			<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 		  </button>
@@ -135,7 +135,7 @@ if ($serviceType == 'I'){
 	  </td>
 	    <td >
 			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
+				<input type="text" class="form-control text-right d-none"   style="outline: none; border:none" maxlength="8"/>
 			  <select class="form-control input-sm selwt" id="selWT" name="selWT">
 
 							<option value="0">No</option>
@@ -243,7 +243,7 @@ else{
 	  </td>
 	   <td >
 			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
+				<input type="text" class="form-control text-right taxamount"   style="outline: none; border:none" maxlength="8"/>
 				<select type="text" class="form-control taxcode"  placeholder="">
 							<?php
 												$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code,Name,Rate FROM OVTG WHERE Inactive = 'N' AND Category='I' ORDER BY CASE WHEN Code = 'IVAT-N' THEN '1' ELSE Code END ASC");
@@ -260,7 +260,7 @@ else{
 	  </td>
 	    <td >
 			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
+				<input type="text" class="form-control text-right d-none"   style="outline: none; border:none" maxlength="8"/>
 			  <select class="form-control input-sm selwt" id="selWT" name="selWT">
 			  		<option value="0">No</option>
 							<option value="1">Yes</option>

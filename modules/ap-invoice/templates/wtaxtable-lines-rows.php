@@ -16,7 +16,7 @@ include_once('../../../config/config.php');
 						
 					
 						 <ul class="dropdown-menu rowfunctions" role="menu" style="background-color: #fdfd96;">
-							<li class="	<li class="duplicaterow style="font-size:20px; color: black; font-weight:bold">Duplicate Row</a></li>" style="font-size:20px; color: black; font-weight:bold">Delete Row</a></li>
+							<li class="	<li class="duplicaterow"style="font-size:20px; color: black; font-weight:bold">Duplicate Row</a></li>" style="font-size:20px; color: black; font-weight:bold">Delete Row</a></li>
 						
 						  </ul>
 						
@@ -36,7 +36,7 @@ include_once('../../../config/config.php');
 				<input type="text" class="form-control matrix-cell text-right rate"  style="outline: none; border:none" maxlength="12" readonly/>
 			  </td>
 			     <td >
-				 <input type="text" class="form-control matrix-cell text-right baseamount" style="outline: none; border: none;" maxlength="12" readonly >
+				<input type="text" class="form-control matrix-cell text-right baseamount"   style="outline: none; border:none" maxlength="12" />
 				
 			  </td>
 			   <td >

@@ -19,7 +19,34 @@ include_once('../../../config/config.php');
 	</div>
 	
 </div>
-<div class="row" style="padding-top:80px">	
+<div class="row" style="padding-top:10px">	
+<div class="col-lg-12">
+	<div class="form-group row py-0 my-0" >
+						<div class="col-sm-3" >
+						<label class=" col-form-label " style="color: black;" >Control Account</label>
+						</div>
+							<div class="col-sm-9" >
+								<div class="input-group mb-1">
+									<div class="input-group-prepend d-none" id="lnkCardCode" >
+										<button  class="btn"  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#bpMasterModal" data-backdrop="false">
+											<i class="fas fa-arrow-right  " style="color: #FFD700; font-size:20px"></i>
+										</button>
+									</div>
+									<input readonly type="text" id="txtControlAccountCode" class="form-control d-none" placeholder="" aria-label="Username" aria-describedby="basic-addon1 " style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
+									<input readonly type="text" id="txtControlAccountName" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1 " style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
+									
+									<div class="input-group-append">
+										<button id="btnControlAccount" class="btn btnGroup" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#controlAccountModal" data-backdrop="false" >
+											<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue "></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>	
+</div>
+</div>
+
+<div class="row" style="padding-top:10px">	
 <div class="col-lg-12">
 	<div class="form-group row py-0 my-0" >
 						<div class="col-sm-3" >

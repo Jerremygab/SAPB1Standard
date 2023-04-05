@@ -258,7 +258,7 @@
 							<div class="col-sm-1 " >
 							</div>
 								<div class="col-sm-6 input-group mb-1 ">
-								<input type="date" id="txtPostingDate" class="form-control postingdate"  value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" >
+								<input type="date" id="txtPostingDate" class="form-control postingdate"  value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" readonly>
 							
 							</div>
 					
@@ -278,7 +278,7 @@
 							<div class="col-sm-1 " >
 							</div>
 							<div class="col-sm-6 input-group mb-1">
-								<input type="date" id="txtDocumentDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050">
+								<input type="date" id="txtDocumentDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" readonly>
 							</div>
 						</div>
 						
@@ -411,12 +411,12 @@
 							  <input type="text" id="txtFooterDiscountSum" class="form-control text-right footer" maxlength="7">
 							</div>
 						</div>
-						<div class="form-group row  py-0 my-0" >
-						<label for="inputEmail3" class="col-sm-4 col-form-label " style="color: black;" >Tax</label>
-							<div class="col-sm-8 input-group mb-1">
-								<input type="text" id="txtVatSum" class="form-control text-right" readonly value=0.00>
+						<div class="form-group row  py-0 my-0">
+							<label for="inputEmail3" class="col-sm-4 col-form-label " style="color: black;">Tax</label>
+								<div class="col-sm-8 input-group mb-1">
+									<input type="text" id="txtVatSum" class="form-control text-right" readonly value=0.00>
+								</div>
 							</div>
-						</div>	
 						<div class="form-group row py-0 my-0" >
 						<label for="inputEmail3" class="col-sm-4 col-form-label " style="color: black;" >WTax Amount</label>
 							<div class="col-sm-8 input-group mb-1">
@@ -427,7 +427,7 @@
 								</div>
 								<input readonly type="text" id="txtWTaxF" name="txtWTaxF" class="form-control text-right"  placeholder="" aria-label="Username" aria-describedby="basic-addon1 " style="border-bottom-left-radius:5px; border-top-left-radius:5px;" value=0.00>	
 							</div>
-						</div>	
+						</div>		
 						<div class="form-group row  py-0 my-0" >
 						<label for="inputEmail3" class="col-sm-4 col-form-label " style="color: black;" >Total Payment Due</label>
 							<div class="col-sm-8 input-group mb-1">
@@ -680,7 +680,7 @@
         <div class="modal-content-full-width modal-content">
           <!--Header-->
           <div class="modal-header"  style="background-color: #A8A8A8; border-bottom-width: thick; border-color: #f0ad4e;">
-            <h4 class="modal-title w-100" id="myModalLabel" style="color:black">List of Customers</h4>
+            <h4 class="modal-title w-100" id="myModalLabel" style="color:black">List of Vendors</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -975,6 +975,69 @@
       </div>
     </div>
     <!-- payment Terms Modal -->
+	<!-- Control Account Modal -->
+    <div class="modal fade" id="controlAccountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+      <div class="modal-dialog modal-xl" role="document" style="width:100%">
+        <!--Content-->
+        <div class="modal-content-full-width modal-content">
+          <!--Header-->
+          <div class="modal-header"  style="background-color: #A8A8A8; border-bottom-width: thick; border-color: #f0ad4e;">
+            <h4 class="modal-title w-100" id="myModalLabel" style="color:black">List of Control Account</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+		  <!-- qwerty -->
+          <!--Body-->
+          <div class="modal-body">
+            <table class="table table-striped table-bordered table-hover" id="tblControlAccount" style="width:100%">
+			<thead>
+							<tr>
+								<th >#</th>
+								<th>Account Number</th>
+								<th>Account Name</th>
+								<th>Account Balance</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+							$itemno = 1;
+							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT DISTINCT
+																					T0.AcctCode, 
+																					T0.AcctName, 
+																					T0.CurrTotal
+																					
+																					FROM OACT T0
+																					WHERE T0.Postable='Y' and T0.LocManTran ='Y'
+																					ORDER BY T0.AcctCode ASC");
+								while (odbc_fetch_row($qry)) 
+								{
+									echo '<tr class="">
+												<td>'.$itemno.'</td>
+												<td class="item-1" style="width: 20%;">'.odbc_result($qry, 'AcctCode').'</td>
+												<td class="item-2">'.odbc_result($qry, 'AcctName').'</td>
+												<td class="item-3 " >'.odbc_result($qry, 'CurrTotal').'</td>
+												
+											  </tr>';
+									$itemno++;	  
+								}
+								
+								odbc_free_result($qry);
+						?>
+						</tbody>
+					</table>
+          </div>
+          <!--Footer-->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        <!--/.Content-->
+      </div>
+    </div>
+    <!-- Control Account Modal -->
 	
    <!-- Item Code Modal -->
     <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
@@ -1244,6 +1307,67 @@
       </div>
     </div>
     <!-- GL Modal -->
+	 <!-- control account Modal -->
+    <div class="modal fade" id="controlAccountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+      <div class="modal-dialog modal-xl" role="document" style="width:100%">
+        <!--Content-->
+        <div class="modal-content-full-width modal-content">
+          <!--Header-->
+          <div class="modal-header"  style="background-color: #A8A8A8; border-bottom-width: thick; border-color: #f0ad4e;">
+            <h4 class="modal-title w-100" id="myModalLabel" style="color:black">List of Control Accounts</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!--Body-->
+          <div class="modal-body">
+            <table class="table table-striped table-bordered table-hover" id="tblCA">
+						<thead>
+							<tr>
+								<th >#</th>
+								<th>Account Number</th>
+								<th>Account Name</th>
+								<th>Account Balance</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+							$itemno = 1;
+							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT DISTINCT
+																					T0.AcctCode, 
+																					T0.AcctName, 
+																					T0.CurrTotal
+																					
+																					FROM OACT T0
+																					WHERE T0.Postable='Y' and T0.LocManTran ='N'
+																					ORDER BY T0.AcctCode ASC");
+								while (odbc_fetch_row($qry)) 
+								{
+									echo '<tr class="">
+												<td>'.$itemno.'</td>
+												<td class="item-1" style="width: 20%;">'.odbc_result($qry, 'AcctCode').'</td>
+												<td class="item-2">'.odbc_result($qry, 'AcctName').'</td>
+												<td class="item-3 " >'.odbc_result($qry, 'CurrTotal').'</td>
+												
+											  </tr>';
+									$itemno++;	  
+								}
+								
+								odbc_free_result($qry);
+						?>
+						</tbody>
+					</table>
+          </div>
+          <!--Footer-->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        <!--/.Content-->
+      </div>
+    </div>
+    <!-- control account Modal -->
 	
 	<!-- Ship To Details Modal -->
     <div class="modal fade" id="shipToDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -1747,7 +1871,6 @@
       </div>
     </div>
     <!-- WTax Table Modal -->
-
     <!-- WTax Modal -->
     <div class="modal fade" id="WTaxModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
       <div class="modal-dialog modal-xl" role="document" style="width:100%">
@@ -2100,6 +2223,7 @@
 <script>$('#tblStatesB').dataTable({"bLengthChange": false,});</script>
 <script>$('#tblGL').dataTable({"bLengthChange": false,});</script>
 <script>$('#tblWhse').dataTable({"bLengthChange": false,});</script>
+<script>$('#tblControlAccount').dataTable({"bLengthChange": false,});</script>
 
 <?php
 	include '../../bottom.php' 

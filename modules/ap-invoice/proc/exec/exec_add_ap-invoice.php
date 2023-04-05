@@ -4,7 +4,7 @@ $errmsg = '';
 session_start();
 include('../../../../config/config.php');
 
-$objSession = json_decode($_SESSION['APInvoiceArr']);
+$objSession = json_decode($_SESSION['ARInvoiceArr']);
 
 $docentry = '';
 
@@ -20,6 +20,7 @@ $txtRemarks = $_POST['txtRemarks'];
 $selShipToAddress  = $_POST['selShipToAddress'];
 $selBillToAddress  = $_POST['selBillToAddress'];
 $txtJournalMemo  = $_POST['txtJournalMemo'];
+$txtControlAccountCode  = $_POST['txtControlAccountCode'];
 $txtPaymentTermsCode = $_POST['txtPaymentTermsCode'];
 // $txtCancellationDate  = $_POST['txtCancellationDate'];
 // $txtRequiredDate = $_POST['txtRequiredDate'];
@@ -88,6 +89,7 @@ if ($err == 0)
 			$oRdr->Comments  = $txtRemarks;
 		
 			$oRdr->DocumentsOwner  = $txtOwnerCode;
+			$oRdr->ControlAccount = $txtControlAccountCode;
 			
 			//$oRdr->BPL_IDAssignedToInvoice  = 52;
 			

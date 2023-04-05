@@ -95,7 +95,7 @@ if ($serviceType == 'I'){
 	  </td>
 	   <td >
 			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
+				<input type="text" class="form-control text-right taxamount"   style="outline: none; border:none" maxlength="8"/>
 				<select type="text" class="form-control taxcode"  placeholder="">
 							<?php
 									$objSession = json_decode($_SESSION['APInvoiceArr']);
@@ -113,7 +113,7 @@ if ($serviceType == 'I'){
 	  </td>
 	      <td >
 			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
+				<input type="text" class="form-control text-right d-none"   style="outline: none; border:none" maxlength="8"/>
 			  <select class="form-control input-sm selwt" id="selWT" name="selWT">
 							<option value="0">No</option>
 							<option value="1">Yes</option>
@@ -200,7 +200,7 @@ else{
 	  </td>
 	   <td >
 			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
+				<input type="text" class="form-control text-right d-none"   style="outline: none; border:none" maxlength="8"/>
 			  <select class="form-control input-sm selwt" id="selWT" name="selWT">
 							<option value="0">No</option>
 							<option value="1">Yes</option>

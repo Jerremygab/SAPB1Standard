@@ -44,10 +44,10 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 				T0.CancelDate,
 				T0.LicTradNum,
 
-				CASE WHEN T0.DocCur <> 'PHP' THEN T0.VatSum ELSE T0.VatSum END AS 'VatSum',
-				CASE WHEN T0.DocCur <> 'PHP' THEN T0.DiscSum ELSE T0.DiscSum END AS 'DiscSum',
-				CASE WHEN T0.DocCur <> 'PHP' THEN T0.DocTotal ELSE T0.DocTotal END AS 'DocTotal',
-				CASE WHEN T0.DocCur <> 'PHP' THEN (T0.DocTotal + T0.DiscSum) - T0.VatSum ELSE (T0.DocTotal + T0.DiscSum) - T0.VatSum END AS 'TotalBeforeDisc',
+				CASE WHEN T0.DocCur <> 'PHP' THEN T0.VatSumFC ELSE T0.VatSum END AS 'VatSum',
+				CASE WHEN T0.DocCur <> 'PHP' THEN T0.DiscSumFC ELSE T0.DiscSum END AS 'DiscSum',
+				CASE WHEN T0.DocCur <> 'PHP' THEN T0.DocTotalFC ELSE T0.DocTotal END AS 'DocTotal',
+				CASE WHEN T0.DocCur <> 'PHP' THEN (T0.DocTotalFC + T0.DiscSumFC) - T0.VatSumFC ELSE (T0.DocTotal + T0.DiscSum) - T0.VatSum END AS 'TotalBeforeDisc',
 				CASE WHEN T0.DocCur <> 'PHP' THEN T0.PaidFC ELSE T0.PaidToDate END AS 'PaidToDate',
 				
 				T0.DiscPrcnt,
