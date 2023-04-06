@@ -252,38 +252,38 @@ while (odbc_fetch_row($qry))
 						  <button class="btn '.$buttonHide.' " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#uomModal" data-backdrop="false">
 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 						  </button>
-						<input type="hidden" class="form-control matrix-cell uomentry"  style="outline: none; border:none" value="'.$UoMEntry.'" />
+						<input type="hidden" class="form-control matrix-cell uomentry"  style="outline: none; border:none" value="'.$UoMEntry.'" readonly />
 						</div>
 					  </td>
 					   <td >
 						<div class="'.$inputGroup.' ">
-						<input type="text" class="form-control matrix-cell whsecode"   style="outline: none; border:none" readonly/  value="'.$WhsCode.'">
+						<input type="text" class="form-control matrix-cell whsecode"   style="outline: none; border:none" readonly  value="'.$WhsCode.'">
 						  <button class="btn '.$buttonHide.' " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#whseModal" data-backdrop="false">
 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 						  </button>
-						<input type="hidden" class="form-control matrix-cell whsename"   style="outline: none; border:none" value="'.$WhsName.'"/>
+						<input type="hidden" class="form-control matrix-cell whsename"   style="outline: none; border:none" value="'.$WhsName.'"readonly />
 						</div>
 					  </td>
 					   <td >
 					   <div class="'.$inputGroup.' ">
-						<input type="text" class="form-control matrix-cell text-right quantity" value="'.$Quantity.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+						<input type="text" class="form-control matrix-cell text-right quantity" value="'.$Quantity.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly />
 						 <button class="btn '.$buttonHide.' btn-batch d-none" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#batchModal" data-backdrop="false">
 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 						  
 						</div>
 					  </td>
 						<td >
-						<input type="text" class="form-control matrix-cell text-right price" value="'.$Price.'"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
+						<input type="text" class="form-control matrix-cell text-right price" value="'.$Price.'"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly />
 						
 					  </td>
 						<td >
-						<input type="text" class="form-control matrix-cell text-right discount"  value="'.$DiscPrcnt.'" style="outline: none; border:none" maxlength="8"/>
+						<input type="text" class="form-control matrix-cell text-right discount"  value="'.$DiscPrcnt.'" style="outline: none; border:none" maxlength="8" readonly />
 						
 					  </td>
 					   <td >
 							<div class="'.$inputGroup.' ">
-								<input type="hidden" class="form-control text-right  taxamount" value="'.$TaxAmount.'" style="outline: none; border:none" maxlength="8"/>
-								<select type="text" class="form-control taxcode"  placeholder=""'.$disabled .'>
+								<input type="hidden" class="form-control text-right  taxamount" value="'.$TaxAmount.'" style="outline: none; border:none" maxlength="8" readonly />
+								<select type="text" class="form-control taxcode"  placeholder=""'.$disabled .' readonly>
 										"'.$taxcode.'"
 								</select>
 							</div>
@@ -291,14 +291,14 @@ while (odbc_fetch_row($qry))
 					  <td >
 					  <div class="input-group ">
 						  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-						<select class="form-control input-sm selwt" id="selWT" name="selWT">
+						<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
 									  <option value="0">No</option>
 									  <option value="1">Yes</option>
 								  </select>
 					  </div>
 				</td>
 					   <td >
-						<input type="text" class="form-control matrix-cell text-right grossprice"  value="'.$PriceAfVat.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
+						<input type="text" class="form-control matrix-cell text-right grossprice"  value="'.$PriceAfVat.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly />
 						
 					  </td>
 					   <td >
@@ -328,7 +328,7 @@ while (odbc_fetch_row($qry))
 							  </ul>
 						  </td>
 						   <td >
-							<input type="text" class="form-control matrix-cell gldescription"  value="'.$Dscription.'" style="outline: none; border:none" '.$readonly .'/>
+							<input type="text" class="form-control matrix-cell gldescription"  value="'.$Dscription.'" style="outline: none; border:none" '.$readonly .'readonly/>
 							 
 						  </td>
 						  <td >
@@ -336,7 +336,7 @@ while (odbc_fetch_row($qry))
 							<input type="text" class="form-control matrix-cell glaccount"   value="'.$AcctCode.'" style="outline: none; border:none" readonly/>
 							<input type="hidden" class="form-control baseentry"   style="outline: none; border:none; " value="'.$DocEntry.'" readonly/>
 							<input type="hidden" class="form-control linenum"   style="outline: none; border:none; " value="'.$LineNum.'" readonly/>
-							<input type="hidden" class="form-control visorder"  style="outline: none; border:none; " readonly value="'.$VisOrder.'" />
+							<input type="hidden" class="form-control visorder"  style="outline: none; border:none; " readonly value="'.$VisOrder.'" readonly/>
 							  <button class="btn '.$buttonHide.' "   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#glModal" data-backdrop="false">
 								<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 							  </button>
@@ -351,16 +351,16 @@ while (odbc_fetch_row($qry))
 							
 						  </td>
 							<td >
-							<input type="text" class="form-control matrix-cell text-right price"   value="'.$Price.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+							<input type="text" class="form-control matrix-cell text-right price"   value="'.$Price.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
 							
 						  </td>
 							<td >
-							<input type="text" class="form-control matrix-cell text-right discount"   value="'.$DiscPrcnt.'" style="outline: none; border:none" maxlength="8" />
+							<input type="text" class="form-control matrix-cell text-right discount"   value="'.$DiscPrcnt.'" style="outline: none; border:none" maxlength="8" readonly/>
 							
 						  </td>
 						   <td >
 								<div class="'.$inputGroup.' ">
-									<input type="hidden" class="form-control text-right  taxamount"  value="'.$TaxAmount2.'"  style="outline: none; border:none" maxlength="8"/>
+									<input type="hidden" class="form-control text-right  taxamount"  value="'.$TaxAmount2.'"  style="outline: none; border:none" maxlength="8" readonly/>
 									<select type="text" class="form-control taxcode"  placeholder="" '.$disabled .'>
 												 '.$taxcode.'
 													</select>
@@ -376,7 +376,7 @@ while (odbc_fetch_row($qry))
 						  </div>
 					</td>
 						   <td >
-							<input type="text" class="form-control matrix-cell text-right grossprice"    value="'.$PriceAfVat.'"  style="outline: none; border:none" maxlength="12"/>
+							<input type="text" class="form-control matrix-cell text-right grossprice"    value="'.$PriceAfVat.'"  style="outline: none; border:none" maxlength="12" readonly/>
 							
 						  </td>
 						   <td >

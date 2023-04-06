@@ -20,7 +20,7 @@ $countUDF = 0;
 		
 	
 		$qryCount = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-			SELECT COUNT(Column_Name) AS 'Count'
+			SELECT  TOP 7 COUNT(Column_Name) AS 'Count'
 			FROM INFORMATION_SCHEMA.COLUMNS
 			WHERE TABLE_NAME = '".$table."' AND LEFT(Column_Name,2) = 'U_'
 			");

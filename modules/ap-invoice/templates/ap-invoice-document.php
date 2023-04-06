@@ -258,7 +258,7 @@
 							<div class="col-sm-1 " >
 							</div>
 								<div class="col-sm-6 input-group mb-1 ">
-								<input type="date" id="txtPostingDate" class="form-control postingdate"  value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" readonly>
+								<input type="date" id="txtPostingDate" class="form-control postingdate"  value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" >
 							
 							</div>
 					
@@ -278,7 +278,7 @@
 							<div class="col-sm-1 " >
 							</div>
 							<div class="col-sm-6 input-group mb-1">
-								<input type="date" id="txtDocumentDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" readonly>
+								<input type="date" id="txtDocumentDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050">
 							</div>
 						</div>
 						

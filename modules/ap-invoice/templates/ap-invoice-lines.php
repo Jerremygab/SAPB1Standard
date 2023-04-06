@@ -115,12 +115,11 @@ if ($serviceType == 'I'){
 		
 	  </td>
 	   <td >
-			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-				<select type="text" class="form-control taxcode"  placeholder="">
-							<?php
-											$objSession = json_decode($_SESSION['APInvoiceArr']);
-											
+	   <div class="input-group ">
+            <input type="text" class="form-control text-right d-none taxamount" style="outline: none; border:none"
+                maxlength="8" />
+            <select type="text" class="form-control taxcode" placeholder="" readonly>
+                <?php
 												$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code,Name,Rate FROM OVTG WHERE Inactive = 'N' AND Category='I' ORDER BY CASE WHEN Code = 'IVAT-N' THEN '1' ELSE Code END ASC");
 													while (odbc_fetch_row($qry)) 
 													{
@@ -130,13 +129,13 @@ if ($serviceType == 'I'){
 													
 													odbc_free_result($qry);
 											?>
-								</select>
-			</div>
+            </select>
+        </div>
 	  </td>
 	    <td >
 			<div class="input-group ">
 				<input type="text" class="form-control text-right d-none"   style="outline: none; border:none" maxlength="8"/>
-			  <select class="form-control input-sm selwt" id="selWT" name="selWT">
+			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
 
 							<option value="0">No</option>
 							<option value="1">Yes</option>
@@ -144,7 +143,7 @@ if ($serviceType == 'I'){
 			</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
 		
 	  </td>
 	   <td >
@@ -242,11 +241,12 @@ else{
 		
 	  </td>
 	   <td >
-			<div class="input-group ">
-				<input type="text" class="form-control text-right taxamount"   style="outline: none; border:none" maxlength="8"/>
-				<select type="text" class="form-control taxcode"  placeholder="">
-							<?php
-												$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code,Name,Rate FROM OVTG WHERE Inactive = 'N' AND Category='I' ORDER BY CASE WHEN Code = 'IVAT-N' THEN '1' ELSE Code END ASC");
+	   <div class="input-group ">
+            <input type="text" class="form-control text-right d-none taxamount" style="outline: none; border:none"
+                maxlength="8" />
+            <select type="text" class="form-control taxcode" placeholder="" readonly>
+                <?php
+												$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code,Name,Rate FROM OVTG WHERE Inactive = 'N' AND Category='I' ORDER BY CASE WHEN Code = 'OVAT-N' THEN '1' ELSE Code END ASC");
 													while (odbc_fetch_row($qry)) 
 													{
 														//echo odbc_result($qry, 'NextNumber');
@@ -255,13 +255,13 @@ else{
 													
 													odbc_free_result($qry);
 											?>
-								</select>
-			</div>
+            </select>
+        </div>
 	  </td>
 	    <td >
 			<div class="input-group ">
 				<input type="text" class="form-control text-right d-none"   style="outline: none; border:none" maxlength="8"/>
-			  <select class="form-control input-sm selwt" id="selWT" name="selWT">
+			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
 			  		<option value="0">No</option>
 							<option value="1">Yes</option>
 						
@@ -269,7 +269,7 @@ else{
 			</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"    maxlength="12"/>
+		<input type="text" class="form-control matrix-cell text-right grossprice"    maxlength="12" readonly/>
 		
 	  </td>
 	   <td >
