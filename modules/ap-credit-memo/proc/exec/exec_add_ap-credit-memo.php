@@ -18,6 +18,7 @@ $txtRemarks = $_POST['txtRemarks'];
 $selShipToAddress  = $_POST['selShipToAddress'];
 $selBillToAddress  = $_POST['selBillToAddress'];
 $txtJournalMemo  = $_POST['txtJournalMemo'];
+$txtControlAccountCode  = $_POST['txtControlAccountCode'];
 $txtPaymentTermsCode = $_POST['txtPaymentTermsCode'];
 $txtCancellationDate  = $_POST['txtCancellationDate'];
 $txtRequiredDate = $_POST['txtRequiredDate'];
@@ -88,6 +89,7 @@ if ($err == 0)
 			}
 			
 			$oRdr->DocumentsOwner  = $txtOwnerCode;
+			$oRdr->ControlAccount = $txtControlAccountCode;
 			
 			
 			$oRdr->ShipToCode = $selShipToAddress;

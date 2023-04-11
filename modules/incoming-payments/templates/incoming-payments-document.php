@@ -650,7 +650,9 @@
 																						T0.Comments,
 																						T0.DocDate, 
 																						T0.DocDueDate, 
-																						T0.DocTotal
+																						T0.DocTotal,
+                                                                                        T0.AcctCode, 
+																						T0.AcctName, 
 																						
 																							
 																						FROM ORCT T0
@@ -1274,7 +1276,7 @@
 																						T0.CurrTotal
 																						
 																						FROM OACT T0 
-																						WHERE T0.Postable = 'Y' AND T0.LocManTran = 'N'
+																						WHERE T0.Postable = 'Y' AND T0.LocManTran = 'Y'
 																						
 
 

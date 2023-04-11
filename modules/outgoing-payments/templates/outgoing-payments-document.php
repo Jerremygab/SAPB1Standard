@@ -652,9 +652,12 @@
 																						T0.DocDueDate, 
 																						T0.DocTotal
 																						
-																							
-																						FROM OVPM T0
+                                                                                        T0.AcctCode, 
+																						T0.AcctName, 
 																						
+																						FROM OACT T0 
+																						LEFT JOIN OVPM T0 ON T0.AcctCode = T0.AcctCode
+																						LEFT JOIN OVPM T0 ON T0.AcctName = T0.AcctName
 																						ORDER BY T0.DocNum ASC");
 								while (odbc_fetch_row($qry)) 
 								{
@@ -668,6 +671,8 @@
 												<td class="item-8 " >'.odbc_result($qry, 'Comments').'</td>
 												<td class="item-9 " >'.date("m/d/Y", strtotime(odbc_result($qry, 'DocDueDate'))).'</td>
 												<td class="item-5 text-right" >'.number_format(odbc_result($qry, 'DocTotal'),2).'</td>
+                                                <td class="item-1">'.odbc_result($qry, 'AcctCode').'</td>
+												<td class="item-2">'.odbc_result($qry, 'AcctName').'</td>
 											  </tr>';
 									$itemno++;	  
 								}

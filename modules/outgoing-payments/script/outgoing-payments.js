@@ -559,7 +559,8 @@ var serviceType = 'S';
 		let contactPersonCode = $(this).children('td.item-8').text();
 		txtCurrency = $(this).children('td.item-9').text();
 		let addressID = '';
-		
+		let glName = $(this).children('td.item-10').text();
+		let glCode = $(this).children('td.item-11').text();
      
 		generateRows(); 
         $('#bpModal').modal('hide');
@@ -569,6 +570,7 @@ var serviceType = 'S';
 		$('#txtContactPerson').val(contactPerson).css({'background-color': '', 'border-radius': '0px'});
 		$('#txtContactPersonCode').val(contactPersonCode);
 		$('#txtJournalMemo').val('Outgoing Payments - ' + cardCode);
+		$('#txtJournalMemo').val(glCode + ' - ' + glName);
 		$('#txtPaymentTermsCode').val(paymentTermsCode);
 		$('#txtPaymentTermsName').val(paymentTermsName);
 		$('#txtTinNumber').val(tinNumber);
