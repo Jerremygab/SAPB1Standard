@@ -1340,7 +1340,7 @@ include '../../head.php' ;
             <!--/.Content-->
         </div>
     </div>
-    Control Account ni eden Modal
+    <!-- Control Account ni eden Modal -->
    <div class="modal fade" id="controlAccountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document" style="width:100%">
             <!--Content-->
