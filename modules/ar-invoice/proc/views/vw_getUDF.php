@@ -21,7 +21,7 @@ $countUDF = 0;
 		$qryCount = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 			SELECT COUNT(Column_Name) AS 'Count'
 			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_NAME = 'OPOR' AND LEFT(Column_Name,2) = 'U_'
+			WHERE TABLE_NAME = 'OINV' AND LEFT(Column_Name,2) = 'U_'
 			");
 		while (odbc_fetch_row($qryCount)) 
 		{
@@ -31,8 +31,8 @@ $countUDF = 0;
 		
 	 $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 					SELECT 
-					 ". $string2 ."
-					FROM OPOR WHERE Docnum = $docNum
+					 CAST(". $string2 .", NVARCHAR(200))
+					FROM OINV WHERE Docnum = $docNum
 					
 					");
 	$arr=array();

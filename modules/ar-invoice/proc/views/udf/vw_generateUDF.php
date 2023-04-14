@@ -5,7 +5,7 @@ include('../../../../../config/config.php');
 $table = $_GET['mainTable'];
 	
 	$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-		SELECT 
+		SELECT TOP 7
 		'U_' + T0.AliasID AS 'AliasID',
 		T0.Descr,
 		T0.TypeID,
@@ -95,7 +95,7 @@ $table = $_GET['mainTable'];
 								<input type="'.$inputType.'" id="'.$inputID.'" class="form-control udfcode d-none" value="' . $value .'" min="2018-01-01" max="2050-12-31">
 								<div class="col-sm input-group mb-1 ">
 									<input type="text" class="form-control col-10 dateType '.$inputID.'"  value="">
-									<input type="'.$inputType.'" validValues="'.$validValues.'" fieldId="" tableId="'.$tableId.'" table="'.$rTable.'" id2="'.$inputID.'" class="form-control col-2 '.$textPosition.' inputUdf '.$amount.' udfname btnDateType"  value="' . $value .'" min="01-01-2018" max="12-31-2050" style="color:transparent !important; color: transparent; text-shadow: 0 0 0 #2196f3;" "'.$readonly.'">
+									<input type="'.$inputType.'" validValues="'.$validValues.'" fieldId="" tableId="'.$tableId.'" table="'.$rTable.'"  data-id2="'.$inputID.'" id2="'.$inputID.'" class="form-control col-2 '.$textPosition.' inputUdf '.$amount.' udfname btnDateType"  value="' . $value .'" min="01-01-2018" max="12-31-2050" style="color:transparent !important; color: transparent; text-shadow: 0 0 0 #2196f3;" "'.$readonly.'">
 									<div class="input-group-append '.$linked.'">
 										<button class="btn btnGroup" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#udfModal" data-backdrop="false" >
 											<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue "></i>

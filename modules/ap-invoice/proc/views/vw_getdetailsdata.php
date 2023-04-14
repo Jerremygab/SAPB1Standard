@@ -231,7 +231,7 @@ while (odbc_fetch_row($qry))
 						<input type="hidden" class="form-control baseentry"   style="outline: none; border:none; " value="'.$DocEntry.'" readonly/>
 						<input type="hidden" class="form-control linenum"   style="outline: none; border:none; " value="'.$LineNum.'" readonly/>
 						<input type="hidden" class="form-control visorder"  style="outline: none; border:none; " readonly value="'.$VisOrder.'" />
-						  <button class="btn '.$buttonHide.' "  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#itemModal" data-backdrop="false" >
+						  <button class="btn '.$buttonHide.' "  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#itemModal" data-backdrop="false" disabled="disabled">
 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 						  </button>
 						<input type="hidden" class="form-control matrix-cell uomgroup"   style="outline: none; border:none" readonly/>
@@ -240,7 +240,7 @@ while (odbc_fetch_row($qry))
 					  <td >
 						<div class="'.$inputGroup.' ">
 						<input type="text" class="form-control matrix-cell itemname"  style="outline: none; border:none" readonly value="'.$Dscription.'" / >
-						  <button class="btn '.$buttonHide.' "   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#itemModal" data-backdrop="false">
+						  <button class="btn '.$buttonHide.' "   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#itemModal" data-backdrop="false" disabled="disabled">
 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 						  </button>
 						<input type="hidden" class="form-control matrix-cell uomgroup"   style="outline: none; border:none" readonly value="'.$UomCode.'" />
@@ -249,7 +249,7 @@ while (odbc_fetch_row($qry))
 					  <td >
 						<div class="'.$inputGroup.' ">
 						<input type="text" class="form-control matrix-cell unitmsr"  style="outline: none; border:none" readonly value="'.$UnitMsr.'" />
-						  <button class="btn '.$buttonHide.' " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#uomModal" data-backdrop="false">
+						  <button class="btn '.$buttonHide.' " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#uomModal" data-backdrop="false" disabled="disabled">
 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 						  </button>
 						<input type="hidden" class="form-control matrix-cell uomentry"  style="outline: none; border:none" value="'.$UoMEntry.'" readonly />
@@ -258,7 +258,7 @@ while (odbc_fetch_row($qry))
 					   <td >
 						<div class="'.$inputGroup.' ">
 						<input type="text" class="form-control matrix-cell whsecode"   style="outline: none; border:none" readonly  value="'.$WhsCode.'">
-						  <button class="btn '.$buttonHide.' " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#whseModal" data-backdrop="false">
+						  <button class="btn '.$buttonHide.' " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#whseModal" data-backdrop="false" disabled="disabled">
 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 						  </button>
 						<input type="hidden" class="form-control matrix-cell whsename"   style="outline: none; border:none" value="'.$WhsName.'"readonly />
@@ -267,7 +267,7 @@ while (odbc_fetch_row($qry))
 					   <td >
 					   <div class="'.$inputGroup.' ">
 						<input type="text" class="form-control matrix-cell text-right quantity" value="'.$Quantity.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly />
-						 <button class="btn '.$buttonHide.' btn-batch d-none" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#batchModal" data-backdrop="false">
+						 <button class="btn '.$buttonHide.' btn-batch d-none" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#batchModal" data-backdrop="false" disabled="disabled">
 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 						  
 						</div>
@@ -283,7 +283,7 @@ while (odbc_fetch_row($qry))
 					   <td >
 							<div class="'.$inputGroup.' ">
 								<input type="hidden" class="form-control text-right  taxamount" value="'.$TaxAmount.'" style="outline: none; border:none" maxlength="8" readonly />
-								<select type="text" class="form-control taxcode"  placeholder=""'.$disabled .' readonly>
+								<select type="text" class="form-control taxcode"  placeholder=""'.$disabled .' readonly disabled="disabled">
 										"'.$taxcode.'"
 								</select>
 							</div>
@@ -291,7 +291,7 @@ while (odbc_fetch_row($qry))
 					  <td >
 					  <div class="input-group ">
 						  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-						<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
+						<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly disabled="disabled">
 									  <option value="0">No</option>
 									  <option value="1">Yes</option>
 								  </select>

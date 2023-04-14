@@ -23,6 +23,7 @@ else{
 
 $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 			SELECT DISTINCT
+				T0.DocEntry,
 				T0.DocNum,
 				T0.DocEntry,
 				T0.DocStatus,
@@ -59,7 +60,6 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 				T0.TrnspCode,
 				T0.JrnlMemo,
 				T0.GroupNum,
-				T0.WTSum,
 				
 			
 
@@ -95,7 +95,9 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 				CAST(ISNULL(T9.Name,'') AS VARCHAR) AS Country2,
 				CAST(ISNULL(T8.Building,'') AS VARCHAR) AS Building2,
 
-				T10.PymntGroup
+				T10.PymntGroup,
+				T0.ExtraDays,
+				T0.ExtraMonth
 				
 			
 
@@ -122,7 +124,7 @@ $arr = array();
 while (odbc_fetch_row($qry)) 
 {
 	$arr[] = array(
-		"DocEntry" => odbc_result($qry, 'DocEntry'),
+				"DocEntry" => odbc_result($qry, 'DocEntry'),	
 				"DocNum" => odbc_result($qry, 'DocNum'),
 				"DocStatus" => odbc_result($qry, 'DocStatus'),
 				"DocStatusFullText" => odbc_result($qry, 'DocStatusFullText'),
@@ -144,14 +146,13 @@ while (odbc_fetch_row($qry))
 				"CardName" => odbc_result($qry, 'CardName'),
 				"LicTradNum" => odbc_result($qry, 'LicTradNum'),
 				
-				"VatSum" => number_format(odbc_result($qry, 'VatSum'),2),
-				"DiscSum" => number_format(odbc_result($qry, 'DiscSum'),2),
-				"DocTotal" => number_format(odbc_result($qry, 'DocTotal'),2),
-				"TotalBeforeDisc" => number_format(odbc_result($qry, 'TotalBeforeDisc'),2),
-				"WTSum" => number_format(odbc_result($qry, 'WTSum'),2),
-				"PaidToDate" => number_format(odbc_result($qry, 'PaidToDate'),2),
-				"BalancedDue" => number_format(((odbc_result($qry, 'DocTotal') - odbc_result($qry, 'PaidToDate')) < 0 ? 0 : odbc_result($qry, 'DocTotal') - odbc_result($qry, 'PaidToDate')),2),
-				"DiscPrcnt" => number_format(odbc_result($qry, 'DiscPrcnt'),2),
+				"VatSum" => number_format(odbc_result($qry, 'VatSum'),6),
+				"DiscSum" => number_format(odbc_result($qry, 'DiscSum'),6),
+				"DocTotal" => number_format(odbc_result($qry, 'DocTotal'),6),
+				"TotalBeforeDisc" => number_format(odbc_result($qry, 'TotalBeforeDisc'),6),
+				"PaidToDate" => number_format(odbc_result($qry, 'PaidToDate'),6),
+				"BalancedDue" => number_format(((odbc_result($qry, 'DocTotal') - odbc_result($qry, 'PaidToDate')) < 0 ? 0 : odbc_result($qry, 'DocTotal') - odbc_result($qry, 'PaidToDate')),6),
+				"DiscPrcnt" => number_format(odbc_result($qry, 'DiscPrcnt'),6),
 				
 				"NumAtCard" => odbc_result($qry, 'NumAtCard'),
 				"Comments" => odbc_result($qry, 'Comments'),
@@ -171,7 +172,9 @@ while (odbc_fetch_row($qry))
 				
 				"EmpID" => odbc_result($qry, 'EmpID'),
 				"EmployeeName" => odbc_result($qry, 'EmployeeName'),
-				"PymntGroup" => odbc_result($qry, 'PymntGroup')
+				"PymntGroup" => odbc_result($qry, 'PymntGroup'),
+				"ExtraDays" => odbc_result($qry, 'ExtraDays'),
+				"ExtraMonth" => odbc_result($qry, 'ExtraMonth')
 			
 				
 			

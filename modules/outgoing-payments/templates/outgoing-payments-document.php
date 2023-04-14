@@ -157,7 +157,7 @@
                                                     <select id="selTransactionType"
                                                         class="col-sm-6 form-control-sm mdb-select md-form text-left"
                                                         searchable="Search here.."
-                                                        style=" !important;outline:none; border-color: #D0D0D0;">
+                                                        style=" outline:none !important; border-color: #D0D0D0 !important;">
                                                         <option class="text-center" value="S">Vendor</option>
                                                         <option class="text-center" value="A">Account</option>
                                                         <input type="hidden" id="rowLoader" name="rowLoader"
@@ -270,7 +270,7 @@
 
 
                                     <ul class="nav nav-tabs pt-2" id="myTab" role="tablist">
-                                        <li class="nav-item " style="">
+                                        <li class="nav-item " >
                                             <a class="nav-link active " id="" data-toggle="tab" href="#contents"
                                                 role="tab" aria-controls="contents" aria-selected="true"
                                                 style="color: black; font-weight:bold">Contents</a>
@@ -328,7 +328,7 @@
                                                         <div class="input-group-append">
                                                             <button class="btn btnGroup" type="button"
                                                                 data-mdb-ripple-color="dark"
-                                                                style="background-color: #ADD8E6; hover:"
+                                                                style="background-color: #ADD8E6;"
                                                                 data-toggle="modal" data-target="#salesEmpModal"
                                                                 data-backdrop="false">
                                                                 <i class="fas fa-list-ul input-prefix" tabindex=0
@@ -346,7 +346,7 @@
                                                         <div class="input-group-prepend " id="lnkEmployee">
                                                             <button class="btn" type="button"
                                                                 data-mdb-ripple-color="dark"
-                                                                style="background-color: #ADD8E6; hover:"
+                                                                style="background-color: #ADD8E6;"
                                                                 data-toggle="modal" data-target="#"
                                                                 data-backdrop="false">
                                                                 <i class="fas fa-arrow-right  "
@@ -362,7 +362,7 @@
                                                         <div class="input-group-append">
                                                             <button class="btn btnGroup" type="button"
                                                                 data-mdb-ripple-color="dark"
-                                                                style="background-color: #ADD8E6; hover:"
+                                                                style="background-color: #ADD8E6;"
                                                                 data-toggle="modal" data-target="#empModal"
                                                                 data-backdrop="false">
                                                                 <i class="fas fa-list-ul input-prefix" tabindex=0
@@ -388,16 +388,16 @@
                                                         placeholder="" resize='false' maxlength="254"></textarea>
                                                 </div>
                                             </div>
+                                           <!--  1234 -->
                                             <div class="form-group row  py-0 my-0 paynodoc d-none">
-                                                <label class="col-sm-3 col-form-label " style="color: black;">Control
-                                                    Account</label>
+                                                <label class="col-sm-3 col-form-label " style="color: black;">Control Account</label>
                                                 <div class="col-sm-9 input-group">
                                                     <input readonly type="text" id="txtGLCodePayNoDoc"
                                                         class="form-control inputRadius " placeholder=""
                                                         aria-label="Username" aria-describedby="basic-addon1 "
                                                         style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
                                                     <input readonly type="text" id="txtGLNamePayNoDoc"
-                                                        class="form-control inputRadius d-none" placeholder=""
+                                                        class="form-control inputRadius" placeholder=""
                                                         aria-label="Username" aria-describedby="basic-addon1 "
                                                         style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
                                                     <div class="input-group-append">
@@ -499,10 +499,10 @@
                                                 style="color: black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Add</button>
                                             <button type="button" id="btnOk"
                                                 class="  btn btn-warning btn-rounded d-none"
-                                                style="color:black; font-weight: bold; black;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Ok</button>
+                                                style="color:black; font-weight: bold;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Ok</button>
                                             <button type="button" id="btnUpdate"
                                                 class="  btn btn-warning btn-rounded d-none"
-                                                style="color:black; font-weight: bold; black;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Update</button>
+                                                style="color:black; font-weight: bold;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Update</button>
                                             <button type="button" id="btnCancel"
                                                 class=" btn btn-warning btn-rounded ml-5"
                                                 style="color: black;width:250px; font-weight: bold; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Cancel</button>
@@ -652,12 +652,9 @@
 																						T0.DocDueDate, 
 																						T0.DocTotal
 																						
-                                                                                        T0.AcctCode, 
-																						T0.AcctName, 
+																							
+																						FROM OVPM T0
 																						
-																						FROM OACT T0 
-																						LEFT JOIN OVPM T0 ON T0.AcctCode = T0.AcctCode
-																						LEFT JOIN OVPM T0 ON T0.AcctName = T0.AcctName
 																						ORDER BY T0.DocNum ASC");
 								while (odbc_fetch_row($qry)) 
 								{
@@ -671,8 +668,6 @@
 												<td class="item-8 " >'.odbc_result($qry, 'Comments').'</td>
 												<td class="item-9 " >'.date("m/d/Y", strtotime(odbc_result($qry, 'DocDueDate'))).'</td>
 												<td class="item-5 text-right" >'.number_format(odbc_result($qry, 'DocTotal'),2).'</td>
-                                                <td class="item-1">'.odbc_result($qry, 'AcctCode').'</td>
-												<td class="item-2">'.odbc_result($qry, 'AcctName').'</td>
 											  </tr>';
 									$itemno++;	  
 								}
@@ -721,7 +716,7 @@
         </div>
     </div>
     <!-- Copy From SQ Modal -->
-
+        <!-- jade2 -->
     <!-- Business Partner Modal -->
     <div class="modal fade" id="bpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document" style="width:100%">
@@ -777,6 +772,7 @@
 																						WHERE T0.CardType = 'S'
 																						
 																						ORDER BY T0.CardCode ASC");
+                                                                                        
 								while (odbc_fetch_row($qry)) 
 								{
 									echo '<tr class="tableHover">
@@ -811,7 +807,7 @@
         </div>
     </div>
     <!-- Business Partner Modal -->
-    <!-- Business Partner Modal -->
+    <!-- jade2 -->
     <div class="modal fade" id="bpModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document" style="width:100%">
             <!--Content-->
@@ -866,6 +862,7 @@
 																						WHERE T0.CardType = 'S'
 																						
 																						ORDER BY T0.CardCode ASC");
+                                                                                        /* qwe */
 								while (odbc_fetch_row($qry)) 
 								{
 									echo '<tr class="tableHover">
@@ -1279,7 +1276,7 @@
 																						T0.CurrTotal
 																						
 																						FROM OACT T0 
-																						WHERE T0.Postable = 'Y' AND T0.LocManTran = 'N'
+																						WHERE T0.Postable = 'Y' AND T0.LocManTran = 'Y'
 																						
 
 
@@ -1736,17 +1733,17 @@
                 <!--Body-->
                 <div class="modal-body">
                     <ul class="nav nav-tabs pt-2" id="myTab" role="tablist">
-                        <li class="nav-item " style="">
+                        <li class="nav-item ">
                             <a class="nav-link  active" id="" data-toggle="tab" href="#check" role="tab"
                                 aria-controls="contents" aria-selected="true"
                                 style="color: black; font-weight:bold">Check</a>
                         </li>
-                        <li class="nav-item " style="">
+                        <li class="nav-item ">
                             <a class="nav-link  " id="" data-toggle="tab" href="#transfer" role="tab"
                                 aria-controls="contents" aria-selected="true"
                                 style="color: black; font-weight:bold">Bank Transfer</a>
                         </li>
-                        <li class="nav-item " style="">
+                        <li class="nav-item ">
                             <a class="nav-link  " id="" data-toggle="tab" href="#cash" role="tab"
                                 aria-controls="contents" aria-selected="true"
                                 style="color: black; font-weight:bold">Cash</a>
@@ -1885,6 +1882,7 @@
         </div>
     </div>
     <!-- Ship To Details Modal -->
+    <!-- jade -->
     <!-- GL Modal -->
     <div class="modal fade" id="glModalCash" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
@@ -1951,7 +1949,7 @@
         </div>
     </div>
     <!-- GL Modal -->
-    <!-- GL Modal -->
+    <!-- jade -->
     <div class="modal fade" id="glModalTransfer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document" style="width:100%">

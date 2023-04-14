@@ -5,7 +5,7 @@ include('../../../../../config/config.php');
 $udfTable = $_GET['udfTable'];
 
 
-$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT 
+$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT TOP 7
 														T0.Descr
 													
 														FROM OUTB T0

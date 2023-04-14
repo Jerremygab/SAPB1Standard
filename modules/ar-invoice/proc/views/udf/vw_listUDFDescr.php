@@ -5,7 +5,7 @@ include('../../../../../config/config.php');
 $table = $_GET['mainTable'];
 
 $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-		SELECT 
+		SELECT TOP 7
 			T0.Descr
 		FROM CUFD T0
 		WHERE T0.TableID = '".$table."'

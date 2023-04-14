@@ -78,15 +78,28 @@ if ($err == 0)
 	{
 			$oRdr = $vCmp->GetBusinessObject($objSession->objectType);
 			$oRdr->GetByKey($txtDocEntry);
-		
 			
+			// $oRdr->DocDate = $txtPostingDate;
+			$oRdr->DocDueDate = $txtDeliveryDate;
 			$oRdr->NumAtCard  = $txtCustomerRefNo;
 			
 			$oRdr->Comments  = $txtRemarks;
 			
 			$oRdr->DocumentsOwner  = $txtOwnerCode;
 			
-		
+			if(json_decode($json) != null) 
+			{
+				$json = json_decode($json, true);
+				//$ctr = -1;
+				//$a = 0;
+				foreach ($json as $key => $value) 
+				{
+					if ($serviceType == 'I') 
+					{
+						// $oRdr->Lines->ItemDescription = valid_input($value[6]);
+					}
+				}
+			}
 			
 			$udfJson = json_decode(stripslashes($udfJson));
 				foreach ($udfJson as $key => $value) 

@@ -35,6 +35,8 @@ $txtPayTo = $_POST['txtPayTo'];
 $selTransactionType = $_POST['selTransactionType'];
 $txtPayNoDoc = $_POST['txtPayNoDoc'];
 $txtGLCodePayNoDoc = $_POST['txtGLCodePayNoDoc'];
+$txtAcctName = $_POST['acctName'];
+$txtAcctNumber = $_POST['acctNumber'];
 $txtCheckAmountTotal = $_POST['txtCheckAmountTotal'];
 $udfJson = $_POST['udfJson'];
 $Cash = 0.00;
@@ -239,12 +241,7 @@ if ($err == 0)
 				
 					
 					
-			  
-					
-				
-			
-			
-			
+			  		
 	}	
 			 
 		}

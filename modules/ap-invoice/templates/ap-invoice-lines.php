@@ -119,7 +119,7 @@ if ($serviceType == 'I'){
             <input type="text" class="form-control text-right d-none taxamount" style="outline: none; border:none"
                 maxlength="8" />
             <select type="text" class="form-control taxcode" placeholder="" readonly>
-                <?php
+                							<?php
 												$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code,Name,Rate FROM OVTG WHERE Inactive = 'N' AND Category='I' ORDER BY CASE WHEN Code = 'IVAT-N' THEN '1' ELSE Code END ASC");
 													while (odbc_fetch_row($qry)) 
 													{
@@ -133,13 +133,15 @@ if ($serviceType == 'I'){
         </div>
 	  </td>
 	    <td >
-			<div class="input-group ">
+		<div class="input-group ">
+			
 				<input type="text" class="form-control text-right d-none"   style="outline: none; border:none" maxlength="8"/>
 			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
 
-							<option value="0">No</option>
-							<option value="1">Yes</option>
-						</select>
+			  		<option value="0" id="btnWTLiableNo">No</option>
+					<option value="1" id="btnWTLiableYes">Yes</option>
+				</select>
+											
 			</div>
 	  </td>
 	   <td >
@@ -259,13 +261,13 @@ else{
         </div>
 	  </td>
 	    <td >
-			<div class="input-group ">
+		<div class="input-group ">
 				<input type="text" class="form-control text-right d-none"   style="outline: none; border:none" maxlength="8"/>
 			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
-			  		<option value="0">No</option>
-							<option value="1">Yes</option>
-						
-						</select>
+
+			  		<option value="0" id="btnWTLiableNo">No</option>
+					<option value="1" id="btnWTLiableYes">Yes</option>
+				</select>
 			</div>
 	  </td>
 	   <td >
@@ -301,6 +303,7 @@ else{
     </tr>
 	  </tfoot>
 </table>
+
 </div>
 
 

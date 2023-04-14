@@ -179,7 +179,7 @@
 					<div class="col-lg-4 pb-2 " id="dateCol">
 						<div class="form-group row  py-0 my-0 mb-1" >
 						<label for="inputEmail3" class="col-sm-2 col-form-label " style="color: black;" >No.</label>
-							<div class="col-sm-4 " >
+							<div class="col-sm-4 " id="btnSeries">
 								<select type="text" class="form-control " id="selSeries" placeholder=""    >
 									
 									<?php
@@ -357,7 +357,7 @@
 									<input readonly type="text" id="txtSalesEmpCode" class="form-control d-none" placeholder="" aria-label="Username" aria-describedby="basic-addon1" value="1">
 									<input readonly type="text" id="txtSalesEmpName" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" style="border-bottom-left-radius:5px; border-top-left-radius:5px;" value="-No Sales Employee-">
 									<div class="input-group-append">
-										<button class="btn btnGroup"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#salesEmpModal" data-backdrop="false">
+										<button class="btn btnGroup" id="btnSalesEmp"  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#salesEmpModal" data-backdrop="false">
 											<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue "></i>
 										</button>
 									</div>
@@ -376,7 +376,7 @@
 							  <input readonly type="text" class="form-control d-none" id="txtOwnerCode" value="<?php echo $EmpId; ?>">
 							  <input readonly type="text" class="form-control " id="txtOwnerName" style="border-bottom-left-radius:5px; border-top-left-radius:5px;" value="<?php echo $UserName?>">
 							  <div class="input-group-append">
-										<button class="btn btnGroup"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#empModal" data-backdrop="false">
+										<button class="btn btnGroup"  id="btnOwner" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#empModal" data-backdrop="false">
 											<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue "></i>
 										</button>
 									</div>

@@ -8,7 +8,9 @@ $objSession = json_decode($_SESSION['ARInvoiceArr']);
 
 $docentry = '';
 
+$selSeries = $_POST["selSeries"];
 $txtCardCode = $_POST['txtCardCode'];
+
 $txtPostingDate  = $_POST['txtPostingDate'];
 $txtDeliveryDate  = $_POST['txtDeliveryDate'];
 $txtDocumentDate  = $_POST['txtDocumentDate'];
@@ -36,7 +38,9 @@ $txtCityB = $_POST['txtCityB'];
 $txtZipCodeB = $_POST['txtZipCodeB'];
 $txtCountryB = $_POST['txtCountryB'];
 $selShippingType = $_POST['selShippingType'];
-
+$txtExtraMonths = $_POST['txtExtraMonths'];
+$txtExtraDays = $_POST['txtExtraDays'];
+$txtDocTotal = $_POST['txtDocTotal'];
 $serviceType  = $_POST['serviceType'];
 
 $json = $_POST['json'];
@@ -48,6 +52,7 @@ $baseType = $_POST['baseType'];
 $childTable21 = $_POST['childTable21'];
 $txtDocNum = $_POST['txtDocNum'];
 $txtOwnerCode = $_SESSION['SESS_EMP'];
+
 
 if ($err == 0) 
 {
@@ -77,7 +82,7 @@ if ($err == 0)
 	else
 	{
 			$oRdr = $vCmp->GetBusinessObject($objSession->objectType);
-		
+			$oRdr->Series = $selSeries;
 			$oRdr->CardCode = $txtCardCode;
 			$oRdr->TaxDate = $txtDocumentDate;
 			$oRdr->DocDueDate = $txtDeliveryDate;
@@ -86,13 +91,27 @@ if ($err == 0)
 			$oRdr->NumAtCard  = $txtCustomerRefNo;
 			
 			$oRdr->Comments  = $txtRemarks;
-		
+			
+			// $oRdr->FatherCard = '104.01-C1';
+			$oRdr->DocTotal  = $txtDocTotal;
+
 			$oRdr->DocumentsOwner  = $txtOwnerCode;
+			if($txtFooterDiscountPercentage != ''){
+				$oRdr->DiscountPercent  = $txtFooterDiscountPercentage;
+			}else{
+				$oRdr->DiscountPercent  = 0.00;
+			}
 			
 			//$oRdr->BPL_IDAssignedToInvoice  = 52;
+			// if($txtExtraMonths != 0){
+			// 	$oRdr->ExtraMonth  = $txtExtraMonths;
+			// }
+			// if($txtExtraDays != 0){
+			// 	$oRdr->ExtraDays  = $txtExtraDays;
+			// }
+			
 			
 
-		
 			$serviceType2 = $serviceType == "I" ? 0 : 1;
 			$oRdr->DocType = $serviceType2;
 			
@@ -102,9 +121,9 @@ if ($err == 0)
 					$oRdr->UserFields->Fields[$value[1]]->Value = $value[0];
 				}
 			
-			if($selShippingType != ''){
-				$oRdr->TransportationCode = $selShippingType;
-			}
+			// if($selShippingType != ''){
+			// 	$oRdr->TransportationCode = $selShippingType;
+			// }
 		
 		
 			
@@ -125,12 +144,6 @@ if ($err == 0)
 						
 						
 					
-						if ($value[6] != '') 
-						{
-							$oRdr->Lines->BaseEntry = $value[6];
-							$oRdr->Lines->BaseLine = $value[7];
-							$oRdr->Lines->BaseType = $baseType; 
-						}
 						
 						if($value[19] == 'B'){
 							$batchCode = explode(",",$value[8]);
@@ -192,13 +205,26 @@ if ($err == 0)
 						}
 						
 						$oRdr->Lines->ItemCode = valid_input($value[0]);
+						$oRdr->Lines->ItemDescription = valid_input($value[20]);
 						$oRdr->Lines->Quantity = $value[2];
 						$oRdr->Lines->UoMEntry = valid_input($value[3]);
 						$oRdr->Lines->UnitPrice = $value[1]; 
 						$oRdr->Lines->DiscountPercent = $value[4];
+						$oRdr->Lines->LineTotal = $value[2] * $value[1]; 
 						$oRdr->Lines->VatGroup = $value[5];
 						$oRdr->Lines->WarehouseCode = $value[17];
+						$oRdr->Lines->WTLiable = 0;
+
+
 						
+						if ($value[6] != '') 
+						{
+							$oRdr->Lines->BaseEntry = $value[6];
+							$oRdr->Lines->BaseLine = $value[7];
+							$oRdr->Lines->BaseType = $baseType;
+							// $oRdr->Lines->BaseAtCard = '104.01-C1';
+							
+						}
 						$oRdr->Lines->Add();
 					
 					}
@@ -211,6 +237,7 @@ if ($err == 0)
 						//$oRdr->Lines->UoMEntry = valid_input($value[3]);
 						$oRdr->Lines->UnitPrice = $value[2]; 
 						$oRdr->Lines->DiscountPercent = $value[4];
+						$oRdr->Lines->LineTotal = $value[2] * 1;
 						$oRdr->Lines->VatGroup = $value[5];
 					
 				

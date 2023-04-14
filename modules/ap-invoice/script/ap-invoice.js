@@ -175,7 +175,27 @@ $(document).ready(function () {
 		$.getJSON('../proc/views/vw_getLastEntry.php?table=' + table, function (data){
 			docNum = data;
 			PreviewDoc(docNum,objType);
+			$('#btnCardCode').prop('disabled',true);
+			$('#selSeries').prop('disabled',true);
+			$('#txtPostingDate').prop('disabled',true);
+			$('#txtPostingDate').prop('readonly',true);
+			$('#txtDeliveryDate').prop('disabled',true);
+			$('#txtDeliveryDate').prop('readonly',true);
+			$('#txtDocumentDate').prop('disabled',true);
+			$('#txtDocumentDate').prop('readonly',true);
+			$('#btnControlAccount').prop('disabled',true);
+			$('#btnPaymentTerms').prop('disabled',true);
+			$('#txtCustomerRefNo').prop('readonly',true);
+			$('#txtTinNumber').prop('readonly',true);
+			$('#btnRefDoc').prop('disabled',true);
+			$('#btnSalesEmp').prop('disabled',true);
+			$('#btnOwner').prop('disabled',true);
+			$('#btnWTax').prop('disabled',true);
+			$('#selSeries').prop('disabled',true);
+			$('#selSeries').prop('readonly',true);
+			$('#txtRemarks').prop('readonly',true);
 		});
+		
 	});
 	$(document.body).on('click', '#sideBarToggle', function () 
 	{
@@ -2399,6 +2419,13 @@ $(document).ready(function () {
 	{	
 		$('#WTaxModal').modal('show');
 		$('#WTLiableModal').modal('hide');
+		$('#WTaxTableModal').removeClass('d-none');
+		
+	});
+	/* dfg */
+	$(document.body).on('click', '#btnWTLiableNo', function () 
+	{	
+		
 	});
 	
 	$('#WTaxModal').on('shown.bs.modal',function()
@@ -2455,7 +2482,7 @@ $(document).ready(function () {
 	
 	$(document.body).on('change', 'select.selwt', function () 
 	{
-		
+		/* zxc */
 		//	setTimeout(function () 
 				//{
 					 $('input[name=txtWTaxF]').trigger('keyup');
@@ -4028,6 +4055,9 @@ $(document).ready(function () {
 					}
 					else{
 					$('#txtRemarks').val(`Copied from ${baseTableName} # ` + val.DocNum );	
+
+					$('#txtPostingDate').val(val.DocDate).prop("disabled",true);
+					$('#txtPostingDate2').prop("disabled",true);
 					}
 				
 				
@@ -4332,10 +4362,10 @@ $(document).ready(function () {
 			{
 				console.log($(this).find('select.taxcode').val())
 				console.log($(this).find('input.taxamount').val())
-				if($(this).find('select.taxcode').val() == 'OVAT-N' && $(this).find('select.selwt').val() == '1'){
+				if($(this).find('select.taxcode').val() == 'OVAT-N' && $(this).find('select.selwt.option.1').val() == '1'){
 					 if(isNaN(parseFloat($(this).find('.rowtotal').val().replace(/,/g,''))))
 					{
-						amount += 0;
+						amount += 0 ;
 					}
 					else
 					{
@@ -4540,7 +4570,7 @@ $(document).ready(function () {
 				if($(this).closest('tr').find('select.selwt').val() == 'Y'){
 						if(isNaN(parseFloat($(this).val().replace(/,/g,''))))
 						{
-							amount += 0;
+							amount * 0;
 						}
 						else
 						{

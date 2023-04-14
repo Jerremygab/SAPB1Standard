@@ -22,7 +22,7 @@ if ($serviceType == 'I'){
 	  </td>
       <td >
 		<div class="input-group " >
-		<input type="text" class="form-control itemcode"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none; "/>
+		<input type="text" class="form-control itemcode"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none; " readonly/>
 		
 		<input type="hidden" class="form-control batchorserial"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none; " readonly/>
 		<input type="hidden" class="form-control batchorserialcontainer"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none; " readonly/>
@@ -47,11 +47,11 @@ if ($serviceType == 'I'){
 	  </td>
 	  <td >
 		<div class="input-group ">
-		<input type="text" class="form-control matrix-cell itemname"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none"/>
+		<input type="text" class="form-control matrix-cell itemname"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none" />
 		  <button class="btn "   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#itemModal" data-backdrop="false">
 			<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 		  </button>
-		<input type="hidden" class="form-control matrix-cell uomgroup"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none"/>
+		<input type="hidden" class="form-control matrix-cell uomgroup"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none" readonly/>
 		</div>
 	  </td>
 	  <td >
@@ -63,7 +63,7 @@ if ($serviceType == 'I'){
 		<input type="hidden" class="form-control matrix-cell uomentry"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none"/>
 		</div>
 	  </td>
-	  <td >
+	   <td >
 		<div class="input-group ">
 		<input type="text" class="form-control matrix-cell whsecode"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none" readonly/>
 		  <button class="btn " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#whseModal" data-backdrop="false">
@@ -72,16 +72,10 @@ if ($serviceType == 'I'){
 		<input type="hidden" class="form-control matrix-cell whsename"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none"/>
 		</div>
 	  </td>
-	  <td >
-		<div class="input-group ">
-		<input type="text" class="form-control matrix-cell whsename"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none" readonly/>
-		<input type="hidden" class="form-control matrix-cell whsecode"  aria-label="Recipient's username" aria-describedby="button-addon2" style="outline: none; border:none"/>
-		</div>
-	  </td>
 	   <td >
 		<div class="input-group " >
-			<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
-			<input type="hidden" class="form-control matrix-cell text-right batchorserialquantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
+			<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="20"/>
+			<input type="hidden" class="form-control matrix-cell text-right batchorserialquantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="20"/>
 			
 			<button class="btn btn-batch d-none"  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#batchModal" data-backdrop="false" >
 				<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
@@ -89,11 +83,13 @@ if ($serviceType == 'I'){
 			<button class="btn btn-serial d-none"  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#serialModal" data-backdrop="false" >
 				<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 			</button>
-
+			<button class="btn btn-disabled d-none"  disabled type="button" data-mdb-ripple-color="dark"  style="background-color: lightgray; "  data-toggle="modal" data-target="#" data-backdrop="false" >
+				<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:black " ></i>
+			</button>
 		</div>
 	  </td>
 	    <td >
-		<input type="text" class="form-control matrix-cell text-right price"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+		<input type="text" class="form-control matrix-cell text-right price"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="20" />
 		
 	  </td>
 	    <td >
@@ -110,7 +106,7 @@ if ($serviceType == 'I'){
 													while (odbc_fetch_row($qry)) 
 													{
 														//echo odbc_result($qry, 'NextNumber');
-														echo '<option  class="taxoptions" val-rate="' . number_format(odbc_result($qry, "Rate"), 2, '.', '.') . '" value="' . odbc_result($qry, "Code") . '"  >' . odbc_result($qry, "Code") . '</option>';
+														echo '<option  class="taxoptions" val-rate="' . number_format(odbc_result($qry, "Rate"), 6, '.', '.') . '" value="' . odbc_result($qry, "Code") . '"  >' . odbc_result($qry, "Code") . '</option>';
 													}
 													
 													odbc_free_result($qry);
@@ -118,17 +114,9 @@ if ($serviceType == 'I'){
 								</select>
 			</div>
 	  </td>
-	      <td >
-			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-			  <select class="form-control input-sm selwt" id="selWT" name="selWT">
-							<option value="0">No</option>
-							<option value="1">Yes</option>
-						</select>
-			</div>
-	  </td>
+	  
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
+		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="20" readonly/>
 		
 	  </td>
 	   <td >
@@ -173,15 +161,15 @@ else{
 		</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell glname"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
+		<input type="text" class="form-control matrix-cell glname"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="20" readonly/>
 		
 	  </td>
 	   <td class="d-none">
-		<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" value="1"/>
+		<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="20" value="1"/>
 		
 	  </td>
 	    <td >
-		<input type="text" class="form-control matrix-cell text-right price"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+		<input type="text" class="form-control matrix-cell text-right price"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="20" />
 		
 	  </td>
 	    <td >
@@ -197,7 +185,7 @@ else{
 													while (odbc_fetch_row($qry)) 
 													{
 														//echo odbc_result($qry, 'NextNumber');
-														echo '<option  class="taxoptions" val-rate="' . number_format(odbc_result($qry, "Rate"), 2, '.', '.') . '" value="' . odbc_result($qry, "Code") . '"  >' . odbc_result($qry, "Code") . '</option>';
+														echo '<option  class="taxoptions" val-rate="' . number_format(odbc_result($qry, "Rate"), 6, '.', '.') . '" value="' . odbc_result($qry, "Code") . '"  >' . odbc_result($qry, "Code") . '</option>';
 													}
 													
 													odbc_free_result($qry);
@@ -206,16 +194,7 @@ else{
 			</div>
 	  </td>
 	   <td >
-			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-			  <select class="form-control input-sm selwt" id="selWT" name="selWT">
-							<option value="0">No</option>
-							<option value="1">Yes</option>
-						</select>
-			</div>
-	  </td>
-	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
+		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="20" readonly/>
 		
 	  </td>
 	   <td >

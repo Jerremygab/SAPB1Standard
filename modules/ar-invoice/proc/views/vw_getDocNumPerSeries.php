@@ -4,19 +4,22 @@ include('../../../../config/config.php');
 
 $series = $_GET['series'];
 	$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-		SELECT
+	SELECT 
+	T1.Series,
+	T1.NextNumber AS newDocNum
+	FROM NNM1 T1
 
-		MAX(T0.DocNum) + 1 AS newDocNum
-
-		FROM OINV T0
-		INNER JOIN NNM1 T1 ON T0.Series = T1.Series
-
-		WHERE SeriesName = '$series'");
+	WHERE SeriesName = '$series' AND ObjectCode = 13
+	");
 		
 	while (odbc_fetch_row($qry)) 
 		{
-			echo odbc_result($qry, "newDocNum");
+			$arr[] = array(
+				"Series" => odbc_result($qry, 'Series'),	
+				"newDocNum" => odbc_result($qry, 'newDocNum'),
+			);
 			
 		}
 		odbc_free_result($qry);
+		echo json_encode($arr);
 ?>

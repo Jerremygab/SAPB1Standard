@@ -7,7 +7,7 @@ $table = $_GET['mainTable'];
 $docNum = $_GET['docNum'];
 
 $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-			SELECT ". $id2 ."
+			SELECT ".$id2."
 			FROM ".$table."
 			WHERE DocNum = $docNum
 				

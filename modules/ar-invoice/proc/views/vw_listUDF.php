@@ -6,7 +6,7 @@ include_once('../../../../config/config.php');
 $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 			SELECT Column_Name
 			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_NAME = 'OPOR' AND LEFT(Column_Name,2) = 'U_'
+			WHERE TABLE_NAME = 'OINV' AND LEFT(Column_Name,2) = 'U_'
 				
 			");
 

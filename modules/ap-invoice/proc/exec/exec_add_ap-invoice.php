@@ -4,7 +4,7 @@ $errmsg = '';
 session_start();
 include('../../../../config/config.php');
 
-$objSession = json_decode($_SESSION['ARInvoiceArr']);
+$objSession = json_decode($_SESSION['APInvoiceArr']);
 
 $docentry = '';
 
@@ -77,7 +77,7 @@ if ($err == 0)
 	}
 	else
 	{
-			$oRdr = $vCmp->GetBusinessObject($objSession->objectType);
+			$oRdr = $vCmp->GetBusinessObject(18);
 		
 			$oRdr->CardCode = $txtCardCode;
 			$oRdr->TaxDate = $txtDocumentDate;

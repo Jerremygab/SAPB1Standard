@@ -20,7 +20,7 @@ $countUDF = 0;
 		
 	
 		$qryCount = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-			SELECT COUNT(Column_Name) AS 'Count'
+			SELECT TOP 7 COUNT(Column_Name) AS 'Count'
 			FROM INFORMATION_SCHEMA.COLUMNS
 			WHERE TABLE_NAME = '".$table."' AND LEFT(Column_Name,2) = 'U_'
 			");
@@ -31,13 +31,13 @@ $countUDF = 0;
 
 		
 	 $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-					SELECT 
+					SELECT TOP 7
 					 ". $string2 ."
 					FROM ".$table." WHERE Docnum = $docNum
 					
 					");
 	$arr=array();
-
+$countUDF = 7;
 	while (odbc_fetch_row($qry)) 
 	{ 
 		for ($i = 0; $i < $countUDF; $i++) {

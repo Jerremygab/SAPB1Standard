@@ -22,29 +22,49 @@ include_once('../../../config/config.php');
 <div class="row" style="padding-top:80px">	
 <div class="col-lg-12">
 	<div class="form-group row py-0 my-0" >
-						<div class="col-sm-3" >
-						<label class=" col-form-label " style="color: black;" >Payment Terms</label>
-						</div>
-							<div class="col-sm-9" >
-								<div class="input-group mb-1">
-									<div class="input-group-prepend d-none" id="lnkCardCode" >
-										<button  class="btn"  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#bpMasterModal" data-backdrop="false">
-											<i class="fas fa-arrow-right  " style="color: #FFD700; font-size:20px"></i>
-										</button>
-									</div>
-									<input readonly type="text" id="txtPaymentTermsCode" class="form-control d-none" placeholder="" aria-label="Username" aria-describedby="basic-addon1 " style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
-									<input readonly type="text" id="txtPaymentTermsName" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1 " style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
-									<div class="input-group-append">
-										<button id="btnPaymentTerms" class="btn btnGroup" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#paymentTermsModal" data-backdrop="false" >
-											<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue "></i>
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>	
+		<div class="col-sm-3" >
+			<label class=" col-form-label " style="color: black;" >Payment Terms</label>
+		</div>
+		<div class="col-sm-9" >
+			<div class="input-group mb-1">
+				<div class="input-group-prepend d-none" id="lnkCardCode" >
+					<button  class="btn"  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#bpMasterModal" data-backdrop="false">
+						<i class="fas fa-arrow-right  " style="color: #FFD700; font-size:20px"></i>
+					</button>
+				</div>
+				<input readonly type="text" id="txtPaymentTermsCode" class="form-control d-none" placeholder="" aria-label="Username" aria-describedby="basic-addon1 " style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
+				<input readonly type="text" id="txtPaymentTermsName" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1 " style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
+				<div class="input-group-append">
+					<button id="btnPaymentTerms" class="btn btnGroup" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#paymentTermsModal" data-backdrop="false" >
+						<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue "></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<div class="form-group row py-0 my-0" >
+		<div class="col-sm-12" >
+			<label class=" col-form-label " style="color: black;" >Manual Recalculate Due Date</label>
+		</div>
+		<div class="col-sm-3" >
+		</div>
+		<div class="col-sm-2" >
+			<label class=" col-form-label " style="color: black;" >Months</label>
+		</div>
+		<div class="col-sm-2" >
+				<input  type="number" id="txtExtraMonths" class="form-control text-right" placeholder="" aria-label="Username" aria-describedby="basic-addon1 " style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
+		</div>
+		<div class="col-sm-2" >
+			<label class=" col-form-label " style="color: black;" >Days</label>
+		</div>
+		<div class="col-sm-2" >
+				<input  type="number" id="txtExtraDays" class="form-control text-right" placeholder="" aria-label="Username" aria-describedby="basic-addon1 " style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
+		</div>
+	</div>	
 </div>
 </div>
 </div>
+
 <div class="col-lg-4" >
 </div>
 <div class="col-lg-4" >

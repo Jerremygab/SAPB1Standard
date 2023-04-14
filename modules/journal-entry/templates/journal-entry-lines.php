@@ -53,11 +53,14 @@ else{
 		  <td >
 		  	<div class="input-group " >
 					<input type="text" class="form-control matrix-cell text-right controlaccount"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
-				  <button class="btn btnaccount btnGroup"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#glModal" data-backdrop="false">
+				  <button class="btn btnaccount btnGroup"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#controlAccountModal" data-backdrop="false">
 					<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 				  </button>
 				</div>
 		  </td>
+
+		  
+
 		  <td >
 				<input type="text" class="form-control matrix-cell text-right debit"    maxlength="12" style="outline: none; border:none" maxlength="12" />
 		  </td>

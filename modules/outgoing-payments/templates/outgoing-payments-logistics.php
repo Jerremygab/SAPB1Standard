@@ -11,7 +11,7 @@ include_once('../../../config/config.php');
 					<input type="text" class="form-control d-none" id="txtShipArr"  readonly>
 					<input type="text" class="form-control d-none" id="txtShipArr2"   class="d-none" readonly>
 					
-					<select id="selShipToAddress" class="col-sm-12 form-control mdb-select md-form text-left"  style=" !important;outline:none; border-color: #D0D0D0;">
+					<select id="selShipToAddress" class="col-sm-12 form-control mdb-select md-form text-left"  style=" outline:none !important; border-color: #D0D0D0 !important;">
 					</select>
 				</div>
 		</div>
@@ -29,7 +29,7 @@ include_once('../../../config/config.php');
 			<div class="input-group ">
 					<input type="text" class="form-control d-none" id="txtBillArr"  readonly>
 					<input type="text" class="form-control d-none" id="txtBillArr2"   class="d-none" readonly>
-					<select id="selBillToAddress" class="col-sm-12 form-control mdb-select md-form text-left"  style=" !important;outline:none; border-color: #D0D0D0;">
+					<select id="selBillToAddress" class="col-sm-12 form-control mdb-select md-form text-left"  style=" outline:none !important; border-color: #D0D0D0 !important;">
 					</select>
 				</div>
 		</div>
@@ -46,7 +46,7 @@ include_once('../../../config/config.php');
 			<label class="col-lg-6 col-form-label pt-1" style="color: black;" >Shipping Type</label>
 		</div>
 		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 py-2">
-								 <select id="selShippingType" class="col-sm-12 form-control mdb-select md-form text-left"  style=" !important;outline:none; border-color: #D0D0D0;">
+								 <select id="selShippingType" class="col-sm-12 form-control mdb-select md-form text-left"  style="outline:none !important; border-color: #D0D0D0 !important;">
 									
 								</select>
 												

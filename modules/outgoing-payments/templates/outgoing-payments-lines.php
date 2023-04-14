@@ -8,7 +8,7 @@ if ($serviceType == 'S'){
 
 <div class="">
     <table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"
-        style="background-color: white; width=100% !important;" cellspacing="0">
+        style="background-color: white; width:100% !important;" cellspacing="0">
         <thead style="border-bottom: 0 !important; ">
             <tr>
                 <th class="text-right" style=" color: black;">#</th>
@@ -62,8 +62,8 @@ else{
 <div class="">
     <table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"
         style="background-color: white">
-        <thead style="z-index: 999;  background-color: lightgray;  !important" class="thead-fixed " style="">
-            <tr style="background-color: lightgray; z-index: 999; !important">
+        <thead style="z-index: 999;  background-color: lightgray  !important;" class="thead-fixed ">
+            <tr style="background-color: lightgray; z-index: 999 !important;">
                 <th class="text-right" style="color: black">#</th>
                 <th style="color: black; min-width:300px;">G/L Account</th>
                 <th style="color: black; min-width:400px;">G/L Name</th>
@@ -138,7 +138,7 @@ else{
 
         </tbody>
         <tfoot style="z-index: 999;  background-color: lightgray; " class="d-none">
-            <tr style="background-color: lightgray; z-index: 999; !important">
+            <tr style="background-color: lightgray; z-index: 999 !important;">
                 <th class="text-right" style="color: black">#</th>
                 <th style="color: black; min-width:300px;">G/L Account</th>
                 <th style="color: black; min-width:400px;">G/L Name</th>

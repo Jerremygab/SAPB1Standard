@@ -10,7 +10,7 @@ $table = $_GET['mainTable'];
 			
 <?php	
 	$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-		SELECT 
+		SELECT TOP 7
 		'U_' + T0.AliasID AS 'AliasID',
 		T0.Descr,
 		T0.TypeID,

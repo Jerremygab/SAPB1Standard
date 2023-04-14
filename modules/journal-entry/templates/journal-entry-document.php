@@ -76,34 +76,34 @@ txtBranchName
 														echo '<option class=" series" value='. odbc_result($qry, "SeriesName").'>'. odbc_result($qry, "SeriesName") .'</option>';
 														$itemno++;	  
 													}
-													$itemno2 = 1;
-												$qry1 = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT 
-																											T0.SeriesName
+												// 	$itemno2 = 1;
+												// $qry1 = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT 
+												// 															T0.SeriesName
 																											
-																											FROM NNM1 T0
-																											WHERE T0.SeriesName != 'Primary' AND ObjectCode = 17
-																											ORDER BY T0.SeriesName ASC");
-													while (odbc_fetch_row($qry1)) 
-													{
-														echo '<option class=" series" value='. odbc_result($qry1, "SeriesName").'>'. odbc_result($qry1, "SeriesName") .'</option>';
-														$itemno2++;	  
-													}
-												$itemno3 = 1;
-												$qry2 = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT 
-																										T0.SeriesName
+												// 															FROM NNM1 T0
+												// 															WHERE T0.SeriesName != 'Primary' AND ObjectCode = 17
+												// 															ORDER BY T0.SeriesName ASC");
+												// 	while (odbc_fetch_row($qry1)) 
+												// 	{
+												// 		echo '<option class=" series" value='. odbc_result($qry1, "SeriesName").'>'. odbc_result($qry1, "SeriesName") .'</option>';
+												// 		$itemno2++;	  
+												// 	}
+												// $itemno3 = 1;
+												// $qry2 = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT 
+												// 														T0.SeriesName
 																										
-																										FROM NNM1 T0
-																										WHERE T0.SeriesName = 'Manual' 
-																										ORDER BY T0.SeriesName ASC");
-												while (odbc_fetch_row($qry2)) 
-												{
-													echo '<option class=" series" value='. odbc_result($qry2, "SeriesName").'>'. odbc_result($qry2, "SeriesName") .'</option>';
-													$itemno3++;	  
-												}
+												// 														FROM NNM1 T0
+												// 														WHERE T0.SeriesName = 'Manual' 
+												// 														ORDER BY T0.SeriesName ASC");
+												// while (odbc_fetch_row($qry2)) 
+												// {
+												// 	echo '<option class=" series" value='. odbc_result($qry2, "SeriesName").'>'. odbc_result($qry2, "SeriesName") .'</option>';
+												// 	$itemno3++;	  
+												// }
 												
 												odbc_free_result($qry);
-												odbc_free_result($qry1);
-												odbc_free_result($qry2);
+												// odbc_free_result($qry1);
+												// odbc_free_result($qry2);
 											?>
 								</select>
 						</div>
@@ -1015,6 +1015,75 @@ txtBranchName
       </div>
     </div>
     <!-- GL Modal -->
+
+	<!--- BP Modal - Control Account --->
+   <!-- Control Account Modal -->
+   <div class="modal fade" id="controlAccountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document" style="width:100%">
+            <!--Content-->
+            <div class="modal-content-full-width modal-content">
+                <!--Header-->
+                <div class="modal-header"
+                    style="background-color: #A8A8A8; border-bottom-width: thick; border-color: #f0ad4e;">
+                    <h4 class="modal-title w-100" id="myModalLabel" style="color:black">List of G/L Accounts</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered table-hover" id="tblControlAccount" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Account Number</th>
+                                <th>Account Name</th>
+                                <th>Account Balance</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+							$itemno = 1;
+							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT TOP 12
+																						T0.AcctCode, 
+																						T0.AcctName, 
+																						T0.CurrTotal
+																						
+																						FROM OACT T0
+																						WHERE T0.Postable='Y' and T0.LocManTran ='Y'
+																						ORDER BY T0.AcctCode DESC");
+								while (odbc_fetch_row($qry)) 
+								{
+									echo '<tr class="">
+												<td>'.$itemno.'</td>
+												<td class="item-1">'.odbc_result($qry, 'AcctCode').'</td>
+												<td class="item-2">'.odbc_result($qry, 'AcctName').'</td>
+												<td class="item-3 " >'.odbc_result($qry, 'CurrTotal').'</td>
+												
+											  </tr>';
+									$itemno++;	  
+								}
+								
+								odbc_free_result($qry);
+						    ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!-- Control Account ni eden Modal -->
+
+
+	<!-- End BP Modal - Control Account --->
+
+	
 	
 	<!-- Ship To Details Modal -->
     <div class="modal fade" id="shipToDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -1061,7 +1130,7 @@ txtBranchName
 				</div>
 			</div>	
 			<div class="form-group row   my-1" >
-				<label for="inputEmail3" class="col-sm-3 col-form-label py-1 mt-2" style="color: black;" >County</label>
+				<label for="inputEmail3" class="col-sm-3 col-form-label py-1 mt-2" style="color: black;" >Country</label>
 				<div class="col-sm-9" >
 					 <input type="text" class="form-control shipInputs" id="txtCountyS" placeholder="">
 				</div>	

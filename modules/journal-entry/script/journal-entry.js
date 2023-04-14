@@ -401,16 +401,19 @@ var serviceType = 'S';
         let controlAccount = $(this).children('td.item-5').text();
 	
 		if(type == 'ACCT'){
-			$('.selected-det').find('input.glaccount').val(code);
-			$('.selected-det').find('input.glname').val(name);
-			$('.selected-det').find('input.controlaccount').val(controlAccount);
-			$('.selected-det').find('button.btnaccount').prop('disabled', true); 
-		}
-		else{
-			$('.selected-det').find('input.glaccount').val(code);
-			$('.selected-det').find('input.glname').val(name);
-			$('.selected-det').find('input.controlaccount').val(controlAccount);
-		}
+            $('.selected-det').find('input.glaccount').val(code);
+            $('.selected-det').find('input.glname').val(name);
+            $('.selected-det').find('input.controlaccount').val(controlAccount);
+            $('.selected-det').find('button.btnaccount').prop('disabled', true); 
+            $('.selected-det').find('input.controlaccount').prop('readonly', true); 
+        }
+        else{
+            $('.selected-det').find('input.glaccount').val(code);
+            $('.selected-det').find('input.glname').val(name);
+            $('.selected-det').find('input.controlaccount').val(controlAccount);
+            $('.selected-det').find('input.controlaccount').prop('readonly', false); 
+			
+        }
 		$('.btnrowfunctions').removeClass('d-none');
         $('#glModal').modal('hide');
 	
@@ -420,6 +423,29 @@ var serviceType = 'S';
 		AddRow();
 		CheckCardCode(itemCode);
     });
+
+//caModal
+$(document.body).on('dblclick', '#tblControlAccount tbody > tr', function () 
+		{
+			
+			var code = $(this).children('td.item-1').text();
+			var name = $(this).children('td.item-2').text();
+			
+		 
+	
+			$('#controlAccountModal').modal('hide');
+		
+			$('#txtControlAccountCode').val(code);
+			$('#txtControlAccountName').val(name);
+		
+		   
+		});
+
+
+
+
+
+
 
 	
 //Click
