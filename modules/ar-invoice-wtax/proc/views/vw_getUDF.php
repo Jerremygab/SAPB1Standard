@@ -1,10 +1,9 @@
 <?php
 session_start();
-include('../../../../../config/config.php');
+include('../../../../config/config.php');
 
 $udfJson = $_GET['udfJson'];
 $docNum = $_GET['docNum'];
-$table = $_GET['mainTable'];
 //$udfJsonNames = $_GET['udfJsonNames'];
 $countUDF = 0;
 
@@ -20,9 +19,9 @@ $countUDF = 0;
 		
 	
 		$qryCount = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-			SELECT TOP 7 COUNT(Column_Name) AS 'Count'
+			SELECT COUNT(Column_Name) AS 'Count'
 			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_NAME = '".$table."' AND LEFT(Column_Name,2) = 'U_'
+			WHERE TABLE_NAME = 'OPOR' AND LEFT(Column_Name,2) = 'U_'
 			");
 		while (odbc_fetch_row($qryCount)) 
 		{
@@ -31,13 +30,13 @@ $countUDF = 0;
 
 		
 	 $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-					SELECT TOP 7
+					SELECT 
 					 ". $string2 ."
-					FROM ".$table." WHERE Docnum = $docNum
+					FROM OPOR WHERE Docnum = $docNum
 					
 					");
 	$arr=array();
-$countUDF = 7;
+
 	while (odbc_fetch_row($qry)) 
 	{ 
 		for ($i = 0; $i < $countUDF; $i++) {

@@ -17,11 +17,7 @@ let baseTable;
 let baseType = -1;
 let copyFromModal;
 let copyFromModalTbl;
-const sapserver = '192.168.1.29'
-let objType = 0;
-$('#txtPostingDate').prop("disabled",false);
-$('#txtPostingDate2').prop("disabled",false);
-let multiCopyFromDR = [];
+
 $(document.body).on('click', 'ul.copyFromList li', function(){
 	copyFromArr.map(item => {
 		if ($(this).find('button').text() == item.baseTableName){
@@ -44,7 +40,6 @@ $(document.body).on('click', 'ul.copyFromList li', function(){
 	}
 	else
 	{	
-		console.log(baseType)
 		$.ajax({
 			type: 'POST',
 			url: '../proc/views/vw_copyFrom.php',
@@ -66,97 +61,6 @@ $(document.body).on('click', 'ul.copyFromList li', function(){
 let refDocToArr = [];
 let origRefDocToArr = [];
 
- $(document.body).on('click', '.copyFromTable tbody tr td', function () 
-	{
-		
-		if($(this).closest('tr').find('td:eq(1) input').is(":checked")){
-			row = $(this).closest('tr').find('td:eq(0)').text();
-			pid = parseInt($(this).closest('tr').find('td:eq(2)').text());
-			objType = $(this).closest('tr').find('td:eq(7)').text();
-				multiCopyFromDR.push(pid);
-				
-			
-		}else{
-			var index = multiCopyFromDR.indexOf(parseInt($(this).closest('tr').find('td:eq(2)').text()));
-				if (index !== -1) {
-				  multiCopyFromDR.splice(index, 1);
-				  console.log(multiCopyFromDR)
-				}
-		}
-		console.log(multiCopyFromDR)
-		// alert(objType)
-
-	});
-
-$(document.body).on('click', '#btnMultiSelectCopyFrom', function () 
-	{
-		console.log('test')
-
-
-		if(multiCopyFromDR.length > 0){
-
-			var docNum = multiCopyFromDR;
-			var docType = 'I';
-		// PreviewDoc(docNum,objType);
-		
-			setTimeout(function () 
-			{
-				PreviewRows(docNum, docType, objType,function () 
-				{
-					// alert(objType)
-					baseType = objType
-				});
-			}, 300) 
-
-			setTimeout(function () 
-			{
-
-				// ComputeRowGrossPrice();
-				// ComputeGrossTotal();
-				ComputeFooterTotalBeforeDiscount();
-				// ComputeRowTaxAmount();
-				ComputeFooterTaxAmount();
-				ComputeTotal();
-			}, 500) 
-
-			
-		}else{
-			$('#messageBar2').addClass('d-none');
-			$('#messageBar3').removeClass('d-none');
-			$('#messageBar').text('No Row to Generate PTF No!').css({'background-color': 'red', 'color': 'white'});
-
-			setTimeout(function()
-			{
-				$('#messageBar').text('').css({'background-color': '', 'color': ''});	
-				$('#messageBar2').removeClass('d-none');
-			},5000)
-		}
-		
-
-
-	})
-// $(document.body).on('click', '#btnMultiSelectCopyFrom', function () 
-// 	{	
-// 		var docNum = [0];
-// 		var objType = baseType;
-// 		var docType = 'I';
-// 		$('.copyFromTable tbody tr').each(function () 
-// 		{
-// 			if ($(this).find('input.item-0').is(':checked')) {
-// 				docNum.push($(this).find('input.item-0').val())
-// 				console.log($(this).find('input.item-0').val())
-// 			}
-// 		});
-// 		console.log(docNum)
-
-// 		$('#btnAdd').removeClass('d-none');
-// 		$('#btnUpdate').addClass('d-none');
-		
-// 		PreviewRows(docNum, docType ,objType);
-       
-// 	})
-
-
 $('#pageTitle').text(`${objectTableName} | SAP B1`);
 	let uniqueSerial = '';
 		$.ajax({
@@ -173,26 +77,57 @@ $('#pageTitle').text(`${objectTableName} | SAP B1`);
 		$('#txtDeliveryDate').trigger('change');
 		$('#txtDocumentDate').trigger('change');
 	},1000);
+// $(document.body).on('click', '#btnPrint', function () 
+// 	{
+// 		var docentry = $('#txtDocNum').val();
+		
+// 		if(docentry != '')
+// 		{
+// 			window.open("../forms/SOA-Red-Ribbon.php?docentry=" + docentry,"", "width=1130,height=550,left=220,top=110");
+// 		}
+// 	});
+// $(document.body).on('click', '#btnPrint', function () 
+// 	{
+// 		alert(1)
+// 		let layout = $('#layoutOptions').val();
+// 		var docentry = $('#txtDocEntry').val();
+		
+// 		if(docentry != '')
+//         {
+//             window.open("../forms/form.php?layout=" + layout + "&docentry=" + encodeURI(docentry),"", "width=1130,height=550,left=220,top=110");
+//         }
 
-	//});
-$(document.body).on('click', '#btnPrint', function () 
-	{
-		let layout = $('#layoutOptions').val();
-		let docentry = $('#txtDocEntry').val();
-		console.log(docentry)
-		// alert(docentry)
-		let moduleTable = 'OINV'
-		if(docentry != '')
-		{ 
-			 
 
-				window.open("http://" + sapserver + ":8091/SAPCrystalReport/Layout/"+layout+"/"+docentry+"");
+// 		// if(docentry != '')
+// 		// { 
+// 		// 	if(layout =='APInvoice'){
+// 		// 		window.open("../forms/APInvoice.php?docentry=" + encodeURI(docentry),"", "width=1130,height=550,left=220,top=110");
+// 		// 	}
+// 		// 	else if(layout =='PaymentVoucherAPV'){
+// 		// 		window.open("../forms/PaymentVoucherAPV.php?docentry=" + encodeURI(docentry),"", "width=1130,height=550,left=220,top=110");
+// 		// 	}
+// 		// 	else if(layout =='PaymentVoucherTransfer'){
+// 		// 		window.open("../forms/PaymentVoucherTransfer.php?docentry=" + encodeURI(docentry),"", "width=1130,height=550,left=220,top=110");
+// 		// 	}
+// 		// 	else if(layout =='EWT2307'){
+// 		// 		window.open("../forms/ewt2307.php?docentry=" + encodeURI(docentry),"", "width=1130,height=550,left=220,top=110");
+// 		// 	}
 			
-		}
-	});
+// 		// }
+	//});
+	 $(document.body).on('click', '#btnPrint', function () {
+
+        let layout = $('#layoutOptions').val();
+        var docentry = $('#txtDocNum').val();
+        console.log(layout + ":" + docentry)
+        if(docentry != '')
+        {
+            window.open("../forms/form.php?layout=" + layout + "&docentry=" + encodeURI(docentry),"", "width=1130,height=550,left=220,top=110");
+        }
+    });
 $(document.body).on('click', '#btnFirstRecord', function (){
-	let table = objectTable;
-	let docNum = '';
+	let table = objecTable;
+	let docNum = '';t
 	let objType = objectType;
 	$.getJSON('../proc/views/vw_getFirstEntry.php?table=' + table, function (data){
 		docNum = data;
@@ -339,7 +274,27 @@ $(document.body).on('click', '.deleterow', function ()
 			ComputeFooterTaxAmount();
 			ComputeTotal();
 });
-
+var otArrLineNum = [];
+$(document.body).on('click', '.deleterowwtax', function () 
+{
+	let rowno = $('.selected-det-wtax').find('.rowno span').text();
+	let lineno = $('.selected-det-wtax').find('.lineno').val();
+	let itemcode = $('#tblWTaxTable tbody tr:last').find('td.rowno span').text()
+		if ($('.selected-det-wtax').find('input.lineno').val() != ''){
+			otArrLineNum.push($('.selected-det-wtax').find('input.visorder').val());
+		}
+	otArrLineNum.join(",");
+	
+		$('.selected-det-wtax').remove();
+		
+		var rowno2 = 1;
+		$('#tblWTaxTable tbody tr').each(function () 
+		{
+			$(this).find('td.rowno span').text(rowno2);
+			rowno2 += 1;
+		});
+			
+});
 let txtCurrency = 'PHP';	
 var fadeDelay = 1000;
 	var fadeDuration = 1000;
@@ -379,7 +334,9 @@ var serviceType = 'I';
 	$('#accounting-tab').load('../templates/' + mainFileName + '-accounting.php'), function(){
 		
 	};
-
+	//WTAX Table
+	$('#wTaxTableResult').load('../templates/wtaxtable-lines.php'), function (){
+	};
 	
 //Matrix Cell Effects
 	
@@ -468,7 +425,72 @@ var serviceType = 'I';
         }
 		
     });
-	
+	//WTAX
+	//Selecting Row
+	$(document.body).on('click', '#tblWTaxTable tbody > tr > td.rowno', function () 
+	{
+        if (window.event.ctrlKey) 
+		{
+			if ($(this).closest('tr').hasClass('selected-det-wtax')) 
+			{
+                $(this).closest('tr').css("background-color", "transparent");
+                $(this).closest('tr').removeClass('selected-det-wtax');
+            }
+			else 
+			{
+                $(this).closest('tr').css("background-color", "lightgray");
+                $(this).closest('tr').addClass('selected-det-wtax');
+            }
+        }
+		else 
+		{
+            $('.selected-det-wtax').map(function () 
+			{
+				$(this).closest('tr').css("background-color", "transparent");
+                $(this).removeClass('selected-det-wtax');
+            })
+
+            $('#tblWTaxTable tbody > tr').css("background-color", "transparent");
+			$(this).closest('tr').css("background-color", "lightgray");
+            $(this).closest('tr').addClass('selected-det-wtax');
+        }
+		
+    });
+	$(document.body).on('click', '#tblWTaxTable > tbody tr > td > div.input-group', function () 
+	{
+		$('input').css('background-color', '');
+        $('.selected-det-wtax').map(function () 
+		{
+            $(this).removeClass('selected-det-wtax');
+            $(this).css("background-color", "transparent");
+        })
+		
+        $(this).closest('tr').css("background-color", "lightgray");
+        $(this).closest('tr').addClass('selected-det-wtax');
+		
+		$(this).children('input').css('background-color', '#fdfd96');
+		
+    });
+	$(document.body).on('focus', '#tblWTaxTable input, #tblWTaxTable select, #tblWTaxTable textarea', function () 
+	{
+        if (window.event.ctrlKey) 
+		{
+            $(this).closest('tr').css("background-color", "lightgray");
+            $(this).closest('tr').addClass('selected-det-wtax');
+        }
+		else
+		{
+            $('.selected-det-wtax').map(function () 
+			{
+                $(this).removeClass('selected-det-wtax');
+            })
+
+            $('#tblWTaxTable tbody > tr').css("background-color", "transparent");
+            $(this).closest('tr').css("background-color", "lightgray");
+            $(this).closest('tr').addClass('selected-det-wtax');
+        }
+		
+    });
 	//Batch
 	$(document.body).on('click', '#tblBatch tbody > tr > td', function () 
 	{
@@ -567,8 +589,6 @@ var serviceType = 'I';
        
     });
 
-	
-	
 	$(document.body).on('dblclick', '#tblBP tbody > tr', function () 
 	{
 		
@@ -581,7 +601,10 @@ var serviceType = 'I';
 		let contactPersonCode = $(this).children('td.item-8').text();
 		txtCurrency = $(this).children('td.item-9').text();
 		let addressID = '';
-		
+		let controlAccount = $(this).children('td.item-10').text();
+		let controlAccountName = $(this).children('td.item-11').text();
+		let wtaxliable = $(this).children('td.item-12').text();
+		console.log(wtaxliable)
      
 
         $('#bpModal').modal('hide');
@@ -596,19 +619,19 @@ var serviceType = 'I';
 		$('#txtTinNumber').val(tinNumber);
 		$('#selCurrency').val('BP');
 		$('#txtCurrency').val(txtCurrency);
-		
+		$('#txtControlAccountCode').val(controlAccount);
+		$('#txtControlAccountName').val(controlAccount + ' - ' + controlAccountName);
+		$('#txtControlAccountCodeDefault').val(controlAccount);
+		$('#txtControlAccountNameDefault').val(controlAccount + ' - ' + controlAccountName);
+		$('#txtWTliableBP').val(wtaxliable)
+
 		$('#lnkCardCode').removeClass('d-none');
 		$('#lnkContactPerson').removeClass('d-none');
 		$('#contactPersonBtn').removeClass('d-none');
 		
 		$('#btnShipToDetails').removeClass('d-none');
 		$('#btnBillToDetails').removeClass('d-none');
-			
-		if(paymentTermsName != '- Cash Basic -'){
-			// $('#txtExtraMonths').val(extramonths);
-			$('#txtExtraDays').val(paymentTermsName);
-		}
-
+		
 		$('#btnCopyFrom').prop('disabled',false);
 		
 		//Addresses
@@ -759,6 +782,7 @@ var serviceType = 'I';
 				data: {cardCode : cardCode},
 				success: function (html) 
 				{	
+					
 					$('#selShippingType').html(html);
 				}
 			}); 
@@ -820,18 +844,13 @@ var serviceType = 'I';
 		
 		var code = $(this).children('td.item-1').text();
         var name = $(this).children('td.item-2').text();
-		var extramonths = $(this).children('td.item-3').text();
-		var extradays = $(this).children('td.item-4').text();
+		
      
 
         $('#paymentTermsModal').modal('hide');
-		
+	
 		$('#txtPaymentTermsCode').val(code);
 		$('#txtPaymentTermsName').val(name);
-		$('#txtExtraMonths').val(extramonths);
-		$('#txtExtraDays').val(extradays);
-
-		FMS_DueDateBasedOnCRD();
 	
        
     });
@@ -934,6 +953,32 @@ var serviceType = 'I';
        
 	   itemCode = glCode;
 		AddRow();
+		CheckCardCode(itemCode);
+    });
+      $(document.body).on('dblclick', '#tblWTax tbody > tr', function () 
+	{
+		
+		var wtcode = $(this).children('td.item-2').text();
+        var wtname = $(this).children('td.item-3').text();
+        var rate = $(this).children('td.item-4').text();
+        var account = $(this).children('td.item-5').text();
+        let value = 0; 
+		console.log(wtcode)
+		$('.btnrowfunctions').removeClass('d-none');
+        $('#WTaxModal').modal('hide');
+
+
+
+
+		$('.selected-det-wtax').find('input.wtcode').val(wtcode);
+		$('.selected-det-wtax').find('input.wtname').val(wtname);
+		$('.selected-det-wtax').find('input.rate').val(rate);
+		$('.selected-det-wtax').find('input.glaccountwtax').val(account);
+		
+       
+	   itemCode = wtcode;
+	   	ComputeWtaxPerRow();
+		AddRowWTax();
 		CheckCardCode(itemCode);
     });
 	$(document.body).on('dblclick', '#tblUnit tbody > tr', function () 
@@ -1614,10 +1659,7 @@ var serviceType = 'I';
 								},5000)
 		}
 	});
-	$(document.body).on('input', '[data-id2=U_CRD]', function () 
-	{
-		FMS_DueDateBasedOnCRD();
-	});
+	
 	$(document.body).on('change', '#selShipToAddress', function () 
 	{
 
@@ -1721,16 +1763,7 @@ var serviceType = 'I';
 				success: function (data) 
 				{
 					console.log(data);
-					
-					let dataObj = JSON.parse(data);
-					  $.each(dataObj, function (key, val){
-					  	$('#txtDocNum').val(val.newDocNum)
-						$('#txtSeriesCode').val(val.Series)
-
-					});
-
-
-					
+					$('#txtDocNum').val(data)
 				}
 			});
 	})
@@ -1818,15 +1851,35 @@ var serviceType = 'I';
 	$(document.body).on('change', '#txtPostingDate', function () 
 	{
 		$('#txtDocumentDate').val($(this).val());
-		$('#txtPostingDate2').val(SAPDateFormater($(this).val()).value);
+		//2021-09-08
+		let date = $(this).val();
+		let month = date.substring(5, 7);
+		let day = date.substring(8, 10);
+		let year = date.substring(0, 4);
+		let newdate = month + "." + day + "." + year;
+		$('#txtPostingDate2').val(newdate);
 	});
+	
+
 	$(document.body).on('change', '#txtDeliveryDate', function () 
 	{
-		$('#txtDeliveryDate2').val(SAPDateFormater($(this).val()).value);
+			//2021-09-08
+			let date = $(this).val();
+			let month = date.substring(5, 7);
+			let day = date.substring(8, 10);
+			let year = date.substring(0, 4);
+			let newdate = month + "." + day + "." + year;
+			$('#txtDeliveryDate2').val(newdate);
 	});
 	$(document.body).on('change', '#txtDocumentDate', function () 
 	{
-		$('#txtDocumentDate2').val(SAPDateFormater($(this).val()).value);
+				//2021-09-08
+				let date = $(this).val();
+				let month = date.substring(5, 7);
+				let day = date.substring(8, 10);
+				let year = date.substring(0, 4);
+				let newdate = month + "." + day + "." + year;
+				$('#txtDocumentDate2').val(newdate);
 	});
 
 	/*UDF Date fields*/
@@ -1880,10 +1933,9 @@ var serviceType = 'I';
 	}); */
 	$('#'+copyFromModal+'Modal').on('shown.bs.modal',function(){
 		
-	
 		var cardCode = $('#txtCardCode').val();
 		var table = baseTable;
-		multiCopyFromDR = [];
+		
 		console.log(copyFromModal, baseTable, copyFromModalTbl);
 		
 		if(cardCode == '')
@@ -1898,7 +1950,7 @@ var serviceType = 'I';
 				url: '../proc/views/vw_copyFrom.php',
 				data: {
 					cardCode : cardCode,
-					table: table,
+					table: table
 				},
 				success: function (html) 
 				{
@@ -2348,6 +2400,134 @@ var serviceType = 'I';
 			
 		}
 	});
+
+$(document.body).on('click', '#btnWTLiableYes', function () 
+{	
+	$('#WTaxModal').modal('show');
+	$('#WTLiableModal').modal('hide');
+});
+
+$('#WTaxModal').on('shown.bs.modal',function()
+{
+	var cardCodeWTLiable = $('#txtCardCode').val();
+	let wtcodeArrayString = $('#txtWtLiableArray').val();
+	let wtcodeArray = wtcodeArrayString.split(",");
+
+	$.ajax({
+			type: 'POST',
+			url: '../proc/views/vw_withholdingTable.php',
+			data: {
+				cardCodeWTLiable : cardCodeWTLiable
+			},
+			success: function(html)
+			{
+				
+				$('#wTaxTResult').html(html);
+
+			}
+		});
+setTimeout(function(){
+		$('#tblWTax tbody tr').each(function(){
+			let wtcode = $(this).find('td.wtcode').text()
+			let element = $(this)
+			if ($.inArray(wtcode, wtcodeArray) != -1)
+			{
+			 	element.find('input.wtselected').prop('checked', true);
+			 	
+			}
+		});
+	},1000)
+});
+
+
+$('#WTaxTableModal').on('shown.bs.modal',function()
+{
+	//ComputeFooterTotalBeforeDiscountWTax();
+	let baseamount = $('#txtDocTotal').val()
+
+	$('#tblWTaxTable').find('input.baseamount').val(baseamount);
+	ComputeTaxable();
+	
+	ComputeWtaxPerRow();
+	ComputeTotal();
+	
+});
+$('#WTaxTableModal').on('hidden.bs.modal',function()
+{
+	ComputeWtaxPerRowToFooter();
+	ComputeTaxable();
+	ComputeTotal();
+});
+
+$(document.body).on('change', 'select.selwt', function () 
+{
+	
+	//	setTimeout(function () 
+			//{
+				 $('input[name=txtWTaxF]').trigger('keyup');
+			//}, 1000)
+			
+				
+});
+$(document.body).on('click', '#btnUpdateWTLiable', function () 
+{
+		
+	// 	var CodeArr = [];
+	// 	var RateArr = [];
+	// 	//var WTAcctCode = [];
+	// 	var Rate = 0.00;
+		
+		
+	// 	var tbl2 = $('#tblWTax tbody tr').each(function (i) 
+	// 	{
+	//         x = $(this).children();
+	       
+			
+			
+	// 		if ($(this).find('input.wtselected').prop('checked') == true)
+	// 		{
+				
+	//             CodeArr.push($(this).find('td.item-2').text());
+	//             RateArr.push($(this).find('td.item-4').text());
+	// 			$('#txtWtLiableAcctCode').val($(this).find('td.item-5').text());
+	//             Rate += parseFloat($(this).find('td.item-4').text());
+				
+				
+			
+	// 		} 
+			
+	// 	});
+	
+	// //$('#txtWTaxF').trigger('keyup');	
+	// $('#txtWtLiableArray').val(CodeArr);
+	// $('#txtWtLiableArray2').val(Rate);
+	
+	// $('input[name=txtWTaxF]').trigger('keyup');	
+	
+	// $('input[name=txtTotalPaymentDue]').trigger('keyup');	
+	// ComputeFooterTotalBeforeDiscount();
+		let wtaxsum = 0.00
+		var tbl2 = $('#tblWTaxTable tbody tr').each(function (i) 
+		{
+	        x = $(this).children();
+	       
+			
+			
+			if ($(this).find('input.wtaxamount').val() != '')
+			{
+				
+	            
+	            wtaxsum += parseFloat($(this).find('input.wtaxamount').val());
+			
+				
+			
+			} 
+			
+		});
+	
+		$('#txtWTaxF').val(FormatMoney(wtaxsum));	
+	$('#WTaxModal').modal('hide');	
+});
 	$('#journalEntryModal').on('shown.bs.modal',function(){
 		var docNum = $('#txtDocNum').val();
 		var currency = $('#txtCurrency').val();
@@ -2369,6 +2549,7 @@ var serviceType = 'I';
 	//Add
 	$(document.body).on('click', '#btnAdd', function () 
 	{
+		
 		CheckBatchSerial();
 		var err = 0;
         var errmsg = '';
@@ -2435,7 +2616,6 @@ var serviceType = 'I';
 		});
 		udfJson += udfArr.join(",") + '}';
        
-       	var selSeries = $('#txtSeriesCode').val();
 		var txtCardCode = $('#txtCardCode').val();
 		var txtPostingDate = $('#txtPostingDate').val();
 		var txtDeliveryDate = $('#txtDeliveryDate').val();
@@ -2454,7 +2634,7 @@ var serviceType = 'I';
 		var txtJournalMemo = $('#txtJournalMemo').val();
 		var txtPaymentTermsCode = $('#txtPaymentTermsCode').val();
 		var txtTinNumber = $('#txtTinNumber').val();
-		
+		var txtControlAccountCode = $('#txtControlAccountCode').val();
 		var txtFooterDiscountPercentage = $('#txtFooterDiscountPercentage').val();
 		
 		//Logistics
@@ -2471,12 +2651,14 @@ var serviceType = 'I';
 		
 		var selShippingType = $('#selShippingType').val();
 
-
-		var txtExtraMonths = $('#txtExtraMonths').val();
-		var txtExtraDays = $('#txtExtraDays').val();
-
-		var txtDocTotal = $('#txtDocTotal').val().replace(/,/g, '').replace('PHP','').trim();
+		var wtLiable = $('input[name=txtWtLiable]').val();
 		
+		var wtLiableCodeArr = $('input[name=txtWtLiableArray]').val();
+		var wtLiableRateArr = $('input[name=txtWtLiableArray2]').val();
+		var txtWtLiableAcctCode = $('input[name=txtWtLiableAcctCode]').val();
+		let txtDocTotal2 = $('#txtDocTotal2').val();
+
+
 		var json = '{';
         var otArr = [];
         var tbl = $('#tblDetails tbody tr').each(function (i) 
@@ -2508,8 +2690,7 @@ var serviceType = 'I';
 					itArr.push('"' + $(this).find('input.whsecode').val() + '"');
 					itArr.push('"' + $(this).find('input.batchorserialcontainer2').val() + '"');
 					itArr.push('"' + $(this).find('input.batchorserial').val() + '"');
-					itArr.push('"' + $(this).find('input.itemname').val() + '"');
-					
+					itArr.push('"' + $(this).find('select.selwt').val().replace(/,/g, '') + '"');
 				otArr.push('"' + i + '": [' + itArr.join(',') + ']'); 
 				
 				}
@@ -2522,6 +2703,7 @@ var serviceType = 'I';
 					itArr.push('"' + $(this).find('input.quantity').val().replace(/,/g, '') + '"')
 					itArr.push('"' + $(this).find('input.discount').val().replace(/,/g, '') + '"');
 					itArr.push('"' + $(this).find('select.taxcode').val() + '"');
+					itArr.push('"' + $(this).find('select.selwt').val().replace(/,/g, '') + '"');
 				
 				otArr.push('"' + i + '": [' + itArr.join(',') + ']'); 
 				}
@@ -2529,9 +2711,40 @@ var serviceType = 'I';
 		});
 		
 		json += otArr.join(",") + '}';
-		console.log(baseType)
-		console.log(json)
-		console.log(udfJson)
+		
+
+		var jsonWTax = '{';
+        var otArrWTax = [];
+        var tbl = $('#tblWTaxTable tbody tr').each(function (i) 
+		{
+			// wtcode
+			// wtname
+			// rate
+			// baseamount
+			// taxableamount
+			// wtaxamount
+			// glaccountwtax
+
+            x = $(this).children();
+            var itArr = [];
+				if ($(this).find('input.wtcode').val() != ''){
+					itArr.push('"' + $(this).find('input.wtcode').val() + '"');
+					itArr.push('"' + $(this).find('input.wtname').val()+ '"');
+					itArr.push('"' + $(this).find('input.rate').val().replace(/,/g, '') + '"')
+					itArr.push('"' + $(this).find('input.baseamount').val().replace(/,/g, '') + '"')
+					itArr.push('"' + $(this).find('input.taxableamount').val().replace(/,/g, '') + '"');
+					itArr.push('"' + $(this).find('input.wtaxamount').val().replace(/,/g, '') + '"');
+					itArr.push('"' + $(this).find('input.glaccountwtax').val().replace(/,/g, '') + '"');
+				
+				otArrWTax.push('"' + i + '": [' + itArr.join(',') + ']'); 
+				
+			
+			}
+		});
+		
+		jsonWTax += otArrWTax.join(",") + '}';
+		console.log(jsonWTax)
+
 
         if (err == 0) 
 		{
@@ -2542,8 +2755,8 @@ var serviceType = 'I';
 				data: 
 				{
 					json: json.replace(/(\r\n|\n|\r)/gm, '[newline]'),
+					jsonWTax: jsonWTax.replace(/(\r\n|\n|\r)/gm, '[newline]'),
 					udfJson: udfJson.replace(/(\r\n|\n|\r)/gm, '[newline]'),
-					selSeries:selSeries,
 					txtCardCode : txtCardCode,
 					txtPostingDate : txtPostingDate,
 					txtDeliveryDate : txtDeliveryDate,
@@ -2572,11 +2785,12 @@ var serviceType = 'I';
 					txtZipCodeB:txtZipCodeB,
 					txtCountryB:txtCountryB,
 					selShippingType:selShippingType,
-					txtExtraMonths:txtExtraMonths,
-					txtExtraDays:txtExtraDays,
-
-					txtDocTotal:txtDocTotal,
 					
+					wtLiableCodeArr : wtLiableCodeArr,
+					wtLiableRateArr : wtLiableRateArr,
+					txtWtLiableAcctCode : txtWtLiableAcctCode,
+
+
 					serviceType : serviceType,
 
 					txtDocNum: $('#txtDocNum').val(),
@@ -2686,7 +2900,7 @@ var serviceType = 'I';
 		});
 
 		udfJson += udfArr.join(",") + '}';
-       console.log(udfJson)
+       
        var txtDocEntry = $('#txtDocEntry').val();
 		var txtDocNum = $('#txtDocNum').val();
 		var txtCardCode = $('#txtCardCode').val();
@@ -2742,7 +2956,6 @@ var serviceType = 'I';
 					itArr.push('"' + $(this).find('input.uomentry').val().replace(/,/g, '') + '"')
 					itArr.push('"' + $(this).find('input.discount').val().replace(/,/g, '') + '"');
 					itArr.push('"' + $(this).find('select.taxcode').val() + '"');
-					itArr.push('"' + $(this).find('input.itemname').val() + '"');
 				
 				otArr.push('"' + i + '": [' + itArr.join(',') + ']'); 
 				
@@ -2768,6 +2981,7 @@ var serviceType = 'I';
         if (err == 0) 
 		{
 			
+			
 			$('#loadModal').modal('show');
             $.ajax({
                 type: 'POST',
@@ -2777,7 +2991,7 @@ var serviceType = 'I';
 					json: json.replace(/(\r\n|\n|\r)/gm, '[newline]'),
 					udfJson: udfJson.replace(/(\r\n|\n|\r)/gm, '[newline]'),
 					jsonDeleteRow : jsonDeleteRow,
-					txtDocEntry: txtDocEntry,
+					txtDocEntry:txtDocEntry,
 					txtDocNum : txtDocNum,
 					txtCardCode : txtCardCode,
 					txtPostingDate : txtPostingDate,
@@ -2865,11 +3079,50 @@ var serviceType = 'I';
 	
 /*Keyups*/
 //Rows
+	//Taxable Amount fro WTAX
+	$(document.body).on('blur', '.taxableamount', function () 
+	{
+		ComputeWtaxPerRow();
+		$(this).val(function(index, value) {
+			value = value.replace(/,/g,'');
+			return NumberWithCommas(value);
+		});
+	});
+	//Taxable Amount fro WTAX
+	$(document.body).on('blur', '.taxableamount', function () 
+	{
+		ComputeWtaxPerRow();
+		$(this).val(function(index, value) {
+			value = value.replace(/,/g,'');
+			return NumberWithCommas(value);
+		});
+	});
+	//WTaxable Amount fro WTAX
+	$(document.body).on('blur', '.wtaxamount', function () 
+	{
+
+		
+		$(this).val(function(index, value) {
+			value = value.replace(/,/g,'');
+			return FormatMoney(NumberWithCommas(value));
+		});
+		ComputeWtaxPerRowToFooter();
+	});
 	//Price
 	$(document.body).on('keyup', '.price', function (e) 
 	{
 		
-		CheckItemCode();
+	
+		
+		
+		
+		
+	});
+	$(document.body).on('blur', '.price', function () 
+	{
+		let amount = $('.selected-det').find('input.price').val();
+		$('.selected-det').find('input.price').val(FormatMoney(amount));
+			CheckItemCode();
 		let value = $(this).val();
 		let price = $('.selected-det').find('input.price').val();
 		let quantity = $('.selected-det').find('input.quantity').val();
@@ -2888,15 +3141,8 @@ var serviceType = 'I';
 		ComputeRowTaxAmount();
 		ComputeFooterTaxAmount();
 		ComputeTotal();
-		
-		
+
 		$('txtFooterDiscountPercentage').trigger('blur');
-		
-	});
-	$(document.body).on('blur', '.price', function () 
-	{
-		let amount = $('.selected-det').find('input.price').val();
-		$('.selected-det').find('input.price').val(FormatMoney(amount));
 		
 	});
 	//Quantity
@@ -3510,7 +3756,7 @@ var serviceType = 'I';
 		var rowno = 0;
 			rowno = ($('#tblDetails tbody tr:last').find('td.rowno span').text() == '') ? 1 : parseFloat($('#tblDetails tbody tr:last').find('td.rowno span').text()) + 1;
 		var lastItem = $('#tblDetails tbody tr:last').find('input.itemcode').val()
-		
+		var wtliableyesorno = $('#txtWTliableBP').val();
 		if(lastItem != ""){
 		setTimeout(function () 
 			{
@@ -3520,6 +3766,7 @@ var serviceType = 'I';
 							$('#tblDetails tbody').append(result);
 
 							$('#tblDetails tbody tr:last').find('td.rowno span').text(rowno);
+							$('#tblDetails tbody tr:last').find('td select.selwt').val(wtliableyesorno);
 						})
 			
 							$(this).prop('disabled', false);
@@ -3528,6 +3775,7 @@ var serviceType = 'I';
 			}, 200)
 		}
 	}
+
 	function AddRowBatch(){
 		
 		var rowno = 0;
@@ -3618,6 +3866,29 @@ var serviceType = 'I';
 			}, 200)
 		
 	}
+	function AddRowWTax(){
+		
+		var rowno = 0;
+			rowno = ($('#tblWTaxTable tbody tr:last').find('td.rowno span').text() == '') ? 1 : parseFloat($('#tblWTaxTable tbody tr:last').find('td.rowno span').text()) + 1;
+		var lastItem = $('#tblWTaxTable tbody tr:last').find('input.wtcode').val()
+		
+		if(lastItem != ""){
+		setTimeout(function () 
+			{
+					
+						$('#rowLoader').load('../templates/wtaxtable-lines-rows.php', function (result) 
+						{
+							$('#tblWTaxTable tbody').append(result);
+
+							$('#tblWTaxTable tbody tr:last').find('td.rowno span').text(rowno);
+						})
+			
+							$(this).prop('disabled', false);
+					
+					
+			}, 200)
+		}
+	}
 	function PreviewDoc(docNum, objType){
 		let docstatus = '';
 		let docType ='';
@@ -3663,16 +3934,11 @@ var serviceType = 'I';
 				$('#txtContactPersonCode').val(val.CntctCode);
 				$('#txtContactPerson').val(val.ContactPerson);
 				$('#selTransactionType').val(val.DocType);
-				
+				$('#txtWTaxF').val(val.WTSum);
 				
 				$('#txtPostingDate').val(val.DocDate);
 				$('#txtDeliveryDate').val(val.DocDueDate);
 				$('#txtDocumentDate').val(val.TaxDate);
-				$('#txtExtraMonths').val(val.ExtraMonth);
-				$('#txtExtraDays').val(val.ExtraDays);
-
-		// FMS_DueDateBasedOnCRD();
-
 				// val.CancelDate ? $('#txtCancellationDate').attr('type', 'date') : $('#txtCancellationDate').attr('type', 'text');
 				// $('#txtCancellationDate').val(val.CancelDate);
 				// $('#txtRequiredDate').val(val.ReqDate);
@@ -3725,6 +3991,17 @@ var serviceType = 'I';
 							
 						}
 					});
+
+					$.ajax({
+						type: 'GET',
+						url: '../proc/views/vw_shippingType.php',
+						data: {cardCode : cardCode},
+						success: function (html) 
+						{
+							
+							$('#selShippingType').html(html);
+						}
+					}); 
 					
 					setTimeout(function () 
 					{
@@ -3747,6 +4024,8 @@ var serviceType = 'I';
 						$('#selBillToAddress').val(val.PayToCode);
 						
 						$('#selBillToAddress').trigger('change');
+						$('#selShippingType').val(trnspCode)
+
 					}, 500)
 
 					$('#txtNoOfRefDocTo').html('');
@@ -3767,9 +4046,6 @@ var serviceType = 'I';
 				}
 				else{
 				$('#txtRemarks').val(`Copied from ${baseTableName} # ` + val.DocNum );	
-
-				$('#txtPostingDate').val(val.DocDate).prop("disabled",true);
-				$('#txtPostingDate2').prop("disabled",true);
 				}
 			
 			
@@ -3799,10 +4075,14 @@ var serviceType = 'I';
 			{
 				
 					
-					PreviewRows(docNum, docType, objType,function () 
-					{
-						
-					});
+				PreviewRows(docNum, docType, objType,function () 
+				{
+					
+				});
+				PreviewRowsWTAX(docNum,function () 
+				{
+					
+				});
 				
 				
 				
@@ -3909,23 +4189,16 @@ var serviceType = 'I';
 		$.getJSON('../proc/views/udf/vw_listUDF.php?mainTable=' + mainTable, function (data){
 			
 			var udfArr = [];
-			var udfArrValues = [];
-			console.log(data)
 			$.each(data, function (key, val){
 					udfArr.push(val.Column_Name);
-					udfArrValues.push('CAST(' + val.Column_Name + ' AS NVARCHAR(200)) AS '  + val.Column_Name);
 					udfArr.join(','); 
 			});		
 			let udfJson = JSON.stringify(udfArr);
-			let udfJsonValues = JSON.stringify(udfArrValues);
-			let udfJsonString = '{' + udfJson + '}';
 			let udfJson2 = udfJson.replace(/(\r\n|\n|\r)/gm, '[newline]');
-			console.log(udfJson)
-			$('#udfvalueloader').load('../proc/views/udf/vw_getUDF.php?udfJson=' + udfJson + '&docNum=' + docNum + '&mainTable=' + mainTable,function (data){
-				
-				console.log(data)
+			
+			$('#udfvalueloader').load('../proc/views/udf/vw_getUDF.php?udfJson=' + udfJson + '&docNum=' + docNum + '&mainTable=' + mainTable,function (){
+			
 				let udfValues = $('#udfvalueloader').text();
-				console.log(udfValues)
 				let udfValues2 = udfValues.replace(/['"]+/g, '');
 				let udfValues3 = udfValues2.replace('[','');
 				let udfValues4 = udfValues3.replace(']','');
@@ -4062,6 +4335,98 @@ var serviceType = 'I';
             callback();
 		});
 	}
+	function PreviewRowsWTAX(docNum,callback){
+        $('#tblWTaxTable tbody').load('../proc/views/vw_getdetailsdataWTAX.php?docNum=' + docNum, function (result) 
+		{
+			
+			
+            callback();
+		});
+	}
+	function ComputeTaxable(){
+		let amount = 0.00;
+
+		$('#tblDetails tbody tr').each(function()
+		{
+			console.log($(this).find('select.taxcode').val())
+			console.log($(this).find('input.taxamount').val())
+			if($(this).find('select.taxcode').val() == 'OVAT-N' && $(this).find('select.selwt').val() == '1'){
+				 if(isNaN(parseFloat($(this).find('.rowtotal').val().replace(/,/g,''))))
+				{
+					amount += 0;
+			    }
+				else
+				{
+					amount += parseFloat($(this).find('.rowtotal').val().replace(/,/g,''));
+			    }
+			}
+			else if($(this).find('select.taxcode').val() == 'OVAT-S' && $(this).find('select.selwt').val() == '1'){
+				 if(isNaN(parseFloat($(this).find('.rowtotal').val().replace(/,/g,''))))
+				{
+					amount += 0;
+			    }
+				else
+				{
+					amount += parseFloat($(this).find('.rowtotal').val().replace(/,/g,''));
+			    }
+			}else{
+				 if(isNaN(parseFloat($(this).find('.rowtotal').val().replace(/,/g,''))))
+				{
+					amount += 0;
+			    }
+				else
+				{
+					amount += parseFloat($(this).find('.rowtotal').val().replace(/,/g,''));
+			    }
+			}
+		   
+	      console.log(amount)
+		})
+		console.log(amount)
+		$('.taxableamount').val(FormatMoney(amount));
+		
+	}
+	function ComputeWtaxPerRow(){
+		let amount = 0.00;
+
+		let taxable = $('.selected-det-wtax').find('.taxableamount').val().replace(/,/g,'');
+		let rate = parseFloat($('.selected-det-wtax').find('.rate').val());
+		let baseamount = $('.selected-det-wtax').find('.baseamount').val().replace(/,/g,'');
+		let newBaseAmount = taxable * 1.12;
+		let newRate = rate / 100;
+		if($('#txtVatSum').val() > 0){
+			amount = taxable * newRate;
+			console.log()
+			$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
+			$('.selected-det-wtax').find('.baseamount').val(FormatMoney(newBaseAmount));
+		}
+		else{
+			amount = taxable * newRate;
+			console.log()
+			$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
+			$('.selected-det-wtax').find('.baseamount').val(FormatMoney(taxable));
+		}
+		
+		
+	}
+	function ComputeWtaxPerRowToFooter(){
+		let amount = 0.00;
+
+			$('#tblWTaxTable tbody tr').each(function (i) 
+			{
+		        
+				if ($(this).find('input.wtcode').val() != '')
+				{
+					console.log($(this).find('input.wtaxamount').val().replace(/,/g,''))
+		            amount += parseFloat($(this).find('input.wtaxamount').val().replace(/,/g,''));
+					
+					
+				
+				} 
+				
+			});
+		$('#txtWTaxF').val(FormatMoney(amount))
+	}
 	function ComputeRowTaxAmount(){
 		
 		let taxrate = $('.selected-det').find('select.taxcode').find('option:selected').attr('val-rate');
@@ -4134,7 +4499,7 @@ var serviceType = 'I';
 		let rowTax2 = parseFloat((rowTaxFloat / 100) * rowTotal2);
 		let rowTotal3 = parseFloat(rowTotal2 + rowTax2);
 		
-		let result = rowTotal3.toFixed(6);
+		let result = rowTotal3.toFixed(4);
 		$('.selected-det').find('.grosstotal').val(FormatMoney(result)); 
 	}
 	
@@ -4171,8 +4536,45 @@ var serviceType = 'I';
 	    }
 	      
 		})
-		$('#txtTotalBeforeDiscount').val(FormatMoney(amount));
+		let wtax =  parseFloat($('#txtWTaxF').val().replace(/,/g,''));
+		let total = 0.00;
+		if(wtax > 0){
+			
+			total =   parseFloat(amount - wtax);	
+				
+			$('#txtTotalBeforeDiscount').val(FormatMoney(total))
+		}else{
+			total =   parseFloat(amount)
+			$('#txtTotalBeforeDiscount').val(FormatMoney(total))
+		}
+	
+		
 		ComputeTotal();
+	}
+	function ComputeFooterTotalBeforeDiscountWTax(){
+		let amount = 0.00;
+		$('.rowtotal').each(function()
+		{
+			if($(this).closest('tr').find('select.selwt').val() == 'Y'){
+					if(isNaN(parseFloat($(this).val().replace(/,/g,''))))
+					{
+						amount += 0;
+				    }
+					else
+					{
+						amount += parseFloat($(this).val().replace(/,/g,''));
+				    }	
+			}
+		
+	      
+		})
+		//if($('input.wtcode').val() != ''){
+			$('input.baseamount').val(FormatMoney(amount))
+		//}
+		
+	
+		
+		
 	}
 	function ComputeDiscountPercentageFooter(discAmount,totalBeforeDiscount){
 		discAmount = isNaN(parseFloat(discAmount.replace(/,/g,'')))? 0: parseFloat(discAmount.replace(/,/g,''));
@@ -4195,17 +4597,20 @@ var serviceType = 'I';
 		let totalTaxAmount = $('#txtVatSum').val();
 		let totalDiscount = $('#txtFooterDiscountSum').val();
 		let paidToDate = $('#txtPaidToDate').val();
+		let totalWtax = $('#txtWTaxF').val().replace(/,/g,'');
 		
 		let totalBeforeDiscountFloat = isNaN(parseFloat(totalBeforeDiscount.replace(/,/g,'')))? 0: parseFloat(totalBeforeDiscount.replace(/,/g,''));
 		let totalTaxAmountFloat = isNaN(parseFloat(totalTaxAmount.replace(/,/g,'')))? 0: parseFloat(totalTaxAmount.replace(/,/g,''));
 		let totalDiscountFloat = isNaN(parseFloat(totalDiscount.replace(/,/g,'')))? 0: parseFloat(totalDiscount.replace(/,/g,''));
 		let paidToDateFloat = isNaN(parseFloat(paidToDate.replace(/,/g,'')))? 0: parseFloat(paidToDate.replace(/,/g,''));
-	
+		let totalWtaxFloat = isNaN(parseFloat(totalWtax.replace(/,/g,'')))? 0: parseFloat(totalWtax.replace(/,/g,''));
+
 		
 		let amount = (totalBeforeDiscountFloat + totalTaxAmountFloat) - totalDiscountFloat;
-		;
-		$('#txtDocTotal').val(FormatMoneyWithCurrency(amount));
-		$('#txtBalancedDue').val(FormatMoneyWithCurrency(amount - paidToDateFloat));
+		let amount2 = amount - totalWtax;
+		
+		$('#txtDocTotal').val(FormatMoneyWithCurrency(amount2));
+		$('#txtBalancedDue').val(FormatMoneyWithCurrency(amount2 - paidToDateFloat));
 	}
 	
 	
@@ -4616,22 +5021,29 @@ var serviceType = 'I';
 		
 	}
 	
+	function GetSumOfRows(){
+		let baseAmount = 0.00;
+	
+		$('.selected-det-wtax').find('input.baseamount').val(ComputeRowTotal(price,quantity,discount));
+		
+
+	}
 	
 	
 	function FormatMoney(amount){
-		let preAmount = accounting.formatMoney(amount, "", 6);
+		let preAmount = accounting.formatMoney(amount, "", 2);
 		
 		
 		return preAmount;
 	} 
 	function FormatQuantity(amount){
-		let preAmount = accounting.formatMoney(amount, "", 6);
+		let preAmount = accounting.formatMoney(amount, "", 2);
 		
 		
 		return preAmount;
 	}
 	function FormatMoneyWithCurrency(amount){
-		let preAmount = accounting.formatMoney(amount, txtCurrency + " " , 6);
+		let preAmount = accounting.formatMoney(amount, txtCurrency + " " , 2);
 		
 		
 		return preAmount;
@@ -4814,28 +5226,6 @@ var serviceType = 'I';
 				}
 			}
 		});
-	}
-
-
-	function FMS_DueDateBasedOnCRD(){
-		let txtExtraMonths = $('#txtExtraMonths').val();
-		let txtExtraDays = parseInt($('#txtExtraDays').val());
-
-		var date = new Date($("[data-id2=U_CRD]").val());
-           
-		date.setDate(date.getDate() + txtExtraDays);
-        if(!isNaN(txtExtraDays)){
-           	// this.setDate(this.getDate() + parseInt(days));
-          
-				// $('#txtDeliveryDate').val(date);
-				$('#txtDeliveryDate').val(moment(date).format('YYYY-MM-DD'));
-				$('#txtDeliveryDate').trigger('change');
-
-			// $('#txtDeliveryDate').datepicker("setDate", new Date(2008,9,03) );
-        } else {
-          
-        }
-
 	}
 
 	function getCurrentRefDocArray(){

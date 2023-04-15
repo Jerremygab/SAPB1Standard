@@ -4,21 +4,8 @@ include('../../../../config/config.php');
 
 $cardCode = $_GET['cardCode'];
 $table = $_GET['table'];
-$fatherCard = '';
+
 $objSession = json_decode($_SESSION['ARInvoiceArr']);
-
-// $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT 
-// 														T0.CardCode
-														
-// 														FROM OCRD T0
-
-// 														WHERE T0.FatherCard = '$cardCode'");
-
-// 	while (odbc_fetch_row($qry)) 
-// 	{
-		
-// 		$fatherCard = odbc_result($qry, 'CardCode');
-// 	}
 
 ?>
 						<table class="table table-striped table-bordered table-hover " id="tbl<?php echo $objSession->copyFromModalTbl1; ?>">
@@ -45,10 +32,9 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT
 														T0.Comments,
 														T0.DocDueDate
 														
-														FROM ODLN T0
-														INNER JOIN OCRD T1 ON T0.CardCode = T1.CardCode
+														FROM $table T0
 
-														WHERE T1.FatherCard =  '152.00-C1' AND T0.DocStatus = 'O'");
+														WHERE T0.CardCode = '$cardCode' AND T0.DocStatus = 'O'");
 
 	while (odbc_fetch_row($qry)) 
 	{

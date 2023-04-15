@@ -14,8 +14,8 @@ else{
 ?>
 <div class="">
 <table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white">
-  <thead style="z-index: 999;  background-color: lightgray;  !important" class="thead-fixed " style="">
-    <tr style="background-color: lightgray; z-index: 999; !important">
+  <thead style="z-index: 999;  background-color: lightgray  !important;" class="thead-fixed ">
+    <tr style="background-color: lightgray; z-index: 999 !important;">
 		  <th class="text-right" style="color: black;">#</th>
 	    <th style="color: black; min-width:300px;">G/L Account</th>
 		  <th style="color: black; min-width:400px;" >G/L Name</th>
@@ -30,7 +30,7 @@ else{
     <tr style="background-color: white; "  >
 		 	<td class="rowno text-center" style="background-color: lightgray;color:black; font-size:13px;">
 			<span>1</span>
-			<button type="button" class="btn d-none btnrowfunctions" data-toggle="dropdown" style="width: 1px;px; padding-left: 0px !important;margin-left: 0px !important">
+			<button type="button" class="btn d-none btnrowfunctions" data-toggle="dropdown" style="width: 1px; padding-left: 0px !important;margin-left: 0px !important">
 				<i class="fas fa-caret-down" ></i>
 			</button>
 			 <ul class="dropdown-menu rowfunctions" role="menu" style="background-color: #fdfd96;">

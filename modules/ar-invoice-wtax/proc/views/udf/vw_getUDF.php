@@ -1,9 +1,10 @@
 <?php
 session_start();
-include('../../../../config/config.php');
+include('../../../../../config/config.php');
 
 $udfJson = $_GET['udfJson'];
 $docNum = $_GET['docNum'];
+$table = $_GET['mainTable'];
 //$udfJsonNames = $_GET['udfJsonNames'];
 $countUDF = 0;
 
@@ -21,7 +22,7 @@ $countUDF = 0;
 		$qryCount = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 			SELECT COUNT(Column_Name) AS 'Count'
 			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_NAME = 'OINV' AND LEFT(Column_Name,2) = 'U_'
+			WHERE TABLE_NAME = '".$table."' AND LEFT(Column_Name,2) = 'U_'
 			");
 		while (odbc_fetch_row($qryCount)) 
 		{
@@ -31,8 +32,8 @@ $countUDF = 0;
 		
 	 $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 					SELECT 
-					 CAST(". $string2 .", NVARCHAR(200))
-					FROM OINV WHERE Docnum = $docNum
+					 ". $string2 ."
+					FROM ".$table." WHERE Docnum = $docNum
 					
 					");
 	$arr=array();
