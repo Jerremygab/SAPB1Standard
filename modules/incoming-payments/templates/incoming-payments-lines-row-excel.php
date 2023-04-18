@@ -54,7 +54,7 @@ if ($serviceType == 'I'){
 	  </td>
 	   <td >
 			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
+				<input type="text" class="form-control text-right   taxamount"   style="outline: none; border:none" maxlength="8"/>
 				<select type="text" class="form-control taxcode"  placeholder=""   readonly >
 							<?php
 												$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code,Name,Rate FROM OVTG WHERE Inactive = 'N' AND Category='O' ORDER BY CASE WHEN Code = 'OVAT-N' THEN '1' ELSE Code END ASC");
@@ -109,7 +109,7 @@ else{
 		<input type="text" class="form-control matrix-cell glname"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
 		
 	  </td>
-	   <td class="d-none">
+	   <td class=" ">
 		<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" value="1"/>
 		
 	  </td>
@@ -123,7 +123,7 @@ else{
 	  </td>
 	   <td >
 			<div class="input-group ">
-				<input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
+				<input type="text" class="form-control text-right   taxamount"   style="outline: none; border:none" maxlength="8"/>
 				<select type="text" class="form-control taxcode"  placeholder=""   readonly >
 							<?php
 												$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code,Name,Rate FROM OVTG WHERE Inactive = 'N' AND Category='O' ORDER BY CASE WHEN Code = 'OVAT-N' THEN '1' ELSE Code END ASC");

@@ -134,18 +134,25 @@ if ($serviceType == 'I'){
 	  </td>
 	    <td >
 		<div class="input-group ">
-			
-				<input type="text" class="form-control text-right d-none"   style="outline: none; border:none" maxlength="8"/>
-			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
+				<input type="text" class="form-control text-right selWT"   style="outline: none; border:none" maxlength="8"/>
+			<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
 
-			  		<option value="0" id="btnWTLiableNo">No</option>
-					<option value="1" id="btnWTLiableYes">Yes</option>
-				</select>
-											
-			</div>
+			  <?php
+						$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; Select T0.WTCode, T0.WTName, T0.Rate,T0.Account FROM OWHT T0 WHERE WTCode = 'C120'");
+							while (odbc_fetch_row($qry)) 
+							{
+								//echo odbc_result($qry, 'NextNumber');
+								echo '<option val-rate="0" value="0">No</option>';
+								echo '<option  class="taxoptions" val-rate="' .number_format(odbc_result($qry, 'Rate'),2). '" value="1"  >Yes</option>';
+							}
+							
+							odbc_free_result($qry);
+					?>
+			</select>
+		</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
+		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
 		
 	  </td>
 	   <td >
@@ -262,16 +269,25 @@ else{
 	  </td>
 	    <td >
 		<div class="input-group ">
-				<input type="text" class="form-control text-right d-none"   style="outline: none; border:none" maxlength="8"/>
-			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
+				<input type="text" class="form-control text-right selWT"   style="outline: none; border:none" maxlength="8"/>
+			<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
 
-			  		<option value="0" id="btnWTLiableNo">No</option>
-					<option value="1" id="btnWTLiableYes">Yes</option>
-				</select>
-			</div>
+			  <?php
+						$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; Select T0.WTCode, T0.WTName, T0.Rate,T0.Account FROM OWHT T0 WHERE WTCode = 'C120'");
+							while (odbc_fetch_row($qry)) 
+							{
+								//echo odbc_result($qry, 'NextNumber');
+								echo '<option val-rate="0" value="0">No</option>';
+								echo '<option  class="taxoptions" val-rate="' .number_format(odbc_result($qry, 'Rate'),2). '" value="1"  >Yes</option>';
+							}
+							
+							odbc_free_result($qry);
+					?>
+			</select>
+		</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"    maxlength="12" readonly/>
+		<input type="text" class="form-control matrix-cell text-right grossprice"    maxlength="12" />
 		
 	  </td>
 	   <td >

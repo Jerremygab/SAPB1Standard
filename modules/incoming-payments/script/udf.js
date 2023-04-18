@@ -1,5 +1,5 @@
 $(document).ready(function () {
-let mainTable = 'ORDR';
+let mainTable = 'ORCT';
 
 		$('#udfResult').load('../proc/views/udf/vw_generateUDF.php?mainTable=' + mainTable,function (){
 			

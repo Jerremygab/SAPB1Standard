@@ -2,11 +2,10 @@
 session_start();
 include_once('../../../../config/config.php');
 
-$bplid = $_GET['bplid'];
 $cardcode = $_GET['cardcode'];
 $serviceType = $_GET['serviceType'];
 ?>
-<table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width=100% !important;"  cellspacing="0">
+<table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
   <thead   style="border-bottom: 0 !important; ">
     <tr >
 		  <th class="text-right" style=" color: black;">#</th>
@@ -32,7 +31,7 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 	SELECT DISTINCT
 		T0.BPLId ,
 		CASE 
-			WHEN T0.ObjType = 18 THEN 'PU'
+			WHEN T0.ObjType = 13 THEN 'IN'
 			WHEN T0.ObjType = 14 THEN 'CM'
 			WHEN T0.ObjType = 30 THEN 'JE'
 		END AS ObjType,
@@ -46,8 +45,8 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 		T0.DocTotal,
 		T0.WTApplied,
 		T0.Comments
-	FROM OPCH T0
-	INNER JOIN OBPL T1 ON T1.BPLId = T0.BPLId
+	FROM OINV T0
+	LEFT JOIN OBPL T1 ON T1.BPLId = T0.BPLId
 	WHERE T0.CardCode = '$cardcode' AND T0.DocStatus = 'O'
 		
 	UNION ALL
@@ -55,7 +54,7 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 	SELECT DISTINCT
 		T0.BPLId ,
 		CASE 
-			WHEN T0.ObjType = 18 THEN 'PU'
+			WHEN T0.ObjType = 13 THEN 'IN'
 			WHEN T0.ObjType = 14 THEN 'CM'
 			WHEN T0.ObjType = 30 THEN 'JE'
 		END AS ObjType,
@@ -69,8 +68,8 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 		T0.DocTotal,
 		T0.WTApplied,
 		T0.Comments
-	FROM ORPC T0
-	INNER JOIN OBPL T1 ON T1.BPLId = T0.BPLId	
+	FROM ORIN T0
+	LEFT JOIN OBPL T1 ON T1.BPLId = T0.BPLId	
 	WHERE T0.CardCode = '$cardcode' AND T0.DocStatus = 'O'
 
 
@@ -94,48 +93,47 @@ while (odbc_fetch_row($qry))
 	$Comments = odbc_result($qry, 'Comments');
 
 	
-				if($serviceType == 'S'){
+				if($serviceType == 'C'){
    
 					echo 
-					'<tr style="background-color: white; "  >
-					  <td class="rowno text-right" style="background-color: lightgray;color:black;">
-						<span>'.$ctr.'</span>
-					
+					'               <tr style="background-color: white; "  >
+					<td class="rowno text-right" style="background-color: lightgray;color:black; ">
+					  <span>'.$ctr.'</span>
+				  
+					</td>
+					   <td style="min-width:50px">
+							  <input type="checkbox" style=" height:20px; width:20px; margin: auto; margin-top: 10px; text-align:center;" class="form-control matrix-cell chkboxInvoice "s>
+						  
 					  </td>
-					 	<td style="min-width:50px">
-					  	<center>
-								<input type="checkbox" style=" height:20px ; width:20px " class="form-control matrix-cell chkboxInvoice ">
-							</center>
-						</td>
-				    <td >
-							<input type="text" class="form-control docnum d-none"  aria-label=" aria-describedby="button-addon2" style="outline: none; border:none; " readonly value="'. $DocEntry .'"/>
-							<input type="text" class="form-control docnum2"  aria-label=" aria-describedby="button-addon2" style="outline: none; border:none; " readonly value="'. $DocNum .'"/>
+				  <td >
+						  <input type="text" class="form-control docnum d-none"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none; " readonly value="'. $DocEntry .'"/>
+						  <input type="text" class="form-control docnum2"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none; " readonly value="'. $DocNum .'"/>
 
-					  </td>
-					  <td >
-							<input type="text" class="form-control matrix-cell documenttype"  style="outline: none; border:none" readonly value="'. $ObjType .'"/>
-					  </td>
-					  <td >
-							<input type="text" class="form-control matrix-cell date"  aria-label=" aria-describedby="button-addon2" style="outline: none; border:none" readonly value="'. $DocDate .'"/>
-					  </td>
-					  <td >
-							<input type="text" class="form-control matrix-cell text-right total"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/  value="'. $DocTotal .'">
-					  </td>
-					  <td >
-							<input type="text" class="form-control matrix-cell text-right balancedue"   style="outline: none; border:none" maxlength="8" readonly value="'. $Balance .'"/>
-							<input type="text" class="form-control matrix-cell text-right balancedue2 d-none"   style="outline: none; border:none" maxlength="8" readonly value="'. $Balance .'"/>
-						
-					  </td>
-					  <td >
-							<input type="text" class="form-control matrix-cell text-right totalpayment"   style="outline: none; border:none" maxlength="8" />
-					  </td>
-					  <td >
-							<input type="text" class="form-control matrix-cell text-right wtaxamount"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/ value="'. $WTApplied .'">
-					  </td>
-					   <td >
-							<input type="text" class="form-control matrix-cell comments"  style="outline: none; border:none" readonly value="'. $Comments .'"/>
-					  </td>
-					</tr>'
+					</td>
+					<td >
+						  <input type="text" class="form-control matrix-cell documenttype"  style="outline: none; border:none" readonly value="'. $ObjType .'"/>
+					</td>
+					<td >
+						  <input type="text" class="form-control matrix-cell date"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" readonly value="'. $DocDate .'"/>
+					</td>
+					<td >
+						  <input type="text" class="form-control matrix-cell text-right total"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly  value="'. $DocTotal .'" />
+					</td>
+					<td >
+						  <input type="text" class="form-control matrix-cell text-right balancedue"   style="outline: none; border:none" maxlength="8" readonly value="'. $Balance .'"/>
+						  <input type="text" class="form-control matrix-cell text-right balancedue2 d-none"   style="outline: none; border:none" maxlength="8" readonly value="'. $Balance .'"/>
+					  
+					</td>
+					<td >
+						  <input type="text" class="form-control matrix-cell text-right totalpayment"   style="outline: none; border:none" maxlength="8" />
+					</td>
+					<td >
+						  <input type="text" class="form-control matrix-cell text-right wtaxamount"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly value="'. $WTApplied .'" />
+					</td>
+					 <td >
+						  <input type="text" class="form-control matrix-cell comments"  style="outline: none; border:none" readonly value="'. $Comments .'"/>
+					</td>
+				  </tr>'
 					;
 			
 					$ctr += 1;

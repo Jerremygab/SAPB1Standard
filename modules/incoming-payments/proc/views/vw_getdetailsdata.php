@@ -14,7 +14,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
 ?>
 
 
-<table id="tblDetails2" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width=100% !important;"  cellspacing="0">
+<table id="tblDetails2" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
   <thead   style="border-bottom: 0 !important; ">
     <tr >
 		<th class="text-right" style=" color: black; max-width:50px;">#</th>
@@ -41,71 +41,72 @@ if($docType == 'S' && $payNoDoc == 'N'){
 
 	$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 	SELECT DISTINCT
-		T0.BPLId ,
-		CASE 
-			WHEN T0.ObjType = 18 THEN 'PU'
-			WHEN T0.ObjType = 14 THEN 'CM'
-			WHEN T0.ObjType = 30 THEN 'JE'
-		END AS ObjType,
-		T0.DocDate,
-		T0.DocNum,
-		T0.DocEntry,
-		T0.CardCode,
-		T0.CardName,
-		T0.NumAtCard,
-		T0.DocTotal - T0.PaidSum AS Balance,
-		T0.DocTotal,
-		T0.WTApplied,
-		T2.PaidSum,
-		T2.SumApplied,
+        T0.BPLId ,
+        CASE 
+            WHEN T0.ObjType = 18 THEN 'PU'
+            WHEN T0.ObjType = 14 THEN 'CM'
+            WHEN T0.ObjType = 30 THEN 'JE'
+        END AS ObjType,
+        T0.DocDate,
+        T0.DocNum,
+        T0.DocEntry,
+        T0.CardCode,
+        T0.CardName,
+        T0.NumAtCard,
+        T0.DocTotal - T0.PaidSum AS Balance,
+        T0.DocTotal,
+        T0.WTApplied,
+        T2.PaidSum,
+        T2.SumApplied,
 
-		T2.OcrCode,
-		T2.OcrCode2,
-		T2.OcrCode3,
-		T0.Comments
+        T2.OcrCode,
+        T2.OcrCode2,
+        T2.OcrCode3,
+        T0.Comments
 
-	FROM OPCH T0
-	
-	INNER JOIN RCT2 T2 ON T0.DocEntry = T2.DocEntry
-	INNER JOIN ORCT T3 ON T3.DocEntry = T2.DocNum
-	WHERE T3.DocNum = $docNum
-		
-	UNION ALL
+    FROM OPCH T0
 
-	SELECT DISTINCT
-		T0.BPLId ,
-		CASE 
-			WHEN T0.ObjType = 18 THEN 'PU'
-			WHEN T0.ObjType = 14 THEN 'CM'
-			WHEN T0.ObjType = 30 THEN 'JE'
-		END AS ObjType,
-		T0.DocDate,
-		T0.DocNum,
-		T0.DocEntry,
-		T0.CardCode,
-		T0.CardName,
-		T0.NumAtCard,
-		T0.DocTotal - T0.PaidSum AS Balance,
-		T0.DocTotal,
-		T0.WTApplied,
-		T2.PaidSum,
-		T2.SumApplied,
+    INNER JOIN VPM2 T2 ON T0.DocEntry = T2.DocEntry
 
-		T2.OcrCode,
-		T2.OcrCode2,
-		T2.OcrCode3,
-		T0.Comments
+    INNER JOIN OVPM T3 ON T3.DocEntry = T2.DocNum
+    WHERE T3.DocEntry = $docNum
 
+    UNION ALL
 
-	FROM ORPC T0
-	
-	INNER JOIN RCT2 T2 ON T0.DocEntry = T2.DocEntry
-	INNER JOIN ORCT T3 ON T3.DocEntry = T2.DocNum
-	WHERE T3.DocNum = $docNum
+    SELECT DISTINCT
+        T0.BPLId ,
+        CASE 
+            WHEN T0.ObjType = 18 THEN 'PU'
+            WHEN T0.ObjType = 14 THEN 'CM'
+            WHEN T0.ObjType = 30 THEN 'JE'
+        END AS ObjType,
+        T0.DocDate,
+        T0.DocNum,
+        T0.DocEntry,
+        T0.CardCode,
+        T0.CardName,
+        T0.NumAtCard,
+        T0.DocTotal - T0.PaidSum AS Balance,
+        T0.DocTotal,
+        T0.WTApplied,
+        T2.PaidSum,
+        T2.SumApplied,
+
+        T2.OcrCode,
+        T2.OcrCode2,
+        T2.OcrCode3,
+        T0.Comments
 
 
+    FROM ORPC T0
 
-	ORDER BY T0.DocNum");
+    INNER JOIN VPM2 T2 ON T0.DocEntry = T2.DocEntry
+    INNER JOIN OVPM T3 ON T3.DocEntry = T2.DocNum
+    WHERE T3.DocNum = $docNum
+
+
+
+    ORDER BY T0.DocNum");
 $ctr = 1;
 
 while (odbc_fetch_row($qry)) 
@@ -135,7 +136,7 @@ while (odbc_fetch_row($qry))
 					  </td>
 					 	<td >
 					  	<center>
-								<input type="checkbox" checked style=" height:30px ; width:30px " class="form-control matrix-cell chkboxInvoice ">
+								<input type="checkbox" checked style=" height:30px ; width:30px ; margin: auto; margin-top: 10px;" class="form-control matrix-cell chkboxInvoice ">
 							</center>
 						</td>
 				    	<td >
@@ -208,8 +209,8 @@ odbc_close($MSSQL_CONN);
 else if($docType == 'A'){
 ?>
 <table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white">
-  <thead style="z-index: 999;  background-color: lightgray;  !important" class="thead-fixed " style="">
-    <tr style="background-color: lightgray; z-index: 999; !important">
+  <thead style="z-index: 999;  background-color: lightgra  !important" class="thead-fixed " >
+    <tr style="background-color: lightgray; z-index: 999 !important">
 			<th class="text-right" style="color: black">#</th>
 			<th style="color: black; min-width:300px;">G/L Account</th>
 			<th style="color: black; min-width:400px;" >G/L Name</th>

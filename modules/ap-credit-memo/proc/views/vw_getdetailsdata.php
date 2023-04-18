@@ -319,12 +319,12 @@ while (odbc_fetch_row($qry))
 						
 					  </td>
 					   <td >
-							<div class="'.$inputGroup.' ">
-								<input type="hidden" class="form-control text-right  taxamount"  style="outline: none; border:none" maxlength="8"/>
-								<select type="text" class="form-control taxcode"  placeholder="" >
-										"'.$taxcode.'"
-								</select>
-							</div>
+					   <div class="'.$inputGroup.' ">
+					   <input type="hidden" class="form-control text-right  taxamount" value="'.$TaxAmount.'" style="outline: none; border:none" maxlength="8" readonly />
+					   <select type="text" class="form-control taxcode"  placeholder=""'.$disabled .' readonly disabled="disabled">
+							   "'.$taxcode.'"
+					   </select>
+				   </div>
 					  </td>
 					  
 					   <td >

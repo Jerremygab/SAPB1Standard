@@ -62,7 +62,6 @@ include_once('../../../config/config.php');
 															   <td >
 																<input  type="number" class="form-control matrix-cell text-right glaccountwtax "  style="outline: none; border:none" readonly/>	
 															  </td>
-															  
     												</tr>
 											  </tbody>
 											</table>

@@ -179,13 +179,10 @@ $(document).ready(function () {
 			$('#selSeries').prop('disabled',true);
 			$('#txtPostingDate').prop('disabled',true);
 			$('#txtPostingDate').prop('readonly',true);
-			$('#txtDeliveryDate').prop('disabled',true);
-			$('#txtDeliveryDate').prop('readonly',true);
 			$('#txtDocumentDate').prop('disabled',true);
 			$('#txtDocumentDate').prop('readonly',true);
 			$('#btnControlAccount').prop('disabled',true);
 			$('#btnPaymentTerms').prop('disabled',true);
-			$('#txtCustomerRefNo').prop('readonly',true);
 			$('#txtTinNumber').prop('readonly',true);
 			$('#btnRefDoc').prop('disabled',true);
 			$('#btnSalesEmp').prop('disabled',true);
@@ -193,7 +190,6 @@ $(document).ready(function () {
 			$('#btnWTax').prop('disabled',true);
 			$('#selSeries').prop('disabled',true);
 			$('#selSeries').prop('readonly',true);
-			$('#txtRemarks').prop('readonly',true);
 		});
 		
 	});
@@ -944,8 +940,8 @@ $(document).ready(function () {
 			var batchOrSerial = $(this).children('td.item-11').text();
 			var price = $(this).children('td.item-6').text();
 			var vendor = $(this).children('td.item-7').text();
-			var whsCode = $(this).children('td.item-12').text();
-			var whsName = $(this).children('td.item-13').text();
+			/* var whsCode = $(this).children('td.item-12').text(); */
+			var whsCode = $('#tblWhse tbody > tr').children('td.item-1').text();
 			
 			
 			$('.btnrowfunctions').removeClass('d-none');
@@ -1552,7 +1548,7 @@ $(document).ready(function () {
 									},5000)
 			}
 		});
-		
+		/* fgh */
 		$(document.body).on('click', '#btnUpdateSerial', function (e) 
 		{
 			let err = 0;
@@ -2482,7 +2478,7 @@ $(document).ready(function () {
 	
 	$(document.body).on('change', 'select.selwt', function () 
 	{
-		/* zxc */
+		/* zxctax */
 		//	setTimeout(function () 
 				//{
 					 $('input[name=txtWTaxF]').trigger('keyup');
@@ -2922,8 +2918,8 @@ $(document).ready(function () {
 			});
 	
 			udfJson += udfArr.join(",") + '}';
-		   
-		   var txtDocEntry = $('#txtDocEntry').val();
+		  /*  asdasdasd */
+		   	var txtDocEntry = $('#txtDocEntry').val();
 			var txtDocNum = $('#txtDocNum').val();
 			var txtCardCode = $('#txtCardCode').val();
 			var txtPostingDate = $('#txtPostingDate').val();
@@ -3094,6 +3090,7 @@ $(document).ready(function () {
 					{
 						$('#messageBar').val('').css({'background-color': '', 'color': ''});	
 					},5000)
+					alert(txtDeliveryDate)
 			}
 			}
 		});
@@ -3241,6 +3238,8 @@ $(document).ready(function () {
 			
 		});
 		//Tax
+		/* 123 */
+		
 		$(document.body).on('change','.taxcode',function()
 		{
 			
@@ -4357,7 +4356,7 @@ $(document).ready(function () {
 		}
 		function ComputeTaxable(){
 			let amount = 0.00;
-	
+	/* zxcvtax */
 			$('#tblDetails tbody tr').each(function()
 			{
 				console.log($(this).find('select.taxcode').val())
@@ -4372,7 +4371,7 @@ $(document).ready(function () {
 						amount += parseFloat($(this).find('.rowtotal').val().replace(/,/g,''));
 					}
 				}
-				else if($(this).find('select.taxcode').val() == 'OVAT-S' && $(this).find('select.selwt').val() == '1'){
+				else if($(this).find('select.taxcode').val() == 'OVAT-S' && $(this).find('select.selwt.option.1').val() == '1'){
 					 if(isNaN(parseFloat($(this).find('.rowtotal').val().replace(/,/g,''))))
 					{
 						amount += 0;
@@ -4391,13 +4390,13 @@ $(document).ready(function () {
 						amount += parseFloat($(this).find('.rowtotal').val().replace(/,/g,''));
 					}
 				}
-			   
-			  console.log(amount)
+				console.log(amount)
 			})
 			console.log(amount)
 			$('.taxableamount').val(FormatMoney(amount));
 			
 		}
+		
 		function ComputeWtaxPerRow(){
 			let amount = 0.00;
 	
@@ -4439,6 +4438,24 @@ $(document).ready(function () {
 				});
 			$('#txtWTaxF').val(FormatMoney(amount))
 		}
+		/* qwetax */
+		function ComputeRowTaxAmount(){
+		
+			let taxrate = $('.selected-det').find('select.selWT').find('option:selected').attr('val-rate');
+			let total = $('.selected-det').find('input.rowtotal').val();
+			let taxrateFloat = isNaN(parseFloat(taxrate.replace(/,/g,'')))? 0: parseFloat(taxrate.replace(/,/g,''));
+			let totalFloat = isNaN(parseFloat(total.replace(/,/g,'')))? 0: parseFloat(total.replace(/,/g,''));
+			let amount;
+			if(taxrateFloat != 0.00){
+				amount = parseFloat((taxrateFloat / 100) * totalFloat);
+				
+			}
+			else{
+				amount = 0.00;
+			}
+			$('.selected-det').find('input.selWT').val(FormatMoney(amount));
+		}
+		/* ===================== */
 		function ComputeRowTaxAmount(){
 		
 			let taxrate = $('.selected-det').find('select.taxcode').find('option:selected').attr('val-rate');
@@ -4457,7 +4474,16 @@ $(document).ready(function () {
 		}
 		
 		
-		
+		$(document.body).on('change','.grossprice',function()
+		{
+			let grossprice = $('.selected-det').find('.grossprice').val();  
+			$('.selected-det').find('.rowtotal ').val(grossprice);  
+			$('.selected-det').find('.price').val(grossprice);  
+			$('.selected-det').find('.rowtotal').val(grossprice);  
+			$('.selected-det').find('.grosstotal').val(grossprice);  
+			
+			
+		})
 		function ComputeRowTotal(price,quantity,discount){
 		
 			price = isNaN(parseFloat(price.replace(/,/g,'')))? 0: parseFloat(price.replace(/,/g,''));
@@ -4473,6 +4499,7 @@ $(document).ready(function () {
 			let result = FormatMoney(rowTotal2);
 				
 			return result; 
+			
 		}
 		
 		function ComputeRowGrossPrice(){
@@ -4492,6 +4519,7 @@ $(document).ready(function () {
 			
 			let result = rowTotal3;
 			$('.selected-det').find('.grossprice').val(FormatMoney(result));  
+
 		}
 		
 		function ComputeGrossTotal(){
@@ -4567,10 +4595,10 @@ $(document).ready(function () {
 			let amount = 0.00;
 			$('.rowtotal').each(function()
 			{
-				if($(this).closest('tr').find('select.selwt').val() == 'Y'){
+				if($(this).closest('tr').find('select.selwt').val() == '1'){
 						if(isNaN(parseFloat($(this).val().replace(/,/g,''))))
 						{
-							amount * 0;
+							amount * 0.2;
 						}
 						else
 						{

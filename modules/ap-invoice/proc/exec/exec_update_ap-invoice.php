@@ -81,7 +81,7 @@ if ($err == 0)
 		
 			
 			$oRdr->NumAtCard  = $txtCustomerRefNo;
-			
+			$oRdr->DocDueDate = $txtDeliveryDate;
 			$oRdr->Comments  = $txtRemarks;
 			
 			$oRdr->DocumentsOwner  = $txtOwnerCode;

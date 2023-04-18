@@ -264,15 +264,18 @@
 					
 						</div>		  
 						
-						<div class="form-group row  py-0 my-0" >
-						<label for="inputEmail3" class="col-sm-5 col-form-label " style="color: black;" >Due Date</label>
-							<div class="col-sm-1 " >
+						<div class="form-group row  py-0 my-0">
+							<label for="inputEmail3" class="col-sm-5 col-form-label "
+								style="color: black;">Due Date</label>
+							<div class="col-sm-1 ">
 							</div>
 							<div class="col-sm-6 input-group mb-1">
-								<input type="date" id="txtDeliveryDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050">
-							
+								<input type="date" id="txtDeliveryDate" class="form-control"
+									value="<?php echo date('Y-m-d'); ?>" min="01-01-2018"
+									max="12-31-2050">
+
 							</div>
-						</div>	
+						</div>
 						<div class="form-group row  py-0 my-0" >
 						<label for="inputEmail3" class="col-sm-5 col-form-label " style="color: black; font-size:15px" >Document Date</label>
 							<div class="col-sm-1 " >

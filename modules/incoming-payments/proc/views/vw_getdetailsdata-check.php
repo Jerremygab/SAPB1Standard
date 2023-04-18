@@ -9,7 +9,7 @@ $docNum = $_GET['docNum'];
 
 
 <div class="">
-<table id="tblCheck" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width=100% !important;"  cellspacing="0">
+<table id="tblCheck" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
   <thead   style="border-bottom: 0 !important; ">
     <tr >
 			<th class="text-right" style=" color: black;">#</th>

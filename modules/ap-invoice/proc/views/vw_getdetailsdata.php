@@ -361,7 +361,7 @@ while (odbc_fetch_row($qry))
 						   <td >
 								<div class="'.$inputGroup.' ">
 									<input type="hidden" class="form-control text-right  taxamount"  value="'.$TaxAmount2.'"  style="outline: none; border:none" maxlength="8" readonly/>
-									<select type="text" class="form-control taxcode"  placeholder="" '.$disabled .'>
+									<select type="text" class="form-control taxcode"  placeholder="" '.$disabled .' readonly disabled="disabled">
 												 '.$taxcode.'
 													</select>
 								</div>
@@ -369,7 +369,7 @@ while (odbc_fetch_row($qry))
 						  <td >
 						  <div class="input-group ">
 							  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-							<select class="form-control input-sm selwt" id="selWT" name="selWT">
+							<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly disabled="disabled">
 										  <option value="0">No</option>
 										  <option value="1">Yes</option>
 									  </select>

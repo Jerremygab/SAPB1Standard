@@ -862,7 +862,7 @@ include '../../head.php' ;
                     <table class="tblBP table table-striped table-bordered table-hover" id="tblBP" style="width: 100%">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th>#</th>
                                 <th>Vendor Code</th>
                                 <th>Vendor Name</th>
                                 <th>Balance</th>
@@ -872,6 +872,7 @@ include '../../head.php' ;
                                 <th class="d-none">Tin Number</th>
                                 <th class="d-none">Contact Person Code</th>
                                 <th class="d-none">Currency</th>
+                                <th class="d-none">DebPayAcct</th>
 
                             </tr>
                         </thead>
@@ -887,9 +888,8 @@ include '../../head.php' ;
 																						T0.LicTradNum,
 																						T0.GroupNum,
 																						T0.Currency,
-																						T2.PymntGroup
-																						
-																						
+																						T2.PymntGroup,
+                                                                                        T0.DebPayAcct   
 																						
 																						FROM OCRD T0
 																						LEFT JOIN CRD1 T1 ON T0.CardCode = T1.CardCode 
@@ -912,6 +912,7 @@ include '../../head.php' ;
 												<td class="item-7 d-none">'.odbc_result($qry, 'LicTradNum').'</td>
 												<td class="item-8 d-none">'.odbc_result($qry, 'CntctCode').'</td>
 												<td class="item-9 d-none">'.odbc_result($qry, 'Currency').'</td>
+												<td class="item-10 d-none">'.odbc_result($qry, 'DebPayAcct').'</td>
 												
 											  </tr>';
 									$itemno++;	  
@@ -1340,7 +1341,7 @@ include '../../head.php' ;
             <!--/.Content-->
         </div>
     </div>
-    <!-- Control Account ni eden Modal -->
+    <!-- Control Account Modal -->
    <div class="modal fade" id="controlAccountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document" style="width:100%">
             <!--Content-->
@@ -1389,9 +1390,7 @@ include '../../head.php' ;
 								}
 								
 								odbc_free_result($qry);
-							
-
-						?>
+						    ?>
                         </tbody>
                     </table>
                 </div>

@@ -330,11 +330,11 @@ $(document).ready(function () {
 			let contactPerson = $(this).children('td.item-4').text();
 			let paymentTermsCode = $(this).children('td.item-5').text();
 			let paymentTermsName = $(this).children('td.item-6').text();
-			let controlAccount = $(this).children('td.item-10').text();
-			let controlAccountName = $(this).children('td.item-11').text();
 			let tinNumber = $(this).children('td.item-7').text();
 			let contactPersonCode = $(this).children('td.item-8').text();
 			txtCurrency = $(this).children('td.item-9').text();
+			let ControlAccountCode = $(this).children('td.item-10').text();
+			let ControlAccountName = $(this).children('td.item-11').text();
 			let addressID = '';
 			
 		 
@@ -346,10 +346,8 @@ $(document).ready(function () {
 			$('#txtContactPerson').val(contactPerson).css({'background-color': '', 'border-radius': '0px'});
 			$('#txtContactPersonCode').val(contactPersonCode);
 			$('#txtJournalMemo').val('Purchase Orders - ' + cardCode);
-			$('#txtControlAccountCode').val(controlAccount);
-			$('#txtControlAccountName').val(controlAccount + ' - ' + controlAccountName);
-			$('#txtControlAccountCodeDefault').val(controlAccount);
-			$('#txtControlAccountNameDefault').val(controlAccount + ' - ' + controlAccountName);
+			$('#txtControlAccountCode').val(ControlAccountCode);
+			$('#txtControlAccountName').val(ControlAccountName);
 			$('#txtPaymentTermsCode').val(paymentTermsCode);
 			$('#txtPaymentTermsName').val(paymentTermsName);
 			$('#txtTinNumber').val(tinNumber);

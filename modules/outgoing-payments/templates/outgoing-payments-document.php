@@ -1271,16 +1271,30 @@
                             <?php
 							$itemno = 1;
 							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT DISTINCT
-																						T0.AcctCode, 
-																						T0.AcctName, 
-																						T0.CurrTotal
-																						
-																						FROM OACT T0 
-																						WHERE T0.Postable = 'Y' AND T0.LocManTran = 'Y'
-																						
+
+									T0.AcctCode AS Code, 
+									T0.AcctName AS Name, 
+									T0.CurrTotal AS CurrentTotal,
+									'ACCT' AS Type,
+									T0.AcctCode AS ControlAccount
+																											
+								FROM OACT T0
+								WHERE T0.LocManTran = 'N' AND T0.Postable = 'Y'
+
+								UNION ALL
 
 
-																						ORDER BY T0.AcctCode ASC");
+								SELECT TOP 12
+
+									T0.CardCode AS Code, 
+									T0.CardName AS Name,
+									T0.Balance AS CurrentTotal,
+									'BP' AS Type,
+									T0.DebPayAcct AS ControlAccount
+																											
+								FROM OCRD T0
+
+								ORDER BY Type, Code ASC");
 								while (odbc_fetch_row($qry)) 
 								{
 									echo '<tr class="">
@@ -1309,7 +1323,66 @@
         </div>
     </div>
     <!-- GL Modal -->
+<div class="modal fade" id="controlAccountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document" style="width:100%">
+            <!--Content-->
+            <div class="modal-content-full-width modal-content">
+                <!--Header-->
+                <div class="modal-header"
+                    style="background-color: #A8A8A8; border-bottom-width: thick; border-color: #f0ad4e;">
+                    <h4 class="modal-title w-100" id="myModalLabel" style="color:black">List of G/L Accounts</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered table-hover" id="tblControlAccount" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Account Number</th>
+                                <th>Account Name</th>
+                                <th>Account Balance</th>
 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+							$itemno = 1;
+							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT TOP 12
+																						T0.AcctCode, 
+																						T0.AcctName, 
+																						T0.CurrTotal
+																						
+																						FROM OACT T0
+																						WHERE T0.Postable='Y' and T0.LocManTran ='N'
+																						ORDER BY T0.AcctCode DESC");
+								while (odbc_fetch_row($qry)) 
+								{
+									echo '<tr class="">
+												<td>'.$itemno.'</td>
+												<td class="item-1">'.odbc_result($qry, 'AcctCode').'</td>
+												<td class="item-2">'.odbc_result($qry, 'AcctName').'</td>
+												<td class="item-3 " >'.odbc_result($qry, 'CurrTotal').'</td>
+												
+											  </tr>';
+									$itemno++;	  
+								}
+								/* ASDASDASD */
+								odbc_free_result($qry);
+						    ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
     <!-- Ship To Details Modal -->
     <div class="modal fade" id="shipToDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
@@ -2039,18 +2112,18 @@
                                 <th>Account Balance</th>
 
                             </tr>
-                        </thead>
+                        </thead><!-- asdasd -->
                         <tbody>
                             <?php
 							$itemno = 1;
-							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT DISTINCT
-																						T0.AcctCode, 
-																						T0.AcctName, 
-																						T0.CurrTotal
-																						
-																						FROM OACT T0
-																						WHERE T0.Postable = 'Y' AND T0.LocManTran = 'Y'
-																						ORDER BY T0.AcctCode ASC");
+							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT TOP 12
+                            T0.AcctCode, 
+                            T0.AcctName, 
+                            T0.CurrTotal
+                            
+                            FROM OACT T0
+                            WHERE T0.Postable='Y' and T0.LocManTran ='N'
+                            ORDER BY T0.AcctCode DESC");
 								while (odbc_fetch_row($qry)) 
 								{
 									echo '<tr class="">

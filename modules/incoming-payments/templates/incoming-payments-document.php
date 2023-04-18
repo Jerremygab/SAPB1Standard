@@ -157,8 +157,8 @@
                                                     <select id="selTransactionType"
                                                         class="col-sm-6 form-control-sm mdb-select md-form text-left"
                                                         searchable="Search here.."
-                                                        style=" !important;outline:none; border-color: #D0D0D0;">
-                                                        <option class="text-center" value="S">Customer</option>
+                                                        style=" outline:none; border-color: #D0D0D0;">
+                                                        <option class="text-center" value="C">Customer</option>
                                                         <option class="text-center" value="A">Account</option>
                                                         <input type="hidden" id="rowLoader" name="rowLoader"
                                                             class="form-control input-sm">
@@ -270,7 +270,7 @@
 
 
                                     <ul class="nav nav-tabs pt-2" id="myTab" role="tablist">
-                                        <li class="nav-item " style="">
+                                        <li class="nav-item ">
                                             <a class="nav-link active " id="" data-toggle="tab" href="#contents"
                                                 role="tab" aria-controls="contents" aria-selected="true"
                                                 style="color: black; font-weight:bold">Contents</a>
@@ -285,10 +285,10 @@
 
                                             <div id="contentContainer" class="table-responsive"
                                                 style="width:100%; padding-bottom:20px; padding-left:10px; overflow-x:hidden;  overflow-y:hidden;">
-                                                <div id="contents-tab">
-                                                </div>
-                                                <div id="contents-tab2" class="d-none">
-                                                </div>
+                                                <div id="contents-tab"> 
+                                               
+                                                  </div>
+
                                                 <hr />
                                             </div>
 
@@ -328,7 +328,7 @@
                                                         <div class="input-group-append">
                                                             <button class="btn btnGroup" type="button"
                                                                 data-mdb-ripple-color="dark"
-                                                                style="background-color: #ADD8E6; hover:"
+                                                                style="background-color: #ADD8E6; "
                                                                 data-toggle="modal" data-target="#salesEmpModal"
                                                                 data-backdrop="false">
                                                                 <i class="fas fa-list-ul input-prefix" tabindex=0
@@ -346,7 +346,7 @@
                                                         <div class="input-group-prepend " id="lnkEmployee">
                                                             <button class="btn" type="button"
                                                                 data-mdb-ripple-color="dark"
-                                                                style="background-color: #ADD8E6; hover:"
+                                                                style="background-color: #ADD8E6; "
                                                                 data-toggle="modal" data-target="#"
                                                                 data-backdrop="false">
                                                                 <i class="fas fa-arrow-right  "
@@ -362,7 +362,7 @@
                                                         <div class="input-group-append">
                                                             <button class="btn btnGroup" type="button"
                                                                 data-mdb-ripple-color="dark"
-                                                                style="background-color: #ADD8E6; hover:"
+                                                                style="background-color: #ADD8E6; "
                                                                 data-toggle="modal" data-target="#empModal"
                                                                 data-backdrop="false">
                                                                 <i class="fas fa-list-ul input-prefix" tabindex=0
@@ -499,10 +499,10 @@
                                                 style="color: black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Add</button>
                                             <button type="button" id="btnOk"
                                                 class="  btn btn-warning btn-rounded d-none"
-                                                style="color:black; font-weight: bold; black;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Ok</button>
+                                                style="color:black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Ok</button>
                                             <button type="button" id="btnUpdate"
                                                 class="  btn btn-warning btn-rounded d-none"
-                                                style="color:black; font-weight: bold; black;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Update</button>
+                                                style="color:black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Update</button>
                                             <button type="button" id="btnCancel"
                                                 class=" btn btn-warning btn-rounded ml-5"
                                                 style="color: black;width:250px; font-weight: bold; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Cancel</button>
@@ -650,9 +650,7 @@
 																						T0.Comments,
 																						T0.DocDate, 
 																						T0.DocDueDate, 
-																						T0.DocTotal,
-                                                                                        T0.AcctCode, 
-																						T0.AcctName, 
+																						T0.DocTotal
 																						
 																							
 																						FROM ORCT T0
@@ -727,7 +725,7 @@
                 <!--Header-->
                 <div class="modal-header"
                     style="background-color: #A8A8A8; border-bottom-width: thick; border-color: #f0ad4e;">
-                    <h4 class="modal-title w-100" id="myModalLabel" style="color:black">List of Vendors</h4>
+                    <h4 class="modal-title w-100" id="myModalLabel" style="color:black">List of Customer</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -738,8 +736,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Vendor Code</th>
-                                <th>Vendor Name</th>
+                                <th>Customer Code</th>
+                                <th>Customer Name</th>
                                 <th>Balance</th>
                                 <th>Contact Person</th>
                                 <th class="d-none">Payment Terms Code</th>
@@ -753,7 +751,8 @@
                         <tbody>
                             <?php
 							$itemno = 1;
-							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT DISTINCT
+							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; 
+                                                                                        SELECT DISTINCT
 																						T0.CardCode, 
 																						T0.CardName,
 																						T0.Balance,
@@ -764,14 +763,15 @@
 																						T0.Currency,
 																						T2.PymntGroup
 																						
-																						
+                                                                                        A.CardCode,
+                                                                                        A.DebPayAcct				
 																						
 																						FROM OCRD T0
 																						LEFT JOIN CRD1 T1 ON T0.CardCode = T1.CardCode 
 																						LEFT JOIN OCTG T2 ON T2.GroupNum = T0.GroupNum
 																						LEFT JOIN OCPR T3 ON T3.Name = T0.CntctPrsn AND T0.CardCode = T3.CardCode 
 																						
-																						WHERE T0.CardType = 'S'
+																						WHERE T0.CardType = 'C'
 																						
 																						ORDER BY T0.CardCode ASC");
 								while (odbc_fetch_row($qry)) 
@@ -811,9 +811,9 @@
     <!-- Business Partner Modal -->
     <div class="modal fade" id="bpModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document" style="width:100%">
-            <!--Content-->
+           
             <div class="modal-content-full-width modal-content">
-                <!--Header-->
+               
                 <div class="modal-header"
                     style="background-color: #A8A8A8; border-bottom-width: thick; border-color: #f0ad4e;">
                     <h4 class="modal-title w-100" id="myModalLabel" style="color:black">List of Vendors</h4>
@@ -821,7 +821,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <!--Body-->
+                
                 <div class="modal-body">
                     <table class="tblBP table table-striped table-bordered table-hover" id="tblBP2" style="width: 100%">
                         <thead>
@@ -888,14 +888,14 @@
                         </tbody>
                     </table>
                 </div>
-                <!--Footer-->
+               
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
-            <!--/.Content-->
+           
         </div>
-    </div>
+    </div> 
     <!-- Business Partner Modal -->
 
     <!-- Contact Person Modal -->
@@ -1733,17 +1733,17 @@
                 <!--Body-->
                 <div class="modal-body">
                     <ul class="nav nav-tabs pt-2" id="myTab" role="tablist">
-                        <li class="nav-item " style="">
+                        <li class="nav-item " >
                             <a class="nav-link  active" id="" data-toggle="tab" href="#check" role="tab"
                                 aria-controls="contents" aria-selected="true"
                                 style="color: black; font-weight:bold">Check</a>
                         </li>
-                        <li class="nav-item " style="">
+                        <li class="nav-item " >
                             <a class="nav-link  " id="" data-toggle="tab" href="#transfer" role="tab"
                                 aria-controls="contents" aria-selected="true"
                                 style="color: black; font-weight:bold">Bank Transfer</a>
                         </li>
-                        <li class="nav-item " style="">
+                        <li class="nav-item ">
                             <a class="nav-link  " id="" data-toggle="tab" href="#cash" role="tab"
                                 aria-controls="contents" aria-selected="true"
                                 style="color: black; font-weight:bold">Cash</a>
