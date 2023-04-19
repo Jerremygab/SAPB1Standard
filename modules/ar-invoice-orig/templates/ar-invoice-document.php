@@ -138,8 +138,7 @@
 							<div class="col-sm-9" >
 								  <div class="input-group mb-1">
 								    <input  type="text" id="txtCardName" class="form-control" placeholder="" readonly>
-										<input type="hidden" class="form-control input-sm " id="txtWtLiableArray" name="txtWtLiableArray" value="" readonly="readonly" >
-										<input type="hidden" class="form-control input-sm " id="txtWtLiableArray2" name="txtWtLiableArray2" value="" readonly="readonly" >
+									
 									</div>
 							</div>
 						</div>	  
@@ -188,6 +187,7 @@
 						<div class="form-group row  py-0 my-0 mb-1" >
 						<label for="inputEmail3" class="col-sm-2 col-form-label " style="color: black;" >No.</label>
 							<div class="col-sm-4 " >
+								<input id="txtSeriesCode" class="d-none" value="4" />
 								<select type="text" class="form-control " id="selSeries" placeholder=""    >
 									
 									<?php
@@ -235,23 +235,24 @@
 								</select>
 							</div>
 							<div class="col-sm-6" >
-								<input type="text" class="form-control d-none" id="txtDocEntry" placeholder="" />
-							  <input type="text" class="form-control " id="txtDocNum" placeholder="" 
-							  value=<?php
-											$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT 
-																									ISNULL(MAX(T0.DocNum),0) + 1 AS NextDocNum
-																								FROM ".$_SESSION['objectTable']." T0 
-																								INNER JOIN NNM1 T1 ON T0.Series = T1.Series
+								 <input type="text" class="form-control d-none" id="txtDocEntry" placeholder="" />
+								  <input type="text" class="form-control " id="txtDocNum" placeholder="" 
+								  value=<?php
+												$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT 
+																										ISNULL(MAX(T0.DocNum),0) + 1 AS NextDocNum
+																									FROM ".$_SESSION['objectTable']." T0 
+																									INNER JOIN NNM1 T1 ON T0.Series = T1.Series
 
-																								WHERE SeriesName = 'Primary'
-																											");
-													while (odbc_fetch_row($qry)) 
-													{
-														echo odbc_result($qry, "NextDocNum");
-														  
-													}
-								?> readonly >
-							</div>
+																									WHERE SeriesName = 'Primary'
+																												");
+														while (odbc_fetch_row($qry)) 
+														{
+															echo odbc_result($qry, "NextDocNum");
+															  
+														}
+									?> readonly >
+									
+									</div>
 						</div>	 
 						<div class="form-group row  py-0 my-0 mb-1" >
 						<label for="inputEmail3" class="col-sm-5 col-form-label " style="color: black;" >Status</label>
@@ -267,7 +268,7 @@
 							</div>
 								<div class="col-sm-6 input-group mb-1 ">
 								<input type="text" id="txtPostingDate2" class="form-control col-10"  value="" min="01-01-2018" max="12-31-2050">
-								<input type="date" id="txtPostingDate" class="form-control col-2 postingdate"  value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" style="color:transparent !important; " >
+								<input type="date" id="txtPostingDate" class="form-control col-2 postingdate" value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" style="color:transparent !important; " >
 							
 							</div>
 							
@@ -279,7 +280,7 @@
 							</div>
 							<div class="col-sm-6 input-group mb-1">
 								<input type="text" id="txtDeliveryDate2" class="form-control col-10"  value="" min="01-01-2018" max="12-31-2050">
-								<input type="date" id="txtDeliveryDate" class="form-control col-2 " value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" style="color:transparent !important" >
+								<input type="date" id="txtDeliveryDate" class="form-control col-2" value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" style="color:transparent !important" >
 							
 							</div>
 						</div>	
@@ -387,7 +388,7 @@
 							  <input readonly type="text" class="form-control d-none" id="txtOwnerCode" value="<?php echo $EmpId; ?>">
 							  <input readonly type="text" class="form-control " id="txtOwnerName" style="border-bottom-left-radius:5px; border-top-left-radius:5px;" value="<?php echo $UserName?>">
 							  <div class="input-group-append">
-										<button class="btn btnGroup"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6;"  data-toggle="modal" data-target="#empModal" data-backdrop="false">
+										<button class="btn btnGroup"   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#empModal" data-backdrop="false">
 											<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue "></i>
 										</button>
 									</div>
@@ -427,7 +428,7 @@
 							<div class="col-sm-8 input-group mb-1">
 								<input type="text" id="txtVatSum" class="form-control text-right" readonly value=0.00>
 							</div>
-						</div>	
+						</div>
 						<div class="form-group row py-0 my-0" >
 						<label for="inputEmail3" class="col-sm-4 col-form-label " style="color: black;" >WTax Amount</label>
 							<div class="col-sm-8 input-group mb-1">
@@ -438,7 +439,7 @@
 								</div>
 								<input readonly type="text" id="txtWTaxF" name="txtWTaxF" class="form-control text-right"  placeholder="" aria-label="Username" aria-describedby="basic-addon1 " style="border-bottom-left-radius:5px; border-top-left-radius:5px;" value=0.00>	
 							</div>
-						</div>	
+						</div>
 						<div class="form-group row  py-0 my-0" >
 						<label for="inputEmail3" class="col-sm-4 col-form-label " style="color: black;" >Total Payment Due</label>
 							<div class="col-sm-8 input-group mb-1">
@@ -464,8 +465,8 @@
 				<div  id="footerButtons" class="form-group row  mt-5 ">
 					<div class="col-lg-6 col-md-6 col-sm-6 text-left">
 						<button type="button" id="btnAdd" class="  btn btn-warning btn-rounded " style="color: black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Add</button>
-						<button type="button" id="btnUpdate" class="  btn btn-warning btn-rounded d-none" style="color:black; font-weight: bold;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Update</button>
-						<button type="button" id="btnOk" class="  btn btn-warning btn-rounded d-none" style="color:black; font-weight: bold;width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Ok</button>
+						<button type="button" id="btnUpdate" class="  btn btn-warning btn-rounded d-none" style="color:black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Update</button>
+						<button type="button" id="btnOk" class="  btn btn-warning btn-rounded d-none" style="color:black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Ok</button>
 						
 						<button type="button" id="btnCancel" class=" btn btn-warning btn-rounded ml-5" style="color: black;width:250px; font-weight: bold; background: linear-gradient(to bottom, #FCF6BA, #BF953F);">Cancel</button>
 					</div>
@@ -601,6 +602,7 @@
 								<th>Remarks</th>
 								<th>Due Date</th>
 								<th>Total</th>
+								<th>Service Invoice No.</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -614,7 +616,8 @@
 																						T0.Comments,
 																						T0.DocDate, 
 																						T0.DocDueDate, 
-																						T0.DocTotal
+																						T0.DocTotal,
+																						T0.U_InvoiceNo
 																						
 																							
 																						FROM ".$_SESSION['objectTable']." T0
@@ -632,6 +635,7 @@
 												<td class="item-8 " style="width: 160px;" >'.odbc_result($qry, 'Comments').'</td>
 												<td class="item-9 " >'.SAPDateFormater(odbc_result($qry, 'DocDueDate')).'</td>
 												<td class="item-5 text-right" >'.number_format(odbc_result($qry, 'DocTotal'),2).'</td>
+												<td class="item-7 " >'.odbc_result($qry, 'U_InvoiceNo').'</td>
 											  </tr>';
 									$itemno++;	  
 								}
@@ -674,6 +678,7 @@
 								</div>
 					          <!--Footer-->
 					          <div class="modal-footer">
+					           	<button type="button" class="btn btn-secondary" id="btnMultiSelectCopyFrom" data-dismiss="modal">Select</button>
 					            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					          </div>
 					        </div>
@@ -712,17 +717,13 @@
 								<th class="d-none">Tin Number</th>
 								<th class="d-none">Contact Person Code</th>
 								<th class="d-none">Currency</th>
-								<th class="d-none">Control Account</th>
-								<th class="d-none">Control Account Name</th>
-								<th class="d-none">Control Account Name</th>
 								
 							</tr>
 						</thead>
 						<tbody>
 						<?php
 							$itemno = 1;
-							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; 
-																						SELECT DISTINCT
+							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT DISTINCT
 																						T0.CardCode, 
 																						T0.CardName,
 																						T0.Balance,
@@ -732,23 +733,14 @@
 																						T0.GroupNum,
 																						T0.Currency,
 																						T0.U_GroupLocation,
-																						T2.PymntGroup,
-																						T0.DebPayAcct,
-																						T4.AcctName,
-																						CASE WHEN
-																						T0.Wtliable = 'Y' THEN 1
-																						WHEN T0.Wtliable = 'N' THEN 0
-																						END AS Wtliable
-
-
-																																											
-																																											
-																																											
+																						T2.PymntGroup
+																						
+																						
+																						
 																						FROM OCRD T0
 																						LEFT JOIN CRD1 T1 ON T0.CardCode = T1.CardCode 
 																						LEFT JOIN OCTG T2 ON T2.GroupNum = T0.GroupNum
 																						LEFT JOIN OCPR T3 ON T3.Name = T0.CntctPrsn AND T0.CardCode = T3.CardCode 
-																						LEFT JOIN OACT T4 ON T4.AcctCode = T0.DebPayAcct
 																						
 																						WHERE T0.CardType = '".$_SESSION['cardType']."'
 																						
@@ -767,9 +759,6 @@
 												<td class="item-7 d-none">'.odbc_result($qry, 'LicTradNum').'</td>
 												<td class="item-8 d-none">'.odbc_result($qry, 'CntctCode').'</td>
 												<td class="item-9 d-none">'.odbc_result($qry, 'Currency').'</td>
-												<td class="item-10 d-none">'.odbc_result($qry, 'DebPayAcct').'</td>
-												<td class="item-11 d-none">'.odbc_result($qry, 'AcctName').'</td>
-												<td class="item-12 d-none">'.odbc_result($qry, 'Wtliable').'</td>
 												
 											  </tr>';
 									$itemno++;	  
@@ -964,6 +953,8 @@
 								<th >#</th>
 								<th class="d-none">Payment Code</th>
 								<th>Payment Name</th>
+								<th class="d-none">Extra Months</th>
+								<th class="d-none">Extra Days</th>
 								
 							</tr>
 						</thead>
@@ -972,7 +963,9 @@
 							$itemno = 1;
 							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT DISTINCT
 																						T0.GroupNum,
-																						T0.PymntGroup
+																						T0.PymntGroup,
+																						T0.ExtraMonth,
+																						T0.ExtraDays
 																						
 																						FROM OCTG T0
 																						
@@ -983,6 +976,8 @@
 												<td>'.$itemno.'</td>
 												<td class="item-1 d-none">'.odbc_result($qry, 'GroupNum').'</td>
 												<td class="item-2">'.odbc_result($qry, 'PymntGroup').'</td>
+												<td class="item-3 d-none">'.odbc_result($qry, 'ExtraMonth').'</td>
+												<td class="item-4 d-none">'.odbc_result($qry, 'ExtraDays').'</td>
 											  </tr>';
 									$itemno++;	  
 								}
@@ -1060,10 +1055,10 @@
 																						
 																							
 																						FROM OITM T0
-																						INNER JOIN OITB T1 ON T0.ItmsGrpCod = T1.ItmsGrpCod
-																						INNER JOIN ITM1 T2 ON T2.ItemCode = T0.ItemCode
+																						LEFT JOIN OITB T1 ON T0.ItmsGrpCod = T1.ItmsGrpCod
+																						LEFT JOIN ITM1 T2 ON T2.ItemCode = T0.ItemCode
 																						LEFT JOIN OPLN T3 ON T3.ListNum = T2.PriceList
-																						INNER JOIN OUOM T4 ON T4.UomEntry = T0.IUoMEntry
+																						LEFT JOIN OUOM T4 ON T4.UomEntry = T0.IUoMEntry
 																						LEFT JOIN OWHS T5 ON T5.WhsCode = T0.DfltWH
 																						
 																						WHERE T0.PrchseItem = 'Y' AND T0.FrozenFor = 'N'
@@ -1818,7 +1813,7 @@
 		  <div id="batchTableReport" class="table-responsive" style="width:100%; height:300px !important; padding-bottom:20px; padding-left:10px;  overflow:scroll;" >
 			
 	
-			<table id="tblBatchCreated" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100%" cellspacing="0">
+			<table id="tblBatchCreated" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width: 100%" cellspacing="0">
 						<thead>
 							<tr >
 								<th style="min-width:20px;position: sticky;top: 0; " >#</th>
@@ -1891,7 +1886,7 @@
 		  <div  id="serialTableReport" class="table-responsive" style="width:100%; height:300px !important; padding-bottom:20px; padding-left:10px;  overflow:scroll;" >
 			
 	
-			<table id="tblSerialCreated" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100%" cellspacing="0">
+			<table id="tblSerialCreated" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width: 100%" cellspacing="0">
 						<thead>
 							<tr >
 								<th style="min-width:20px;position: sticky;top: 0; " >#</th>
@@ -1945,7 +1940,9 @@
 						  </li>
 						  <li class="nav-item">
 						    <a class="nav-link" id="" data-toggle="tab" href="#docRefBy" role="tab" aria-controls="docRefBy"
-						      aria-selected="false" style="color: black; font-weight:bold">Document Referenced by</a>						 
+						      aria-selected="false" style="color: black; font-weight:bold">Document Referenced by</a>
+						  </li>
+						 
 						</ul>
 
 						<div class="tab-content" id="myTabContent" style="padding-top: 10px;">
@@ -1957,7 +1954,7 @@
 									<hr/>
 									<div style="margin: 0px; padding-bottom: 0px;">
 										<input type="checkbox" id="chkFlagVar" name="flagVar" value="" style="width: 20px; height: 20px;">
-  									<label for="flagVar" style="font-size:15px;">  Only Reference Business Partner on Main Document</label>
+  									<label for="flagVar" style="font-size: 15px;">  Only Reference Business Partner on Main Document</label>
 									</div>
 								</div>
 							</div>

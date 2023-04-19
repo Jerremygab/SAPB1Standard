@@ -4473,7 +4473,7 @@ $(document).ready(function () {
 			$('.selected-det').find('input.taxamount').val(FormatMoney(amount));
 		}
 		
-		
+		/* pinaltan ko */
 		$(document.body).on('change','.grossprice',function()
 		{
 			let grossprice = $('.selected-det').find('.grossprice').val();  
