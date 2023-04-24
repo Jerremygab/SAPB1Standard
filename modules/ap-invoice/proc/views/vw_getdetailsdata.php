@@ -30,7 +30,7 @@ else{
 $taxcode2 = "";
 $rate = 0;
 
-$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code, Name, Rate FROM OVTG WHERE Inactive = 'N' AND Category='$objSession->taxCodeCategory'");
+$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code, Name, Rate FROM OVTG WHERE Inactive = 'N' AND Category='I'");
 
 while (odbc_fetch_row($qry)) 
 {
@@ -283,7 +283,7 @@ while (odbc_fetch_row($qry))
 					   <td >
 							<div class="'.$inputGroup.' ">
 								<input type="hidden" class="form-control text-right  taxamount" value="'.$TaxAmount.'" style="outline: none; border:none" maxlength="8" readonly />
-								<select type="text" class="form-control taxcode"  placeholder=""'.$disabled .' readonly disabled="disabled">
+								<select type="text" class="form-control taxcode"  placeholder=""'.$disabled .' readonly >
 										"'.$taxcode.'"
 								</select>
 							</div>
@@ -291,7 +291,7 @@ while (odbc_fetch_row($qry))
 					  <td >
 					  <div class="input-group ">
 						  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-						<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly disabled="disabled">
+						<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly >
 									  <option value="0">No</option>
 									  <option value="1">Yes</option>
 								  </select>
@@ -476,7 +476,7 @@ while (odbc_fetch_row($qry))
 					  <td >
 					  <div class="input-group ">
 						  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-						<select class="form-control input-sm selwt" id="selWT" name="selWT">
+						<select class="form-control input-sm selwt" id="selWT" name="selWT" >
 									  <option value="0">No</option>
 									  <option value="1">Yes</option>
 								  </select>
@@ -552,14 +552,14 @@ while (odbc_fetch_row($qry))
 						  <td >
 						  <div class="input-group ">
 							  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-							<select class="form-control input-sm selwt" id="selWT" name="selWT">
+							<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
 										  <option value="0">No</option>
 										  <option value="1">Yes</option>
 									  </select>
 						  </div>
 					</td>
 						   <td >
-							<input type="text" class="form-control matrix-cell text-right grossprice"      style="outline: none; border:none" maxlength="12"/>
+							<input type="text" class="form-control matrix-cell text-right grossprice"      style="outline: none; border:none" maxlength="12" />
 							
 						  </td>
 						   <td >

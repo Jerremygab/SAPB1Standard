@@ -190,6 +190,7 @@ $(document).ready(function () {
 			$('#btnWTax').prop('disabled',true);
 			$('#selSeries').prop('disabled',true);
 			$('#selSeries').prop('readonly',true);
+			$('#grossprice').prop('readonly',true);
 		});
 		
 	});
@@ -942,6 +943,7 @@ $(document).ready(function () {
 			var vendor = $(this).children('td.item-7').text();
 			/* var whsCode = $(this).children('td.item-12').text(); */
 			var whsCode = $('#tblWhse tbody > tr').children('td.item-1').text();
+			var qty = 1;
 			
 			
 			$('.btnrowfunctions').removeClass('d-none');
@@ -957,6 +959,7 @@ $(document).ready(function () {
 			$('.selected-det').find('input.cardcode').val(vendor);
 			$('.selected-det').find('input.whsecode').val(whsCode);
 			$('.selected-det').find('input.whsename').val(whsName);
+			$('.selected-det').find('input.quantity').val(qty);
 			$('.selected-det').find('input.batchorserial').val(batchOrSerial);
 			$('.selected-det').find('input.batchorserialcontainer').val('');
 			$('.selected-det').find('input.batchorserialcontainer2').val('');
@@ -1007,7 +1010,7 @@ $(document).ready(function () {
 			
 		   
 		   itemCode = wtcode;
-			   ComputeWtaxPerRow();
+			ComputeWtaxPerRow();
 			AddRowWTax();
 			CheckCardCode(itemCode);
 		});
@@ -2762,7 +2765,6 @@ $(document).ready(function () {
 			jsonWTax += otArrWTax.join(",") + '}';
 			console.log(jsonWTax)
 	
-	
 			if (err == 0) 
 			{
 				$('#loadModal').modal('show');
@@ -4438,23 +4440,23 @@ $(document).ready(function () {
 				});
 			$('#txtWTaxF').val(FormatMoney(amount))
 		}
-		/* qwetax */
-		function ComputeRowTaxAmount(){
+		// qwetax
+		// function ComputeRowTaxAmount(){
 		
-			let taxrate = $('.selected-det').find('select.selWT').find('option:selected').attr('val-rate');
-			let total = $('.selected-det').find('input.rowtotal').val();
-			let taxrateFloat = isNaN(parseFloat(taxrate.replace(/,/g,'')))? 0: parseFloat(taxrate.replace(/,/g,''));
-			let totalFloat = isNaN(parseFloat(total.replace(/,/g,'')))? 0: parseFloat(total.replace(/,/g,''));
-			let amount;
-			if(taxrateFloat != 0.00){
-				amount = parseFloat((taxrateFloat / 100) * totalFloat);
+		// 	let taxrate = $('.selected-det').find('select.selWT').find('option:selected').attr('val-rate');
+		// 	let total = $('.selected-det').find('input.rowtotal').val();
+		// 	let taxrateFloat = isNaN(parseFloat(taxrate.replace(/,/g,'')))? 0: parseFloat(taxrate.replace(/,/g,''));
+		// 	let totalFloat = isNaN(parseFloat(total.replace(/,/g,'')))? 0: parseFloat(total.replace(/,/g,''));
+		// 	let amount;
+		// 	if(taxrateFloat != 0.00){
+		// 		amount = parseFloat((taxrateFloat / 100) * totalFloat);
 				
-			}
-			else{
-				amount = 0.00;
-			}
-			$('.selected-det').find('input.selWT').val(FormatMoney(amount));
-		}
+		// 	}
+		// 	else{
+		// 		amount = 0.00;
+		// 	}
+		// 	$('.selected-det').find('input.selWT').val(FormatMoney(amount));
+		// }
 		/* ===================== */
 		function ComputeRowTaxAmount(){
 		

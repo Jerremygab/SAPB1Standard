@@ -11,6 +11,7 @@ $bankCode = $_GET['bankCode'];
         <tr>
             <th>#</th>
             <th>Account</th>
+            <th>G/L Account</th>
         </tr>
     </thead>
     <tbody>
@@ -33,6 +34,7 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 		echo '<tr>
 				<td>'.$itemno.'</td>
 				<td class="item-1">'.odbc_result($qry, 'Account').'</td>
+				<td class="item-2">'.odbc_result($qry, 'GlAccount').'</td>
 
 			
 		

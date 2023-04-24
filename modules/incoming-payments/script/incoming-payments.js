@@ -160,26 +160,27 @@ $(document).ready(function () {
 	$(document.body).on('click', '#chkPayNoDoc', function () 
 	{
 		if($(this).prop('checked') == true){
+			tblDetails
 			txtGLCodePayNoDoc
-			var glCode = $('#tblGL tbody > tr').children('td.item-1').text();
-			var glName = $('#tblGL tbody > tr').children('td.item-2').text();
-	
-			$('#txtGLCodePayNoDoc').val(glCode + glName);
+			
 			$('#txtNoDocSum').prop('readonly', false);
 			$('.paynodoc').removeClass('d-none');
+			
 	
 		}
 		else{
 			$('#txtNoDocSum').prop('readonly', true);
 			$('.paynodoc').addClass('d-none');
 		}
-		$('#tblDetails tbody').html('');
+
 	});
+
 	
 	
 	$(document.body).on('click', '.chkBoxManualCheck', function () 
 	{
 		if($(this).prop('checked') == true){
+			
 			$(this).closest('tr').find('.checkno').prop('readonly', false);
 		}
 		else{
@@ -252,27 +253,27 @@ $(document).ready(function () {
 	
 		$('#txtCardCode').focus();
 	
-	var serviceType = 'S';
+	var serviceType = 'C';
 	//Validations
 		$('#txtCardCode').focus();
 	
 	/*Load Tabs*/
 		//Contents
-		// $('#contents-tab').load('../templates/incoming-payments-lines.php?serviceType=' + serviceType), function (){
+		 $('#contents-tab').load('../templates/incoming-payments-lines.php?serviceType=' + serviceType), function (){
 			
-		// };
+		 };
 		//Logistics
-		// $('#logistics-tab').load('../templates/incoming-payments-logistics.php'), function(){
+		$('#logistics-tab').load('../templates/incoming-payments-logistics.php'), function(){
 			
-		// };
+		 };
 		// //Accounting
-		// $('#accounting-tab').load('../templates/incoming-payments-accounting.php'), function(){
+		$('#accounting-tab').load('../templates/incoming-payments-accounting.php'), function(){
 			
-		// };
+		};
 	
-		// $('#checks-tab').load('../templates/incoming-payments-check-lines.php'), function (){
+		 $('#checks-tab').load('../templates/incoming-payments-check-lines.php'), function (){
 			
-		// };
+		 };
 		
 	//Matrix Cell Effects
 		
@@ -468,7 +469,7 @@ $(document).ready(function () {
 			$('#txtSeriesOVPM').val(series);
 			$('#txtSeriesNameOVPM').val(code);
 			if($('#selTransactionType').val() == 'S'){
-				// generateRows();
+				 generateRows();
 			}else{
 	
 			}
@@ -563,16 +564,13 @@ $(document).ready(function () {
 			let paymentTermsName = $(this).children('td.item-6').text();
 			let tinNumber = $(this).children('td.item-7').text();
 			let contactPersonCode = $(this).children('td.item-8').text();
+			let controlacct = $(this).children('td.item-10').text();
 			txtCurrency = $(this).children('td.item-9').text();
+			let glCode = $(this).children('td.item-10').text();
+			let glName = $(this).children('td.item-11').text();
 			let addressID = '';
-			
-			var glCode = $('#tblGL tbody > tr').children('td.item-1').text();
-			var glName = $('#tblGL tbody > tr').children('td.item-2').text();
-			$('#txtGLCodePayNoDoc').val(glCode + glName);
-			let cardcode = $('#txtCardCode').val();
-			let serviceType = $('#selTransactionType').val();
-			
 	
+
 	
 			generateRows(cardCode); 
 			$('#bpModal').modal('hide');
@@ -582,7 +580,7 @@ $(document).ready(function () {
 			$('#txtContactPerson').val(contactPerson).css({'background-color': '', 'border-radius': '0px'});
 			$('#txtContactPersonCode').val(contactPersonCode);
 			$('#txtJournalMemo').val('Incoming Payments - ' + cardCode);
-			$('#txtGLCodePayNoDoc').val(glCode +' - '+ glName);
+			$('#txtGLCodePayNoDoc').val(controlacct);
 			$('#txtPaymentTermsCode').val(paymentTermsCode);
 			$('#txtPaymentTermsName').val(paymentTermsName);
 			$('#txtTinNumber').val(tinNumber);
@@ -598,132 +596,131 @@ $(document).ready(function () {
 			
 			$('#btnCopyFrom').prop('disabled',false);
 			
-				/* sdasd */
-	
-			/* asdasd */
 			//Addresses
-				$.ajax({
-					type: 'GET',
-					url: '../proc/views/vw_shipToAddressID.php',
-					data: {cardCode : cardCode},
-					success: function (html) 
-					{
-						
-						$('#selShipToAddress').html(html);
-					}
-				}); 
-				$.ajax({
-					type: 'GET',
-					url: '../proc/views/vw_billToAddressID.php',
-					data: {cardCode : cardCode},
-					success: function (html) 
-					{
-						
-						$('#selBillToAddress').html(html);
-					}
-				}); 
-			
-				$.getJSON('../proc/views/vw_shipToAddressDetails.php?cardCode=' + cardCode + '&address=' + addressID, function (data){
-					let shipArr = [];	
-					let shipArr2 = [];	
-					let shipList;
-					let shipList2;
+			$.ajax({
+				type: 'GET',
+				url: '../proc/views/vw_shipToAddressID.php',
+				data: {cardCode : cardCode},
+				success: function (html) 
+				{
 					
-					$.each(data, function (key, val){
-						$('#selShipToAddress').val(val.Address);
-						$('#txtShipToAddressTextArea').val(val.Street + '\n' + '\n'  + val.ZipCode + ' ' + val.City + '\n'  + val.Country );
-						
-								val.Street != '' ? shipArr.push('Street'): '';
-								val.StreetNo != '' ? shipArr.push('StreetNo'): '';
-								val.Block != '' ? shipArr.push('Block'): '';
-								val.ZipCode != '' ? shipArr.push('ZipCode'): '';
-								val.City != '' ? shipArr.push('City'): '';
-								val.County != '' ? shipArr.push('County'): '';
-								val.State != '' ? shipArr.push('State'): '';
-								val.Country != '' ? shipArr.push('Country'): '';
-								val.Building != '' ? shipArr.push('Building'): '';
-								
-								val.CountryCode != '' ? shipArr.push('CountryCode'): '';
-								
-								
-								shipArr2.push(val.Street);
-								shipArr2.push(val.StreetNo);
-								shipArr2.push(val.Block);
-								shipArr2.push(val.ZipCode);
-								shipArr2.push(val.City);
-								shipArr2.push(val.County);
-								shipArr2.push(val.State);
-								shipArr2.push(val.Country);
-								shipArr2.push(val.Building);
-								
-								shipArr2.push(val.CountryCode);
-								
-			
-				setTimeout(function () {
-					shipList = shipArr;
-					shipList2 = shipArr2;
-					$('#txtShipArr').val(shipList);			
-					$('#txtShipArr2').val(shipList2);
-					ShipToAddressComponent();			
+					$('#selShipToAddress').html(html);
+				}
+			}); 
+			$.ajax({
+				type: 'GET',
+				url: '../proc/views/vw_billToAddressID.php',
+				data: {cardCode : cardCode},
+				success: function (html) 
+				{
+					
+					$('#selBillToAddress').html(html);
+				}
+			}); 
+		
+			$.getJSON('../proc/views/vw_shipToAddressDetails.php?cardCode=' + cardCode + '&address=' + addressID, function (data){
+				let shipArr = [];	
+				let shipArr2 = [];	
+				let shipList;
+				let shipList2;
 				
-					}, 100) 
-						
-					});
-				});
-				$.getJSON('../proc/views/vw_billToAddressDetails.php?cardCode=' + cardCode + '&address=' + addressID, function (data){
-					let billArr = [];	
-					let billArr2 = [];	
-					let billList;
-					let billList2;
-					$.each(data, function (key, val){
-						$('#selBillToAddress').val(val.Address);
-						$('#txtBillToAddressTextArea').val(val.Street + '\n' + '\n'  + val.ZipCode + ' ' + val.City + '\n'  + val.Country );
-								val.Street != '' ? billArr.push('Street'): '';
-								val.StreetNo != '' ? billArr.push('StreetNo'): '';
-								val.Block != '' ? billArr.push('Block'): '';
-								val.ZipCode != '' ? billArr.push('ZipCode'): '';
-								val.City != '' ? billArr.push('City'): '';
-								val.County != '' ? billArr.push('County'): '';
-								val.State != '' ? billArr.push('State'): '';
-								val.Country != '' ? billArr.push('Country'): '';
-								val.Building != '' ? billArr.push('Building'): '';
-								
-								val.CountryCode != '' ? billArr.push('CountryCode'): '';
-								
-								
-								billArr2.push(val.Street);
-								billArr2.push(val.StreetNo);
-								billArr2.push(val.Block);
-								billArr2.push(val.ZipCode);
-								billArr2.push(val.City);
-								billArr2.push(val.County);
-								billArr2.push(val.State);
-								billArr2.push(val.Country);
-								billArr2.push(val.Building);
-								
-								billArr2.push(val.CountryCode);
-								
-								setTimeout(function () {
-								billList = billArr;
-								billList2 = billArr2;
-								$('#txtBillArr').val(billList);			
-								$('#txtBillArr2').val(billList2);			
-								BillToAddressComponent();
-								}, 100) 
+				$.each(data, function (key, val){
+					$('#selShipToAddress').val(val.Address);
+					$('#txtShipToAddressTextArea').val(val.Street + '\n' + '\n'  + val.ZipCode + ' ' + val.City + '\n'  + val.Country );
 					
-					});
-				});	
-				$.ajax({
-					type: 'GET',
-					url: '../proc/views/vw_shippingType.php',
-					data: {cardCode : cardCode},
-					success: function (html) 
-					{
-						
-						$('#selShippingType').html(html);
-					}
-				}); 
+							val.Street != '' ? shipArr.push('Street'): '';
+							val.StreetNo != '' ? shipArr.push('StreetNo'): '';
+							val.Block != '' ? shipArr.push('Block'): '';
+							val.ZipCode != '' ? shipArr.push('ZipCode'): '';
+							val.City != '' ? shipArr.push('City'): '';
+							val.County != '' ? shipArr.push('County'): '';
+							val.State != '' ? shipArr.push('State'): '';
+							val.Country != '' ? shipArr.push('Country'): '';
+							val.Building != '' ? shipArr.push('Building'): '';
+							
+							val.CountryCode != '' ? shipArr.push('CountryCode'): '';
+							
+							
+							shipArr2.push(val.Street);
+							shipArr2.push(val.StreetNo);
+							shipArr2.push(val.Block);
+							shipArr2.push(val.ZipCode);
+							shipArr2.push(val.City);
+							shipArr2.push(val.County);
+							shipArr2.push(val.State);
+							shipArr2.push(val.Country);
+							shipArr2.push(val.Building);
+							
+							shipArr2.push(val.CountryCode);
+							
+		
+			setTimeout(function () {
+				shipList = shipArr;
+				shipList2 = shipArr2;
+				$('#txtShipArr').val(shipList);			
+				$('#txtShipArr2').val(shipList2);
+				ShipToAddressComponent();			
+			
+				}, 100) 
+					
+				});
+			});
+			$.getJSON('../proc/views/vw_billToAddressDetails.php?cardCode=' + cardCode + '&address=' + addressID, function (data){
+				let billArr = [];	
+				let billArr2 = [];	
+				let billList;
+				let billList2;
+				$.each(data, function (key, val){
+					$('#selBillToAddress').val(val.Address);
+					$('#txtBillToAddressTextArea').val(val.Street + '\n' + '\n'  + val.ZipCode + ' ' + val.City + '\n'  + val.Country );
+							val.Street != '' ? billArr.push('Street'): '';
+							val.StreetNo != '' ? billArr.push('StreetNo'): '';
+							val.Block != '' ? billArr.push('Block'): '';
+							val.ZipCode != '' ? billArr.push('ZipCode'): '';
+							val.City != '' ? billArr.push('City'): '';
+							val.County != '' ? billArr.push('County'): '';
+							val.State != '' ? billArr.push('State'): '';
+							val.Country != '' ? billArr.push('Country'): '';
+							val.Building != '' ? billArr.push('Building'): '';
+							
+							val.CountryCode != '' ? billArr.push('CountryCode'): '';
+							
+							
+							billArr2.push(val.Street);
+							billArr2.push(val.StreetNo);
+							billArr2.push(val.Block);
+							billArr2.push(val.ZipCode);
+							billArr2.push(val.City);
+							billArr2.push(val.County);
+							billArr2.push(val.State);
+							billArr2.push(val.Country);
+							billArr2.push(val.Building);
+							
+							billArr2.push(val.CountryCode);
+							
+							setTimeout(function () {
+							billList = billArr;
+							billList2 = billArr2;
+							$('#txtBillArr').val(billList);			
+							$('#txtBillArr2').val(billList2);			
+							BillToAddressComponent();
+							}, 100) 
+				
+				});
+			});	
+			$.ajax({
+				type: 'GET',
+				url: '../proc/views/vw_shippingType.php',
+				data: {cardCode : cardCode},
+				success: function (html) 
+				{
+					
+					$('#selShippingType').html(html);
+				}
+			}); 
+		
 	
+
 	
 		   
 		});
@@ -1218,7 +1215,7 @@ $(document).ready(function () {
 		$(document.body).on('change', '#selTransactionType', function () 
 		{
 			serviceType =  $(this).val();
-			if (serviceType == 'S'){
+			if (serviceType == 'C'){
 				$('input.quantity').val(1);
 				$('.vendor').removeClass('d-none');
 				$('.account').addClass('d-none');
@@ -1228,9 +1225,9 @@ $(document).ready(function () {
 				$('.account').removeClass('d-none');
 			}
 			$('#txtDocTotal').val('0.00');
-			// $('#contents-tab').load('../templates/incoming-payments-lines.php?serviceType=' + serviceType), function (){
+			$('#contents-tab').load('../templates/incoming-payments-lines.php?serviceType=' + serviceType), function (){
 				
-			// };
+			 };
 		});
 		
 	//On Shown Modals
@@ -1289,6 +1286,7 @@ $(document).ready(function () {
 		$('#acctFMSModal').on('shown.bs.modal',function(){
 			
 			var bankCode = $('.selected-det-check').find('select.bankcode').val();
+			var bplId = $('#txtBPLId').val();
 			console.log(bankCode)
 			
 			if(bankCode == '')
@@ -1304,6 +1302,7 @@ $(document).ready(function () {
 					type: 'GET',
 					url: '../proc/views/vw_accountFMS.php',
 					data: {
+						bplId : bplId,
 						bankCode : bankCode
 	
 						},
@@ -1392,9 +1391,21 @@ $(document).ready(function () {
 			var err = 0;
 			var errmsg = '';
 	
-			
+			if($('#txtBPLId').val() == '' ){
+				err = 1;
+				$('#messageBar2').addClass('d-none');
+							$('#messageBar3').removeClass('d-none');
+							$('#messageBar').text('Select Branch!').css({'background-color': 'red', 'color': 'white'});
+							
+								setTimeout(function()
+								{
+									$('#messageBar').text('').css({'background-color': '', 'color': ''});	
+									$('#messageBar2').removeClass('d-none');
+								},5000)
+			}
+
 	
-			   if($('#selTransactionType').val() == 'S'){
+			   if($('#selTransactionType').val() == 'C'){
 				if($('#txtCardCode').val() == '' ){
 					err = 1;
 					$('#messageBar2').addClass('d-none');
@@ -1461,6 +1472,7 @@ $(document).ready(function () {
 			udfJson += udfArr.join(",") + '}';
 	
 			let txtSeriesOVPM = $('#txtSeriesOVPM').val();
+			let txtBPLId = $('#txtBPLId').val();
 			let txtCardCode = $('#txtCardCode').val();
 			let txtCashGLCode = $('#txtCashGLCode').val();
 			let txtCashAmount = $('#txtCashAmount').val();
@@ -1492,7 +1504,7 @@ $(document).ready(function () {
 			var otArr = [];
 	
 				
-					if(selTransactionType == 'S'){
+					if(selTransactionType == 'C'){
 					
 						$('#tblDetails tbody tr').each(function (i) 
 						{
@@ -1570,6 +1582,7 @@ $(document).ready(function () {
 						jsonCheck: jsonCheck.replace(/(\r\n|\n|\r)/gm, '[newline]'),
 						udfJson: udfJson.replace(/(\r\n|\n|\r)/gm, '[newline]'),
 						txtSeriesOVPM : txtSeriesOVPM,
+						txtBPLId : txtBPLId,
 						txtCardCode : txtCardCode,
 						txtCashGLCode : txtCashGLCode,
 						txtCashAmount : txtCashAmount,
@@ -1681,7 +1694,7 @@ $(document).ready(function () {
 			});
 			udfJson += udfArr.join(",") + '}';
 		   
-			   let txtDocEntry = $('#txtDocEntry').val();
+			let txtDocEntry = $('#txtDocEntry').val();
 			let txtDocNum = $('#txtDocNum').val();
 			let txtRemarks = $('#txtRemarks').val();
 			let txtJournalMemo = $('#txtJournalMemo').val();
@@ -1912,9 +1925,12 @@ $(document).ready(function () {
 		{
 			let amount = $(this).closest('tr').find('input.checkamount').val();
 			$(this).closest('tr').find('input.checkamount').val(FormatMoney(amount));
-			AddRowCheck();
-			ComputeTotalCheckAmount()
-			ComputeBalance()
+			if(amount != '0.00'){
+				AddRowCheck();
+				ComputeTotalCheckAmount()
+				ComputeBalance()
+			}
+			
 		});
 		$(document.body).on('keyup', '.taxamount', function (e) 
 		{
@@ -2331,7 +2347,7 @@ $(document).ready(function () {
 				}, 200)
 			}
 		}
-		/* function AddRowCheck(){
+		function AddRowCheck(){
 			
 			var rowno = 0;
 				rowno = ($('#tblCheck tbody tr:last').find('td.rowno span').text() == '') ? 1 : parseFloat($('#tblCheck tbody tr:last').find('td.rowno span').text()) + 1;
@@ -2353,7 +2369,7 @@ $(document).ready(function () {
 						
 				}, 200)
 			}
-		}  */
+		}  
 		
 		function PreviewDoc(docNum,objType){
 		
@@ -2597,11 +2613,11 @@ $(document).ready(function () {
 		}
 	
 		function PreviewRows(docNum, docType, objType, payNoDoc,callback){
-			// $('#contents-tab').load('../proc/views/vw_getdetailsdata.php?docNum=' + docNum + '&docType=' + docType + '&objType=' + objType + '&payNoDoc=' + payNoDoc, function (result) 
-			// {
-			// 	// $('#contents-tab').append(result)
-			// 	callback();
-			// });
+			$('#contents-tab').load('../proc/views/vw_getdetailsdata.php?docNum=' + docNum + '&docType=' + docType + '&objType=' + objType + '&payNoDoc=' + payNoDoc, function (result) 
+			{
+			// $('#contents-tab').append(result)
+			callback();
+			});
 			
 					
 		}
@@ -2610,7 +2626,7 @@ $(document).ready(function () {
 			{
 				duedateChange();
 				ComputeTotalCheckAmount();
-			   // callback();
+			// callback();
 			});
 			
 					
@@ -2719,9 +2735,9 @@ $(document).ready(function () {
 			let serviceType = $('#selTransactionType').val();
 			$('#contents-tab').load('../proc/views/vw_getInvoices.php?cardcode=' + cardCode + '&serviceType=' + serviceType), function (data){
 				console.log(data)
-					/* sdasd */
+					
 			};
-		}
+	}
 		function ComputeBalanceDue(balance, payment){
 			
 			balance = isNaN(parseFloat(balance.replace(/,/g,'')))? 0: parseFloat(balance.replace(/,/g,''));
@@ -2768,9 +2784,13 @@ $(document).ready(function () {
 			docTotal = isNaN(parseFloat(docTotal.replace(/,/g,'')))? 0: parseFloat(docTotal.replace(/,/g,''));
 	
 			let payment = checkSum + cashSum + transferSum;
-			let openBalance = docTotal - payment;
+			let openBalance = docTotal - payment ;
 			
 			$('#txtOpenBalance').val(FormatMoney(openBalance));
+			
+			
+			
+		
 	
 		}
 		function ShipToAddressComponent(){
@@ -2949,14 +2969,15 @@ $(document).ready(function () {
 			let totalBeforeDiscount = $('#txtTotalBeforeDiscount').val();
 			let totalTaxAmount = $('#txtVatSum').val();
 			let totalDiscount = $('#txtFooterDiscountSum').val();
+			// let payNoDocSum = $('#txtNoDocSum').val();
 			
 			let totalBeforeDiscountFloat = isNaN(parseFloat(totalBeforeDiscount.replace(/,/g,'')))? 0: parseFloat(totalBeforeDiscount.replace(/,/g,''));
 			let totalTaxAmountFloat = isNaN(parseFloat(totalTaxAmount.replace(/,/g,'')))? 0: parseFloat(totalTaxAmount.replace(/,/g,''));
 			let totalDiscountFloat = isNaN(parseFloat(totalDiscount.replace(/,/g,'')))? 0: parseFloat(totalDiscount.replace(/,/g,''));
-		
+			// let payNoDocSumFloat = isNaN(parseFloat(payNoDocSum.replace(/,/g,'')))? 0: parseFloat(payNoDocSum.replace(/,/g,''));
 			
 			let amount = (totalBeforeDiscountFloat + totalTaxAmountFloat) - totalDiscountFloat;
-			;
+			
 			$('#txtDocTotal').val(FormatMoneyWithCurrency(amount));
 		}
 		function ComputeTotalCheckAmount(){

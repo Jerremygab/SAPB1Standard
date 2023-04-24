@@ -6,7 +6,7 @@ include('../../../../config/config.php');
 
 $docentry = '';
 
-$Database = $_SESSION['SESS_COMPANY'];
+$Database = $_SESSION['MSSQL_DB'];
 
 if($Database == 'EBI_LIVEDB20220217'){
 	$err += 1;

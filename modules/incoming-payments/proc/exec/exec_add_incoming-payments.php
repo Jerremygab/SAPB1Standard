@@ -4,7 +4,7 @@ $errmsg = '';
 session_start();
 include('../../../../config/config.php');
 
-$Database = $_SESSION['SESS_COMPANY'];
+$Database = $_SESSION['MSSQL_DB'];
 
 if($Database == 'EBI_LIVEDB20220217'){
 	$err += 1;
@@ -17,7 +17,7 @@ $docentry = '';
 $json = $_POST['json'];
 $jsonCheck =  $_POST['jsonCheck'];
 $txtSeriesOVPM = $_POST['txtSeriesOVPM'];
-$txtBPLId = $_POST['txtBPLId'];
+
 $txtCardCode = $_POST['txtCardCode'];
 $txtCashGLCode = $_POST['txtCashGLCode'];
 $txtCashAmount = $_POST['txtCashAmount'];
@@ -35,8 +35,8 @@ $txtPayTo = $_POST['txtPayTo'];
 $selTransactionType = $_POST['selTransactionType'];
 $txtPayNoDoc = $_POST['txtPayNoDoc'];
 $txtGLCodePayNoDoc = $_POST['txtGLCodePayNoDoc'];
-$txtAcctName = $_POST['acctName'];
-$txtAcctNumber = $_POST['acctNumber'];
+// $txtAcctName = $_POST['acctName'];
+// $txtAcctNumber = $_POST['acctNumber'];
 $txtCheckAmountTotal = $_POST['txtCheckAmountTotal'];
 $udfJson = $_POST['udfJson'];
 $Cash = 0.00;
@@ -69,9 +69,9 @@ if ($err == 0)
 	}
 	else
 	{
-			$oRdr = $vCmp->GetBusinessObject(46);
+			$oRdr = $vCmp->GetBusinessObject(24);
 			
-			if($selTransactionType == 'S') {
+			if($selTransactionType == 'C') {
 				if($txtPayNoDoc == 'Y'){
 					$oRdr->CardCode = $txtCardCode;
 					
@@ -90,7 +90,7 @@ if ($err == 0)
 
   			$oRdr->CounterReference = $txtReference;
 		
-			$oRdr->BPLID = $txtBPLId;
+			
 			//$oRdr->Series = $txtSeriesOVPM;
 			$oRdr->Remarks = $txtRemarks;
 			
@@ -114,7 +114,7 @@ if ($err == 0)
 			if($txtPayNoDoc == 'N'){
 			if(json_decode($json) != null) 
 			{
-				if($selTransactionType == 'S') {
+				if($selTransactionType == 'C') {
 					$json = json_decode($json, true);
 					$ctr = 0;
 				 	foreach ($json as $key => $value) {
@@ -122,8 +122,8 @@ if ($err == 0)
 						
 						$oRdr->Invoices->DocEntry = $value[0];
 						$oRdr->Invoices->SumApplied = $value[1];
-						if($value[2] == 'PU'){
-							$oRdr->Invoices->InvoiceType = 18;
+						if($value[2] == 'IN'){
+							$oRdr->Invoices->InvoiceType = 13;
 						}
 						else if($value[2] == 'CM'){
 							$oRdr->Invoices->InvoiceType = 14;

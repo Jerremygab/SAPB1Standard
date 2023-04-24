@@ -1104,7 +1104,7 @@
 																						INNER JOIN OUOM T4 ON T4.UomEntry = T0.IUoMEntry
 																						LEFT JOIN OWHS T5 ON T5.WhsCode = T0.DfltWH
 																						
-																						WHERE T0.PrchseItem = 'Y' AND T0.FrozenFor = 'N'
+																						WHERE T0.SellItem = 'Y' AND T0.FrozenFor = 'N'
 																						
 																						
 																						ORDER BY T0.ItemName ASC");

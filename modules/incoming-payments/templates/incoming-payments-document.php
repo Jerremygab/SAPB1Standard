@@ -745,35 +745,38 @@
                                 <th class="d-none">Tin Number</th>
                                 <th class="d-none">Contact Person Code</th>
                                 <th class="d-none">Currency</th>
+                                <th class="d-none">Deb Pay Account</th>
+
 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
 							$itemno = 1;
-							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; 
-                                                                                        SELECT DISTINCT
-																						T0.CardCode, 
-																						T0.CardName,
-																						T0.Balance,
-																						T3.CntctCode,
-																						T0.CntctPrsn,
-																						T0.LicTradNum,
-																						T0.GroupNum,
-																						T0.Currency,
-																						T2.PymntGroup
-																						
-                                                                                        A.CardCode,
-                                                                                        A.DebPayAcct				
-																						
-																						FROM OCRD T0
-																						LEFT JOIN CRD1 T1 ON T0.CardCode = T1.CardCode 
-																						LEFT JOIN OCTG T2 ON T2.GroupNum = T0.GroupNum
-																						LEFT JOIN OCPR T3 ON T3.Name = T0.CntctPrsn AND T0.CardCode = T3.CardCode 
-																						
-																						WHERE T0.CardType = 'C'
-																						
-																						ORDER BY T0.CardCode ASC");
+							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT DISTINCT
+                                                                                    T0.CardCode, 
+                                                                                    T0.CardName,
+                                                                                    T0.Balance,
+                                                                                    T3.CntctCode,
+                                                                                    T0.CntctPrsn,
+                                                                                    T0.LicTradNum,
+                                                                                    T0.GroupNum,
+                                                                                    T0.Currency,
+                                                                                    T0.DebPayAcct,
+                                                                                    T2.PymntGroup
+
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    FROM OCRD T0
+                                                                                    LEFT JOIN CRD1 T1 ON T0.CardCode = T1.CardCode 
+                                                                                    LEFT JOIN OCTG T2 ON T2.GroupNum = T0.GroupNum
+                                                                                    LEFT JOIN OCPR T3 ON T3.Name = T0.CntctPrsn AND T0.CardCode = T3.CardCode 
+                                                                                
+                                                                                    
+                                                                                    WHERE T0.CardType = 'C'
+                                                                                    
+                                                                                    ORDER BY T0.CardCode");
 								while (odbc_fetch_row($qry)) 
 								{
 									echo '<tr class="tableHover">
@@ -787,6 +790,9 @@
 												<td class="item-7 d-none">'.odbc_result($qry, 'LicTradNum').'</td>
 												<td class="item-8 d-none">'.odbc_result($qry, 'CntctCode').'</td>
 												<td class="item-9 d-none">'.odbc_result($qry, 'Currency').'</td>
+                                                <td class="item-10 d-none">'.odbc_result($qry, 'DebPayAcct').'</td>
+
+
 												
 											  </tr>';
 									$itemno++;	  
@@ -1840,7 +1846,7 @@
                                                     value="" min="01-01-2018" max="12-31-2050">
                                                 <input type="date" id="txtTransferDate"
                                                     class="form-control col-2 transferdate"
-                                                    value="<?php echo date('Y-m-d'); ?>" min="01-01-2018"
+                                                    value="" min="01-01-2018"
                                                     max="12-31-2050" style="color:transparent !important; ">
 
                                             </div>
@@ -2603,7 +2609,11 @@
     $('#tblOcrCode3Account').dataTable({
         "bLengthChange": false,
     });
+    $('#tblGLPayNoDoc').dataTable({
+        "bLengthChange": false,
+    });
     </script>
+
 
 
 

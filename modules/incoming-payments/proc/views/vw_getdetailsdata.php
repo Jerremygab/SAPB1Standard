@@ -21,6 +21,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
 		<th style="color: black; max-width:50px;">Select</th>
 	    <th style="color: black; min-width:150px; ">Document No.</th>
 	    <th style="color: black; min-width:150px;" >Document Type</th>
+		<th style="color: black; min-width:150px; ">Customer Ref No.</th>
 	    <th style="color: black; min-width:150px;">Date</th>
 		<th style="color: black; min-width:150px;">Total</th>
 		<th style="color: black; min-width:150px;">Balance Due</th>
@@ -43,7 +44,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
 	SELECT DISTINCT
         T0.BPLId ,
         CASE 
-            WHEN T0.ObjType = 18 THEN 'PU'
+            WHEN T0.ObjType = 18 THEN 'IN'
             WHEN T0.ObjType = 14 THEN 'CM'
             WHEN T0.ObjType = 30 THEN 'JE'
         END AS ObjType,
@@ -64,7 +65,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
         T2.OcrCode3,
         T0.Comments
 
-    FROM OPCH T0
+    FROM OINV T0
 
     INNER JOIN VPM2 T2 ON T0.DocEntry = T2.DocEntry
 
@@ -76,7 +77,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
     SELECT DISTINCT
         T0.BPLId ,
         CASE 
-            WHEN T0.ObjType = 18 THEN 'PU'
+            WHEN T0.ObjType = 18 THEN 'IN'
             WHEN T0.ObjType = 14 THEN 'CM'
             WHEN T0.ObjType = 30 THEN 'JE'
         END AS ObjType,
@@ -98,7 +99,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
         T0.Comments
 
 
-    FROM ORPC T0
+    FROM ORIN T0
 
     INNER JOIN VPM2 T2 ON T0.DocEntry = T2.DocEntry
     INNER JOIN OVPM T3 ON T3.DocEntry = T2.DocNum
@@ -149,6 +150,10 @@ while (odbc_fetch_row($qry))
 
 					  </td>
 					  <td >
+					<input type="text" class="form-control matrix-cell customrefno"  aria-label=" aria-describedby="button-addon2" style="outline: none; border:none" readonly value="'. $NumAtCard .'"/>
+
+					  </td>
+					  <td >
 						<input type="text" class="form-control matrix-cell date"  aria-label=" aria-describedby="button-addon2" style="outline: none; border:none" readonly value="'. $DocDate .'"/>
 					  </td>
 					  <td >
@@ -189,6 +194,7 @@ odbc_close($MSSQL_CONN);
 		<th style="color: black; max-width:50px;">Select</th>
 	    <th style="color: black; min-width:150px; ">Document No.</th>
 	    <th style="color: black; min-width:150px;" >Document Type</th>
+		<th style="color: black; min-width:150px; ">Customer Ref No.</th>
 	    <th style="color: black; min-width:150px;">Date</th>
 		<th style="color: black; min-width:150px;">Total</th>
 		<th style="color: black; min-width:150px;">Balance Due</th>

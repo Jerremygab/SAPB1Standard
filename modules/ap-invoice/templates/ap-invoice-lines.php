@@ -135,20 +135,11 @@ if ($serviceType == 'I'){
 	    <td >
 		<div class="input-group ">
 				<input type="text" class="form-control text-right selWT"   style="outline: none; border:none" maxlength="8"/>
-			<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
+			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
 
-			  <?php
-						$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; Select T0.WTCode, T0.WTName, T0.Rate,T0.Account FROM OWHT T0 WHERE WTCode = 'C120'");
-							while (odbc_fetch_row($qry)) 
-							{
-								//echo odbc_result($qry, 'NextNumber');
-								echo '<option val-rate="0" value="0">No</option>';
-								echo '<option  class="taxoptions" val-rate="' .number_format(odbc_result($qry, 'Rate'),2). '" value="1"  >Yes</option>';
-							}
-							
-							odbc_free_result($qry);
-					?>
-			</select>
+					<option value="0">No</option>';
+					<option value="1" >Yes</option>';
+				</select>
 		</div>
 	  </td>
 	   <td >
@@ -270,20 +261,11 @@ else{
 	    <td >
 		<div class="input-group ">
 				<input type="text" class="form-control text-right selWT"   style="outline: none; border:none" maxlength="8"/>
-			<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
+			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
 
-			  <?php
-						$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; Select T0.WTCode, T0.WTName, T0.Rate,T0.Account FROM OWHT T0 WHERE WTCode = 'C120'");
-							while (odbc_fetch_row($qry)) 
-							{
-								//echo odbc_result($qry, 'NextNumber');
-								echo '<option val-rate="0" value="0">No</option>';
-								echo '<option  class="taxoptions" val-rate="' .number_format(odbc_result($qry, 'Rate'),2). '" value="1"  >Yes</option>';
-							}
-							
-							odbc_free_result($qry);
-					?>
-			</select>
+					<option value="0">No</option>';
+					<option value="1" >Yes</option>';
+				</select>
 		</div>
 	  </td>
 	   <td >

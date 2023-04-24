@@ -3,7 +3,7 @@ session_start();
 include_once('../../../config/config.php');
 $serviceType = $_GET['serviceType'];
 
-if ($serviceType == 'S'){
+if ($serviceType == 'C'){
 ?>
 
 <div class="">
@@ -15,6 +15,7 @@ if ($serviceType == 'S'){
                 <th style="color: black; min-width:50px; ">Select</th>
                 <th style="color: black; min-width:150px; ">Document No.</th>
                 <th style="color: black; min-width:150px;">Document Type</th>
+                <th style="color: black; min-width:150px; ">Customer Ref No.</th>
                 <th style="color: black; min-width:150px;">Date</th>
                 <th style="color: black; min-width:150px;">Total</th>
                 <th style="color: black; min-width:150px;">Balance Due</th>
@@ -37,6 +38,7 @@ if ($serviceType == 'S'){
                 <th style="color: black; min-width:50px; ">Select</th>
                 <th style="color: black; min-width:150px; ">Document No.</th>
                 <th style="color: black; min-width:150px;">Document Type</th>
+                <th style="color: black; min-width:150px; ">Customer Ref No.</th>
                 <th style="color: black; min-width:150px;">Date</th>
                 <th style="color: black; min-width:150px;">Overdue Days</th>
                 <th style="color: black; min-width:300px;">Total</th>

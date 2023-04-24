@@ -12,6 +12,7 @@ $serviceType = $_GET['serviceType'];
 		  <th style="color: black; min-width:100px; ">Select</th>
 	    <th style="color: black; min-width:150px; ">Document No.</th>
 	    <th style="color: black; min-width:150px;" >Document Type</th>
+		<th style="color: black; min-width:150px; ">Customer Ref No.</th>
 	    <th style="color: black; min-width:150px;">Date</th>
 		  <th style="color: black; min-width:150px;">Total</th>
 		  <th style="color: black; min-width:150px;">Balance Due</th>
@@ -114,6 +115,10 @@ while (odbc_fetch_row($qry))
 						  <input type="text" class="form-control matrix-cell documenttype"  style="outline: none; border:none" readonly value="'. $ObjType .'"/>
 					</td>
 					<td >
+					<input type="text" class="form-control matrix-cell customrefno"  aria-label=" aria-describedby="button-addon2" style="outline: none; border:none" readonly value="'. $NumAtCard .'"/>
+
+					  </td>
+					<td >
 						  <input type="text" class="form-control matrix-cell date"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" readonly value="'. $DocDate .'"/>
 					</td>
 					<td >
@@ -124,8 +129,9 @@ while (odbc_fetch_row($qry))
 						  <input type="text" class="form-control matrix-cell text-right balancedue2 d-none"   style="outline: none; border:none" maxlength="8" readonly value="'. $Balance .'"/>
 					  
 					</td>
+					
 					<td >
-						  <input type="text" class="form-control matrix-cell text-right totalpayment"   style="outline: none; border:none" maxlength="8" />
+						  <input type="text" class="form-control matrix-cell text-right totalpayment" aria-label="" maxlength="12" />
 					</td>
 					<td >
 						  <input type="text" class="form-control matrix-cell text-right wtaxamount"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly value="'. $WTApplied .'" />
@@ -154,6 +160,7 @@ while (odbc_fetch_row($qry))
 		  <th style="color: black; min-width:50px; ">Select</th>
 	    <th style="color: black; min-width:150px; ">Document No.</th>
 	    <th style="color: black; min-width:150px;" >Document Type</th>
+		<th style="color: black; min-width:150px; ">Customer Ref No.</th>
 	    <th style="color: black; min-width:150px;">Date</th>
 		  <th style="color: black; min-width:150px;">Overdue Days</th>
 		  <th style="color: black; min-width:300px;">Total</th>
