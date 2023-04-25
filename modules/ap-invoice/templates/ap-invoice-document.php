@@ -264,18 +264,15 @@
 					
 						</div>		  
 						
-						<div class="form-group row  py-0 my-0">
-							<label for="inputEmail3" class="col-sm-5 col-form-label "
-								style="color: black;">Due Date</label>
-							<div class="col-sm-1 ">
+						<div class="form-group row  py-0 my-0" >
+						<label for="inputEmail3" class="col-sm-5 col-form-label " style="color: black;" >Due Date</label>
+							<div class="col-sm-1 " >
 							</div>
 							<div class="col-sm-6 input-group mb-1">
-								<input type="date" id="txtDeliveryDate" class="form-control"
-									value="<?php echo date('Y-m-d'); ?>" min="01-01-2018"
-									max="12-31-2050">
-
+								<input type="date" id="txtDeliveryDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050">
+							
 							</div>
-						</div>
+						</div>	
 						<div class="form-group row  py-0 my-0" >
 						<label for="inputEmail3" class="col-sm-5 col-form-label " style="color: black; font-size:15px" >Document Date</label>
 							<div class="col-sm-1 " >
@@ -1104,7 +1101,7 @@
 																						INNER JOIN OUOM T4 ON T4.UomEntry = T0.IUoMEntry
 																						LEFT JOIN OWHS T5 ON T5.WhsCode = T0.DfltWH
 																						
-																						WHERE T0.SellItem = 'Y' AND T0.FrozenFor = 'N'
+																						WHERE T0.PrchseItem = 'Y' AND T0.FrozenFor = 'N'
 																						
 																						
 																						ORDER BY T0.ItemName ASC");

@@ -49,7 +49,7 @@ if ($err == 0)
 	}
 	else
 	{
-			$oRdr = $vCmp->GetBusinessObject(46);
+			$oRdr = $vCmp->GetBusinessObject(24);
 			$oRdr->GetByKey($txtDocEntry);
 			
 			
@@ -59,7 +59,7 @@ if ($err == 0)
 			$oRdr->JournalRemarks = $txtJournalMemo;
 			
 
-			if($selTransactionType == 'S') {
+			if($selTransactionType == 'C') {
 				if($txtPayNoDoc == 'Y'){
 				}
 					

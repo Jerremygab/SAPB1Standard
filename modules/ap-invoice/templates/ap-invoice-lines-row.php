@@ -111,10 +111,10 @@ if ($serviceType == 'I'){
 								</select>
 			</div>
 	  </td>
-		<td >
+	  <td >
 		<div class="input-group ">
-				<input type="text" class="form-control text-right selWT"   style="outline: none; border:none" maxlength="8"/>
-			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
+				<input type="text" class="form-control text-right selWT d-none"  name="selWTax" style="outline: none; border:none" maxlength="8"/>
+			  <select class="form-control input-sm selwt" name="selWT" readonly>
 
 					<option value="0">No</option>';
 					<option value="1" >Yes</option>';
@@ -122,7 +122,7 @@ if ($serviceType == 'I'){
 		</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
 		
 	  </td>
 	   <td >
@@ -199,10 +199,10 @@ else{
 								</select>
 			</div>
 	  </td>
-	   <td >
-	   <div class="input-group ">
-				<input type="text" class="form-control text-right selWT"   style="outline: none; border:none" maxlength="8"/>
-			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
+	  <td >
+		<div class="input-group ">
+				<input type="text" class="form-control text-right selWT d-none"  name="selWTax" style="outline: none; border:none" maxlength="8"/>
+			  <select class="form-control input-sm selwt" name="selWT" readonly>
 
 					<option value="0">No</option>';
 					<option value="1" >Yes</option>';
@@ -210,7 +210,7 @@ else{
 		</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
 		
 	  </td>
 	   <td >

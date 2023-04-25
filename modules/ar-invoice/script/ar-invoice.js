@@ -2748,16 +2748,7 @@ setTimeout(function(){
 					itArr.push('"' + $(this).find('input.discount').val().replace(/,/g, '') + '"');
 					itArr.push('"' + $(this).find('select.taxcode').val() + '"');
 
-					// ADD SCRIPTS NI JERREMY
-					
-					// console.log($(this).find('select.selwt').val())
-					// console.log($('#tblDetails tbody tr').find('select.selwt').val())
-					// alert('ito po ung naka #tblDetails tbody tr ' + $('#tblDetails tbody tr').find('select.selwt').val())
-					// alert('ito po ung naka this ' + $(this).find('select.selwt').val())
-
-					// ADD SCRIPTS NI JERREMY
-					
-					
+										
 					itArr.push('"' + $(this).find('input.baseentry').val() + '"');
 					itArr.push('"' + $(this).find('input.linenum').val() + '"');
 					
@@ -4533,9 +4524,7 @@ setTimeout(function(){
 					}
 
 					let amount = 0.00;
-					// let taxable = parseFloat($('.selected-det-wtax').find('.taxableamount').val().split(','));
 					let rate = parseFloat($('.selected-det-wtax').find('.rate').val());
-					// let baseamount = parseFloat($('.selected-det-wtax').find('.baseamount').val().replace(/,/g,''));
 					
 					let newBaseAmount = taxable * 1.12;
 					let newRate = rate / 100;
@@ -4549,19 +4538,7 @@ setTimeout(function(){
 						$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
 						$('.selected-det-wtax').find('.baseamount').val(FormatMoney(newBaseAmount));
 				}
-				// else{
-				// 	// alert(2)
-				// 	amount = 0;
-				// 	console.log(amount)
-				// 	console.log(taxable)
-				// 	console.log(newRate)
-				// 	$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
-				// 	$('.selected-det-wtax').find('.baseamount').val(FormatMoney(taxable));
-				// }
 			})
-			// console.log(amount)
-			// console.log(taxable)
-			// console.log(newRate)
 			
 		},500)
 		// EDIT SCRIPTS NI JERREMY

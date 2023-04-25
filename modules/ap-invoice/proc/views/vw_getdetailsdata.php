@@ -30,7 +30,7 @@ else{
 $taxcode2 = "";
 $rate = 0;
 
-$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code, Name, Rate FROM OVTG WHERE Inactive = 'N' AND Category='I'");
+$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT Code, Name, Rate FROM OVTG WHERE Inactive = 'N' AND Category='$objSession->taxCodeCategory'");
 
 while (odbc_fetch_row($qry)) 
 {
@@ -81,6 +81,11 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 		ELSE T1.UnitMsr 
 		END AS UnitMsr,
 		
+		CASE 
+		WHEN T1.WTLiable = 'Y' THEN 'Yes'
+		WHEN T1.WTLiable = 'N' THEN 'NO'
+		END AS WTLiable,
+		
 		T2.UomCode,
 		T3.AcctName,
 		
@@ -117,6 +122,7 @@ while (odbc_fetch_row($qry))
 	$AcctName = odbc_result($qry, "AcctName");
 	$Quantity = odbc_result($qry, "Quantity");
 	$PriceAfVat = odbc_result($qry, "PriceAfVat");
+	$WTLiable = odbc_result($qry, "WTLiable");
 	
 	$Price = odbc_result($qry, "Price");
 	$DiscSum = number_format(odbc_result($qry, "DiscSum"),2);
@@ -283,20 +289,16 @@ while (odbc_fetch_row($qry))
 					   <td >
 							<div class="'.$inputGroup.' ">
 								<input type="hidden" class="form-control text-right  taxamount" value="'.$TaxAmount.'" style="outline: none; border:none" maxlength="8" readonly />
-								<select type="text" class="form-control taxcode"  placeholder=""'.$disabled .' readonly >
+								<select type="text" class="form-control taxcode"  placeholder=""'.$disabled .' readonly disabled="disabled">
 										"'.$taxcode.'"
 								</select>
 							</div>
 					  </td>
-					  <td >
-					  <div class="input-group ">
-						  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-						<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly >
-									  <option value="0">No</option>
-									  <option value="1">Yes</option>
-								  </select>
-					  </div>
-				</td>
+					  
+					   <td >
+						<input type="text" class="form-control matrix-cell text-right grossprice"  value="'.$WTLiable.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly />
+						
+					  </td>
 					   <td >
 						<input type="text" class="form-control matrix-cell text-right grossprice"  value="'.$PriceAfVat.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly />
 						
@@ -361,20 +363,16 @@ while (odbc_fetch_row($qry))
 						   <td >
 								<div class="'.$inputGroup.' ">
 									<input type="hidden" class="form-control text-right  taxamount"  value="'.$TaxAmount2.'"  style="outline: none; border:none" maxlength="8" readonly/>
-									<select type="text" class="form-control taxcode"  placeholder="" '.$disabled .' readonly disabled="disabled">
+									<select type="text" class="form-control taxcode"  placeholder="" '.$disabled .'>
 												 '.$taxcode.'
 													</select>
 								</div>
 						  </td>
-						  <td >
-						  <div class="input-group ">
-							  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-							<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly disabled="disabled">
-										  <option value="0">No</option>
-										  <option value="1">Yes</option>
-									  </select>
-						  </div>
-					</td>
+						 
+						   <td >
+							<input type="text" class="form-control matrix-cell text-right grossprice"    value="'.$WTLiable.'"  style="outline: none; border:none" maxlength="12" readonly/>
+							
+						  </td>
 						   <td >
 							<input type="text" class="form-control matrix-cell text-right grossprice"    value="'.$PriceAfVat.'"  style="outline: none; border:none" maxlength="12" readonly/>
 							
@@ -391,189 +389,188 @@ while (odbc_fetch_row($qry))
 				}
 }
 //for another row
-	if($isBaseType){
-		$date = date("Y-m-d");
-		if($docType == 'I'){
+// 	if($isBaseType){
+// 		$date = date("Y-m-d");
+// 		if($docType == 'I'){
    
-					echo 
-					'<tr style="background-color: white; "  >
-					  <td class="rowno text-right" style="background-color: lightgray;color:black;">
-						<span>'.$ctr.'</span>
-						<button type="button" class="btn d-none btnrowfunctions" data-toggle="dropdown" style="width:1px; padding-left: 0px !important;margin-left: 0px !important">
-							<i class="fas fa-caret-down" ></i>
-						</button>
+// 					echo 
+// 					'<tr style="background-color: white; "  >
+// 					  <td class="rowno text-right" style="background-color: lightgray;color:black;">
+// 						<span>'.$ctr.'</span>
+// 						<button type="button" class="btn d-none btnrowfunctions" data-toggle="dropdown" style="width:1px; padding-left: 0px !important;margin-left: 0px !important">
+// 							<i class="fas fa-caret-down" ></i>
+// 						</button>
 						
 					
-						 <ul class="dropdown-menu rowfunctions" role="menu" style="background-color: #fdfd96;">
-							<li class="deleterow" style="font-size:20px; color: black; font-weight:bold">Delete Row</a></li>
-							<li class="duplicaterow"style="font-size:20px; color: black; font-weight:bold">Duplicate Row</a></li>
-						  </ul>
-					  </td>
-					  <td >
-						<div class="'.$inputGroup.' " >
-						<input type="text" class="form-control itemcode"  style="outline: none; border:none; " readonly  />
-						<input type="hidden" class="form-control batchorserial "  style="outline: none; border:none; " readonly  />
-						<input type="hidden" class="form-control baseentry"   style="outline: none; border:none; "  readonly/>
-						<input type="hidden" class="form-control linenum"   style="outline: none; border:none; " readonly/>
-						<input type="hidden" class="form-control visorder"  style="outline: none; border:none; " readonly  />
-						  <button class="btn '.$buttonHide.' "  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#itemModal" data-backdrop="false" >
-							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
-						  </button>
-						<input type="hidden" class="form-control matrix-cell uomgroup"   style="outline: none; border:none" readonly/>
-						</div>
-					  </td>
-					  <td >
-						<div class="'.$inputGroup.' ">
-						<input type="text" class="form-control matrix-cell itemname"  style="outline: none; border:none" readonly  / >
-						  <button class="btn '.$buttonHide.' "   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#itemModal" data-backdrop="false">
-							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
-						  </button>
-						<input type="hidden" class="form-control matrix-cell uomgroup"   style="outline: none; border:none" readonly  />
-						</div>
-					  </td>
-					  <td >
-						<div class="'.$inputGroup.' ">
-						<input type="text" class="form-control matrix-cell unitmsr"  style="outline: none; border:none" readonly  />
-						  <button class="btn '.$buttonHide.' " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#uomModal" data-backdrop="false">
-							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
-						  </button>
-						<input type="hidden" class="form-control matrix-cell uomentry"  style="outline: none; border:none"  />
-						</div>
-					  </td>
-					   <td >
-						<div class="'.$inputGroup.' ">
-						<input type="text" class="form-control matrix-cell whsecode"   style="outline: none; border:none" readonly/>
-						  <button class="btn '.$buttonHide.' " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#whseModal" data-backdrop="false">
-							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
-						  </button>
-						<input type="hidden" class="form-control matrix-cell whsename"   style="outline: none; border:none" />
-						</div>
-					  </td>
-					   <td >
-					   <div class="'.$inputGroup.' ">
-						<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
-						 <button class="btn '.$buttonHide.' btn-batch d-none" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#batchModal" data-backdrop="false">
-							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
+// 						 <ul class="dropdown-menu rowfunctions" role="menu" style="background-color: #fdfd96;">
+// 							<li class="deleterow" style="font-size:20px; color: black; font-weight:bold">Delete Row</a></li>
+// 							<li class="duplicaterow"style="font-size:20px; color: black; font-weight:bold">Duplicate Row</a></li>
+// 						  </ul>
+// 					  </td>
+// 					  <td >
+// 						<div class="'.$inputGroup.' " >
+// 						<input type="text" class="form-control itemcode"  style="outline: none; border:none; " readonly  />
+// 						<input type="hidden" class="form-control batchorserial "  style="outline: none; border:none; " readonly  />
+// 						<input type="hidden" class="form-control baseentry"   style="outline: none; border:none; "  readonly/>
+// 						<input type="hidden" class="form-control linenum"   style="outline: none; border:none; " readonly/>
+// 						<input type="hidden" class="form-control visorder"  style="outline: none; border:none; " readonly  />
+// 						  <button class="btn '.$buttonHide.' "  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#itemModal" data-backdrop="false" >
+// 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
+// 						  </button>
+// 						<input type="hidden" class="form-control matrix-cell uomgroup"   style="outline: none; border:none" readonly/>
+// 						</div>
+// 					  </td>
+// 					  <td >
+// 						<div class="'.$inputGroup.' ">
+// 						<input type="text" class="form-control matrix-cell itemname"  style="outline: none; border:none" readonly  / >
+// 						  <button class="btn '.$buttonHide.' "   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#itemModal" data-backdrop="false">
+// 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
+// 						  </button>
+// 						<input type="hidden" class="form-control matrix-cell uomgroup"   style="outline: none; border:none" readonly  />
+// 						</div>
+// 					  </td>
+// 					  <td >
+// 						<div class="'.$inputGroup.' ">
+// 						<input type="text" class="form-control matrix-cell unitmsr"  style="outline: none; border:none" readonly  />
+// 						  <button class="btn '.$buttonHide.' " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#uomModal" data-backdrop="false">
+// 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
+// 						  </button>
+// 						<input type="hidden" class="form-control matrix-cell uomentry"  style="outline: none; border:none"  />
+// 						</div>
+// 					  </td>
+// 					   <td >
+// 						<div class="'.$inputGroup.' ">
+// 						<input type="text" class="form-control matrix-cell whsecode"   style="outline: none; border:none" readonly/>
+// 						  <button class="btn '.$buttonHide.' " type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#whseModal" data-backdrop="false">
+// 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
+// 						  </button>
+// 						<input type="hidden" class="form-control matrix-cell whsename"   style="outline: none; border:none" />
+// 						</div>
+// 					  </td>
+// 					   <td >
+// 					   <div class="'.$inputGroup.' ">
+// 						<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
+// 						 <button class="btn '.$buttonHide.' btn-batch d-none" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#batchModal" data-backdrop="false">
+// 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 						 
-						</div>
-					  </td>
-						<td >
-						<input type="text" class="form-control matrix-cell text-right price"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+// 						</div>
+// 					  </td>
+// 						<td >
+// 						<input type="text" class="form-control matrix-cell text-right price"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
 						
-					  </td>
-						<td >
-						<input type="text" class="form-control matrix-cell text-right discount"   style="outline: none; border:none" maxlength="8"/>
+// 					  </td>
+// 						<td >
+// 						<input type="text" class="form-control matrix-cell text-right discount"   style="outline: none; border:none" maxlength="8"/>
 						
-					  </td>
-					   <td >
-							<div class="'.$inputGroup.' ">
-								<input type="hidden" class="form-control text-right  taxamount"  style="outline: none; border:none" maxlength="8"/>
-								<select type="text" class="form-control taxcode"  placeholder="" >
-										"'.$taxcode.'"
-								</select>
-							</div>
-					  </td>
-					  <td >
-					  <div class="input-group ">
-						  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-						<select class="form-control input-sm selwt" id="selWT" name="selWT" >
-									  <option value="0">No</option>
-									  <option value="1">Yes</option>
-								  </select>
-					  </div>
-				</td>
-					   <td >
-						<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
+// 					  </td>
+// 					   <td >
+// 							<div class="'.$inputGroup.' ">
+// 								<input type="hidden" class="form-control text-right  taxamount"  style="outline: none; border:none" maxlength="8"/>
+// 								<select type="text" class="form-control taxcode"  placeholder="" >
+// 										"'.$taxcode.'"
+// 								</select>
+// 							</div>
+// 					  </td>
+// 					  <td >
+// 					  <div class="input-group ">
+// 						  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
+// 						<select class="form-control input-sm selwt" id="selWT" name="selWT">
+// 									  <option value="0">No</option>
+// 									  <option value="1">Yes</option>
+// 								  </select>
+// 					  </div>
+// 				</td>
+// 					   <td >
+// 						<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
 						
-					  </td>
-					   <td >
-						<input  type="text" class="form-control matrix-cell text-right rowtotal "   style="outline: none; border:none" readonly/>	
-					  </td>
-					   <td >
-						<input  type="text" class="form-control matrix-cell text-right grosstotal "   style="outline: none; border:none" readonly/>	
-					  </td>
-					</tr>'
-					;
+// 					  </td>
+// 					   <td >
+// 						<input  type="text" class="form-control matrix-cell text-right rowtotal "   style="outline: none; border:none" readonly/>	
+// 					  </td>
+// 					   <td >
+// 						<input  type="text" class="form-control matrix-cell text-right grosstotal "   style="outline: none; border:none" readonly/>	
+// 					  </td>
+// 					</tr>'
+// 					;
 			
-					$ctr += 1;
-				}
-				else{
-					echo '<tr style="background-color: white; "  >
-						  <td class="rowno text-right" style="background-color: lightgray;color:black;">
-							<span>'.$ctr.'</span>
-							<button type="button" class="btn '.$buttonHide.'" data-toggle="dropdown" style="width:1px; padding-left: 0px !important;margin-left: 0px !important">
-								<i class="fas fa-caret-down" ></i>
-							</button>
-							<ul class="dropdown-menu rowfunctions" role="menu" style="background-color: #fdfd96;">
-								<li class="deleterow" style="font-size:20px; color: black; font-weight:bold">Delete Row</a></li>
-								<li class="duplicaterow"style="font-size:20px; color: black; font-weight:bold">Duplicate Row</a></li>
-							  </ul>
-						  </td>
-						   <td >
-							<input type="text" class="form-control matrix-cell gldescription"  style="outline: none; border:none" />
+// 					$ctr += 1;
+// 				}
+// 				else{
+// 					echo '<tr style="background-color: white; "  >
+// 						  <td class="rowno text-right" style="background-color: lightgray;color:black;">
+// 							<span>'.$ctr.'</span>
+// 							<button type="button" class="btn '.$buttonHide.'" data-toggle="dropdown" style="width:1px; padding-left: 0px !important;margin-left: 0px !important">
+// 								<i class="fas fa-caret-down" ></i>
+// 							</button>
+// 							<ul class="dropdown-menu rowfunctions" role="menu" style="background-color: #fdfd96;">
+// 								<li class="deleterow" style="font-size:20px; color: black; font-weight:bold">Delete Row</a></li>
+// 								<li class="duplicaterow"style="font-size:20px; color: black; font-weight:bold">Duplicate Row</a></li>
+// 							  </ul>
+// 						  </td>
+// 						   <td >
+// 							<input type="text" class="form-control matrix-cell gldescription"  style="outline: none; border:none" />
 							 
-						  </td>
-						  <td >
-							<div class="'.$inputGroup.' ">
-							<input type="text" class="form-control matrix-cell glaccount"    style="outline: none; border:none" readonly/>
-							<input type="hidden" class="form-control baseentry"   style="outline: none; border:none; "  readonly/>
-							<input type="hidden" class="form-control linenum"   style="outline: none; border:none; "  readonly/>
-							<input type="hidden" class="form-control visorder"  style="outline: none; border:none; " readonly  />
-							  <button class="btn '.$buttonHide.' "   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#glModal" data-backdrop="false">
-								<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
-							  </button>
-							</div>
-						  </td>
-						   <td >
-							<input type="text" class="form-control matrix-cell glname"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
+// 						  </td>
+// 						  <td >
+// 							<div class="'.$inputGroup.' ">
+// 							<input type="text" class="form-control matrix-cell glaccount"    style="outline: none; border:none" readonly/>
+// 							<input type="hidden" class="form-control baseentry"   style="outline: none; border:none; "  readonly/>
+// 							<input type="hidden" class="form-control linenum"   style="outline: none; border:none; "  readonly/>
+// 							<input type="hidden" class="form-control visorder"  style="outline: none; border:none; " readonly  />
+// 							  <button class="btn '.$buttonHide.' "   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#glModal" data-backdrop="false">
+// 								<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
+// 							  </button>
+// 							</div>
+// 						  </td>
+// 						   <td >
+// 							<input type="text" class="form-control matrix-cell glname"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
 							
-						  </td>
-						   <td class="d-none">
-							<input type="text" class="form-control matrix-cell text-right quantity"  value="1" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" value="1"/>
+// 						  </td>
+// 						   <td class="d-none">
+// 							<input type="text" class="form-control matrix-cell text-right quantity"  value="1" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" value="1"/>
 							
-						  </td>
-							<td >
-							<input type="text" class="form-control matrix-cell text-right price"    aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+// 						  </td>
+// 							<td >
+// 							<input type="text" class="form-control matrix-cell text-right price"    aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
 							
-						  </td>
-							<td >
-							<input type="text" class="form-control matrix-cell text-right discount"  style="outline: none; border:none" maxlength="8"/>
+// 						  </td>
+// 							<td >
+// 							<input type="text" class="form-control matrix-cell text-right discount"  style="outline: none; border:none" maxlength="8"/>
 							
-						  </td>
-						   <td >
-								<div class="'.$inputGroup.' ">
-									<input type="hidden" class="form-control text-right  taxamount"   style="outline: none; border:none" maxlength="8"/>
-									<select type="text" class="form-control taxcode"  placeholder="" >
-												 '.$taxcode.'
-													</select>
-								</div>
-						  </td>
-						  <td >
-						  <td >
-						  <div class="input-group ">
-							  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
-							<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
-										  <option value="0">No</option>
-										  <option value="1">Yes</option>
-									  </select>
-						  </div>
-					</td>
-						   <td >
-							<input type="text" class="form-control matrix-cell text-right grossprice"      style="outline: none; border:none" maxlength="12" />
+// 						  </td>
+// 						   <td >
+// 								<div class="'.$inputGroup.' ">
+// 									<input type="hidden" class="form-control text-right  taxamount"   style="outline: none; border:none" maxlength="8"/>
+// 									<select type="text" class="form-control taxcode"  placeholder="" >
+// 												 '.$taxcode.'
+// 													</select>
+// 								</div>
+// 						  </td>
+// 						  <td >
+// 						  <td >
+// 						  <div class="input-group ">
+// 							  <input type="text" class="form-control text-right d-none taxamount"   style="outline: none; border:none" maxlength="8"/>
+// 							<select class="form-control input-sm selwt" id="selWT" name="selWT">
+// 										  <option value="0">No</option>
+// 										  <option value="1">Yes</option>
+// 									  </select>
+// 						  </div>
+// 					</td>
+// 						   <td >
+// 							<input type="text" class="form-control matrix-cell text-right grossprice"      style="outline: none; border:none" maxlength="12"/>
 							
-						  </td>
-						   <td >
-							<input  type="text" class="form-control matrix-cell text-right rowtotal "    style="outline: none; border:none" readonly/>	
-						  </td>
-						   <td >
-							<input  type="text" class="form-control matrix-cell text-right grosstotal "    style="outline: none; border:none" readonly/>	
-						  </td>
-						</tr>';
+// 						  </td>
+// 						   <td >
+// 							<input  type="text" class="form-control matrix-cell text-right rowtotal "    style="outline: none; border:none" readonly/>	
+// 						  </td>
+// 						   <td >
+// 							<input  type="text" class="form-control matrix-cell text-right grosstotal "    style="outline: none; border:none" readonly/>	
+// 						  </td>
+// 						</tr>';
 						
-						$ctr += 1;
-				}
-	}
-odbc_free_result($qry);
-odbc_close($MSSQL_CONN);
-
+// 						$ctr += 1;
+// 				}
+// 	}
+	odbc_free_result($qry);
+	odbc_close($MSSQL_CONN);
 ?>

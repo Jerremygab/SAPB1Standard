@@ -30,7 +30,7 @@ die('Could not open database!');
 
 </head>
 
-<body id="" style=" -moz-transform: scale(0.7, 0.7); /* Moz-browsers */
+<body id="" style=" --moz-transform: scale(0.7, 0.7); /* Moz-browsers */
     zoom: 0.7; /* Other non-webkit browsers */
     zoom: 70%; /* Webkit browsers */
 ">
