@@ -83,12 +83,17 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 		
 		T1.WhsCode,
 		T5.WhsName,
-		T1.wtliable AS WTLiable,
 		
 		CASE 
 		WHEN T1.UomEntry = '-1' THEN 'Manual'
 		ELSE T1.UnitMsr 
 		END AS UnitMsr,
+
+		CASE 
+		WHEN T1.WTLiable = 'Y' THEN 'Yes'
+		WHEN T1.WTLiable = 'N' THEN 'NO'
+		END AS WTLiable,
+
 		
 		T2.UomCode,
 		T3.AcctName,

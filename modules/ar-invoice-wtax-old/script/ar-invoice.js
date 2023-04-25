@@ -4446,26 +4446,47 @@ $(document).ready(function () {
 			
 		}
 		function ComputeWtaxPerRow(){
-			let amount = 0.00;
-	
-			let taxable = $('.selected-det-wtax').find('.taxableamount').val().replace(/,/g,'');
-			let rate = parseFloat($('.selected-det-wtax').find('.rate').val());
-			let baseamount = $('.selected-det-wtax').find('.baseamount').val().replace(/,/g,'');
-			let newBaseAmount = taxable * 1.12;
-			let newRate = rate / 100;
-			if($('#txtVatSum').val() > 0){
-				amount = taxable * newRate;
-				console.log()
-				$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
-				$('.selected-det-wtax').find('.baseamount').val(FormatMoney(newBaseAmount));
-			}
-			else{
-				amount = taxable * newRate;
-				console.log()
-				$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
-				$('.selected-det-wtax').find('.baseamount').val(FormatMoney(taxable));
-			}
+		
+			// EDIT SCRIPTS NI JERREMY
 			
+				 $('#tblDetails tbody tr').each(function(){
+	
+					let amount = 0.00;
+					let taxable = parseFloat($('.selected-det-wtax').find('.taxableamount').val().replace(/,/g,''));
+					let rate = parseFloat($('.selected-det-wtax').find('.rate').val());
+					let baseamount = parseFloat($('.selected-det-wtax').find('.baseamount').val().replace(/,/g,''));
+					
+					let taxableArray = taxable.split(",");
+	
+					let newBaseAmount = taxableArray * 1.12;
+					let newRate = rate / 100;
+					
+					if($('#txtVatSum').val() > 0 && $(this).find('select.selwt').val() == '1'){
+	
+						alert(1)
+						amount = taxable * newRate;
+						console.log(amount)
+						console.log(taxableArray)
+						console.log(newRate)
+						$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
+						$('.selected-det-wtax').find('.baseamount').val(FormatMoney(newBaseAmount));
+					}
+					// else{
+					// 	// alert(2)
+					// 	amount = 0;
+					// 	console.log(amount)
+					// 	console.log(taxable)
+					// 	console.log(newRate)
+					// 	$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
+					// 	$('.selected-det-wtax').find('.baseamount').val(FormatMoney(taxable));
+					// }
+				})
+				// console.log(amount)
+				// console.log(taxable)
+				// console.log(newRate)
+				
+			
+			// EDIT SCRIPTS NI JERREMY
 			
 		}
 		function ComputeWtaxPerRowToFooter(){

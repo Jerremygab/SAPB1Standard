@@ -80,6 +80,11 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 		WHEN T1.UomEntry = '-1' THEN 'Manual'
 		ELSE T1.UnitMsr 
 		END AS UnitMsr,
+
+		CASE 
+		WHEN T1.WTLiable = 'Y' THEN 'Yes'
+		WHEN T1.WTLiable = 'N' THEN 'NO'
+		END AS WTLiable,
 		
 		T2.UomCode,
 		T3.AcctName,
@@ -126,6 +131,7 @@ while (odbc_fetch_row($qry))
 	$RowTotal = odbc_result($qry, "RowTotal");
 	$GrossTotal = odbc_result($qry, "GrossTotal");
 	$TaxAmount = odbc_result($qry, "TaxAmount");
+	$WTLiable = odbc_result($qry, "WTLiable");
 	$RowTotal2 = number_format(odbc_result($qry, "RowTotal2"),2);
 	$GrossTotal2 = number_format(odbc_result($qry, "GrossTotal2"),2);
 	$TaxAmount2 = number_format(odbc_result($qry, "TaxAmount2"),2);
@@ -302,6 +308,10 @@ while (odbc_fetch_row($qry))
 							</div>
 					  </td>
 					  
+					   <td >
+						<input type="text" class="form-control matrix-cell text-right selWT"  value="'.$WTLiable.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
+						
+					  </td>
 					   <td >
 						<input type="text" class="form-control matrix-cell text-right grossprice"  value="'.$PriceAfVat.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
 						

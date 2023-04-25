@@ -134,7 +134,7 @@ if ($serviceType == 'I'){
 	  </td>
 	    <td >
 		<div class="input-group ">
-				<input type="text" class="form-control text-right selWT "  name="selWTax" style="outline: none; border:none" maxlength="8"/>
+				<input type="text" class="form-control text-right selWT d-none"  name="selWTax" style="outline: none; border:none" maxlength="8"/>
 			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
 
 					<option value="0">No</option>';
@@ -260,8 +260,8 @@ else{
 	  </td>
 	    <td >
 		<div class="input-group ">
-				<input type="text" class="form-control text-right selWT"  name="selWTax" style="outline: none; border:none" maxlength="8"/>
-			  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
+				<input type="text" class="form-control text-right selWT d-none"  name="selWTax" style="outline: none; border:none" maxlength="8"/>
+			  <select class="form-control input-sm selwt" name="selWT" readonly>
 
 					<option value="0">No</option>';
 					<option value="1" >Yes</option>';

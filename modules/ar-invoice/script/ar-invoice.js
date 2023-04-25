@@ -2479,7 +2479,7 @@ $('#WTaxModal').on('shown.bs.modal',function()
 	var cardCodeWTLiable = $('#txtCardCode').val();
 	let wtcodeArrayString = $('#txtWtLiableArray').val();
 	/* let wtcodeArray = wtcodeArrayString.split(","); */
-
+/* sss */
 	console.log(cardCodeWTLiable);
 	console.log(wtcodeArrayString);
 	$.ajax({
@@ -2747,15 +2747,15 @@ setTimeout(function(){
 					itArr.push('"' + $(this).find('input.uomentry').val().replace(/,/g, '') + '"')
 					itArr.push('"' + $(this).find('input.discount').val().replace(/,/g, '') + '"');
 					itArr.push('"' + $(this).find('select.taxcode').val() + '"');
-					
-					/* if($('#tblDetails tbody tr').find('select.selwt').val() == 1){
 
-					}
-					else{
-
-					} */
-					alert($(this).find('select.selwt').val())
+					// ADD SCRIPTS NI JERREMY
 					
+					// console.log($(this).find('select.selwt').val())
+					// console.log($('#tblDetails tbody tr').find('select.selwt').val())
+					// alert('ito po ung naka #tblDetails tbody tr ' + $('#tblDetails tbody tr').find('select.selwt').val())
+					// alert('ito po ung naka this ' + $(this).find('select.selwt').val())
+
+					// ADD SCRIPTS NI JERREMY
 					
 					
 					itArr.push('"' + $(this).find('input.baseentry').val() + '"');
@@ -2775,6 +2775,7 @@ setTimeout(function(){
 					itArr.push('"' + $(this).find('input.batchorserialcontainer2').val() + '"');
 					itArr.push('"' + $(this).find('input.batchorserial').val() + '"');
 					itArr.push('"' + $(this).find('input.itemname').val() + '"');
+					itArr.push('"' + $(this).find('select.selwt').val() + '"');
 					
 				otArr.push('"' + i + '": [' + itArr.join(',') + ']'); 
 			
@@ -2788,6 +2789,7 @@ setTimeout(function(){
 					itArr.push('"' + $(this).find('input.quantity').val().replace(/,/g, '') + '"')
 					itArr.push('"' + $(this).find('input.discount').val().replace(/,/g, '') + '"');
 					itArr.push('"' + $(this).find('select.taxcode').val() + '"');
+					itArr.push('"' + $(this).find('select.selwt').val() + '"');
 				
 				otArr.push('"' + i + '": [' + itArr.join(',') + ']'); 
 				}
@@ -2901,7 +2903,7 @@ setTimeout(function(){
 							{
 								$('#messageBar').text('').css({'background-color': '', 'color': ''});	
 								
-							window.location.replace("../templates/" + mainFileName + "-document.php");
+							// window.location.replace("../templates/" + mainFileName + "-document.php");
 							},3000)
 					}
 					else
@@ -4460,10 +4462,10 @@ setTimeout(function(){
 				{
 					amount += 0;
 			    }
-				else
-				{
-					amount += parseFloat($(this).find('.rowtotal').val().replace(/,/g,''));
-			    }
+				// else
+				// {
+				// 	amount += parseFloat($(this).find('.rowtotal').val().replace(/,/g,''));
+			    // }
 			}
 		   
 	      console.log(amount)
@@ -4472,36 +4474,97 @@ setTimeout(function(){
 		$('.taxableamount').val(FormatMoney(amount));
 		
 	}
-	function ComputeWtaxPerRow(){
-		let amount = 0.00;
-/* asd */
-		if($('#tblDetails tbody tr').find('select.selwt').val() == 1){
 
-			let taxable = $('.selected-det-wtax').find('.taxableamount').val().replace(/,/g,'');
-			let rate = parseFloat($('.selected-det-wtax').find('.rate').val());
-			let baseamount = $('.selected-det-wtax').find('.baseamount').val().replace(/,/g,'');
-			/* if($('#tblDetails tbody tr').find('select.selwt').val() == 1) */
-			let newBaseAmount = taxable * 1.12;
-			let newRate = rate / 100;
-			if($('#txtVatSum').val() > 0){
-				amount = taxable * newRate;
-				console.log()
-				$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
-				$('.selected-det-wtax').find('.baseamount').val(FormatMoney(newBaseAmount));
-			}
-			else{
-				amount = taxable * newRate;
-				console.log()
-				$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
-				$('.selected-det-wtax').find('.baseamount').val(FormatMoney(taxable));
-			}
-		}
-		else if($('#tblDetails tbody tr').find('select.selwt').val() == 0){
+		// ORIGINAL ComputeWtaxPerRow() NI JERREMY
+	// function ComputeWtaxPerRow(){
+	// 	let amount = 0.00;
+		
+
+	// 		let taxable = $('.selected-det-wtax').find('.taxableamount').val().replace(/,/g,'');
+	// 		let rate = parseFloat($('.selected-det-wtax').find('.rate').val());
+	// 		let baseamount = $('.selected-det-wtax').find('.baseamount').val().replace(/,/g,'');
 			
-				amount = 0
-				console.log()
-				$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
-		}
+	// 		let newBaseAmount = taxable * 1.12;
+	// 		let newRate = rate / 100;
+			
+	// 		if($('#txtVatSum').val() > 0){
+	// 			amount = taxable * newRate;
+	// 			$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
+	// 			$('.selected-det-wtax').find('.baseamount').val(FormatMoney(newBaseAmount));
+	// 		}
+	// 		else{
+	// 			amount = taxable * newRate;
+	// 			$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
+	// 			$('.selected-det-wtax').find('.baseamount').val(FormatMoney(taxable));
+	// 		}
+		
+	// 	// ORIGINAL ComputeWtaxPerRow() NI JERREMY
+		
+	// }
+	function ComputeWtaxPerRow(){
+		
+		// EDIT SCRIPTS NI JERREMY
+		setTimeout(function()	{
+				
+			 $('#tblDetails tbody tr').each(function(){
+
+				if($('#txtVatSum').val() != '0.00' && $(this).find('select.selwt').val() == '1'){
+					let taxableString = $('.selected-det-wtax').find('.taxableamount').val().toString() 
+					let taxable = 0.00;
+					if (taxableString.indexOf(',') > -1)
+					{
+						taxable = parseFloat($('.selected-det-wtax').find('.taxableamount').val().replace(/,/g,''));
+						
+					}
+					else{
+						taxable = parseFloat($('.selected-det-wtax').find('.taxableamount').val());
+					}
+
+
+					let baseamountString = $('.selected-det-wtax').find('.baseamount').val().toString()
+					let baseamount = 0.00;
+					if (baseamountString.indexOf(',') > -1)
+					{
+						baseamount = parseFloat($('.selected-det-wtax').find('.baseamount').val().replace(/,/g,''));
+						
+					}
+					else{
+						baseamount = parseFloat($('.selected-det-wtax').find('.baseamount').val());
+					}
+
+					let amount = 0.00;
+					// let taxable = parseFloat($('.selected-det-wtax').find('.taxableamount').val().split(','));
+					let rate = parseFloat($('.selected-det-wtax').find('.rate').val());
+					// let baseamount = parseFloat($('.selected-det-wtax').find('.baseamount').val().replace(/,/g,''));
+					
+					let newBaseAmount = taxable * 1.12;
+					let newRate = rate / 100;
+					
+
+						
+						amount = taxable * newRate;
+						console.log(amount)
+						console.log(taxable)
+						console.log(newRate)
+						$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
+						$('.selected-det-wtax').find('.baseamount').val(FormatMoney(newBaseAmount));
+				}
+				// else{
+				// 	// alert(2)
+				// 	amount = 0;
+				// 	console.log(amount)
+				// 	console.log(taxable)
+				// 	console.log(newRate)
+				// 	$('.selected-det-wtax').find('.wtaxamount').val(FormatMoney(amount));
+				// 	$('.selected-det-wtax').find('.baseamount').val(FormatMoney(taxable));
+				// }
+			})
+			// console.log(amount)
+			// console.log(taxable)
+			// console.log(newRate)
+			
+		},500)
+		// EDIT SCRIPTS NI JERREMY
 		
 	}
 	function ComputeWtaxPerRowToFooter(){
