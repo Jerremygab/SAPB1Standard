@@ -143,7 +143,7 @@ if ($serviceType == 'I'){
 		</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
+		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
 		
 	  </td>
 	   <td >
@@ -269,7 +269,7 @@ else{
 		</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"    maxlength="12" readonly/>
+		<input type="text" class="form-control matrix-cell text-right grossprice"    maxlength="12" />
 		
 	  </td>
 	   <td >

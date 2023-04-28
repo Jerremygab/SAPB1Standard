@@ -391,7 +391,7 @@ while (odbc_fetch_row($qry))
 								</div>
 						  </td>
 						   <td >
-							<input type="text" class="form-control matrix-cell text-right grossprice"    value="'.$WTLiable.'"  style="outline: none; border:none" maxlength="20" readonly/>
+							<input type="text" class="form-control matrix-cell text-right selWT"    value="'.$WTLiable.'"  style="outline: none; border:none" maxlength="20" readonly/>
 							
 						  </td>
 						   <td >

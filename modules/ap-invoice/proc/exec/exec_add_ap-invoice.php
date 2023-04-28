@@ -222,12 +222,12 @@ if ($err == 0)
 						$oRdr->Lines->DiscountPercent = $value[4];
 						$oRdr->Lines->VatGroup = $value[5];
 					
-						// if($value[6] == '1'){
-						// 	$oRdr->Lines->WTLiable = 1;
-						// }
-						// else{
-						// 	$oRdr->Lines->WTLiable = 0;
-						// }
+						if($value[6] == '1'){
+							$oRdr->Lines->WTLiable = 1;
+						}
+						else{
+							$oRdr->Lines->WTLiable = 0;
+						}
 				
 						$oRdr->Lines->Add();
 					
