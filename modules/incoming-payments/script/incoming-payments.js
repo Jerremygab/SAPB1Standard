@@ -2737,7 +2737,7 @@ $(document).ready(function () {
 				console.log(data)
 					
 			};
-	}
+		}
 		function ComputeBalanceDue(balance, payment){
 			
 			balance = isNaN(parseFloat(balance.replace(/,/g,'')))? 0: parseFloat(balance.replace(/,/g,''));

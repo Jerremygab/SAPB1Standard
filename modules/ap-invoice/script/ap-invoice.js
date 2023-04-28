@@ -353,6 +353,9 @@ $(document).ready(function () {
 		//WTAX Table
 		$('#wTaxTableResult').load('../templates/wtaxtable-lines.php'), function (){
 		};
+		//DOWN PAYMENT TABLE NI GABZ
+		$('#DownPaymentResult').load('../templates/downpayment-lines.php'), function (){
+		};
 		
 	//Matrix Cell Effects
 		
@@ -622,7 +625,11 @@ $(document).ready(function () {
 			let wtaxliable = $(this).children('td.item-12').text();
 			console.log(wtaxliable)
 		 
-	
+			// DOWN PAYMENT NI GABZ
+			generateRows(cardCode); 
+			// alert(generateRows(cardCode)); 
+			// console.log(generateRows(cardCode));
+			// ========== //
 			$('#bpModal').modal('hide');
 		
 			$('#txtCardCode').val(cardCode).css({'background-color': '', 'border-radius': '0px'});
@@ -650,7 +657,17 @@ $(document).ready(function () {
 			
 			$('#btnCopyFrom').prop('disabled',false);
 			
-			//Addresses
+			
+				$.ajax({
+					type: 'GET',
+					url: '../proc/views/vw_getdetailsDP.php',
+					data: {cardCode : cardCode},
+					success: function (html) 
+					{
+						$('#selShipToAddress').html(html);
+					}
+				}); 
+				//Addresses
 				$.ajax({
 					type: 'GET',
 					url: '../proc/views/vw_shipToAddressID.php',
@@ -2764,10 +2781,38 @@ $(document).ready(function () {
 				
 				}
 			});
+
+			// DOWN PAYMENT NI GABZ 
+			var jsonDP = '{';
+			var otArrDP = [];
+			var tbl = $('#DownPaymentResult tbody tr').each(function (i) 
+			{
 			
-			jsonWTax += otArrWTax.join(",") + '}';
-			console.log(jsonWTax)
-	
+				x = $(this).children();
+				var itArr = [];
+					if ($(this).find('input.docnum').val() != ''){
+						itArr.push('"' + $(this).find('input.docnum').val() + '"');
+						itArr.push('"' + $(this).find('input.doctype').val()+ '"');
+						itArr.push('"' + $(this).find('input.remarks').val().replace(/,/g, '') + '"')
+						itArr.push('"' + $(this).find('input.taxcode').val().replace(/,/g, '') + '"')
+						itArr.push('"' + $(this).find('input.netamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.taxamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.grossamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.taxcode').val().replace(/,/g, '') + '"')
+						itArr.push('"' + $(this).find('input.opennetamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.opentaxamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.opengrossamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.docdate').val().replace(/,/g, '') + '"');
+					
+						otArrDP.push('"' + i + '": [' + itArr.join(',') + ']'); 
+					
+				
+				}
+			});
+			
+			jsonDP += otArrDP.join(",") + '}';
+			console.log(jsonDP)
+			// ====================================== //
 	
 			if (err == 0) 
 			{
@@ -2779,6 +2824,9 @@ $(document).ready(function () {
 					{
 						json: json.replace(/(\r\n|\n|\r)/gm, '[newline]'),
 						jsonWTax: jsonWTax.replace(/(\r\n|\n|\r)/gm, '[newline]'),
+						// DOWN PAYMENT NI GABZ
+						jsonDP: jsonDP.replace(/(\r\n|\n|\r)/gm, '[newline]'),
+						// ========================================//
 						udfJson: udfJson.replace(/(\r\n|\n|\r)/gm, '[newline]'),
 						txtCardCode : txtCardCode,
 						txtPostingDate : txtPostingDate,
@@ -2813,7 +2861,8 @@ $(document).ready(function () {
 						wtLiableCodeArr : wtLiableCodeArr,
 						wtLiableRateArr : wtLiableRateArr,
 						txtWtLiableAcctCode : txtWtLiableAcctCode,
-	
+						
+						
 	
 						serviceType : serviceType,
 	
@@ -3889,6 +3938,7 @@ $(document).ready(function () {
 				}, 200)
 			
 		}
+		
 		function AddRowWTax(){
 			
 			var rowno = 0;
@@ -4299,6 +4349,17 @@ $(document).ready(function () {
 			
 			});
 		}
+		// DOWN PAYMENT NI GABZ
+		function generateRows(cardCode){
+			let serviceType = $('#selTransactionType').val();
+
+			console.log(cardCode)
+			$('#DownPaymentResult').load('../proc/views/vw_getdetailsdataDP.php?cardCode=' + cardCode), function (data){
+				console.log(data)
+					
+			};
+		}
+		// =====================
 		function PreviewDocJournalEntry(docNum, objType, currency){
 			let docstatus = '';
 			let docType ='';
