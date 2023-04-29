@@ -2409,8 +2409,12 @@ $(document).ready(function () {
 	
 					
 					if(objType == 24){
+					$('#txtCardCode').val(val.CardCode);
+					$('#txtCardName').val(val.CardName);	
 					$('#txtDocNum').val(val.DocNum);
 					$('#txtDocEntry').val(val.DocEntry);
+					$('#txtOwnerCode').val(val.EmpID);
+					$('#txtOwnerName').val(val.EmployeeName);
 					}
 					else{
 					//$('#txtDocNum').val("");
@@ -2461,8 +2465,8 @@ $(document).ready(function () {
 					$('#txtSalesEmpCode').val(val.SlpCode);
 					$('#txtSalesEmpName').val(val.SlpName);
 					
-					$('#txtOwnerCode').val(val.EmpID);
-					$('#txtOwnerName').val(val.EmployeeName);
+					// $('#txtOwnerCode').val(val.EmpID);
+					// $('#txtOwnerName').val(val.EmployeeName);
 					
 					if(objType == 24){
 					$('#txtRemarks').val(val.Comments);
@@ -2615,7 +2619,7 @@ $(document).ready(function () {
 		function PreviewRows(docNum, docType, objType, payNoDoc,callback){
 			$('#contents-tab').load('../proc/views/vw_getdetailsdata.php?docNum=' + docNum + '&docType=' + docType + '&objType=' + objType + '&payNoDoc=' + payNoDoc, function (result) 
 			{
-			// $('#contents-tab').append(result)
+			$('#contents-tab').append(result)
 			callback();
 			});
 			
@@ -2737,7 +2741,7 @@ $(document).ready(function () {
 				console.log(data)
 					
 			};
-		}
+	}
 		function ComputeBalanceDue(balance, payment){
 			
 			balance = isNaN(parseFloat(balance.replace(/,/g,'')))? 0: parseFloat(balance.replace(/,/g,''));

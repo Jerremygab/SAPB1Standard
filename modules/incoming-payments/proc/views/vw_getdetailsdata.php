@@ -6,8 +6,6 @@ $docNum = $_GET['docNum'];
 $docType = $_GET['docType'];
 $objType = $_GET['objType'];
 $payNoDoc = $_GET['payNoDoc'];
-$table = '';
-$table2 = '';
 
 if($docType == 'S' && $payNoDoc == 'N'){
 

@@ -2,18 +2,16 @@
 session_start();
 include_once('../../../../config/config.php');
 
-$cardcode = $_GET['cardCode'];
+
+$docNum = $_GET['docNum'];
 ?>
 			
 				<table id="tblDownPaymentTable" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
 					<thead   style="border-bottom: 0 !important; ">
 						<tr >
 							<th class="text-right" style=" color: black; min-width:20px; " >#</th>
-							<th style="color: black; min-width:100px;">Select</th>
 							<th style="color: black; min-width:200px;">Document Number</th>
-							<th style="color: black; min-width:250px;">Document Type</th>
 							<th style="color: black; min-width:150px;">Remarks</th>
-							<th style="color: black; min-width:150px;">Tax Code</th>
 							<th style="color: black; min-width:250px;">Net Amount to Draw</th>
 							<th style="color: black; min-width:250px;">Tax Amount to Draw</th>
 							<th style="color: black; min-width:250px;">Gross Amount to Draw</th>
@@ -27,42 +25,39 @@ $cardcode = $_GET['cardCode'];
 
 <?php
 $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
-										SELECT 
+                                            SELECT  DISTINCT
 
-										T0.CardCode,
-										T0.DocNum,
-										T0.DocType,
+                                            T0.BaseDocNum,
 
-										T0.Comments,
+                                            T0.BsComments,
 
-										T0.DpmAmnt,
-										T0.VatSum,
-										T0.DocTotal,
-										T0.DpmAmntSC,
-										T0.VatSumSy,
-										T0.DocTotalSy,
-										T0.DocDate
+                                            T0.DrawnSum,
+                                            T0.Vat,
+                                            T0.Gross,
+                                            T0.DrawnSumSc,
+                                            T0.VatSc,
+                                            T0.GrossSc,
+                                            T0.BsDocDate
 
 
-										FROM ODPO T0
-										WHERE T0.CardCode = '$cardcode'
-										AND T0.DocStatus = 'O'
+                                            FROM PCH9 T0
+                                            WHERE T0.DocEntry = '$docNum'
 										");
 $ctr = 1;
 
 while (odbc_fetch_row($qry)) 
 {
 	
-	$DocNum = odbc_result($qry, 'DocNum');
-	$DocType = odbc_result($qry, 'DocType');
-	$Remarks = odbc_result($qry, 'Comments');
-	$NetAmount = odbc_result($qry, 'DpmAmnt');
-	$TaxAmount = odbc_result($qry, 'VatSum');
-	$GrossAmount = odbc_result($qry, 'DocTotal');
-	$OpenNetAmount = odbc_result($qry, 'DpmAmntSC');
-	$OpenTaxAmount = odbc_result($qry, 'VatSumSy');
-	$OpenGrossAmount = odbc_result($qry, 'DocTotalSy');
-	$DocDate = odbc_result($qry, 'DocDate');
+	$DocNum = odbc_result($qry, 'BaseDocNum');
+
+	$Remarks = odbc_result($qry, 'BsComments');
+	$NetAmount = odbc_result($qry, 'DrawnSum');
+	$TaxAmount = odbc_result($qry, 'Vat');
+	$GrossAmount = odbc_result($qry, 'Gross');
+	$OpenNetAmount = odbc_result($qry, 'DrawnSumSc');
+	$OpenTaxAmount = odbc_result($qry, 'VatSc');
+	$OpenGrossAmount = odbc_result($qry, 'GrossSc');
+	$DocDate = odbc_result($qry, 'BsDocDate');
 	
 	
 	$readonly = '';
@@ -77,30 +72,20 @@ while (odbc_fetch_row($qry))
 								<span>'.$ctr.'</span>
 							
 							</td>
-							<td style="min-width:50px">
-								<input type="checkbox" style=" height:20px ; width:20px; display: flex; margin:auto;" class="form-control matrix-cell chkboxInvoice ">
-							</td>
 							<td>
 								<input type="text" class="form-control docnum"   style="outline: none; border:none; " value="'.$DocNum.'"readonly/>
 							</td>
 							<td >
-								<input type="text" class="form-control matrix-cell text-right doctype"  style="outline: none; border:none" maxlength="12"  value="'.$DocType.'" readonly/>
-							</td>
-							<td >
 								<input type="text" class="form-control matrix-cell text-right remarks"  style="outline: none; border:none" maxlength="12"  value="'.$Remarks.'" readonly/>
 							</td>
-								<td >
-								<input type="text" class="form-control matrix-cell text-right taxcode"   style="outline: none; border:none" maxlength="12"   value="" readonly/>
-								
-							</td>
 							<td >
-								<input type="text" class="form-control matrix-cell text-right netamount"  style="outline: none; border:none" maxlength="12"  value="'.$NetAmount.'" />
+								<input type="text" class="form-control matrix-cell text-right netamount"  style="outline: none; border:none" maxlength="12"  value="'.$NetAmount.'" readonly/>
 							</td>
 							<td >
 								<input type="text" class="form-control matrix-cell text-right taxamount"  style="outline: none; border:none" maxlength="12"  value="'.$TaxAmount.'" readonly/>
 							</td>
 							<td >
-								<input  type="number" class="form-control matrix-cell text-right grossamount "  style="outline: none; border:none" value="'.$GrossAmount.'"  />	
+								<input  type="number" class="form-control matrix-cell text-right grossamount "  style="outline: none; border:none" value="'.$GrossAmount.'"  readonly/>	
 							</td>
 							<td >
 								<input  type="number" class="form-control matrix-cell text-right opennetamount "  style="outline: none; border:none" value="'.$OpenNetAmount.'"  readonly/>	
@@ -128,9 +113,7 @@ odbc_close($MSSQL_CONN);
 		<th class="text-right" style=" color: black; min-width:20px; " >#</th>
 		<th style="color: black; min-width:100px;">Select</th>
 		<th style="color: black; min-width:200px;">Document Number</th>
-		<th style="color: black; min-width:250px;">Document Type</th>
 		<th style="color: black; min-width:150px;">Remarks</th>
-		<th style="color: black; min-width:150px;">Tax Code</th>
 		<th style="color: black; min-width:250px;">Net Amount to Draw</th>
 		<th style="color: black; min-width:250px;">Tax Amount to Draw</th>
 		<th style="color: black; min-width:250px;">Gross Amount to Draw</th>

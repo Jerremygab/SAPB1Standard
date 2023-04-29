@@ -133,6 +133,7 @@ $(document).ready(function () {
 			docNum = data;
 			PreviewDoc(docNum,objType);
 		});
+		generateDPAdded(docNum)
 	});
 	$(document.body).on('click', '#btnPrevRecord', function (){
 		let table = objectTable;
@@ -150,6 +151,7 @@ $(document).ready(function () {
 				PreviewDoc(docNum,objType);
 			});
 		}
+		generateDPAdded(docNum)
 	});
 	$(document.body).on('click', '#btnNextRecord', function (){
 		let table = objectTable;
@@ -166,6 +168,7 @@ $(document).ready(function () {
 				docNum = data;
 				PreviewDoc(docNum,objType);
 			});
+			generateDPAdded(docNum)
 		}
 	});
 	$(document.body).on('click', '#btnLastRecord', function (){
@@ -191,6 +194,9 @@ $(document).ready(function () {
 			$('#selSeries').prop('disabled',true);
 			$('#selSeries').prop('readonly',true);
 		});
+		generateDPAdded(docNum)
+		alert(generateDPAdded(docNum))
+		console.log(generateDPAdded(docNum));
 		
 	});
 	$(document.body).on('click', '#sideBarToggle', function () 
@@ -354,8 +360,8 @@ $(document).ready(function () {
 		$('#wTaxTableResult').load('../templates/wtaxtable-lines.php'), function (){
 		};
 		//DOWN PAYMENT TABLE NI GABZ
-		$('#DownPaymentResult').load('../templates/downpayment-lines.php'), function (){
-		};
+		// $('#DownPaymentResult').load('../templates/downpayment-lines.php'), function (){
+		// };
 		
 	//Matrix Cell Effects
 		
@@ -626,7 +632,7 @@ $(document).ready(function () {
 			console.log(wtaxliable)
 		 
 			// DOWN PAYMENT NI GABZ
-			generateRows(cardCode); 
+			generateDPRows(cardCode); 
 			// alert(generateRows(cardCode)); 
 			// console.log(generateRows(cardCode));
 			// ========== //
@@ -2781,7 +2787,7 @@ $(document).ready(function () {
 				
 				}
 			});
-
+			
 			// DOWN PAYMENT NI GABZ 
 			var jsonDP = '{';
 			var otArrDP = [];
@@ -2790,7 +2796,7 @@ $(document).ready(function () {
 			
 				x = $(this).children();
 				var itArr = [];
-					if ($(this).find('input.docnum').val() != ''){
+					if ($(this).find('input.chkboxInvoice').prop('checked') == true){
 						itArr.push('"' + $(this).find('input.docnum').val() + '"');
 						itArr.push('"' + $(this).find('input.doctype').val()+ '"');
 						itArr.push('"' + $(this).find('input.remarks').val().replace(/,/g, '') + '"')
@@ -4350,8 +4356,7 @@ $(document).ready(function () {
 			});
 		}
 		// DOWN PAYMENT NI GABZ
-		function generateRows(cardCode){
-			let serviceType = $('#selTransactionType').val();
+		function generateDPRows(cardCode){
 
 			console.log(cardCode)
 			$('#DownPaymentResult').load('../proc/views/vw_getdetailsdataDP.php?cardCode=' + cardCode), function (data){
@@ -4359,7 +4364,16 @@ $(document).ready(function () {
 					
 			};
 		}
-		// =====================
+
+		function generateDPAdded(docNum){
+
+			console.log(docNum)
+			$('#DownPaymentResult').load('../proc/views/vw_getdetailsdataDP-added.php?docNum=' + docNum), function (data){
+				console.log(data)
+					
+			};
+		}
+		// ===================== //
 		function PreviewDocJournalEntry(docNum, objType, currency){
 			let docstatus = '';
 			let docType ='';
@@ -4462,7 +4476,7 @@ $(document).ready(function () {
 		}
 		function ComputeWtaxPerRow(){
 		
-			// EDIT SCRIPTS NI JERREMY
+			// WTAX NI GABZ
 			setTimeout(function()	{
 					
 				 $('#tblDetails tbody tr').each(function(){
@@ -4506,7 +4520,7 @@ $(document).ready(function () {
 				})
 				
 			},500)
-			// EDIT SCRIPTS NI JERREMY
+			// ==================== //
 			
 		}
 		function ComputeWtaxPerRowToFooter(){
