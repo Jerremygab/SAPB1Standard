@@ -133,7 +133,9 @@ $(document).ready(function () {
 			docNum = data;
 			PreviewDoc(docNum,objType);
 		});
-		generateDPAdded(docNum)
+		Disable(objType);
+		generateDPAdded(docNum);
+		
 	});
 	$(document.body).on('click', '#btnPrevRecord', function (){
 		let table = objectTable;
@@ -151,7 +153,9 @@ $(document).ready(function () {
 				PreviewDoc(docNum,objType);
 			});
 		}
-		generateDPAdded(docNum)
+		
+		Disable(objType);
+		generateDPAdded(docNum);
 	});
 	$(document.body).on('click', '#btnNextRecord', function (){
 		let table = objectTable;
@@ -168,8 +172,9 @@ $(document).ready(function () {
 				docNum = data;
 				PreviewDoc(docNum,objType);
 			});
-			generateDPAdded(docNum)
 		}
+		Disable(objType);
+		generateDPAdded(docNum);
 	});
 	$(document.body).on('click', '#btnLastRecord', function (){
 		let table = objectTable;
@@ -178,25 +183,11 @@ $(document).ready(function () {
 		$.getJSON('../proc/views/vw_getLastEntry.php?table=' + table, function (data){
 			docNum = data;
 			PreviewDoc(docNum,objType);
-			$('#btnCardCode').prop('disabled',true);
-			$('#selSeries').prop('disabled',true);
-			$('#txtPostingDate').prop('disabled',true);
-			$('#txtPostingDate').prop('readonly',true);
-			$('#txtDocumentDate').prop('disabled',true);
-			$('#txtDocumentDate').prop('readonly',true);
-			$('#btnControlAccount').prop('disabled',true);
-			$('#btnPaymentTerms').prop('disabled',true);
-			$('#txtTinNumber').prop('readonly',true);
-			$('#btnRefDoc').prop('disabled',true);
-			$('#btnSalesEmp').prop('disabled',true);
-			$('#btnOwner').prop('disabled',true);
-			$('#btnWTax').prop('disabled',true);
-			$('#selSeries').prop('disabled',true);
-			$('#selSeries').prop('readonly',true);
+			
 		});
-		generateDPAdded(docNum)
-		alert(generateDPAdded(docNum))
-		console.log(generateDPAdded(docNum));
+		Disable(objType);
+		generateDPAdded(docNum);
+		
 		
 	});
 	$(document.body).on('click', '#sideBarToggle', function () 
@@ -664,15 +655,15 @@ $(document).ready(function () {
 			$('#btnCopyFrom').prop('disabled',false);
 			
 			
-				$.ajax({
-					type: 'GET',
-					url: '../proc/views/vw_getdetailsDP.php',
-					data: {cardCode : cardCode},
-					success: function (html) 
-					{
-						$('#selShipToAddress').html(html);
-					}
-				}); 
+				// $.ajax({
+				// 	type: 'GET',
+				// 	url: '../proc/views/vw_getdetailsDP.php',
+				// 	data: {cardCode : cardCode},
+				// 	success: function (html) 
+				// 	{
+				// 		$('#selShipToAddress').html(html);
+				// 	}
+				// }); 
 				//Addresses
 				$.ajax({
 					type: 'GET',
@@ -2798,21 +2789,17 @@ $(document).ready(function () {
 				var itArr = [];
 					if ($(this).find('input.chkboxInvoice').prop('checked') == true){
 						itArr.push('"' + $(this).find('input.docnum').val() + '"');
-						itArr.push('"' + $(this).find('input.doctype').val()+ '"');
-						itArr.push('"' + $(this).find('input.remarks').val().replace(/,/g, '') + '"')
-						itArr.push('"' + $(this).find('input.taxcode').val().replace(/,/g, '') + '"')
-						itArr.push('"' + $(this).find('input.netamount').val().replace(/,/g, '') + '"');
-						itArr.push('"' + $(this).find('input.taxamount').val().replace(/,/g, '') + '"');
-						itArr.push('"' + $(this).find('input.grossamount').val().replace(/,/g, '') + '"');
-						itArr.push('"' + $(this).find('input.taxcode').val().replace(/,/g, '') + '"')
-						itArr.push('"' + $(this).find('input.opennetamount').val().replace(/,/g, '') + '"');
-						itArr.push('"' + $(this).find('input.opentaxamount').val().replace(/,/g, '') + '"');
-						itArr.push('"' + $(this).find('input.opengrossamount').val().replace(/,/g, '') + '"');
-						itArr.push('"' + $(this).find('input.docdate').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.DPdoctype').val()+ '"');
+						itArr.push('"' + $(this).find('input.DPnetamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.DPtaxamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.DPgrossamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.DPopennetamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.DPopentaxamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.DPopengrossamount').val().replace(/,/g, '') + '"');
+						itArr.push('"' + $(this).find('input.DPdocdate').val().replace(/,/g, '') + '"');
 					
 						otArrDP.push('"' + i + '": [' + itArr.join(',') + ']'); 
 					
-				
 				}
 			});
 			
@@ -3600,7 +3587,7 @@ $(document).ready(function () {
 			$(this).addClass('selected-row');
 	
 		});
-	
+		
 		$(document.body).on('click', '.btnRefDocNum', function ()
 		{
 			transactType = $(this).parent().parent().parent().children().find('div .txtTransactType').val();
@@ -3968,6 +3955,41 @@ $(document).ready(function () {
 				}, 200)
 			}
 		}
+
+		// READONLY AT DISABLE NI GABZ
+
+		function Disable(objType){
+			setTimeout(function () {
+				$('#tblDetails tbody tr').each(function(){
+
+					$(this).find('input.grossprice').prop('readonly',true);  
+					$(this).find('input.quantity').prop('readonly',true);  
+					$(this).find('input.price').prop('readonly',true);  
+					$(this).find('input.discount').prop('readonly',true);  
+					$(this).find('select.taxcode').prop('disabled',true);  
+					$(this).find('button.btn').prop('disabled',true);   
+					
+				});
+				
+				$('#btnCardCode').prop('disabled',true);
+				$('#selSeries').prop('disabled',true);
+				$('#txtPostingDate').prop('disabled',true);
+				$('#txtPostingDate').prop('readonly',true);
+				$('#txtDocumentDate').prop('disabled',true);
+				$('#txtDocumentDate').prop('readonly',true);
+				$('#btnControlAccount').prop('disabled',true);
+				$('#btnPaymentTerms').prop('disabled',true);
+				$('#txtTinNumber').prop('readonly',true);
+				$('#btnRefDoc').prop('disabled',true);
+				$('#btnSalesEmp').prop('disabled',true);
+				$('#btnOwner').prop('disabled',true);
+				$('#btnWTax').prop('disabled',true);
+				$('#selSeries').prop('disabled',true);
+				$('#selSeries').prop('readonly',true);
+			
+			},1000);
+		};
+		// ======================================= //
 		function PreviewDoc(docNum, objType){
 			let docstatus = '';
 			let docType ='';
@@ -3987,6 +4009,7 @@ $(document).ready(function () {
 			}
 			
 			let trnspCode;
+			generateDPAdded(docNum)
 			$.getJSON('../proc/views/vw_getheaderdata.php?docNum=' + docNum + '&objType=' + objType, function (data){
 	
 				$.each(data, function (key, val){
@@ -4021,6 +4044,7 @@ $(document).ready(function () {
 					// val.CancelDate ? $('#txtCancellationDate').attr('type', 'date') : $('#txtCancellationDate').attr('type', 'text');
 					// $('#txtCancellationDate').val(val.CancelDate);
 					// $('#txtRequiredDate').val(val.ReqDate);
+					
 					if(objType == objectType){
 						$('#txtFooterDiscountSum').val(val.DiscSum);
 						$('#txtFooterDiscountPercentage').val(val.DiscPrcnt);
@@ -4357,21 +4381,28 @@ $(document).ready(function () {
 		}
 		// DOWN PAYMENT NI GABZ
 		function generateDPRows(cardCode){
-
+			
 			console.log(cardCode)
 			$('#DownPaymentResult').load('../proc/views/vw_getdetailsdataDP.php?cardCode=' + cardCode), function (data){
 				console.log(data)
-					
+				
 			};
 		}
-
+		
 		function generateDPAdded(docNum){
-
-			console.log(docNum)
+		
 			$('#DownPaymentResult').load('../proc/views/vw_getdetailsdataDP-added.php?docNum=' + docNum), function (data){
 				console.log(data)
-					
 			};
+			setTimeout(function () 
+				{
+					$('#tblDownPaymentTableAdded tbody tr').each(function()
+					{
+						netamountAdded = $(this).find('input.DPnetamount').val();
+
+							$('#txtDownPayment').val(FormatMoney(netamountAdded));
+					});
+				}, 500) 
 		}
 		// ===================== //
 		function PreviewDocJournalEntry(docNum, objType, currency){
@@ -4431,6 +4462,48 @@ $(document).ready(function () {
 				callback();
 			});
 		}
+		// DOWN PAYMENT NI GABZ
+		$(document.body).on('change', 'input.chkboxInvoice', function () 
+		{
+			
+			netamount = 0.00;
+			grossamount = 0.00;
+			tax = 0.00;
+			let vat = parseFloat($('#txtVatSum').val().replace(/,/g,''));
+			
+
+			$('#tblDownPaymentTable tbody tr').each(function()
+				{
+					if($(this).find('input.chkboxInvoice').prop('checked') == true){
+						
+						netamount += parseFloat($(this).find('input.DPnetamount').val());
+						grossamount += parseFloat($(this).find('input.DPgrossamount').val());
+						tax += parseFloat($(this).find('input.DPtaxamount').val());
+						
+					}
+				});
+					console.log(vat)
+					console.log(tax)
+
+		setTimeout(function(){
+			if(tax >= vat){
+				let TaxAmount = tax - vat;
+
+				$('#txtVatSum').val(FormatMoney(TaxAmount));
+				console.log(TaxAmount)
+			}
+			else if(tax <= vat){
+				let TaxAmount = vat - tax;
+
+				$('#txtVatSum').val(FormatMoney(TaxAmount));
+				console.log(TaxAmount)
+			}
+			
+			$('#txtDownPayment').val(FormatMoney(netamount));
+			$('#txtPaidToDate').val(FormatMoney(grossamount));
+		},2000);
+		});
+		// ============================ //
 		function ComputeTaxable(){
 			let amount = 0.00;
 	

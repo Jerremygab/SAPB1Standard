@@ -1866,7 +1866,7 @@
           <!--Header-->
           <div class="modal-header"  style="background-color: #A8A8A8; border-bottom-width: thick; border-color: #f0ad4e;">
             <h4 class="modal-title w-100" id="myModalLabel" style="color:black">Total Down Payment</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>

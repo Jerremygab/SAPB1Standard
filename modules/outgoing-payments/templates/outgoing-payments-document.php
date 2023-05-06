@@ -157,7 +157,7 @@
                                                     <select id="selTransactionType"
                                                         class="col-sm-6 form-control-sm mdb-select md-form text-left"
                                                         searchable="Search here.."
-                                                        style=" outline:none !important; border-color: #D0D0D0 !important;">
+                                                        style=" outline:none; border-color: #D0D0D0;">
                                                         <option class="text-center" value="S">Vendor</option>
                                                         <option class="text-center" value="A">Account</option>
                                                         <input type="hidden" id="rowLoader" name="rowLoader"
@@ -388,16 +388,16 @@
                                                         placeholder="" resize='false' maxlength="254"></textarea>
                                                 </div>
                                             </div>
-                                           <!--  1234 -->
                                             <div class="form-group row  py-0 my-0 paynodoc d-none">
-                                                <label class="col-sm-3 col-form-label " style="color: black;">Control Account</label>
+                                                <label class="col-sm-3 col-form-label " style="color: black;">Control
+                                                    Account</label>
                                                 <div class="col-sm-9 input-group">
                                                     <input readonly type="text" id="txtGLCodePayNoDoc"
                                                         class="form-control inputRadius " placeholder=""
                                                         aria-label="Username" aria-describedby="basic-addon1 "
                                                         style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
                                                     <input readonly type="text" id="txtGLNamePayNoDoc"
-                                                        class="form-control inputRadius" placeholder=""
+                                                        class="form-control inputRadius d-none" placeholder=""
                                                         aria-label="Username" aria-describedby="basic-addon1 "
                                                         style="border-bottom-left-radius:5px; border-top-left-radius:5px;">
                                                     <div class="input-group-append">
@@ -745,6 +745,7 @@
                                 <th class="d-none">Tin Number</th>
                                 <th class="d-none">Contact Person Code</th>
                                 <th class="d-none">Currency</th>
+                                <th class="d-none">DebPayAcct</th>
 
                             </tr>
                         </thead>
@@ -760,7 +761,8 @@
 																						T0.LicTradNum,
 																						T0.GroupNum,
 																						T0.Currency,
-																						T2.PymntGroup
+																						T2.PymntGroup,
+                                                                                        T0.DebPayAcct
 																						
 																						
 																						
@@ -771,8 +773,7 @@
 																						
 																						WHERE T0.CardType = 'S'
 																						
-																						ORDER BY T0.CardCode ASC");
-                                                                                        
+																						ORDER BY T0.CardCode");
 								while (odbc_fetch_row($qry)) 
 								{
 									echo '<tr class="tableHover">
@@ -786,6 +787,7 @@
 												<td class="item-7 d-none">'.odbc_result($qry, 'LicTradNum').'</td>
 												<td class="item-8 d-none">'.odbc_result($qry, 'CntctCode').'</td>
 												<td class="item-9 d-none">'.odbc_result($qry, 'Currency').'</td>
+                                                <td class="item-10 d-none">'.odbc_result($qry, 'DebPayAcct').'</td>
 												
 											  </tr>';
 									$itemno++;	  
@@ -862,7 +864,6 @@
 																						WHERE T0.CardType = 'S'
 																						
 																						ORDER BY T0.CardCode ASC");
-                                                                                        /* qwe */
 								while (odbc_fetch_row($qry)) 
 								{
 									echo '<tr class="tableHover">
@@ -1271,30 +1272,16 @@
                             <?php
 							$itemno = 1;
 							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT DISTINCT
-
-									T0.AcctCode AS Code, 
-									T0.AcctName AS Name, 
-									T0.CurrTotal AS CurrentTotal,
-									'ACCT' AS Type,
-									T0.AcctCode AS ControlAccount
-																											
-								FROM OACT T0
-								WHERE T0.LocManTran = 'N' AND T0.Postable = 'Y'
-
-								UNION ALL
+																						T0.AcctCode, 
+																						T0.AcctName, 
+																						T0.CurrTotal
+																						
+																						FROM OACT T0 
+																						WHERE T0.Postable = 'Y' AND T0.LocManTran = 'N'
+																						
 
 
-								SELECT TOP 12
-
-									T0.CardCode AS Code, 
-									T0.CardName AS Name,
-									T0.Balance AS CurrentTotal,
-									'BP' AS Type,
-									T0.DebPayAcct AS ControlAccount
-																											
-								FROM OCRD T0
-
-								ORDER BY Type, Code ASC");
+																						ORDER BY T0.AcctCode ASC");
 								while (odbc_fetch_row($qry)) 
 								{
 									echo '<tr class="">
@@ -1323,66 +1310,7 @@
         </div>
     </div>
     <!-- GL Modal -->
-<div class="modal fade" id="controlAccountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document" style="width:100%">
-            <!--Content-->
-            <div class="modal-content-full-width modal-content">
-                <!--Header-->
-                <div class="modal-header"
-                    style="background-color: #A8A8A8; border-bottom-width: thick; border-color: #f0ad4e;">
-                    <h4 class="modal-title w-100" id="myModalLabel" style="color:black">List of G/L Accounts</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!--Body-->
-                <div class="modal-body">
-                    <table class="table table-striped table-bordered table-hover" id="tblControlAccount" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Account Number</th>
-                                <th>Account Name</th>
-                                <th>Account Balance</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-							$itemno = 1;
-							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT TOP 12
-																						T0.AcctCode, 
-																						T0.AcctName, 
-																						T0.CurrTotal
-																						
-																						FROM OACT T0
-																						WHERE T0.Postable='Y' and T0.LocManTran ='N'
-																						ORDER BY T0.AcctCode DESC");
-								while (odbc_fetch_row($qry)) 
-								{
-									echo '<tr class="">
-												<td>'.$itemno.'</td>
-												<td class="item-1">'.odbc_result($qry, 'AcctCode').'</td>
-												<td class="item-2">'.odbc_result($qry, 'AcctName').'</td>
-												<td class="item-3 " >'.odbc_result($qry, 'CurrTotal').'</td>
-												
-											  </tr>';
-									$itemno++;	  
-								}
-								/* ASDASDASD */
-								odbc_free_result($qry);
-						    ?>
-                        </tbody>
-                    </table>
-                </div>
-                <!--Footer-->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-            <!--/.Content-->
-        </div>
-    </div>
     <!-- Ship To Details Modal -->
     <div class="modal fade" id="shipToDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
@@ -1806,17 +1734,17 @@
                 <!--Body-->
                 <div class="modal-body">
                     <ul class="nav nav-tabs pt-2" id="myTab" role="tablist">
-                        <li class="nav-item ">
+                        <li class="nav-item " >
                             <a class="nav-link  active" id="" data-toggle="tab" href="#check" role="tab"
                                 aria-controls="contents" aria-selected="true"
                                 style="color: black; font-weight:bold">Check</a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item " >
                             <a class="nav-link  " id="" data-toggle="tab" href="#transfer" role="tab"
                                 aria-controls="contents" aria-selected="true"
                                 style="color: black; font-weight:bold">Bank Transfer</a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item " >
                             <a class="nav-link  " id="" data-toggle="tab" href="#cash" role="tab"
                                 aria-controls="contents" aria-selected="true"
                                 style="color: black; font-weight:bold">Cash</a>
@@ -1910,7 +1838,7 @@
                                             </div>
                                             <div class="col-sm-9 input-group mb-1 ">
                                                 <input type="text" id="txtTransferDate2" class="form-control col-10"
-                                                    value="" min="01-01-2018" max="12-31-2050">
+                                                    value="<?php echo date('m.d.Y'); ?>" min="01-01-2018" max="12-31-2050">
                                                 <input type="date" id="txtTransferDate"
                                                     class="form-control col-2 transferdate"
                                                     value="<?php echo date('Y-m-d'); ?>" min="01-01-2018"
@@ -2112,18 +2040,18 @@
                                 <th>Account Balance</th>
 
                             </tr>
-                        </thead><!-- asdasd -->
+                        </thead>
                         <tbody>
                             <?php
 							$itemno = 1;
-							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT TOP 12
-                            T0.AcctCode, 
-                            T0.AcctName, 
-                            T0.CurrTotal
-                            
-                            FROM OACT T0
-                            WHERE T0.Postable='Y' and T0.LocManTran ='N'
-                            ORDER BY T0.AcctCode DESC");
+							$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."]; SELECT DISTINCT
+																						T0.AcctCode, 
+																						T0.AcctName, 
+																						T0.CurrTotal
+																						
+																						FROM OACT T0
+																						WHERE T0.Postable = 'Y' AND T0.LocManTran = 'Y'
+																						ORDER BY T0.AcctCode ASC");
 								while (odbc_fetch_row($qry)) 
 								{
 									echo '<tr class="">

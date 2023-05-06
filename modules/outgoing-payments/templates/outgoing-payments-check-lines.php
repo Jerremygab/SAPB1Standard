@@ -30,7 +30,7 @@ include_once('../../../config/config.php');
 
                 </td>
                 <td class="row">
-                    <input type="text" class="form-control  matrix-cell duedate2 col-9"
+                    <input type="text" value="<?php echo date('m.d.Y'); ?>" class="form-control  matrix-cell duedate2 col-9"
                         style="outline: none; border:none;">
                     <input type="date" class="form-control  matrix-cell duedate col-3"
                         style="outline: none; border:none;" placeholder="" aria-label="Username"
@@ -41,7 +41,7 @@ include_once('../../../config/config.php');
 
                 <td>
                     <input type="text" class="form-control matrix-cell text-right checkamount"
-                        style="outline: none; border:none" maxlength="12" />
+                        style="outline: none; border:none" maxlength="12" value="0.00"/>
 
                 </td>
                 <td>
@@ -80,9 +80,10 @@ include_once('../../../config/config.php');
                 </td>
                 <td>
                     <div class="input-group">
-                        <input type="text" class="form-control matrix-cell text-right account" aria-label=""
-                            aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"
-                            readonly />
+                        <input type="text" class="form-control matrix-cell text-right account"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
+                        <button class="btn "   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#acctFMSModal" data-backdrop="false">
+                        <i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
+                        </button>
                         <!--<button class="btn " type="button" data-mdb-ripple-color="dark"
                             style="background-color: #ADD8E6; " data-toggle="modal" data-target="#acctFMSModal"
                             data-backdrop="false">

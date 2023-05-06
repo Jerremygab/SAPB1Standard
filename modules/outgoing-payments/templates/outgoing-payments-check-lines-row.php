@@ -11,16 +11,24 @@ include_once('../../../config/config.php');
 		<span>1</span>
 	
 	  </td>
-	 	<td class="row">
-			<input type="text" class="form-control  matrix-cell duedate2 col-9" style="outline: none; border:none;">
-			<input type="date" class="form-control  matrix-cell duedate col-3" style="outline: none; border:none;" placeholder="" aria-label="Username" aria-describedby="basic-addon1" value="<?php echo date('Y-m-d'); ?>" min="2018-01-01" max="2050-12-31">
-		 </td>
-	    <td >
-		<input type="text" class="form-control matrix-cell text-right checkamount"  style="outline: none; border:none" maxlength="12" />
-		
-	  </td>
-	    <td >
-		<select type="text" class="form-control matrix-cell bankcode"   style="outline: none; border:none" maxlength="8">
+	  <td class="row">
+                    <input type="text" value="<?php echo date('m.d.Y'); ?>" class="form-control  matrix-cell duedate2 col-9"
+                        style="outline: none; border:none;">
+                    <input type="date" class="form-control  matrix-cell duedate col-3"
+                        style="outline: none; border:none;" placeholder="" aria-label="Username"
+                        aria-describedby="basic-addon1" value="<?php echo date('Y-m-d'); ?>" min="2018-01-01"
+                        max="2050-12-31">
+
+                </td>
+
+                <td>
+                    <input type="text" class="form-control matrix-cell text-right checkamount"
+                        style="outline: none; border:none" maxlength="12" value="0.00"/>
+
+                </td>
+                <td>
+                    <select type="text" class="form-control matrix-cell bankcode" style="outline: none; border:none"
+                        maxlength="8">
 				<?php
 					$itemno = 1;
 					$qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
@@ -52,33 +60,28 @@ include_once('../../../config/config.php');
                         style="outline: none; border:none" maxlength="12" readonly />
 
                 </td>
+	    
 	  <td >
 	  <div class="input-group">
-                        <input type="text" class="form-control matrix-cell text-right account" aria-label=""
-                            aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"
-                            readonly />
-                        <!--<button class="btn " type="button" data-mdb-ripple-color="dark"
-                            style="background-color: #ADD8E6; " data-toggle="modal" data-target="#acctFMSModal"
-                            data-backdrop="false">
-                            <i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue "></i>
-                        </button>-->
-                    </div>
-                </td>
-                <td>
-                    <center>
-                        <input type="checkbox" style=" height:20px ; width:20px "
-                            class="form-control matrix-cell chkBoxManualCheck ">
-                    </center>
-                </td>
-                <td>
-                    <input type="number" class="form-control matrix-cell text-right checkno "
-                        style="outline: none; border:none" readonly />
-                </td>
-                <td>
-                    <input type="text" class="form-control matrix-cell text-right glAcctCheck "
-                        style="outline: none; border:none" readonly />
-                </td>
-            </tr>
+			<input type="text" class="form-control matrix-cell text-right account"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
+		  <button class="btn "   type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#acctFMSModal" data-backdrop="false">
+			<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
+		  </button>
+		</div>
+	  </td>
+	  <td >
+		
+				<input type="checkbox" style=" height:20px ; width:20px ; margin: auto; margin-top: 10px; " 
+				class="form-control matrix-cell chkBoxManualCheck ">
+			
+	  </td>
+	   <td >
+		<input  type="number" class="form-control matrix-cell text-right checkno "  style="outline: none; border:none" readonly/>	
+	  </td>
+	   <td >
+		<input  type="text" class="form-control matrix-cell text-right glAcctCheck " style="outline: none; border:none" readonly/>	
+	  </td>
+   </tr>
 
 
 

@@ -6,7 +6,7 @@ include_once('../../../../config/config.php');
 $docNum = $_GET['docNum'];
 ?>
 			
-				<table id="tblDownPaymentTable" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
+				<table id="tblDownPaymentTableAdded" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
 					<thead   style="border-bottom: 0 !important; ">
 						<tr >
 							<th class="text-right" style=" color: black; min-width:20px; " >#</th>
@@ -66,6 +66,14 @@ while (odbc_fetch_row($qry))
 	$disabled = '';
 	$hasBatchSerial = '';
 
+	$arr[] = array(
+		"DrawnSum" => number_format(odbc_result($qry, 'DrawnSum'),2),
+		"Vat" => number_format(odbc_result($qry, 'Vat'),2),
+		"Gross" => number_format(odbc_result($qry, 'Gross'),2),
+		"DrawnSumSc" => number_format(odbc_result($qry, 'DrawnSumSc'),2),
+		"GrossSc" => number_format(odbc_result($qry, 'GrossSc'),2),
+	);
+
 					echo 
 					' <tr style="background-color: white; "  >
 							<td class="rowno text-right" style="background-color: lightgray;color:black; font-size:13px;">
@@ -73,31 +81,31 @@ while (odbc_fetch_row($qry))
 							
 							</td>
 							<td>
-								<input type="text" class="form-control docnum"   style="outline: none; border:none; " value="'.$DocNum.'"readonly/>
+								<input type="text" class="form-control DPdocnum"   style="outline: none; border:none; " value="'.$DocNum.'"readonly/>
 							</td>
 							<td >
-								<input type="text" class="form-control matrix-cell text-right remarks"  style="outline: none; border:none" maxlength="12"  value="'.$Remarks.'" readonly/>
+								<input type="text" class="form-control matrix-cell text-right DPremarks"  style="outline: none; border:none" maxlength="12"  value="'.$Remarks.'" readonly/>
 							</td>
 							<td >
-								<input type="text" class="form-control matrix-cell text-right netamount"  style="outline: none; border:none" maxlength="12"  value="'.$NetAmount.'" readonly/>
+								<input type="text" class="form-control matrix-cell text-right DPnetamount"  style="outline: none; border:none" maxlength="12"  value="'.$NetAmount.'" readonly/>
 							</td>
 							<td >
-								<input type="text" class="form-control matrix-cell text-right taxamount"  style="outline: none; border:none" maxlength="12"  value="'.$TaxAmount.'" readonly/>
+								<input type="text" class="form-control matrix-cell text-right DPtaxamount"  style="outline: none; border:none" maxlength="12"  value="'.$TaxAmount.'" readonly/>
 							</td>
 							<td >
-								<input  type="number" class="form-control matrix-cell text-right grossamount "  style="outline: none; border:none" value="'.$GrossAmount.'"  readonly/>	
+								<input  type="number" class="form-control matrix-cell text-right DPgrossamount "  style="outline: none; border:none" value="'.$GrossAmount.'"  readonly/>	
 							</td>
 							<td >
-								<input  type="number" class="form-control matrix-cell text-right opennetamount "  style="outline: none; border:none" value="'.$OpenNetAmount.'"  readonly/>	
+								<input  type="number" class="form-control matrix-cell text-right DPopennetamount "  style="outline: none; border:none" value="'.$OpenNetAmount.'"  readonly/>	
 							</td>
 							<td >
-								<input  type="number" class="form-control matrix-cell text-right opentaxamount "  style="outline: none; border:none" value="'.$OpenTaxAmount.'"  readonly/>	
+								<input  type="number" class="form-control matrix-cell text-right DPopentaxamount "  style="outline: none; border:none" value="'.$OpenTaxAmount.'"  readonly/>	
 							</td>
 							<td >
-								<input  type="number" class="form-control matrix-cell text-right opengrossamount "  style="outline: none; border:none" value="'.$OpenGrossAmount.'"  readonly/>	
+								<input  type="number" class="form-control matrix-cell text-right DPopengrossamount "  style="outline: none; border:none" value="'.$OpenGrossAmount.'"  readonly/>	
 							</td>
 							<td >
-								<input  type="text" class="form-control matrix-cell text-right docdate "  style="outline: none; border:none" value="'.$DocDate.'"  readonly/>	
+								<input  type="text" class="form-control matrix-cell text-right DPdocdate "  style="outline: none; border:none" value="'.$DocDate.'"  readonly/>	
 							</td>
 							</tr>';
 						

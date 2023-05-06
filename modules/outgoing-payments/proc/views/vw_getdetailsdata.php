@@ -14,7 +14,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
 ?>
 
 
-<table id="tblDetails2" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width=100% !important;"  cellspacing="0">
+<table id="tblDetails2" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
   <thead   style="border-bottom: 0 !important; ">
     <tr >
 		<th class="text-right" style=" color: black; max-width:50px;">#</th>
@@ -67,6 +67,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
 	FROM OPCH T0
 	
 	INNER JOIN VPM2 T2 ON T0.DocEntry = T2.DocEntry
+	
 	INNER JOIN OVPM T3 ON T3.DocEntry = T2.DocNum
 	WHERE T3.DocEntry = $docNum
 		
@@ -204,8 +205,8 @@ odbc_close($MSSQL_CONN);
 else if($docType == 'A'){
 ?>
 <table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white">
-  <thead style="z-index: 999;  background-color: lightgray;  !important" class="thead-fixed " style="">
-    <tr style="background-color: lightgray; z-index: 999; !important">
+  <thead style="z-index: 999;  background-color: lightgray;" class="thead-fixed ">
+    <tr style="background-color: lightgray; z-index: 999; ">
 			<th class="text-right" style="color: black">#</th>
 			<th style="color: black; min-width:300px;">G/L Account</th>
 			<th style="color: black; min-width:400px;" >G/L Name</th>

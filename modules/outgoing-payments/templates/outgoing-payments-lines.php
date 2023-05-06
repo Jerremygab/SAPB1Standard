@@ -6,7 +6,7 @@ $serviceType = $_GET['serviceType'];
 if ($serviceType == 'S'){
 ?>
 
-<div class="">
+<div class="" style="width: 100%;">
     <table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"
         style="background-color: white; width:100% !important;" cellspacing="0">
         <thead style="border-bottom: 0 !important; ">
@@ -15,6 +15,7 @@ if ($serviceType == 'S'){
                 <th style="color: black; min-width:50px; ">Select</th>
                 <th style="color: black; min-width:150px; ">Document No.</th>
                 <th style="color: black; min-width:150px;">Document Type</th>
+                <th style="color: black; min-width:150px; ">Customer Ref No.</th>
                 <th style="color: black; min-width:150px;">Date</th>
                 <th style="color: black; min-width:150px;">Total</th>
                 <th style="color: black; min-width:150px;">Balance Due</th>
@@ -37,6 +38,7 @@ if ($serviceType == 'S'){
                 <th style="color: black; min-width:50px; ">Select</th>
                 <th style="color: black; min-width:150px; ">Document No.</th>
                 <th style="color: black; min-width:150px;">Document Type</th>
+                <th style="color: black; min-width:150px; ">Customer Ref No.</th>
                 <th style="color: black; min-width:150px;">Date</th>
                 <th style="color: black; min-width:150px;">Overdue Days</th>
                 <th style="color: black; min-width:300px;">Total</th>
@@ -59,21 +61,21 @@ if ($serviceType == 'S'){
 
 else{
 ?>
-<div class="">
-    <table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"
-        style="background-color: white">
-        <thead style="z-index: 999;  background-color: lightgray  !important;" class="thead-fixed ">
-            <tr style="background-color: lightgray; z-index: 999 !important;">
-                <th class="text-right" style="color: black">#</th>
+<div class="" style="width: 100%;">
+<table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable " cellspacing="0"  style="background-color: white; width:100%" cellspacing="0">
+  <thead   style="border-bottom: 0 !important">
+    <tr style="background-color: lightgray; z-index: 999">
+	  <th class="text-right" style=" color: black; min-width:15px;">#</th>
                 <th style="color: black; min-width:300px;">G/L Account</th>
                 <th style="color: black; min-width:400px;">G/L Name</th>
                 <th style="color: black; min-width:150px;">Doc. Remarks</th>
                 <th style="color: black; min-width:150px;">Tax Definition</th>
                 <th style="color: black; min-width:100px;">Net Amount</th>
+                <th style="color: black; min-width:100px;">Gross Amount</th>
+</tr>
  
 
 
-            </tr>
         </thead>
         <tbody class="">
             <tr style="background-color: white; ">
@@ -133,18 +135,23 @@ else{
 		<input type="text" class="form-control matrix-cell text-right price"   style="outline: none; border:none" maxlength="12"/>
 		
 	  </td>
+      <td >
+		<input type="text" class="form-control matrix-cell text-right grosstotal"   style="outline: none; border:none" maxlength="12" />
+		
+	  </td>
 	  
             </tr>
 
         </tbody>
         <tfoot style="z-index: 999;  background-color: lightgray; " class="d-none">
-            <tr style="background-color: lightgray; z-index: 999 !important;">
+            <tr style="background-color: lightgray; z-index: 999 !important">
                 <th class="text-right" style="color: black">#</th>
                 <th style="color: black; min-width:300px;">G/L Account</th>
                 <th style="color: black; min-width:400px;">G/L Name</th>
                 <th style="color: black; min-width:150px;">Doc. Remarks</th>
                 <th style="color: black; min-width:150px;">Tax Definition</th>
                 <th style="color: black; min-width:100px;">Net Amount</th>
+                <th style="color: black; min-width:100px;">Gross Amount</th>
             </tr>
         </tfoot>
     </table>

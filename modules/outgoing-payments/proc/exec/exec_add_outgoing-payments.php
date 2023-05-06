@@ -17,6 +17,7 @@ $docentry = '';
 $json = $_POST['json'];
 $jsonCheck =  $_POST['jsonCheck'];
 $txtSeriesOVPM = $_POST['txtSeriesOVPM'];
+
 $txtCardCode = $_POST['txtCardCode'];
 $txtCashGLCode = $_POST['txtCashGLCode'];
 $txtCashAmount = $_POST['txtCashAmount'];
@@ -34,6 +35,8 @@ $txtPayTo = $_POST['txtPayTo'];
 $selTransactionType = $_POST['selTransactionType'];
 $txtPayNoDoc = $_POST['txtPayNoDoc'];
 $txtGLCodePayNoDoc = $_POST['txtGLCodePayNoDoc'];
+// $txtAcctName = $_POST['acctName'];
+// $txtAcctNumber = $_POST['acctNumber'];
 $txtCheckAmountTotal = $_POST['txtCheckAmountTotal'];
 $udfJson = $_POST['udfJson'];
 $Cash = 0.00;

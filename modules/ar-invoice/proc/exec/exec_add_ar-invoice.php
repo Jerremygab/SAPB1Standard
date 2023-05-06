@@ -105,7 +105,22 @@ if ($err == 0)
 			if($selShippingType != ''){
 				$oRdr->TransportationCode = $selShippingType;
 			}
-		
+			// WTAX NI GABZ
+			if(json_decode($jsonWTax) != null) 
+			{
+				$jsonWTax = json_decode($jsonWTax, true);
+				//$ctr = -1;
+				//$a = 0;
+				foreach ($jsonWTax as $key => $value) 
+				{
+					$oRdr->WithholdingTaxData->WTCode = $value[0];
+					// $oRdr->WithholdingTaxData->WTAmount = $value[4];
+					// $oRdr->WithholdingTaxData->TaxableAmount = $value[5];
+
+					$oRdr->WithholdingTaxData->Add();
+				}
+			}
+			// ===================================== //
 		
 			
 			if(json_decode($json) != null) 
@@ -199,7 +214,7 @@ if ($err == 0)
 						$oRdr->Lines->VatGroup = $value[5];
 						$oRdr->Lines->WarehouseCode = $value[17];
 
-						// ADD LINES NI JERREMY
+						// WTAX NI GABZ
 
 						if($value[21] == '1'){
 							$oRdr->Lines->WTLiable = 1;
@@ -208,7 +223,7 @@ if ($err == 0)
 							$oRdr->Lines->WTLiable = 0;
 						}
 						
-						// ADD LINES NI JERREMY
+						// WTAX NI GABZ
 
 
 						
@@ -225,13 +240,14 @@ if ($err == 0)
 						$oRdr->Lines->UnitPrice = $value[2]; 
 						$oRdr->Lines->DiscountPercent = $value[4];
 						$oRdr->Lines->VatGroup = $value[5];
+						// WTAX NI GABZ
 						if($value[6] == '1'){
 							$oRdr->Lines->WTLiable = 1;
 						}
 						else{
 							$oRdr->Lines->WTLiable = 0;
 						}
-				
+						// WTAX NI GABZ
 						$oRdr->Lines->Add();
 					
 					}

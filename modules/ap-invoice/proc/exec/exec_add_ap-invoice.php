@@ -109,7 +109,7 @@ if ($err == 0)
 			if($selShippingType != ''){
 				$oRdr->TransportationCode = $selShippingType;
 			}
-		
+			// DOWNPAYMENT NI GABZ
 			if(json_decode($jsonWTax) != null) 
 			{
 				$jsonWTax = json_decode($jsonWTax, true);
@@ -124,7 +124,8 @@ if ($err == 0)
 					$oRdr->WithholdingTaxData->Add();
 				}
 			}
-
+			// ===================================== //
+			
 			// DOWNPAYMENT NI GABZ
 			if(json_decode($jsonDP) != null) 
 			{
@@ -133,7 +134,7 @@ if ($err == 0)
 				//$a = 0;
 				foreach ($jsonDP as $key => $value) 
 				{
-					$oRdr->DownPaymentsToDraw->DocEntry = 9;
+					$oRdr->DownPaymentsToDraw->DocEntry = $value[0];
 					// $oRdr->WithholdingTaxData->WTAmount = $value[4];
 					// $oRdr->WithholdingTaxData->TaxableAmount = $value[5];
 

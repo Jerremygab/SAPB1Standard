@@ -2469,17 +2469,17 @@ var serviceType = 'I';
 		}
 	});
 	$(document.body).on('click', '#btnWTLiableYes', function () 
-{	
+	{	
 	$('#WTaxModal').modal('show');
 	$('#WTLiableModal').modal('hide');
-});
+	});
 
 $('#WTaxModal').on('shown.bs.modal',function()
 {
 	var cardCodeWTLiable = $('#txtCardCode').val();
 	let wtcodeArrayString = $('#txtWtLiableArray').val();
 	/* let wtcodeArray = wtcodeArrayString.split(","); */
-/* sss */
+
 	console.log(cardCodeWTLiable);
 	console.log(wtcodeArrayString);
 	$.ajax({
@@ -2766,6 +2766,7 @@ setTimeout(function(){
 					itArr.push('"' + $(this).find('input.batchorserialcontainer2').val() + '"');
 					itArr.push('"' + $(this).find('input.batchorserial').val() + '"');
 					itArr.push('"' + $(this).find('input.itemname').val() + '"');
+					// WTAX NI GABZ
 					itArr.push('"' + $(this).find('select.selwt').val() + '"');
 					
 				otArr.push('"' + i + '": [' + itArr.join(',') + ']'); 
@@ -2780,6 +2781,7 @@ setTimeout(function(){
 					itArr.push('"' + $(this).find('input.quantity').val().replace(/,/g, '') + '"')
 					itArr.push('"' + $(this).find('input.discount').val().replace(/,/g, '') + '"');
 					itArr.push('"' + $(this).find('select.taxcode').val() + '"');
+					// WTAX NI GABZ
 					itArr.push('"' + $(this).find('select.selwt').val() + '"');
 				
 				otArr.push('"' + i + '": [' + itArr.join(',') + ']'); 
@@ -3180,7 +3182,6 @@ setTimeout(function(){
 	//WTaxable Amount fro WTAX
 	$(document.body).on('blur', '.wtaxamount', function () 
 	{
-
 		
 		$(this).val(function(index, value) {
 			value = value.replace(/,/g,'');
@@ -4422,6 +4423,7 @@ setTimeout(function(){
             callback();
 		});
 	}
+	// WTAX NI GABZ
 	function ComputeTaxable(){
 		let amount = 0.00;
 
@@ -4466,7 +4468,7 @@ setTimeout(function(){
 		
 	}
 
-		// ORIGINAL ComputeWtaxPerRow() NI JERREMY
+		// ORIGINAL ComputeWtaxPerRow() NI GABZ
 	// function ComputeWtaxPerRow(){
 	// 	let amount = 0.00;
 		
@@ -4489,12 +4491,12 @@ setTimeout(function(){
 	// 			$('.selected-det-wtax').find('.baseamount').val(FormatMoney(taxable));
 	// 		}
 		
-	// 	// ORIGINAL ComputeWtaxPerRow() NI JERREMY
+	// 	// ORIGINAL ComputeWtaxPerRow() NI GABZ
 		
 	// }
 	function ComputeWtaxPerRow(){
 		
-		// EDIT SCRIPTS NI JERREMY
+		// WTAX NI GABZ
 		setTimeout(function()	{
 				
 			 $('#tblDetails tbody tr').each(function(){
@@ -4541,7 +4543,7 @@ setTimeout(function(){
 			})
 			
 		},500)
-		// EDIT SCRIPTS NI JERREMY
+		// EDIT WTAX NI GABZ
 		
 	}
 	function ComputeWtaxPerRowToFooter(){
