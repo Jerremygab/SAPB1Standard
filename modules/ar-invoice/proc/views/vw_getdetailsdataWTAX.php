@@ -2,7 +2,8 @@
 session_start();
 include_once('../../../../config/config.php');
 
-$docNum = $_GET['docNum'];
+$docNum = $_GET['docEntryWtax'];
+$objType = $_GET['objType'];
 
 
 $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];

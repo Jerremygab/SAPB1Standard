@@ -733,8 +733,8 @@
 																						
 																						
 																						FROM OCRD T0
-																						INNER JOIN CRD1 T1 ON T0.CardCode = T1.CardCode 
-																						INNER JOIN OCTG T2 ON T2.GroupNum = T0.GroupNum
+																						LEFT JOIN CRD1 T1 ON T0.CardCode = T1.CardCode 
+																						LEFT JOIN OCTG T2 ON T2.GroupNum = T0.GroupNum
 																						LEFT JOIN OCPR T3 ON T3.Name = T0.CntctPrsn AND T0.CardCode = T3.CardCode 
 																						
 																						WHERE T0.CardType = 'S'

@@ -73,7 +73,6 @@ while (odbc_fetch_row($qry))
 		"DrawnSumSc" => number_format(odbc_result($qry, 'DrawnSumSc'),2),
 		"GrossSc" => number_format(odbc_result($qry, 'GrossSc'),2),
 	);
-
 					echo 
 					' <tr style="background-color: white; "  >
 							<td class="rowno text-right" style="background-color: lightgray;color:black; font-size:13px;">

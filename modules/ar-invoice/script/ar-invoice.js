@@ -2469,17 +2469,17 @@ var serviceType = 'I';
 		}
 	});
 	$(document.body).on('click', '#btnWTLiableYes', function () 
-	{	
+{	
 	$('#WTaxModal').modal('show');
 	$('#WTLiableModal').modal('hide');
-	});
+});
 
 $('#WTaxModal').on('shown.bs.modal',function()
 {
 	var cardCodeWTLiable = $('#txtCardCode').val();
 	let wtcodeArrayString = $('#txtWtLiableArray').val();
 	/* let wtcodeArray = wtcodeArrayString.split(","); */
-
+/* sss */
 	console.log(cardCodeWTLiable);
 	console.log(wtcodeArrayString);
 	$.ajax({
@@ -2684,7 +2684,6 @@ setTimeout(function(){
 			}
 		});
 		udfJson += udfArr.join(",") + '}';
-       
        	var selSeries = $('#txtSeriesCode').val();
 		var txtCardCode = $('#txtCardCode').val();
 		var txtPostingDate = $('#txtPostingDate').val();
@@ -2766,7 +2765,6 @@ setTimeout(function(){
 					itArr.push('"' + $(this).find('input.batchorserialcontainer2').val() + '"');
 					itArr.push('"' + $(this).find('input.batchorserial').val() + '"');
 					itArr.push('"' + $(this).find('input.itemname').val() + '"');
-					// WTAX NI GABZ
 					itArr.push('"' + $(this).find('select.selwt').val() + '"');
 					
 				otArr.push('"' + i + '": [' + itArr.join(',') + ']'); 
@@ -2781,7 +2779,6 @@ setTimeout(function(){
 					itArr.push('"' + $(this).find('input.quantity').val().replace(/,/g, '') + '"')
 					itArr.push('"' + $(this).find('input.discount').val().replace(/,/g, '') + '"');
 					itArr.push('"' + $(this).find('select.taxcode').val() + '"');
-					// WTAX NI GABZ
 					itArr.push('"' + $(this).find('select.selwt').val() + '"');
 				
 				otArr.push('"' + i + '": [' + itArr.join(',') + ']'); 
@@ -2896,7 +2893,7 @@ setTimeout(function(){
 							{
 								$('#messageBar').text('').css({'background-color': '', 'color': ''});	
 								
-							// window.location.replace("../templates/" + mainFileName + "-document.php");
+							 window.location.replace("../templates/" + mainFileName + "-document.php");
 							},3000)
 					}
 					else
@@ -3182,6 +3179,7 @@ setTimeout(function(){
 	//WTaxable Amount fro WTAX
 	$(document.body).on('blur', '.wtaxamount', function () 
 	{
+
 		
 		$(this).val(function(index, value) {
 			value = value.replace(/,/g,'');
@@ -3968,6 +3966,7 @@ setTimeout(function(){
 	}
 	function PreviewDoc(docNum, objType){
 		let docstatus = '';
+		let docEntryWtax = 0;
 		let docType ='';
 		let docNumBuff;
 		let table;
@@ -4000,6 +3999,7 @@ setTimeout(function(){
 					$('#txtCardName').val(val.CardName);
 					$('#txtDocNum').val(val.DocNum);
 					$('#txtDocEntry').val(val.DocEntry);
+					docEntryWtax = val.DocEntry
 					docNumBuff = val.DocNum;
 				}
 				else{
@@ -4152,7 +4152,7 @@ setTimeout(function(){
 				{
 					
 				});
-				PreviewRowsWTAX(docNum,function () 
+				PreviewRowsWTAX(docEntryWtax,objType,function () 
 				{
 					
 				});
@@ -4415,15 +4415,14 @@ setTimeout(function(){
             callback();
 		});
 	}
-	function PreviewRowsWTAX(docNum,callback){
-        $('#tblWTaxTable tbody').load('../proc/views/vw_getdetailsdataWTAX.php?docNum=' + docNum, function (result) 
+	function PreviewRowsWTAX(docEntryWtax,objType,callback){
+        $('#tblWTaxTable tbody').load('../proc/views/vw_getdetailsdataWTAX.php?docEntryWtax=' + docEntryWtax + '&objType=' + objType, function (result) 
 		{
 			
 			
             callback();
 		});
 	}
-	// WTAX NI GABZ
 	function ComputeTaxable(){
 		let amount = 0.00;
 
@@ -4468,7 +4467,7 @@ setTimeout(function(){
 		
 	}
 
-		// ORIGINAL ComputeWtaxPerRow() NI GABZ
+		// ORIGINAL ComputeWtaxPerRow() NI JERREMY
 	// function ComputeWtaxPerRow(){
 	// 	let amount = 0.00;
 		
@@ -4491,12 +4490,12 @@ setTimeout(function(){
 	// 			$('.selected-det-wtax').find('.baseamount').val(FormatMoney(taxable));
 	// 		}
 		
-	// 	// ORIGINAL ComputeWtaxPerRow() NI GABZ
+	// 	// ORIGINAL ComputeWtaxPerRow() NI JERREMY
 		
 	// }
 	function ComputeWtaxPerRow(){
 		
-		// WTAX NI GABZ
+		// EDIT SCRIPTS NI JERREMY
 		setTimeout(function()	{
 				
 			 $('#tblDetails tbody tr').each(function(){
@@ -4543,7 +4542,7 @@ setTimeout(function(){
 			})
 			
 		},500)
-		// EDIT WTAX NI GABZ
+		// EDIT SCRIPTS NI JERREMY
 		
 	}
 	function ComputeWtaxPerRowToFooter(){

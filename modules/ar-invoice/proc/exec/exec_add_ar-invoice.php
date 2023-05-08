@@ -8,6 +8,7 @@ $objSession = json_decode($_SESSION['ARInvoiceArr']);
 
 $docentry = '';
 
+$selSeries = $_POST['selSeries'];
 $txtCardCode = $_POST['txtCardCode'];
 $txtPostingDate  = $_POST['txtPostingDate'];
 $txtDeliveryDate  = $_POST['txtDeliveryDate'];
@@ -40,6 +41,7 @@ $selShippingType = $_POST['selShippingType'];
 $serviceType  = $_POST['serviceType'];
 
 $json = $_POST['json'];
+$jsonWTax =  $_POST['jsonWTax'];
 $udfJson = $_POST['udfJson'];
 
 $refDocToObj = json_decode($_POST['refDocToObj']);
@@ -77,7 +79,8 @@ if ($err == 0)
 	else
 	{
 			$oRdr = $vCmp->GetBusinessObject($objSession->objectType);
-		
+			
+			$oRdr->Series = $selSeries;
 			$oRdr->CardCode = $txtCardCode;
 			$oRdr->TaxDate = $txtDocumentDate;
 			$oRdr->DocDueDate = $txtDeliveryDate;
@@ -105,7 +108,7 @@ if ($err == 0)
 			if($selShippingType != ''){
 				$oRdr->TransportationCode = $selShippingType;
 			}
-			// WTAX NI GABZ
+		
 			if(json_decode($jsonWTax) != null) 
 			{
 				$jsonWTax = json_decode($jsonWTax, true);
@@ -120,9 +123,6 @@ if ($err == 0)
 					$oRdr->WithholdingTaxData->Add();
 				}
 			}
-			// ===================================== //
-		
-			
 			if(json_decode($json) != null) 
 			{
 				$json = json_decode($json, true);
@@ -214,7 +214,7 @@ if ($err == 0)
 						$oRdr->Lines->VatGroup = $value[5];
 						$oRdr->Lines->WarehouseCode = $value[17];
 
-						// WTAX NI GABZ
+						// ADD LINES NI JERREMY
 
 						if($value[21] == '1'){
 							$oRdr->Lines->WTLiable = 1;
@@ -223,7 +223,7 @@ if ($err == 0)
 							$oRdr->Lines->WTLiable = 0;
 						}
 						
-						// WTAX NI GABZ
+						// ADD LINES NI JERREMY
 
 
 						
@@ -240,14 +240,13 @@ if ($err == 0)
 						$oRdr->Lines->UnitPrice = $value[2]; 
 						$oRdr->Lines->DiscountPercent = $value[4];
 						$oRdr->Lines->VatGroup = $value[5];
-						// WTAX NI GABZ
 						if($value[6] == '1'){
 							$oRdr->Lines->WTLiable = 1;
 						}
 						else{
 							$oRdr->Lines->WTLiable = 0;
 						}
-						// WTAX NI GABZ
+				
 						$oRdr->Lines->Add();
 					
 					}

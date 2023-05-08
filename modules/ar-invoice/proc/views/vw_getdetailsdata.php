@@ -90,9 +90,14 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 		END AS UnitMsr,
 
 		CASE 
-		WHEN T1.WTLiable = 'Y' THEN 'Yes'
-		WHEN T1.WTLiable = 'N' THEN 'NO'
+		WHEN T1.WTLiable = 'Y' THEN '1'
+		WHEN T1.WTLiable = 'N' THEN '0'
 		END AS WTLiable,
+
+		CASE 
+		WHEN T1.WTLiable = 'Y' THEN 'YES'
+		WHEN T1.WTLiable = 'N' THEN 'NO'
+		END AS WTLiableText,
 
 		
 		T2.UomCode,
@@ -141,6 +146,7 @@ while (odbc_fetch_row($qry))
 	$GrossTotal = odbc_result($qry, "GrossTotal");
 	$TaxAmount = odbc_result($qry, "TaxAmount");
 	$WTLiable = odbc_result($qry, "WTLiable");
+	$WTLiableText = odbc_result($qry, "WTLiableText");
 	$RowTotal2 = number_format(odbc_result($qry, "RowTotal2"),6);
 	$GrossTotal2 = number_format(odbc_result($qry, "GrossTotal2"),6);
 	$TaxAmount2 = number_format(odbc_result($qry, "TaxAmount2"),6);
@@ -301,16 +307,16 @@ while (odbc_fetch_row($qry))
 						</div>
 					  </td>
 						<td >
-						<input type="text" class="form-control matrix-cell text-right price" value="'.$Price.'"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" '.$readonly.' />
+						<input type="text" class="form-control matrix-cell text-right price" value="'.$Price.'"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength=30" '.$readonly.' />
 						
 					  </td>
 						<td >
-						<input type="text" class="form-control matrix-cell text-right discount"  value="'.$DiscPrcnt.'" style="outline: none; border:none" maxlength="30" '.$readonly.'/>
+						<input type="text" class="form-control matrix-cell text-right discount"  value="'.$DiscPrcnt.'" style="outline: none; border:none" maxlength="8" '.$readonly.'/>
 						
 					  </td>
 					   <td >
 							<div class="'.$inputGroup.' ">
-								<input type="hidden" class="form-control text-right  taxamount" value="'.$TaxAmount.'" style="outline: none; border:none" maxlength="30" readonly/>
+								<input type="hidden" class="form-control text-right  taxamount" value="'.$TaxAmount.'" style="outline: none; border:none" maxlength="8" readonly/>
 								<select type="text" class="form-control taxcode"  placeholder=""   readonly '.$disabled .'>
 										"'.$taxcode.'"
 								</select>
@@ -318,11 +324,13 @@ while (odbc_fetch_row($qry))
 					  </td>
 					
 					   <td >
-						<input type="text" class="form-control matrix-cell text-right selWT"  value="'.$WTLiable.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none " maxlength="30" readonly/>
-						
-					  </td>
+						<select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
+
+								<option value="'.$WTLiable.'">'.$WTLiableText.'</option>
+							</select>
+							</td>
 					   <td >
-						<input type="text" class="form-control matrix-cell text-right grossprice"  value="'.$PriceAfVat.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" readonly/>
+						<input type="text" class="form-control matrix-cell text-right grossprice"  value="'.$PriceAfVat.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength=30" readonly/>
 						
 					  </td>
 					   <td >
@@ -367,35 +375,37 @@ while (odbc_fetch_row($qry))
 							</div>
 						  </td>
 						   <td >
-							<input type="text" class="form-control matrix-cell glname"  value="'.$AcctName.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" readonly/>
+							<input type="text" class="form-control matrix-cell glname"  value="'.$AcctName.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength=30" readonly/>
 							
 						  </td>
 						   <td class="d-none">
-							<input type="text" class="form-control matrix-cell text-right quantity"  value="1" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" value="1"/>
+							<input type="text" class="form-control matrix-cell text-right quantity"  value="1" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength=30" value="1"/>
 							
 						  </td>
 							<td >
-							<input type="text" class="form-control matrix-cell text-right price"   value="'.$Price.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" '.$readonly .'/>
+							<input type="text" class="form-control matrix-cell text-right price"   value="'.$Price.'" aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength=30" '.$readonly .'/>
 							
 						  </td>
 							<td >
-							<input type="text" class="form-control matrix-cell text-right discount"   value="'.$DiscPrcnt.'" style="outline: none; border:none" maxlength="30" '.$readonly.'/>
+							<input type="text" class="form-control matrix-cell text-right discount"   value="'.$DiscPrcnt.'" style="outline: none; border:none" maxlength="8" '.$readonly.'/>
 							
 						  </td>
 						   <td >
 								<div class="'.$inputGroup.' ">
-									<input type="hidden" class="form-control text-right  taxamount"  value="'.$TaxAmount2.'"  style="outline: none; border:none" maxlength="30"/>
+									<input type="hidden" class="form-control text-right  taxamount"  value="'.$TaxAmount2.'"  style="outline: none; border:none" maxlength="8"/>
 									<select type="text" class="form-control taxcode"  placeholder=""   readonly '.$disabled .'>
 												 '.$taxcode.'
 													</select>
 								</div>
 						  </td>
+						  <td>
+						  <select class="form-control input-sm selwt" id="selWT" name="selWT" readonly>
+
+								<option value="'.$WTLiable.'">'.$WTLiableText.'</option>
+							</select>
+							</td>
 						   <td >
-							<input type="text" class="form-control matrix-cell text-right selWT"    value="'.$WTLiable.'"  style="outline: none; border:none" maxlength="30" readonly/>
-							
-						  </td>
-						   <td >
-							<input type="text" class="form-control matrix-cell text-right grossprice"    value="'.$PriceAfVat.'"  style="outline: none; border:none" maxlength="30" readonly/>
+							<input type="text" class="form-control matrix-cell text-right grossprice"    value="'.$PriceAfVat.'"  style="outline: none; border:none" maxlength=30" readonly/>
 							
 						  </td>
 						   <td >
@@ -470,7 +480,7 @@ while (odbc_fetch_row($qry))
 // 					  </td>
 // 					   <td >
 // 					   <div class="'.$inputGroup.' ">
-// 						<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30"/>
+// 						<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength=30"/>
 // 						 <button class="btn '.$buttonHide.' btn-batch d-none" type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#batchModal" data-backdrop="false">
 // 							<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
 // 						  </button>
@@ -487,12 +497,12 @@ while (odbc_fetch_row($qry))
 						
 // 					  </td>
 // 						<td >
-// 						<input type="text" class="form-control matrix-cell text-right discount"   style="outline: none; border:none" maxlength="30"/>
+// 						<input type="text" class="form-control matrix-cell text-right discount"   style="outline: none; border:none" maxlength="8"/>
 						
 // 					  </td>
 // 					   <td >
 // 							<div class="'.$inputGroup.' ">
-// 								<input type="hidden" class="form-control text-right  taxamount"  style="outline: none; border:none" maxlength="30" readonly/>
+// 								<input type="hidden" class="form-control text-right  taxamount"  style="outline: none; border:none" maxlength="8" readonly/>
 // 								<select type="text" class="form-control taxcode"  placeholder=""   readonly >
 // 										"'.$taxcode.'"
 // 								</select>
@@ -554,12 +564,12 @@ while (odbc_fetch_row($qry))
 							
 // 						  </td>
 // 							<td >
-// 							<input type="text" class="form-control matrix-cell text-right discount"  style="outline: none; border:none" maxlength="30"/>
+// 							<input type="text" class="form-control matrix-cell text-right discount"  style="outline: none; border:none" maxlength="8"/>
 							
 // 						  </td>
 // 						   <td >
 // 								<div class="'.$inputGroup.' ">
-// 									<input type="hidden" class="form-control text-right  taxamount"   style="outline: none; border:none" maxlength="30"/>
+// 									<input type="hidden" class="form-control text-right  taxamount"   style="outline: none; border:none" maxlength="8"/>
 // 									<select type="text" class="form-control taxcode"  placeholder=""   readonly >
 // 												 '.$taxcode.'
 // 													</select>

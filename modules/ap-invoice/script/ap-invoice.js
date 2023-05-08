@@ -133,9 +133,8 @@ $(document).ready(function () {
 			docNum = data;
 			PreviewDoc(docNum,objType);
 		});
+		generateDPAdded(docNum)
 		Disable(objType);
-		generateDPAdded(docNum);
-		
 	});
 	$(document.body).on('click', '#btnPrevRecord', function (){
 		let table = objectTable;
@@ -153,9 +152,8 @@ $(document).ready(function () {
 				PreviewDoc(docNum,objType);
 			});
 		}
-		
+		generateDPAdded(docNum)
 		Disable(objType);
-		generateDPAdded(docNum);
 	});
 	$(document.body).on('click', '#btnNextRecord', function (){
 		let table = objectTable;
@@ -173,8 +171,8 @@ $(document).ready(function () {
 				PreviewDoc(docNum,objType);
 			});
 		}
+		generateDPAdded(docNum)
 		Disable(objType);
-		generateDPAdded(docNum);
 	});
 	$(document.body).on('click', '#btnLastRecord', function (){
 		let table = objectTable;
@@ -183,11 +181,26 @@ $(document).ready(function () {
 		$.getJSON('../proc/views/vw_getLastEntry.php?table=' + table, function (data){
 			docNum = data;
 			PreviewDoc(docNum,objType);
-			
+			$('#btnCardCode').prop('disabled',true);
+			$('#selSeries').prop('disabled',true);
+			$('#txtPostingDate').prop('disabled',true);
+			$('#txtPostingDate').prop('readonly',true);
+			$('#txtDocumentDate').prop('disabled',true);
+			$('#txtDocumentDate').prop('readonly',true);
+			$('#btnControlAccount').prop('disabled',true);
+			$('#btnPaymentTerms').prop('disabled',true);
+			$('#txtTinNumber').prop('readonly',true);
+			$('#btnRefDoc').prop('disabled',true);
+			$('#btnSalesEmp').prop('disabled',true);
+			$('#btnOwner').prop('disabled',true);
+			$('#btnWTax').prop('disabled',true);
+			$('#selSeries').prop('disabled',true);
+			$('#selSeries').prop('readonly',true);
 		});
-		Disable(objType);
 		generateDPAdded(docNum);
+		Disable(objType);
 		
+		console.log(generateDPAdded(docNum));
 		
 	});
 	$(document.body).on('click', '#sideBarToggle', function () 
@@ -655,15 +668,15 @@ $(document).ready(function () {
 			$('#btnCopyFrom').prop('disabled',false);
 			
 			
-				// $.ajax({
-				// 	type: 'GET',
-				// 	url: '../proc/views/vw_getdetailsDP.php',
-				// 	data: {cardCode : cardCode},
-				// 	success: function (html) 
-				// 	{
-				// 		$('#selShipToAddress').html(html);
-				// 	}
-				// }); 
+				$.ajax({
+					type: 'GET',
+					url: '../proc/views/vw_getdetailsDP.php',
+					data: {cardCode : cardCode},
+					success: function (html) 
+					{
+						$('#selShipToAddress').html(html);
+					}
+				}); 
 				//Addresses
 				$.ajax({
 					type: 'GET',
@@ -3955,7 +3968,6 @@ $(document).ready(function () {
 				}, 200)
 			}
 		}
-
 		// READONLY AT DISABLE NI GABZ
 
 		function Disable(objType){
@@ -3990,6 +4002,7 @@ $(document).ready(function () {
 			},1000);
 		};
 		// ======================================= //
+
 		function PreviewDoc(docNum, objType){
 			let docstatus = '';
 			let docType ='';
@@ -4044,7 +4057,6 @@ $(document).ready(function () {
 					// val.CancelDate ? $('#txtCancellationDate').attr('type', 'date') : $('#txtCancellationDate').attr('type', 'text');
 					// $('#txtCancellationDate').val(val.CancelDate);
 					// $('#txtRequiredDate').val(val.ReqDate);
-					
 					if(objType == objectType){
 						$('#txtFooterDiscountSum').val(val.DiscSum);
 						$('#txtFooterDiscountPercentage').val(val.DiscPrcnt);

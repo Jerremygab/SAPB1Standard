@@ -74,8 +74,8 @@ if ($serviceType == 'I'){
 	  </td>
 	   <td >
 		<div class="input-group " >
-		<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
-			<input type="hidden" class="form-control matrix-cell text-right batchorserialquantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12"/>
+		<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30"/>
+			<input type="hidden" class="form-control matrix-cell text-right batchorserialquantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30"/>
 			
 			<button class="btn btn-batch d-none"  type="button" data-mdb-ripple-color="dark"  style="background-color: #ADD8E6; "  data-toggle="modal" data-target="#batchModal" data-backdrop="false" >
 				<i class="fas fa-list-ul input-prefix" tabindex=0 style="color:blue " ></i>
@@ -86,7 +86,7 @@ if ($serviceType == 'I'){
 		</div>
 	  </td>
 	    <td >
-		<input type="text" class="form-control matrix-cell text-right price"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+		<input type="text" class="form-control matrix-cell text-right price"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" />
 		
 	  </td>
 	    <td >
@@ -122,7 +122,7 @@ if ($serviceType == 'I'){
 		</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" />
 		
 	  </td>
 	   <td >
@@ -167,15 +167,15 @@ else{
 		</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell glname"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" readonly/>
+		<input type="text" class="form-control matrix-cell glname"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" readonly/>
 		
 	  </td>
 	   <td class="d-none">
-		<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" value="1"/>
+		<input type="text" class="form-control matrix-cell text-right quantity"  aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" value="1"/>
 		
 	  </td>
 	    <td >
-		<input type="text" class="form-control matrix-cell text-right price"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+		<input type="text" class="form-control matrix-cell text-right price"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" />
 		
 	  </td>
 	    <td >
@@ -210,7 +210,7 @@ else{
 		</div>
 	  </td>
 	   <td >
-		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="12" />
+		<input type="text" class="form-control matrix-cell text-right grossprice"   aria-label="" aria-describedby="button-addon2" style="outline: none; border:none" maxlength="30" />
 		
 	  </td>
 	   <td >
