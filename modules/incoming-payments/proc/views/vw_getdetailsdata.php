@@ -6,6 +6,8 @@ $docNum = $_GET['docNum'];
 $docType = $_GET['docType'];
 $objType = $_GET['objType'];
 $payNoDoc = $_GET['payNoDoc'];
+$table = '';
+$table2 = '';
 
 if($docType == 'S' && $payNoDoc == 'N'){
 
@@ -42,7 +44,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
 	SELECT DISTINCT
         T0.BPLId ,
         CASE 
-            WHEN T0.ObjType = 18 THEN 'IN'
+            WHEN T0.ObjType = 18 THEN 'PU'
             WHEN T0.ObjType = 14 THEN 'CM'
             WHEN T0.ObjType = 30 THEN 'JE'
         END AS ObjType,
@@ -63,7 +65,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
         T2.OcrCode3,
         T0.Comments
 
-    FROM OINV T0
+    FROM OPCH T0
 
     INNER JOIN VPM2 T2 ON T0.DocEntry = T2.DocEntry
 
@@ -75,7 +77,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
     SELECT DISTINCT
         T0.BPLId ,
         CASE 
-            WHEN T0.ObjType = 18 THEN 'IN'
+            WHEN T0.ObjType = 18 THEN 'PU'
             WHEN T0.ObjType = 14 THEN 'CM'
             WHEN T0.ObjType = 30 THEN 'JE'
         END AS ObjType,
@@ -97,7 +99,7 @@ if($docType == 'S' && $payNoDoc == 'N'){
         T0.Comments
 
 
-    FROM ORIN T0
+    FROM ORPC T0
 
     INNER JOIN VPM2 T2 ON T0.DocEntry = T2.DocEntry
     INNER JOIN OVPM T3 ON T3.DocEntry = T2.DocNum

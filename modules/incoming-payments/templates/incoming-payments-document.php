@@ -284,7 +284,7 @@
                                             aria-labelledby="contents">
 
                                             <div id="contentContainer" class="table-responsive"
-                                                style="width:100%; padding-bottom:20px; padding-left:10px; overflow-x:hidden;  overflow-y:hidden;">
+                                                style="width:100%; padding-bottom:20px; padding-left:10px; overflow-x:hidden !important;  overflow-y:scroll;">
                                                 <div id="contents-tab"> 
                                                
                                                   </div>

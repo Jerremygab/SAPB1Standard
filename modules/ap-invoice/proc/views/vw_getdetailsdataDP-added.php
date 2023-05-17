@@ -6,7 +6,7 @@ include_once('../../../../config/config.php');
 $docNum = $_GET['docNum'];
 ?>
 			
-				<table id="tblDownPaymentTableAdded" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
+				<table id="tblDownPaymentTable" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
 					<thead   style="border-bottom: 0 !important; ">
 						<tr >
 							<th class="text-right" style=" color: black; min-width:20px; " >#</th>
@@ -66,13 +66,8 @@ while (odbc_fetch_row($qry))
 	$disabled = '';
 	$hasBatchSerial = '';
 
-	$arr[] = array(
-		"DrawnSum" => number_format(odbc_result($qry, 'DrawnSum'),2),
-		"Vat" => number_format(odbc_result($qry, 'Vat'),2),
-		"Gross" => number_format(odbc_result($qry, 'Gross'),2),
-		"DrawnSumSc" => number_format(odbc_result($qry, 'DrawnSumSc'),2),
-		"GrossSc" => number_format(odbc_result($qry, 'GrossSc'),2),
-	);
+
+
 					echo 
 					' <tr style="background-color: white; "  >
 							<td class="rowno text-right" style="background-color: lightgray;color:black; font-size:13px;">

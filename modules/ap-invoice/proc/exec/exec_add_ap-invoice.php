@@ -109,7 +109,7 @@ if ($err == 0)
 			if($selShippingType != ''){
 				$oRdr->TransportationCode = $selShippingType;
 			}
-		
+			// DOWNPAYMENT NI GABZ
 			if(json_decode($jsonWTax) != null) 
 			{
 				$jsonWTax = json_decode($jsonWTax, true);
@@ -124,7 +124,8 @@ if ($err == 0)
 					$oRdr->WithholdingTaxData->Add();
 				}
 			}
-
+			// ===================================== //
+			
 			// DOWNPAYMENT NI GABZ
 			if(json_decode($jsonDP) != null) 
 			{

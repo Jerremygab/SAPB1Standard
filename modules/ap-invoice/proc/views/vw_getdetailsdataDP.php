@@ -78,7 +78,7 @@ while (odbc_fetch_row($qry))
 							
 							</td>
 							<td style="min-width:50px">
-								<input type="checkbox" style=" height:20px ; width:20px; display: flex; margin:auto;" class="form-control matrix-cell chkboxInvoice" id="chkboxInvoice">
+								<input type="checkbox" style=" height:20px ; width:20px; display: flex; margin:auto;" class="form-control matrix-cell chkboxInvoice">
 							</td>
 							<td>
 								<input type="text" class="form-control docnum"   style="outline: none; border:none; " value="'.$DocNum.'"readonly/>

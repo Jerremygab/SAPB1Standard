@@ -5,20 +5,21 @@ include_once('../../../../config/config.php');
 $cardcode = $_GET['cardcode'];
 $serviceType = $_GET['serviceType'];
 ?>
-<table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable" cellspacing="0"  style="background-color: white; width:100% !important;"  cellspacing="0">
+<table id="tblDetails" class="table table-striped table-bordered table-sm detailsTable table-responsive" cellspacing="0"  style="background-color: white; overflow-x:scroll !important;  overflow-y:hidden ; width:100% !important;"  cellspacing="0">
   <thead   style="border-bottom: 0 !important; ">
     <tr >
-		  <th class="text-right" style=" color: black;">#</th>
-		  <th style="color: black; min-width:100px; ">Select</th>
+		<th class="text-right" style=" color: black;">#</th>
+		<th style="color: black; min-width:100px; ">Select</th>
 	    <th style="color: black; min-width:150px; ">Document No.</th>
 	    <th style="color: black; min-width:150px;" >Document Type</th>
 		<th style="color: black; min-width:150px; ">Customer Ref No.</th>
 	    <th style="color: black; min-width:150px;">Date</th>
-		  <th style="color: black; min-width:150px;">Total</th>
-		  <th style="color: black; min-width:150px;">Balance Due</th>
+		<th style="color: black; min-width:150px;">Total</th>
+		<th style="color: black; min-width:150px;">Balance Due</th>
 	    <th style="color: black; min-width:150px;">Total Payment</th>
 	    <th style="color: black; min-width:150px;">WTax Amount</th>
-	     <th style="color: black; min-width:150px;">Doc. Remarks</th>
+	    <th style="color: black; min-width:150px;">Doc. Remarks</th>
+		<th style="color: black; min-width:100px;">Service Invoice No.</th>
     </tr>
   </thead>
   <tbody class="">
@@ -45,12 +46,17 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 		T0.DocTotal - T0.PaidSum AS Balance,
 		T0.DocTotal,
 		T0.WTApplied,
-		T0.Comments
+		T0.Comments,
+
+		CASE 
+		WHEN U_InvoiceNo IS NOT NULL THEN U_InvoiceNo
+		END AS U_InvoiceNo
 	FROM OINV T0
 	LEFT JOIN OBPL T1 ON T1.BPLId = T0.BPLId
 	WHERE T0.CardCode = '$cardcode' AND T0.DocStatus = 'O'
 		
 	UNION ALL
+
 
 	SELECT DISTINCT
 		T0.BPLId ,
@@ -68,7 +74,43 @@ $qry = odbc_exec($MSSQL_CONN, "USE [".$MSSQL_DB."];
 		T0.DocTotal - T0.PaidSum AS Balance,
 		T0.DocTotal,
 		T0.WTApplied,
-		T0.Comments
+		T0.Comments,
+
+		CASE 
+		WHEN U_InvoiceNo IS NOT NULL THEN U_InvoiceNo
+		END AS U_InvoiceNo
+	FROM OINV T0
+	INNER JOIN OCRD T2 ON T0.CardCode = T2.CardCode
+	LEFT JOIN OBPL T1 ON T1.BPLId = T0.BPLId
+	WHERE T2.FatherCard = '$cardcode' AND T0.DocStatus = 'O'
+	
+	UNION ALL
+
+
+
+
+	SELECT DISTINCT
+		T0.BPLId ,
+		CASE 
+			WHEN T0.ObjType = 13 THEN 'IN'
+			WHEN T0.ObjType = 14 THEN 'CM'
+			WHEN T0.ObjType = 30 THEN 'JE'
+		END AS ObjType,
+		T0.DocDate,
+		T0.DocNum,
+		T0.DocEntry,
+		T0.CardCode,
+		T0.CardName,
+		T0.NumAtCard,
+		T0.DocTotal - T0.PaidSum AS Balance,
+		T0.DocTotal,
+		T0.WTApplied,
+		T0.Comments,
+
+		CASE 
+		WHEN U_InvoiceNo IS NOT NULL THEN U_InvoiceNo
+		END AS U_InvoiceNo
+
 	FROM ORIN T0
 	LEFT JOIN OBPL T1 ON T1.BPLId = T0.BPLId	
 	WHERE T0.CardCode = '$cardcode' AND T0.DocStatus = 'O'
@@ -92,6 +134,7 @@ while (odbc_fetch_row($qry))
 	$WTApplied = number_format(odbc_result($qry, 'WTApplied'),2);
 	$DocTotal = number_format(odbc_result($qry, 'DocTotal'),2);
 	$Comments = odbc_result($qry, 'Comments');
+	$ServiceInvoice = odbc_result($qry, 'U_InvoiceNo');
 
 	
 				if($serviceType == 'C'){
@@ -139,6 +182,9 @@ while (odbc_fetch_row($qry))
 					 <td >
 						  <input type="text" class="form-control matrix-cell comments"  style="outline: none; border:none" readonly value="'. $Comments .'"/>
 					</td>
+					 <td >
+						  <input type="text" class="form-control matrix-cell serviceinvoice"  style="outline: none; border:none" value="'. $ServiceInvoice .'"/>
+					</td>
 				  </tr>'
 					;
 			
@@ -153,20 +199,21 @@ while (odbc_fetch_row($qry))
 
 ?>
   </tbody>
-  <tfoot style="z-index: 999;  background-color: lightgray; " class="d-none">
+  <tfoot style="z-index: 999;  background-color: lightgray; overflow-y: scroll;" class="d-none">
 		<tr style="background-color: lightgray; z-index: 999">
-			<th class="text-right" style=" color: black">#</th>
-			<th style="color: black; min-width:50px; ">Select</th>
-		  <th style="color: black; min-width:50px; ">Select</th>
+		<th class="text-right" style=" color: black">#</th>
+		<th style="color: black; min-width:50px; ">Select</th>
+		<th style="color: black; min-width:50px; ">Select</th>
 	    <th style="color: black; min-width:150px; ">Document No.</th>
 	    <th style="color: black; min-width:150px;" >Document Type</th>
 		<th style="color: black; min-width:150px; ">Customer Ref No.</th>
 	    <th style="color: black; min-width:150px;">Date</th>
-		  <th style="color: black; min-width:150px;">Overdue Days</th>
-		  <th style="color: black; min-width:300px;">Total</th>
+		<th style="color: black; min-width:150px;">Overdue Days</th>
+		<th style="color: black; min-width:300px;">Total</th>
 	    <th style="color: black; min-width:300px;">Total Payment</th>
-		  <th style="color: black; min-width:300px;">Balance Due</th>
+		<th style="color: black; min-width:300px;">Balance Due</th>
 	    <th style="color: black; min-width:300px;">WTax Amount</th>
+		<th style="color: black; min-width:100px;">Service Invoice No.</th>
 		</tr>
 	  </tfoot>
 </table>

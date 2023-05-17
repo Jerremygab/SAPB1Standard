@@ -134,7 +134,6 @@ $(document).ready(function () {
 			PreviewDoc(docNum,objType);
 		});
 		generateDPAdded(docNum)
-		Disable(objType);
 	});
 	$(document.body).on('click', '#btnPrevRecord', function (){
 		let table = objectTable;
@@ -153,7 +152,6 @@ $(document).ready(function () {
 			});
 		}
 		generateDPAdded(docNum)
-		Disable(objType);
 	});
 	$(document.body).on('click', '#btnNextRecord', function (){
 		let table = objectTable;
@@ -170,9 +168,8 @@ $(document).ready(function () {
 				docNum = data;
 				PreviewDoc(docNum,objType);
 			});
+			generateDPAdded(docNum)
 		}
-		generateDPAdded(docNum)
-		Disable(objType);
 	});
 	$(document.body).on('click', '#btnLastRecord', function (){
 		let table = objectTable;
@@ -197,10 +194,10 @@ $(document).ready(function () {
 			$('#selSeries').prop('disabled',true);
 			$('#selSeries').prop('readonly',true);
 		});
-		generateDPAdded(docNum);
-		Disable(objType);
+		generateDPAdded(docNum)
 		
-		console.log(generateDPAdded(docNum));
+		
+		
 		
 	});
 	$(document.body).on('click', '#sideBarToggle', function () 
@@ -270,7 +267,7 @@ $(document).ready(function () {
 		$.ajax({
 			type: 'GET',
 			url: '../proc/views/utilities/vw_logout.php',
-			success: function (html) 
+			success: function (_html) 
 			{
 				window.location.reload();
 			}
@@ -359,6 +356,11 @@ $(document).ready(function () {
 		//Accounting
 		$('#accounting-tab').load('../templates/' + mainFileName + '-accounting.php'), function(){
 			
+		};
+
+		//Attachments
+		$('#attachments-tab').load('../templates/' + mainFileName + '-attachments.php'), function(){
+
 		};
 		//WTAX Table
 		$('#wTaxTableResult').load('../templates/wtaxtable-lines.php'), function (){
@@ -668,15 +670,15 @@ $(document).ready(function () {
 			$('#btnCopyFrom').prop('disabled',false);
 			
 			
-				$.ajax({
-					type: 'GET',
-					url: '../proc/views/vw_getdetailsDP.php',
-					data: {cardCode : cardCode},
-					success: function (html) 
-					{
-						$('#selShipToAddress').html(html);
-					}
-				}); 
+				// $.ajax({
+				// 	type: 'GET',
+				// 	url: '../proc/views/vw_getdetailsDP.php',
+				// 	data: {cardCode : cardCode},
+				// 	success: function (html) 
+				// 	{
+				// 		$('#selShipToAddress').html(html);
+				// 	}
+				// }); 
 				//Addresses
 				$.ajax({
 					type: 'GET',
@@ -781,7 +783,7 @@ $(document).ready(function () {
 					let billArr2 = [];	
 					let billList;
 					let billList2;
-					$.each(data, function (key, val){
+					$.each(data, function (_key, val){
 						$('#selBillToAddress').val(val.Address);
 						$('#txtBillToAddressTextArea').val(val.Street + '\n' + '\n'  + val.ZipCode + ' ' + val.City + '\n'  + val.Country );
 								val.Street != '' ? billArr.push('Street'): '';
@@ -997,6 +999,137 @@ $(document).ready(function () {
 			}
 	   
 		});
+
+		//Attachment
+		//Selecting Row
+		$(document.body).on('click', '#tblAttachment tbody > tr > td.rowno', function () 
+		{
+			if (window.event.ctrlKey) 
+			{
+				if ($(this).closest('tr').hasClass('selected-det-attachment')) 
+				{
+					$(this).closest('tr').css("background-color", "transparent");
+					$(this).closest('tr').removeClass('selected-det-attachment');
+				}
+				else 
+				{
+					$(this).closest('tr').css("background-color", "lightgray");
+					$(this).closest('tr').addClass('selected-det-attachment');
+				}
+			}
+			else 
+			{
+				$('.selected-det-attachment').map(function () 
+				{
+					$(this).closest('tr').css("background-color", "transparent");
+					$(this).removeClass('selected-det-attachment');
+				})
+	
+				$('#tblAttachment tbody > tr').css("background-color", "transparent");
+				$(this).closest('tr').css("background-color", "lightgray");
+				$(this).closest('tr').addClass('selected-det-attachment');
+			}
+			
+		});
+		$(document.body).on('click', '#tblAttachment > tbody tr > td > div.input-group', function () 
+		{
+			$('input').css('background-color', '');
+			$('.selected-det-attachment').map(function () 
+			{
+				$(this).removeClass('selected-det-attachment');
+				$(this).css("background-color", "transparent");
+			})
+			
+			$(this).closest('tr').css("background-color", "lightgray");
+			$(this).closest('tr').addClass('selected-det-attachment');
+			
+			$(this).children('input').css('background-color', '#fdfd96');
+			
+		});
+		$(document.body).on('focus', '#tblAttachment input, #tblAttachment select, #tblAttachment textarea', function () 
+		{
+			if (window.event.ctrlKey) 
+			{
+				$(this).closest('tr').css("background-color", "lightgray");
+				$(this).closest('tr').addClass('selected-det-attachment');
+			}
+			else
+			{
+				$('.selected-det-attachment').map(function () 
+				{
+					$(this).removeClass('selected-det-attachment');
+				})
+	
+				$('#tblAttachment tbody > tr').css("background-color", "transparent");
+				$(this).closest('tr').css("background-color", "lightgray");
+				$(this).closest('tr').addClass('selected-det-attachment');
+			}
+			
+		});
+
+		$(document.body).on('click', '#browseButton', function (event) 
+		{
+
+			event.preventDefault();
+			const inputElement = document.getElementById("getFile");
+		
+			// Add event listener to the input element to update the filename in the text input element
+			inputElement.addEventListener("change", function() {
+			// Get the selected file name
+			const fileName = inputElement.value.split("\\").pop();
+		
+			// Get the text input element
+			const itemnameElement = document.querySelector("input.filesname");
+		
+			// Set the value of the text input element to the selected file name
+			itemnameElement.value = fileName;
+		});
+	  
+			// Trigger the file input dialog
+			inputElement.click();
+
+			// var fileName = $(this).children('td.item-2').text();
+			// $('.selected-det-attachment').find('input.filesname').val(fileName);
+
+
+
+			AddRowAttachment();
+			
+		});
+
+
+		// $(document.body).on('dblclick', '#tblAttachment tbody > tr', function () 
+		// {
+		// 	var fileName = $(this).children('td.item-2').text();
+			
+		// 	$('.btnrowfunctions').removeClass('d-none');
+	
+
+		// 	$('.selected-det-attachment').find('input.filesname').val(fileName);
+
+			let fileName = $('#tblAttachment tbody tr:last').find('td.rowno span').text()
+			if ($('.selected-det-attachment').find('input.filesname').val() != ''){
+				fileName.push($('.selected-det-attachment').find('input.filesname').val());
+			}
+
+			var rowno2 = 1;
+			$('#tblAttachment tbody tr').each(function () 
+			{
+				$(this).find('td.rowno span').value(fileName);
+				rowno2 += 1;
+			});
+				AddRowAttachment();
+			
+			
+		// 	// AddFileAttachments();
+		// 	itemCode = fileName;
+		// 	AddRowAttachment();
+		// 	CheckCardCode(itemCode);
+			
+		// });
+
+	
+
 		
 		$(document.body).on('dblclick', '#tblGL tbody > tr', function () 
 		{
@@ -1015,6 +1148,10 @@ $(document).ready(function () {
 			AddRow();
 			CheckCardCode(itemCode);
 		});
+
+
+
+
 		  $(document.body).on('dblclick', '#tblWTax tbody > tr', function () 
 		{
 			
@@ -1507,7 +1644,7 @@ $(document).ready(function () {
 				}, 100) 
 		});
 		
-		$(document.body).on('click', '#btnUpdateBatch', function (e) 
+		$(document.body).on('click', '#btnUpdateBatch', function (_e) 
 		{
 			let err = 0;
 			let selectedRow;
@@ -1518,7 +1655,7 @@ $(document).ready(function () {
 			let selectedQtyCreated;
 			
 			
-			$('#tblBatch tbody tr').each(function(i){
+			$('#tblBatch tbody tr').each(function(_i){
 			
 			if($(this).hasClass('selected-item')){
 				 
@@ -1533,7 +1670,7 @@ $(document).ready(function () {
 			})
 			if(selectedQtyNeeded != ''){
 				let quantity = 0.00;
-				 $('#tblBatchCreated tbody tr').each(function(i) {
+				 $('#tblBatchCreated tbody tr').each(function(_i) {
 					
 					if($(this).find('input.quantity').val() > 0){
 						quantity += parseFloat($(this).find('input.quantity').val());
@@ -1579,7 +1716,7 @@ $(document).ready(function () {
 			}
 		});
 		
-		$(document.body).on('click', '#btnUpdateSerial', function (e) 
+		$(document.body).on('click', '#btnUpdateSerial', function (_e) 
 		{
 			let err = 0;
 			let err2 = 0;
@@ -1602,7 +1739,7 @@ $(document).ready(function () {
 									}); 
 									//alert(uniqueSerial)
 			
-			$('#tblSerial tbody tr').each(function(i){
+			$('#tblSerial tbody tr').each(function(_i){
 			
 			if($(this).hasClass('selected-item')){
 				 selectedRow = $(this).find('td.tbldetailrowno').text();
@@ -1616,7 +1753,7 @@ $(document).ready(function () {
 			})
 			if(selectedQtyNeeded != ''){
 				let quantity = 0.00;
-				 $('#tblSerialCreated tbody tr').each(function(i) {
+				 $('#tblSerialCreated tbody tr').each(function(_i) {
 					if($(this).find('input.quantity').val() > 0){
 						quantity += parseFloat($(this).find('input.quantity').val());
 						
@@ -1647,7 +1784,7 @@ $(document).ready(function () {
 				
 						
 					if(uniqueSerial == '.mfrserial'){
-					 $('#tblDetails tbody tr').each(function(i) {
+					 $('#tblDetails tbody tr').each(function(_i) {
 						let mfrSerialArray = $(this).find('input.batchorserialcontainer2').val().split(',');
 						let rowNo = $(this).find('td.rowno span').text();
 						
@@ -1673,7 +1810,7 @@ $(document).ready(function () {
 					 });
 					}
 					else if(uniqueSerial == '.serial'){
-						 $('#tblDetails tbody tr').each(function(i) {
+						 $('#tblDetails tbody tr').each(function(_i) {
 						let serialArray = $(this).find('input.batchorserialcontainer').val().split(',');
 						let rowNo = $(this).find('td.rowno span').text();
 						
@@ -1842,7 +1979,7 @@ $(document).ready(function () {
 					$('#textBillToAddress').css('background-color', '');
 					
 					$.getJSON('../proc/views/vw_billToAddressDetails.php?cardCode=' + cardCode + '&address=' + addressID, function (data){
-					$.each(data, function (key, val){
+					$.each(data, function (_key, val){
 					$('#selBillToAddress').val(val.Address);
 					$('#txtBillToAddressTextArea').val(val.Street + '\n' + '\n'  + val.ZipCode + ' ' + val.City + '\n'  + val.Country );
 								val.Street != '' ? billArr.push('Street'): '';
@@ -2554,7 +2691,7 @@ $(document).ready(function () {
 		// $('input[name=txtTotalPaymentDue]').trigger('keyup');	
 		// ComputeFooterTotalBeforeDiscount();
 			let wtaxsum = 0.00
-			var tbl2 = $('#tblWTaxTable tbody tr').each(function (i) 
+			var tbl2 = $('#tblWTaxTable tbody tr').each(function (_i) 
 			{
 				x = $(this).children();
 			   
@@ -3162,7 +3299,7 @@ $(document).ready(function () {
 		$(document.body).on('blur', '.taxableamount', function () 
 		{
 			ComputeWtaxPerRow();
-			$(this).val(function(index, value) {
+			$(this).val(function(_index, value) {
 				value = value.replace(/,/g,'');
 				return NumberWithCommas(value);
 			});
@@ -3171,7 +3308,7 @@ $(document).ready(function () {
 		$(document.body).on('blur', '.taxableamount', function () 
 		{
 			ComputeWtaxPerRow();
-			$(this).val(function(index, value) {
+			$(this).val(function(_index, value) {
 				value = value.replace(/,/g,'');
 				return NumberWithCommas(value);
 			});
@@ -3181,14 +3318,14 @@ $(document).ready(function () {
 		{
 	
 			
-			$(this).val(function(index, value) {
+			$(this).val(function(_index, value) {
 				value = value.replace(/,/g,'');
 				return FormatMoney(NumberWithCommas(value));
 			});
 			ComputeWtaxPerRowToFooter();
 		});
 		//Price
-		$(document.body).on('keyup', '.price', function (e) 
+		$(document.body).on('keyup', '.price', function (_e) 
 		{
 			
 		
@@ -3207,7 +3344,7 @@ $(document).ready(function () {
 			let quantity = $('.selected-det').find('input.quantity').val();
 			let discount = $('.selected-det').find('input.discount').val();
 			let taxrate = $('.selected-det').find('option:selected').attr('val-rate');
-				$(this).val(function(index, value) {
+				$(this).val(function(_index, value) {
 				value = value.replace(/,/g,'');
 				return NumberWithCommas(value);
 			});
@@ -3225,7 +3362,7 @@ $(document).ready(function () {
 			
 		});
 		//Quantity
-		$(document.body).on('keyup', '.quantity', function (e) 
+		$(document.body).on('keyup', '.quantity', function (_e) 
 		{
 			
 			CheckItemCode();
@@ -3279,7 +3416,7 @@ $(document).ready(function () {
 		});
 		$(document.body).on('keyup', '.unitcost', function () 
 		{
-			$(this).val(function(index, value) {
+			$(this).val(function(_index, value) {
 				value = value.replace(/,/g,'');
 				return NumberWithCommas(value);
 			});
@@ -3327,13 +3464,13 @@ $(document).ready(function () {
 		
 	
 	//Footer
-		$(document.body).on('keyup', '#txtFooterDiscountSum', function (e) 
+		$(document.body).on('keyup', '#txtFooterDiscountSum', function (_e) 
 		{
 			let value = $(this).val();
 			let discAmount = $(this).val();
 			let totalBeforeDiscount = $('#txtTotalBeforeDiscount').val();
 			let amount = parseFloat(discAmount/totalBeforeDiscount) * 100;
-				$(this).val(function(index, value) {
+				$(this).val(function(_index, value) {
 				value = value.replace(/,/g,'');
 				return NumberWithCommas(value);
 			});
@@ -3341,7 +3478,7 @@ $(document).ready(function () {
 			ComputeTotal();
 			
 		});	
-		$(document.body).on('blur', '#txtFooterDiscountSum', function (e) 
+		$(document.body).on('blur', '#txtFooterDiscountSum', function (_e) 
 		{
 			let amount = $(this).val();
 			let discAmount = $(this).val();
@@ -3365,7 +3502,7 @@ $(document).ready(function () {
 			ComputeTotal();
 			
 		});	
-		$(document.body).on('blur', '#txtFooterDiscountPercentage', function (e) 
+		$(document.body).on('blur', '#txtFooterDiscountPercentage', function (_e) 
 		{
 			let amount = $(this).val();
 			let discPercentage = $(this).val();
@@ -3396,7 +3533,7 @@ $(document).ready(function () {
 			$(this).css('border', '0px solid red');
 			
 			if(uniqueSerial == '.mfrserial'){
-			 $('#tblSerialCreated tbody tr').each(function(i) {
+			 $('#tblSerialCreated tbody tr').each(function(_i) {
 					let mfrSerial = $(this).find('input.mfrserial').val();
 					let rowNo = $(this).find('td.rowno span').text();
 					let hasFocus = $('.mfrserial').is(':focus');
@@ -3436,7 +3573,7 @@ $(document).ready(function () {
 			$(this).css('border', '0px solid red');
 			
 			if(uniqueSerial == '.serial'){
-			 $('#tblSerialCreated tbody tr').each(function(i) {
+			 $('#tblSerialCreated tbody tr').each(function(_i) {
 					let serial = $(this).find('input.serial').val();
 					let rowNo = $(this).find('td.rowno span').text();
 				
@@ -3469,18 +3606,18 @@ $(document).ready(function () {
 		});
 	/*Logistics Tab*/
 	//Address
-		$(document.body).on('keyup', '.shipInputs', function (e) 
+		$(document.body).on('keyup', '.shipInputs', function (_e) 
 		{
 			$('#btnShipToAddressOk').addClass('d-none');
 			$('#btnShipToAddressUpdate').removeClass('d-none');
 		});
-		$(document.body).on('keyup', '.billInputs', function (e) 
+		$(document.body).on('keyup', '.billInputs', function (_e) 
 		{
 			$('#btnBillToAddressOk').addClass('d-none');
 			$('#btnBillToAddressUpdate').removeClass('d-none');
 		});
 	
-		$(document.body).on('click', '#btnShipToAddressUpdate', function (e) 
+		$(document.body).on('click', '#btnShipToAddressUpdate', function (_e) 
 		{
 			let addressArr = [];
 			let txtStreetPOBoxS = $('#txtStreetPOBoxS').val();
@@ -3529,7 +3666,7 @@ $(document).ready(function () {
 			
 		});
 	
-		$(document.body).on('click', '#btnBillToAddressUpdate', function (e) 
+		$(document.body).on('click', '#btnBillToAddressUpdate', function (_e) 
 		{
 			let txtStreetPOBoxB = $('#txtStreetPOBoxB').val();
 			let txtStreetNoB = $('#txtStreetNoB').val();
@@ -3853,6 +3990,58 @@ $(document).ready(function () {
 				}, 200)
 			}
 		}
+
+		function AddFileAttachments(){
+			// Get the input element and the browse button element
+			const inputElement = document.getElementById("getFile");
+			const browseButton = document.getElementById("browseButton");
+			
+		
+			// Add event listener to the browse button element
+			browseButton.addEventListener("click", function(e) {
+			  e.preventDefault();
+			  inputElement.click();
+			});
+		
+			// Add event listener to the input element to update the filename in the text input element
+			inputElement.addEventListener("change", function() {
+			  // Get the selected file name
+			  const fileName = inputElement.value.split("\\").pop();
+		
+			  // Get the text input element
+			  const itemnameElement = document.querySelector(".form-control.matrix-cell.filesname");
+		
+			  // Set the value of the text input element to the selected file name
+			  itemnameElement.value = fileName;
+			});
+		  }
+	
+		function AddRowAttachment(){
+			
+			var rowno = 0;
+				rowno = ($('#tblAttachment tbody tr:last').find('td.rowno span').text() == '') ? 1 : parseFloat($('#tblAttachment tbody tr:last').find('td.rowno span').text()) + 1;
+			var lastItem = $('#tblAttachment tbody tr:last').find('input.filesname').val()
+			
+			if(lastItem != ""){
+			setTimeout(function () 
+				{
+						
+							$('#rowLoader').load('../templates/' + mainFileName + '-lines-row-attachments.php?', function (result) 
+							{
+								$('#tblAttachment tbody').append(result);
+
+	
+								$('#tblAttachment tbody tr:last').find('td.rowno span').text(rowno);
+							})
+				
+								$(this).prop('disabled', false);
+						
+						
+				}, 200)
+			}
+		}
+
+		
 	
 		function AddRowBatch(){
 			
@@ -3968,41 +4157,6 @@ $(document).ready(function () {
 				}, 200)
 			}
 		}
-		// READONLY AT DISABLE NI GABZ
-
-		function Disable(objType){
-			setTimeout(function () {
-				$('#tblDetails tbody tr').each(function(){
-
-					$(this).find('input.grossprice').prop('readonly',true);  
-					$(this).find('input.quantity').prop('readonly',true);  
-					$(this).find('input.price').prop('readonly',true);  
-					$(this).find('input.discount').prop('readonly',true);  
-					$(this).find('select.taxcode').prop('disabled',true);  
-					$(this).find('button.btn').prop('disabled',true);   
-					
-				});
-				
-				$('#btnCardCode').prop('disabled',true);
-				$('#selSeries').prop('disabled',true);
-				$('#txtPostingDate').prop('disabled',true);
-				$('#txtPostingDate').prop('readonly',true);
-				$('#txtDocumentDate').prop('disabled',true);
-				$('#txtDocumentDate').prop('readonly',true);
-				$('#btnControlAccount').prop('disabled',true);
-				$('#btnPaymentTerms').prop('disabled',true);
-				$('#txtTinNumber').prop('readonly',true);
-				$('#btnRefDoc').prop('disabled',true);
-				$('#btnSalesEmp').prop('disabled',true);
-				$('#btnOwner').prop('disabled',true);
-				$('#btnWTax').prop('disabled',true);
-				$('#selSeries').prop('disabled',true);
-				$('#selSeries').prop('readonly',true);
-			
-			},1000);
-		};
-		// ======================================= //
-
 		function PreviewDoc(docNum, objType){
 			let docstatus = '';
 			let docType ='';
@@ -4025,7 +4179,7 @@ $(document).ready(function () {
 			generateDPAdded(docNum)
 			$.getJSON('../proc/views/vw_getheaderdata.php?docNum=' + docNum + '&objType=' + objType, function (data){
 	
-				$.each(data, function (key, val){
+				$.each(data, function (_key, val){
 					docType = val.DocType;
 					docstatus = val.DocStatusFullText;
 					//$('#txtDocNum').val(val.DocNum);
@@ -4057,6 +4211,7 @@ $(document).ready(function () {
 					// val.CancelDate ? $('#txtCancellationDate').attr('type', 'date') : $('#txtCancellationDate').attr('type', 'text');
 					// $('#txtCancellationDate').val(val.CancelDate);
 					// $('#txtRequiredDate').val(val.ReqDate);
+					
 					if(objType == objectType){
 						$('#txtFooterDiscountSum').val(val.DiscSum);
 						$('#txtFooterDiscountPercentage').val(val.DiscPrcnt);
@@ -4260,7 +4415,7 @@ $(document).ready(function () {
 			$('#btnPreviewJournalEntry').attr("disabled",false);
 		}
 		function PreviewRows(docNum, docType, objType,callback){
-			$('#tblDetails tbody').load('../proc/views/vw_getdetailsdata.php?docNum=' + docNum + '&docType=' + docType + '&objType=' + objType, function (result) 
+			$('#tblDetails tbody').load('../proc/views/vw_getdetailsdata.php?docNum=' + docNum + '&docType=' + docType + '&objType=' + objType, function (_result) 
 			{
 				CheckBatchSerial();
 				
@@ -4285,7 +4440,7 @@ $(document).ready(function () {
 			let udfJsonNames = '';
 			$.getJSON('../proc/views/udf/vw_listUDFDescr.php?mainTable=' + mainTable, function (data){
 				var udfArr = [];
-				$.each(data, function (key, val){
+				$.each(data, function (_key, val){
 						udfArr.push(val.Descr);
 						udfArr.join(','); 
 				});		
@@ -4294,7 +4449,7 @@ $(document).ready(function () {
 			$.getJSON('../proc/views/udf/vw_listUDF.php?mainTable=' + mainTable, function (data){
 				
 				var udfArr = [];
-				$.each(data, function (key, val){
+				$.each(data, function (_key, val){
 						udfArr.push(val.Column_Name);
 						udfArr.join(','); 
 				});		
@@ -4400,21 +4555,22 @@ $(document).ready(function () {
 				
 			};
 		}
-		
+
 		function generateDPAdded(docNum){
-		
+
 			$('#DownPaymentResult').load('../proc/views/vw_getdetailsdataDP-added.php?docNum=' + docNum), function (data){
 				console.log(data)
-			};
-			setTimeout(function () 
-				{
-					$('#tblDownPaymentTableAdded tbody tr').each(function()
-					{
-						netamountAdded = $(this).find('input.DPnetamount').val();
 
-							$('#txtDownPayment').val(FormatMoney(netamountAdded));
-					});
-				}, 500) 
+				$('#tblDownPaymentTable tbody tr').each(function()
+				{
+					if($(this).find('input.chkboxInvoice').prop('checked') == true){
+						
+						netamount += parseFloat($(this).find('input.DPnetamount').val());
+						
+					}
+					$('#txtDownPayment').val(FormatMoney(netamount));
+				});
+			};
 		}
 		// ===================== //
 		function PreviewDocJournalEntry(docNum, objType, currency){
@@ -4425,7 +4581,7 @@ $(document).ready(function () {
 			$.getJSON('../proc/views/vw_getheaderdataJE.php?docNum=' + docNum + '&objType=' + objType, function (data){
 				
 				
-				$.each(data, function (key, val){
+				$.each(data, function (_key, val){
 					
 					transID = val.TransId;
 					
@@ -4461,13 +4617,13 @@ $(document).ready(function () {
 			});
 		}
 		function PreviewRowsJE(transID , currency, callback){
-			$('#tblJE tbody').load('../proc/views/vw_getdetailsdataJE.php?transID=' + transID + '&currency=' + currency, function (result) 
+			$('#tblJE tbody').load('../proc/views/vw_getdetailsdataJE.php?transID=' + transID + '&currency=' + currency, function (_result) 
 			{
 				callback();
 			});
 		}
 		function PreviewRowsWTAX(docNum,callback){
-			$('#tblWTaxTable tbody').load('../proc/views/vw_getdetailsdataWTAX.php?docNum=' + docNum, function (result) 
+			$('#tblWTaxTable tbody').load('../proc/views/vw_getdetailsdataWTAX.php?docNum=' + docNum, function (_result) 
 			{
 				
 				
@@ -4611,7 +4767,7 @@ $(document).ready(function () {
 		function ComputeWtaxPerRowToFooter(){
 			let amount = 0.00;
 	
-				$('#tblWTaxTable tbody tr').each(function (i) 
+				$('#tblWTaxTable tbody tr').each(function (_i) 
 				{
 					
 					if ($(this).find('input.wtcode').val() != '')
@@ -4850,7 +5006,7 @@ $(document).ready(function () {
 		}
 		
 		
-		function SelectCreatedBatchPerItem(selectedRow,selectedDocNum,selectedItem,selectedWhse,selectedQtyNeeded,selectedQtyCreated){
+		function SelectCreatedBatchPerItem(selectedRow,_selectedDocNum,selectedItem,_selectedWhse,_selectedQtyNeeded,_selectedQtyCreated){
 			var json = '{';
 			let tblDetailRowNo = [];	
 			let batchCodeArray = [];	
@@ -4865,7 +5021,7 @@ $(document).ready(function () {
 			let batchDetailsArray = [];	
 			let batchUnitCostArray = [];	
 			
-			$('#tblBatchCreated tbody tr').each(function(i) {
+			$('#tblBatchCreated tbody tr').each(function(_i) {
 			{
 				let batchArrayChildren = [];
 				if ($(this).find('input.batch').val() != ''){
@@ -4888,7 +5044,7 @@ $(document).ready(function () {
 			
 			});
 			
-			 $('#tblBatch tbody tr.selected-item').each(function(i) {
+			 $('#tblBatch tbody tr.selected-item').each(function(_i) {
 			
 				
 					batchQuantityCreatedArray.push($(this).find('td.totalcreated').text());
@@ -4899,7 +5055,7 @@ $(document).ready(function () {
 			//json += batchArrayParent.join(",") + '}';
 			
 			
-			 $('#tblDetails tbody tr').each(function(i) {
+			 $('#tblDetails tbody tr').each(function(_i) {
 				let rowNo = $(this).find('td.rowno span').text();
 				let itemCode = $(this).find('input.itemcode').val();
 				let quantity = $(this).find('input.quantity').val();
@@ -4928,7 +5084,7 @@ $(document).ready(function () {
 			
 		}
 		
-		function SelectCreatedSerialPerItem(selectedRow,selectedDocNum,selectedItem,selectedWhse,selectedQtyNeeded,selectedQtyCreated){
+		function SelectCreatedSerialPerItem(selectedRow,_selectedDocNum,selectedItem,_selectedWhse,_selectedQtyNeeded,_selectedQtyCreated){
 			var json = '{';
 			let tblDetailRowNo = [];	
 			let mfrserialCodeArray = [];	
@@ -4945,7 +5101,7 @@ $(document).ready(function () {
 			let serialUnitCostArray = [];	
 			
 		
-			$('#tblSerialCreated tbody tr').each(function(i) {
+			$('#tblSerialCreated tbody tr').each(function(_i) {
 			{
 				
 				let serialArrayChildren = [];
@@ -4972,7 +5128,7 @@ $(document).ready(function () {
 			});
 			
 			
-			 $('#tblSerial tbody tr.selected-item').each(function(i) {
+			 $('#tblSerial tbody tr.selected-item').each(function(_i) {
 			
 				
 					serialQuantityCreatedArray.push($(this).find('td.totalcreated').text());
@@ -4983,7 +5139,7 @@ $(document).ready(function () {
 			//json += batchArrayParent.join(",") + '}';
 			
 			
-			 $('#tblDetails tbody tr').each(function(i) {
+			 $('#tblDetails tbody tr').each(function(_i) {
 				let rowNo = $(this).find('td.rowno span').text();
 				let itemCode = $(this).find('input.itemcode').val();
 				let quantity = $(this).find('input.quantity').val();
@@ -5677,3 +5833,5 @@ $(document).ready(function () {
 		}
 	
 	});
+
+	

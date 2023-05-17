@@ -566,11 +566,17 @@ $(document).ready(function () {
 			let contactPersonCode = $(this).children('td.item-8').text();
 			let controlacct = $(this).children('td.item-10').text();
 			txtCurrency = $(this).children('td.item-9').text();
-			let glCode = $(this).children('td.item-10').text();
-			let glName = $(this).children('td.item-11').text();
-			let addressID = '';
-	
 
+			
+			let addressID = '';
+			
+			let AcctCode = $('#tblGL tbody > tr').children('td.item-1').text();
+			let AcctName = $('#tblGL tbody > tr').children('td.item-2').text();
+			
+			let cardcode = $('#txtCardCode').val();
+			
+			
+	
 	
 			generateRows(cardCode); 
 			$('#bpModal').modal('hide');
@@ -2409,12 +2415,8 @@ $(document).ready(function () {
 	
 					
 					if(objType == 24){
-					$('#txtCardCode').val(val.CardCode);
-					$('#txtCardName').val(val.CardName);	
 					$('#txtDocNum').val(val.DocNum);
 					$('#txtDocEntry').val(val.DocEntry);
-					$('#txtOwnerCode').val(val.EmpID);
-					$('#txtOwnerName').val(val.EmployeeName);
 					}
 					else{
 					//$('#txtDocNum').val("");
@@ -2465,8 +2467,8 @@ $(document).ready(function () {
 					$('#txtSalesEmpCode').val(val.SlpCode);
 					$('#txtSalesEmpName').val(val.SlpName);
 					
-					// $('#txtOwnerCode').val(val.EmpID);
-					// $('#txtOwnerName').val(val.EmployeeName);
+					$('#txtOwnerCode').val(val.EmpID);
+					$('#txtOwnerName').val(val.EmployeeName);
 					
 					if(objType == 24){
 					$('#txtRemarks').val(val.Comments);
@@ -2619,7 +2621,7 @@ $(document).ready(function () {
 		function PreviewRows(docNum, docType, objType, payNoDoc,callback){
 			$('#contents-tab').load('../proc/views/vw_getdetailsdata.php?docNum=' + docNum + '&docType=' + docType + '&objType=' + objType + '&payNoDoc=' + payNoDoc, function (result) 
 			{
-			$('#contents-tab').append(result)
+			// $('#contents-tab').append(result)
 			callback();
 			});
 			
@@ -2741,7 +2743,7 @@ $(document).ready(function () {
 				console.log(data)
 					
 			};
-	}
+		}
 		function ComputeBalanceDue(balance, payment){
 			
 			balance = isNaN(parseFloat(balance.replace(/,/g,'')))? 0: parseFloat(balance.replace(/,/g,''));
@@ -2973,13 +2975,11 @@ $(document).ready(function () {
 			let totalBeforeDiscount = $('#txtTotalBeforeDiscount').val();
 			let totalTaxAmount = $('#txtVatSum').val();
 			let totalDiscount = $('#txtFooterDiscountSum').val();
-			// let payNoDocSum = $('#txtNoDocSum').val();
 			
 			let totalBeforeDiscountFloat = isNaN(parseFloat(totalBeforeDiscount.replace(/,/g,'')))? 0: parseFloat(totalBeforeDiscount.replace(/,/g,''));
 			let totalTaxAmountFloat = isNaN(parseFloat(totalTaxAmount.replace(/,/g,'')))? 0: parseFloat(totalTaxAmount.replace(/,/g,''));
 			let totalDiscountFloat = isNaN(parseFloat(totalDiscount.replace(/,/g,'')))? 0: parseFloat(totalDiscount.replace(/,/g,''));
-			// let payNoDocSumFloat = isNaN(parseFloat(payNoDocSum.replace(/,/g,'')))? 0: parseFloat(payNoDocSum.replace(/,/g,''));
-			
+		
 			let amount = (totalBeforeDiscountFloat + totalTaxAmountFloat) - totalDiscountFloat;
 			
 			$('#txtDocTotal').val(FormatMoneyWithCurrency(amount));

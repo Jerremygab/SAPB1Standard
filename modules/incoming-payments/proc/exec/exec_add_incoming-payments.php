@@ -4,11 +4,7 @@ $errmsg = '';
 session_start();
 include('../../../../config/config.php');
 
-$Database = $_SESSION['MSSQL_DB'];
 
-if($Database == 'EBI_LIVEDB20220217'){
-	$err += 1;
-}
 
 $docentry = '';
 

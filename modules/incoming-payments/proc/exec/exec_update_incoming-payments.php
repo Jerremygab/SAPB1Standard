@@ -6,7 +6,7 @@ include('../../../../config/config.php');
 
 $docentry = '';
 
-$Database = $_SESSION['MSSQL_DB'];
+$Database = $_SESSION['SESS_COMPANY'];
 
 if($Database == 'EBI_LIVEDB20220217'){
 	$err += 1;
@@ -49,7 +49,7 @@ if ($err == 0)
 	}
 	else
 	{
-			$oRdr = $vCmp->GetBusinessObject(24);
+			$oRdr = $vCmp->GetBusinessObject(46);
 			$oRdr->GetByKey($txtDocEntry);
 			
 			
@@ -59,7 +59,7 @@ if ($err == 0)
 			$oRdr->JournalRemarks = $txtJournalMemo;
 			
 
-			if($selTransactionType == 'C') {
+			if($selTransactionType == 'S') {
 				if($txtPayNoDoc == 'Y'){
 				}
 					
