@@ -131,9 +131,7 @@
 								</div>
 							</div>
 					</div>	 
-					<br>
-					<br>
-						<!-- <div class="form-group row  py-0 my-0">
+						<div class="form-group row  py-0 my-0">
 						<div class="col-sm-3" >
 						<label for="inputEmail3" class=" col-form-label " style="color: black;" >Name</label>
 						</div>
@@ -143,8 +141,8 @@
 									
 									</div>
 							</div>
-						</div> -->	  
-						<!-- <div class="form-group row  py-0 my-0" >
+						</div>	  
+						<div class="form-group row  py-0 my-0" >
 						<label for="inputEmail3" class="col-sm-3 col-form-label " style="color: black;" >Contact Person</label>
 							<div class="col-sm-9 " >
 							 <div class="input-group mb-1">
@@ -158,14 +156,14 @@
 									</div>
 									</div>
 							</div>
-						</div>	 -->	
-						<!-- <div class="form-group row  py-0 my-0 mb-1" >
+						</div>		
+						<div class="form-group row  py-0 my-0 mb-1" >
 						<label for="inputEmail3" class="col-sm-3 col-form-label " style="color: black;" >Customer Ref. No.</label>
 							<div class="col-sm-9" >
 							  <input type="text" class="form-control " id="txtCustomerRefNo" placeholder="" maxlength="100">
 							</div>
-						</div>	 -->
-						<!-- <div class="form-group row  py-0 my-0 " >
+						</div>	
+						<div class="form-group row  py-0 my-0 " >
 							
 							<div class="input-group col-sm-3">
 								  <select type="text" class="form-control " id="selCurrency" placeholder=""   readonly >
@@ -179,14 +177,14 @@
 							<input type="text" class="form-control " id="txtCurrency" placeholder="" style="color: black;" readonly>
 						</div>
 							
-						</div> -->	
+						</div>	
 						
 					</div>	
 					<div class="col-lg-4 pb-2  "  width="100%" id="midCol">
 						
 					</div>
 					<div class="col-lg-4 pb-2 " id="dateCol">
-						<!-- <div class="form-group row  py-0 my-0 mb-1" >
+						<div class="form-group row  py-0 my-0 mb-1" >
 						<label for="inputEmail3" class="col-sm-2 col-form-label " style="color: black;" >No.</label>
 							<div class="col-sm-4 " >
 								<input id="txtSeriesCode" class="d-none" value="4" />
@@ -255,16 +253,16 @@
 									?> readonly >
 									
 									</div>
-						</div> -->	 
-						<!-- <div class="form-group row  py-0 my-0 mb-1" >
+						</div>	 
+						<div class="form-group row  py-0 my-0 mb-1" >
 						<label for="inputEmail3" class="col-sm-5 col-form-label " style="color: black;" >Status</label>
 							<div class="col-sm-1 " >
 							</div>
 							<div class="col-sm-6" >
 							  <input type="email" class="form-control" id="txtStatus" placeholder=""  value="Open" readonly>
 							</div>
-						</div> -->	
-						<!-- <div class="form-group row  py-0 my-0" >
+						</div>	
+						<div class="form-group row  py-0 my-0" >
 						<label for="inputEmail3" class="col-sm-5 col-form-label " style="color: black;" >Posting Date</label>
 							<div class="col-sm-1 " >
 							</div>
@@ -274,9 +272,9 @@
 							
 							</div>
 							
-						</div> -->		  
+						</div>		  
 						
-						<!-- <div class="form-group row  py-0 my-0" >
+						<div class="form-group row  py-0 my-0" >
 						<label for="inputEmail3" class="col-sm-5 col-form-label " style="color: black;" >Delivery Date</label>
 							<div class="col-sm-1 " >
 							</div>
@@ -285,8 +283,8 @@
 								<input type="date" id="txtDeliveryDate" class="form-control col-2" value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" style="color:transparent !important" >
 							
 							</div>
-						</div> -->	
-						<!-- <div class="form-group row  py-0 my-0" >
+						</div>	
+						<div class="form-group row  py-0 my-0" >
 						<label for="inputEmail3" class="col-sm-5 col-form-label " style="color: black; font-size:15px" >Document Date</label>
 							<div class="col-sm-1 " >
 							</div>
@@ -294,7 +292,7 @@
 								<input type="text" id="txtDocumentDate2" class="form-control col-10" value="" min="01-01-2018" max="12-31-2050">
 								<input type="date" id="txtDocumentDate" class="form-control col-2" value="<?php echo date('Y-m-d'); ?>" min="01-01-2018" max="12-31-2050" style="color:transparent !important" >
 							</div>
-						</div> -->
+						</div>
 						
 					</div>
 				</div>
@@ -305,28 +303,28 @@
     <a class="nav-link active " id="" data-toggle="tab" href="#contents" role="tab" aria-controls="contents"
       aria-selected="true" style="color: black; font-weight:bold">Contents</a>
   </li>
-<!--   <li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" id="" data-toggle="tab" href="#logistics" role="tab" aria-controls="logistics"
       aria-selected="false" style="color: black; font-weight:bold">Logistics</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" id="" data-toggle="tab" href="#accounting" role="tab" aria-controls="contact"
       aria-selected="false"  style="color: black; font-weight:bold">Accounting</a>
-  </li> -->
+  </li>
  
 </ul>
 
 <div class="tab-content" id="myTabContent" style="padding-top: 10px;">
 	<div class="tab-pane fade show active" id="contents" role="tabpanel" aria-labelledby="contents">
 	<div class="form-group row  mb-0" >
-		<!-- <div class="col-sm-4 row">
+		<div class="col-sm-4 row">
 		<label for="inputEmail3" class="col-sm-4 col-form-label pr-0" style="color: black; font-size:15px" >Item/Service Type</label>
 			<select id="selTransactionType" class="col-sm-3 form-control-sm mdb-select md-form text-left" searchable="Search here.." style=" outline:none !important; border-color: #D0D0D0 !important;">
 				<option class="text-center" value="I" >Item</option>
 				<option class="text-center" value="S" >Service</option>
 				<input type="hidden" id="rowLoader" name="rowLoader" class="form-control input-sm">
 			</select>
-		</div> -->
+		</div>
 	</div>
 		<div id="contentContainer"class="table-responsive" style="width:100%; padding-bottom:20px; padding-left:10px;  overflow-x:hidden;  overflow-y:hidden;" >
 			<div id="contents-tab">
@@ -335,32 +333,32 @@
 		</div>
 		
 	</div>
-	<!-- <div class="tab-pane fade " id="logistics" role="tabpanel" aria-labelledby="logistics">
+	<div class="tab-pane fade " id="logistics" role="tabpanel" aria-labelledby="logistics">
 		<div id="contentContainer"class="table-responsive" style="width:100%; padding-bottom:20px; padding-left:10px; overflow-x:hidden;  overflow-y:hidden;">
 			<div id="logistics-tab" >
 			</div>
 			<hr/>
 		</div>
-	</div> -->
-	<!-- <div class="tab-pane fade " id="accounting" role="tabpanel" aria-labelledby="accounting">
+	</div>
+	<div class="tab-pane fade " id="accounting" role="tabpanel" aria-labelledby="accounting">
 		<div id="contentContainer"class="table-responsive" style="width:100%; padding-bottom:20px; padding-left:10px; padding-right:10px;  overflow-x:hidden;  overflow-y:hidden;">
 			<div id="accounting-tab" >
 			</div>
 			<hr/>
 		</div>
-	</div> -->
-	<!-- <div class="tab-pane fade " id="attachments" role="tabpanel" aria-labelledby="attachments">
+	</div>
+	<div class="tab-pane fade " id="attachments" role="tabpanel" aria-labelledby="attachments">
 		<div id="contentContainer"class="table-responsive" style="width:100%; padding-bottom:20px; padding-left:10px; padding-right:10px;  overflow-x:hidden;  overflow-y:hidden;">
 			<div id="attachments-tab" >
 			</div>
 			<hr/>
 		</div>
-	</div> -->
+	</div>
 </div>
         <!-- /.container-fluid -->
 
 
-				<!-- <div class="row pr-0 "  width="100%">
+				<div class="row pr-0 "  width="100%">
 					<div class="col-lg-5 pb-2" >
 						<div class="form-group row  py-0 my-0">
 						<div class="col-sm-3" >
@@ -462,7 +460,7 @@
 						</div>	
 						
 					</div>	
-				</div> -->
+				</div>
 				
 				<div  id="footerButtons" class="form-group row  mt-5 ">
 					<div class="col-lg-6 col-md-6 col-sm-6 text-left">
