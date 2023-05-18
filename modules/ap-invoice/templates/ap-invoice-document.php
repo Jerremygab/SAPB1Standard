@@ -299,10 +299,10 @@
     <a class="nav-link" id="" data-toggle="tab" href="#accounting" role="tab" aria-controls="contact"
       aria-selected="false"  style="color: black; font-weight:bold">Accounting</a>
   </li>
-  <li class="nav-item">
+<!--   <li class="nav-item">
     <a class="nav-link" id="" data-toggle="tab" href="#attachments" role="tab" aria-controls="attachments"
       aria-selected="false"  style="color: black; font-weight:bold">Attachments</a>
-  </li>
+  </li> -->
  
 </ul>
 
@@ -1990,8 +1990,8 @@
 								<th  style="min-width:250px;position: sticky;top: 0; ">Batch</th>
 								<th  style="min-width:150px;position: sticky;top: 0; ">Qty</th>
 								<th  style="min-width:100px;position: sticky;top: 0; ">Expiration Date</th>
-								<th  style="min-width:100px;position: sticky;top: 0; ">Mfr Date</th>
-								<th  style="min-width:100px;position: sticky;top: 0; ">Admission Date</th>
+								<th  style="min-width:100px;position: sticky;top: 0;  ">Mfr Date</th>
+								<th  style="min-width:100px;position: sticky;top: 0;  ;">Admission Date</th>
 								<th  style="min-width:300px;position: sticky;top: 0; ">Location</th>
 								<th  style="min-width:300px;position: sticky;top: 0; ">Details</th>
 								<th  style="min-width:300px;position: sticky;top: 0; ">Unit Cost</th>

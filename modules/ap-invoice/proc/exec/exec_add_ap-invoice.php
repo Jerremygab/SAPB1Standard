@@ -142,6 +142,20 @@ if ($err == 0)
 				}
 			}
 			// ===================================== //
+
+			// attachment
+			// if(json_decode($jsonAttachment) != null) 
+			// {
+			// 	$jsonAttachment = json_decode($jsonAttachment, true);
+			// 	//$ctr = -1;
+			// 	//$a = 0;
+			// 	foreach ($jsonAttachment as $key => $value) 
+			// 	{
+			// 		$oRdr->Attachments->WTCode = $value[0];
+
+			// 		$oRdr->Attachments->Add();
+			// 	}
+			// }
 			
 			if(json_decode($json) != null) 
 			{

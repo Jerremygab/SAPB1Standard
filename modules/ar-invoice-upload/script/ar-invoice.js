@@ -1170,7 +1170,7 @@ var serviceType = 'I';
 		let itemnameElement = $(this).find('input.filesname').val
 	  
 		  
-		//   itemnameElement.value = fileName;
+		itemnameElement.value = fileName;
 		});
 		$('#tblAttachment > tbody tr').each(function(){
 
@@ -3044,7 +3044,7 @@ setTimeout(function(){
 				
 				x = $(this).children();
 				var itArr = [];
-					if ($(this).find('input.filesname').val() != ''){
+					if ($(this).find('input.targetpath').val() != ''){
 						itArr.push('"' + $(this).find('input.filesname').val() + '"');
 						itArr.push('"' + $(this).find('input.targetpath').val()+ '"');
 						itArr.push('"' + $(this).find('input.attachmentdate').val().replace(/,/g, '') + '"')

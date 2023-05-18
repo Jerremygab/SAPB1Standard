@@ -456,6 +456,74 @@ $(document).ready(function () {
 			}
 			
 		});
+
+
+		//    //ATTACHMENTS
+		//    $(document.body).on('click', '#tblAttachment tbody > tr > td.rowno', function () 
+		//    {
+		// 	   if (window.event.ctrlKey) 
+		// 	   {
+		// 		   if ($(this).closest('tr').hasClass('selected-det-attachment')) 
+		// 		   {
+		// 			   $(this).closest('tr').css("background-color", "transparent");
+		// 			   $(this).closest('tr').removeClass('selected-det-attachment');
+		// 		   }
+		// 		   else 
+		// 		   {
+		// 			   $(this).closest('tr').css("background-color", "lightgray");
+		// 			   $(this).closest('tr').addClass('selected-det-attachment');
+		// 		   }
+		// 	   }
+		// 	   else 
+		// 	   {
+		// 		   $('.selected-det-attachment').map(function () 
+		// 		   {
+		// 			   $(this).closest('tr').css("background-color", "transparent");
+		// 			   $(this).removeClass('selected-det-attachment');
+		// 		   })
+	   
+		// 		   $('#tblAttachment tbody > tr').css("background-color", "transparent");
+		// 		   $(this).closest('tr').css("background-color", "lightgray");
+		// 		   $(this).closest('tr').addClass('selected-det-attachment');
+		// 	   }
+			   
+		//    });
+		//    $(document.body).on('click', '#tblAttachment > tbody tr > td > div.input-group', function () 
+		//    {
+		// 	   $('input').css('background-color', '');
+		// 	   $('.selected-det-attachment').map(function () 
+		// 	   {
+		// 		   $(this).removeClass('selected-det-attachment');
+		// 		   $(this).css("background-color", "transparent");
+		// 	   })
+			   
+		// 	   $(this).closest('tr').css("background-color", "lightgray");
+		// 	   $(this).closest('tr').addClass('selected-det-attachment');
+			   
+		// 	   $(this).children('input').css('background-color', '#fdfd96');
+			   
+		//    });
+		//    $(document.body).on('focus', '#tblAttachment input, #tblAttachment select, #tblAttachment textarea', function () 
+		//    {
+		// 	   if (window.event.ctrlKey) 
+		// 	   {
+		// 		   $(this).closest('tr').css("background-color", "lightgray");
+		// 		   $(this).closest('tr').addClass('selected-det-attachment');
+		// 	   }
+		// 	   else
+		// 	   {
+		// 		   $('.selected-det-attachment').map(function () 
+		// 		   {
+		// 			   $(this).removeClass('selected-det-attachment');
+		// 		   })
+	   
+		// 		   $('#tblAttachment tbody > tr').css("background-color", "transparent");
+		// 		   $(this).closest('tr').css("background-color", "lightgray");
+		// 		   $(this).closest('tr').addClass('selected-det-attachment');
+		// 	   }
+			   
+		//    });
+
 		//WTAX
 		//Selecting Row
 		$(document.body).on('click', '#tblWTaxTable tbody > tr > td.rowno', function () 
@@ -1000,135 +1068,34 @@ $(document).ready(function () {
 	   
 		});
 
-		//Attachment
-		//Selecting Row
-		$(document.body).on('click', '#tblAttachment tbody > tr > td.rowno', function () 
-		{
-			if (window.event.ctrlKey) 
-			{
-				if ($(this).closest('tr').hasClass('selected-det-attachment')) 
-				{
-					$(this).closest('tr').css("background-color", "transparent");
-					$(this).closest('tr').removeClass('selected-det-attachment');
-				}
-				else 
-				{
-					$(this).closest('tr').css("background-color", "lightgray");
-					$(this).closest('tr').addClass('selected-det-attachment');
-				}
-			}
-			else 
-			{
-				$('.selected-det-attachment').map(function () 
-				{
-					$(this).closest('tr').css("background-color", "transparent");
-					$(this).removeClass('selected-det-attachment');
-				})
-	
-				$('#tblAttachment tbody > tr').css("background-color", "transparent");
-				$(this).closest('tr').css("background-color", "lightgray");
-				$(this).closest('tr').addClass('selected-det-attachment');
-			}
+		// $(document.body).on('input', 'input.filesname', function (event) {
+
+		// 	let targetPath = 'C:/Users/Administrator/Desktop/JCBA/ATTACHMENTS/'
+
+		// 	event.preventDefault();
+		// 	const inputElement = document.getElementById("getFile");
+		  
 			
-		});
-		$(document.body).on('click', '#tblAttachment > tbody tr > td > div.input-group', function () 
-		{
-			$('input').css('background-color', '');
-			$('.selected-det-attachment').map(function () 
-			{
-				$(this).removeClass('selected-det-attachment');
-				$(this).css("background-color", "transparent");
-			})
-			
-			$(this).closest('tr').css("background-color", "lightgray");
-			$(this).closest('tr').addClass('selected-det-attachment');
-			
-			$(this).children('input').css('background-color', '#fdfd96');
-			
-		});
-		$(document.body).on('focus', '#tblAttachment input, #tblAttachment select, #tblAttachment textarea', function () 
-		{
-			if (window.event.ctrlKey) 
-			{
-				$(this).closest('tr').css("background-color", "lightgray");
-				$(this).closest('tr').addClass('selected-det-attachment');
-			}
-			else
-			{
-				$('.selected-det-attachment').map(function () 
-				{
-					$(this).removeClass('selected-det-attachment');
-				})
-	
-				$('#tblAttachment tbody > tr').css("background-color", "transparent");
-				$(this).closest('tr').css("background-color", "lightgray");
-				$(this).closest('tr').addClass('selected-det-attachment');
-			}
-			
-		});
+		// 	inputElement.addEventListener("change", function() {
+			 
+		// 	  const fileName = inputElement.value.split("\\").pop();
+		  
+		// 	  // Get the text input element
+		// 	  const itemnameElement = document.querySelector("input.filesname");
+		// 	 	document.querySelector("input.targetpath").val(targetPath);
+		  
+			  
+		// 	  itemnameElement.value = fileName;
+		// 	});
+		  
+		// 	$('#tblAttachment tbody tr').each(function(){
 
-		$(document.body).on('click', '#browseButton', function (event) 
-		{
-
-			event.preventDefault();
-			const inputElement = document.getElementById("getFile");
-		
-			// Add event listener to the input element to update the filename in the text input element
-			inputElement.addEventListener("change", function() {
-			// Get the selected file name
-			const fileName = inputElement.value.split("\\").pop();
-		
-			// Get the text input element
-			const itemnameElement = document.querySelector("input.filesname");
-		
-			// Set the value of the text input element to the selected file name
-			itemnameElement.value = fileName;
-		});
-	  
-			// Trigger the file input dialog
-			inputElement.click();
-
-			// var fileName = $(this).children('td.item-2').text();
-			// $('.selected-det-attachment').find('input.filesname').val(fileName);
-
-
-
-			AddRowAttachment();
-			
-		});
-
-
-		// $(document.body).on('dblclick', '#tblAttachment tbody > tr', function () 
-		// {
-		// 	var fileName = $(this).children('td.item-2').text();
-			
-		// 	$('.btnrowfunctions').removeClass('d-none');
-	
-
-		// 	$('.selected-det-attachment').find('input.filesname').val(fileName);
-
-			let fileName = $('#tblAttachment tbody tr:last').find('td.rowno span').text()
-			if ($('.selected-det-attachment').find('input.filesname').val() != ''){
-				fileName.push($('.selected-det-attachment').find('input.filesname').val());
-			}
-
-			var rowno2 = 1;
-			$('#tblAttachment tbody tr').each(function () 
-			{
-				$(this).find('td.rowno span').value(fileName);
-				rowno2 += 1;
-			});
-				AddRowAttachment();
-			
-			
-		// 	// AddFileAttachments();
-		// 	itemCode = fileName;
+		// 		$(this).find('input.targetpath').val(targetPath);
+		// 	});
+		// 	/* inputElement.click(); */
 		// 	AddRowAttachment();
-		// 	CheckCardCode(itemCode);
-			
 		// });
 
-	
 
 		
 		$(document.body).on('dblclick', '#tblGL tbody > tr', function () 
@@ -2928,6 +2895,29 @@ $(document).ready(function () {
 				
 				}
 			});
+
+			// var jsonAttachment = '{';
+			// var otArrAttachment = [];
+			// var tbl = $('#tblAttachment tbody tr').each(function (i) 
+			// {
+				
+			// 	x = $(this).children();
+			// 	var itArr = [];
+			// 		if ($(this).find('input.filesname').val() != ''){
+			// 			itArr.push('"' + $(this).find('input.filesname').val() + '"');
+			// 			itArr.push('"' + $(this).find('input.targetpath').val()+ '"');
+			// 			itArr.push('"' + $(this).find('input.attachmentdate').val().replace(/,/g, '') + '"')
+			// 			itArr.push('"' + $(this).find('input.freetext').val().replace(/,/g, '') + '"')
+					
+			// 			otArrAttachment.push('"' + i + '": [' + itArr.join(',') + ']'); 
+					
+				
+			// 	}
+			// });
+			
+			// jsonAttachment += otArrAttachment.join(",") + '}';
+			// console.log(jsonAttachment);
+			// alert(jsonAttachment);
 			
 			// DOWN PAYMENT NI GABZ 
 			var jsonDP = '{';
@@ -3991,55 +3981,60 @@ $(document).ready(function () {
 			}
 		}
 
-		function AddFileAttachments(){
-			// Get the input element and the browse button element
-			const inputElement = document.getElementById("getFile");
-			const browseButton = document.getElementById("browseButton");
+		// function AddFileAttachments(){
+		// 	// Get the input element and the browse button element
+		// 	const inputElement = document.getElementById("getFile");
+		// 	// const browseButton = document.getElementById("browseButton");
 			
 		
-			// Add event listener to the browse button element
-			browseButton.addEventListener("click", function(e) {
-			  e.preventDefault();
-			  inputElement.click();
-			});
+		// 	// Add event listener to the browse button element
+		// 		browseButton.addEventListener("click", function(e) {
+		// 		e.preventDefault();
+		// 		inputElement.click();
+		// 	});
 		
-			// Add event listener to the input element to update the filename in the text input element
-			inputElement.addEventListener("change", function() {
-			  // Get the selected file name
-			  const fileName = inputElement.value.split("\\").pop();
+		// 	// Add event listener to the input element to update the filename in the text input element
+		// 	inputElement.addEventListener("change", function() {
+		// 	  // Get the selected file name
+		// 	  const fileName = inputElement.value.split("\\").pop();
 		
-			  // Get the text input element
-			  const itemnameElement = document.querySelector(".form-control.matrix-cell.filesname");
+		// 	  // Get the text input element
+		// 	  const itemnameElement = document.querySelector("input.filesname");
 		
-			  // Set the value of the text input element to the selected file name
-			  itemnameElement.value = fileName;
-			});
-		  }
+		// 	  // Set the value of the text input element to the selected file name
+		// 	  itemnameElement.value = fileName;
+
+		// 	  //This is the directory where files will be saved  
+		// 		$target = "C:/Users/Administrator/Desktop/JCBA/ATTACHMENTS/";
+		// 		$target = $target . basename( $_FILES['file']['name']); google
+		// 	});
+
+		//   }
 	
-		function AddRowAttachment(){
+		// function AddRowAttachment(){
 			
-			var rowno = 0;
-				rowno = ($('#tblAttachment tbody tr:last').find('td.rowno span').text() == '') ? 1 : parseFloat($('#tblAttachment tbody tr:last').find('td.rowno span').text()) + 1;
-			var lastItem = $('#tblAttachment tbody tr:last').find('input.filesname').val()
+		// 	var rowno = 0;
+		// 		rowno = ($('#tblAttachment tbody tr:last').find('td.rowno span').text() == '') ? 1 : parseFloat($('#tblAttachment tbody tr:last').find('td.rowno span').text()) + 1;
+		// 	var lastItem = $('#tblAttachment tbody tr:last').find('input.filesname').val()
 			
-			if(lastItem != ""){
-			setTimeout(function () 
-				{
+		// 	// if(lastItem != ""){
+		// 	setTimeout(function () 
+		// 		{
 						
-							$('#rowLoader').load('../templates/' + mainFileName + '-lines-row-attachments.php?', function (result) 
-							{
-								$('#tblAttachment tbody').append(result);
+		// 					$('#rowLoader').load('../templates/' + mainFileName + '-lines-row-attachments.php?', function (result) 
+		// 					{
+		// 						$('#tblAttachment tbody').append(result);
 
 	
-								$('#tblAttachment tbody tr:last').find('td.rowno span').text(rowno);
-							})
+		// 						$('#tblAttachment tbody tr:last').find('td.rowno span').text(rowno);
+		// 					})
 				
-								$(this).prop('disabled', false);
+		// 						$(this).prop('disabled', false);
 						
 						
-				}, 200)
-			}
-		}
+		// 		}, 200)
+		// 	// }
+		// }
 
 		
 	

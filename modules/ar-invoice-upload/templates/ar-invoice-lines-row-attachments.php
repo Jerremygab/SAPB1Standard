@@ -22,7 +22,7 @@ include_once('../../../config/config.php');
 	  </td>
 	  <td >
 			<div class="input-group ">
-				<input type='file' id="getFile" name="file" class="form-control matrix-cell filesname"  aria-label="File Name" aria-describedby="button-addon2" style="outline: none; border:none" readonly/>
+			<input type="text" class="form-control matrix-cell filesname"  aria-label="File Name" aria-describedby="button-addon2" style="outline: none; border:none" />
 			</div>
 	  </td>
 	  <td >
