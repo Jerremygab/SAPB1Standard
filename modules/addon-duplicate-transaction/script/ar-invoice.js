@@ -391,7 +391,7 @@ var serviceType = 'I';
 
 /*Load Tabs*/
 	//Contents
-	$('#contents-tab').load('../templates/' + mainFileName + '-lines.php?serviceType=' + serviceType), function (){
+	$('#contents-tab').load('../templates/addon-duplicate-transaction-lines.php?' ), function (){
 		
 	};
 	//Logistics

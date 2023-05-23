@@ -3,6 +3,49 @@
 	include '../../head.php' ;
 
 ?>
+<?php
+
+// if(isset($_POST['btnAdd'])) {
+// 	$target_dir = '/Users/Administrator/Desktop/JCBA/ATTACHMENTS/'; // directory where uploaded files will be saved
+// 	$target_file = $target_dir . basename($_FILES["file"]["name"]); // full path of uploaded file
+// 	$uploadOk = 1; // flag to indicate whether the file was uploaded successfully
+	
+// 	// Loop through each uploaded file
+// 	foreach ($_FILES['filesToUpload']['name'] as $key => $name) {
+// 		$targetFile = $targetDir . basename($name);
+// 	// Check if file already exists
+// 	if (file_exists($target_file)) {
+// 		echo "Sorry, file already exists.";
+// 		$uploadOk = 0;
+// 	}
+	
+// 	// Check file size
+// 	if ($_FILES["getFile"]["size"] > 500000) { // 500KB limit
+// 		echo "Sorry, your file is too large.";
+// 		$uploadOk = 0;
+// 	}
+	
+// 	// Allow certain file formats
+// 	$allowedExtensions = array("jpg", "jpeg", "png", "gif", "csv", "pdf", "xslx");
+// 	$fileExtension = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+// 	if (!in_array($fileExtension, $allowedExtensions)) {
+// 		echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+// 		$uploadOk = 0;
+// 	}
+	
+// 	// Check if $uploadOk is set to 0 by an error
+// 	if ($uploadOk == 0) {
+// 		echo "Sorry, your file was not uploaded.";
+// 	// If everything is ok, try to upload file
+// 	} else {
+// 		if (move_uploaded_file($_FILES["getFile"]["tmp_name"], $target_file)) {
+// 			echo "The file ". htmlspecialchars( basename( $_FILES["getFile"]["name"])). " has been uploaded.";
+// 		} else {
+// 			echo "Sorry, there was an error uploading your file.";
+// 		}
+// 	}
+// 	}}
+?>
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -311,6 +354,10 @@
     <a class="nav-link" id="" data-toggle="tab" href="#accounting" role="tab" aria-controls="contact"
       aria-selected="false"  style="color: black; font-weight:bold">Accounting</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="" data-toggle="tab" href="#attachments" role="tab" aria-controls="contact"
+      aria-selected="false"  style="color: black; font-weight:bold">Attachments</a>
+  </li>
  
 </ul>
 
@@ -464,7 +511,10 @@
 				
 				<div  id="footerButtons" class="form-group row  mt-5 ">
 					<div class="col-lg-6 col-md-6 col-sm-6 text-left">
-						<button type="button" id="btnAdd" class="  btn btn-warning btn-rounded " style="color: black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Add</button>
+					<form action="" method="post" enctype="multipart/form-data">
+					<!-- <input type='file' id="getFile" name="getFile" class="form-control matrix-cell filesname"  aria-label="File Name" aria-describedby="button-addon2" style="outline: none; border:none" readonly/>								 -->
+						<button type="button" id="btnAdd" onlick="uploadFile()" name="btnAdd" value="Add" class="  btn btn-warning btn-rounded " style="color: black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Add</button>
+					</form>
 						<button type="button" id="btnUpdate" class="  btn btn-warning btn-rounded d-none" style="color:black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Update</button>
 						<button type="button" id="btnOk" class="  btn btn-warning btn-rounded d-none" style="color:black; font-weight: bold; width:250px; background: linear-gradient(to bottom, #FCF6BA, #BF953F);" >Ok</button>
 						
@@ -2097,6 +2147,32 @@
 <script>$('#tblGL').dataTable({"bLengthChange": false,});</script>
 <script>$('#tblWhse').dataTable({"bLengthChange": false,});</script>
 
+<script>
+//UploadFiles
+	function uploadFile() {
+		const fileInput = document.getElementById('getFile');
+		const file = fileInput.files[0];
+  
+		if (file) {
+		  const formData = new FormData();
+		  formData.append('file', file);
+  
+		  // Replace 'upload.php' with the appropriate URL or file upload handling script on your server
+		  fetch('ar-invoice-upload.php', 'ar-invoice-attachment.php'{
+			method: 'POST',
+			body: formData
+		  })
+		  .then(response => {
+			// Handle the response from the server
+			console.log(response);
+		  })
+		  .catch(error => {
+			// Handle any errors
+			console.error(error);
+		  });
+		}
+	  }
+	  </script>
 <?php
 	include '../../bottom.php' 
 ?>

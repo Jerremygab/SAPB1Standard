@@ -145,7 +145,7 @@ $GenSet = '';
 			?> "
 	   style="background-color:#D0D0D0; ">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#financials" aria-expanded="true" aria-controls="collapsePages" >
-         <i class="fas fa-tags nav-icon" style=""></i>
+         <i class="fas fa-tags nav-icon" ></i>
           <span class="nav-module nav-module-span" >Financials</span>
         </a>
         <div id="financials" class="collapse nav-collapse-parent" aria-labelledby="headingPages" data-parent="#accordionSidebar" >
@@ -204,7 +204,7 @@ $GenSet = '';
 			?> "
 	   style="background-color:#D0D0D0; ">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sales" aria-expanded="true" aria-controls="collapsePages" >
-         <i class="fas fa-tags nav-icon" style=""></i>
+         <i class="fas fa-tags nav-icon"></i>
           <span class="nav-module nav-module-span" >Sales</span>
         </a>
         <div id="sales" class="collapse nav-collapse-parent" aria-labelledby="headingPages" data-parent="#accordionSidebar" >
