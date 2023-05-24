@@ -464,49 +464,7 @@ $(document).ready(function () {
 
 	});
 
-	//ATTACHMENTS
-	// $(document.body).on('click', '#btnAdd', function () {
 
-		// 	let formData = new FormData();
-		// 		// let file = $('.file')[0].files[0]
-		// 		// formData.append('file', file);
-		// 	// let formData = new FormData();
-		// 	// formData.append('file[]',$('input.file')[0].files[0]);
-		// 	// var itArr = [];
-
-		// 	$('#tblAttachment tbody tr').each(function (i) 
-		// 	{
-		// 		x = $(this).children();
-
-		// 		if ($(this).find('.file').val() != ''){
-		// 			let file = $(this).find('.file')[0].files[0]
-		// 			formData.append('file', file);
-		// 		}
-		// 	});
-
-
-		// 	// })
-		// 	// console.log(itArr)
- 
-
-		// 	console.log(formData)
-
-		// 	$.ajax({
-		// 		url: '../proc/views/vw_uploadFile.php',
-		// 		type: 'post',
-		// 		data: formData,
-		// 		contentType: false,
-		// 		processData: false,
-		// 		success: function(data){
-		// 			if (data != 0) {
-		// 			alert('Successful jQuery file upload to:' + data);
-		// 		}
-		// 		else{
-		// 			alert('jQuery file upload error.');
-		// 		 }
-		// 	  },
-		//   });
-	// });
 
 
 
@@ -2918,6 +2876,11 @@ $(document).ready(function () {
 			jsonAttachment += otArrAttachment.join(",") + '}';
 			console.log(jsonAttachment);
 
+			
+
+
+			
+			
 			let formData = new FormData();
 			let docentry = '';
 			// let file = $('.file')[0].files[0]
@@ -2931,7 +2894,7 @@ $(document).ready(function () {
 
 				if ($(this).find('.file').val() != '') {
 					let file = $(this).find('.file')[0].files[0]
-					formData.append('file', file);
+					formData.append('fileToUpload[]', file);
 				}
 			});
 
@@ -3208,7 +3171,7 @@ $(document).ready(function () {
 
 				if ($(this).find('.file').val() != '') {
 					let file = $(this).find('.file')[0].files[0]
-					formData.append('file', file);
+					formData.append('fileToUpload[]', file);
 				}
 			});
 

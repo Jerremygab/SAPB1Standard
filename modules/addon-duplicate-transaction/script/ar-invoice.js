@@ -3969,7 +3969,7 @@ setTimeout(function(){
 		let docEntryWtax = 0;
 		let docType ='';
 		let docNumBuff;
-		let table;
+		let table; []
 
 		if(objType == objectType){
 			$('#btnAdd').addClass('d-none');

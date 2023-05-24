@@ -37,7 +37,7 @@ while (odbc_fetch_row($qry))
 		$html .=		
 					' <tr style="background-color: white; "  >
 		<td class="rowno text-right" style="background-color: lightgray;color:black; font-size:13px;">
-			<span>1</span>
+			<span>'.$ctr.'</span>
 			<ul class="dropdown-menu rowfunctions" role="menu" style="background-color: #fdfd96;">
 				<li class="deleterow" style="font-size:20px; color: black; font-weight:bold">Delete Row</a></li>
 				<li class="duplicaterow"style="font-size:20px; color: black; font-weight:bold">Duplicate Row</a></li>
@@ -66,12 +66,14 @@ while (odbc_fetch_row($qry))
 			</div>
 	  </td>
  </tr>';
+
+ $ctr += 1;
 		}		
 
 
 		$html .= ' <tr style="background-color: white; "  >
 		<td class="rowno text-right" style="background-color: lightgray;color:black; font-size:13px;">
-			<span>1</span>
+			<span>'.$ctr.'</span>
 			<ul class="dropdown-menu rowfunctions" role="menu" style="background-color: #fdfd96;">
 				<li class="deleterow" style="font-size:20px; color: black; font-weight:bold">Delete Row</a></li>
 				<li class="duplicaterow"style="font-size:20px; color: black; font-weight:bold">Duplicate Row</a></li>
